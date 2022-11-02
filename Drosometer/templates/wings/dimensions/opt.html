@@ -1,0 +1,46 @@
+{% extends "base/head.html" %}
+{% block content %}
+
+<div class="page-heading">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>One more thing...</h1>
+                <p>We have detected that the wing is placed in the <strong> center </strong> without touching any
+                    borders or frames of the
+                    image. <br>Is that true?</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Forms -->
+<section class="forms">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form id="contact" action="" method="post">
+                    <div class="col-md-8">
+                        <div class="circle-item">
+                            <input name="demo-priority" type="radio" id="demo-small" checked>
+                            <label for="demo-small">Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="circle-item">
+                            <input name="demo-priority" type="radio" id="demo-medium">
+                            <label for="demo-medium">No
+                            </label>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" id="form-submit" class="button">Done</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
