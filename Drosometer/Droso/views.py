@@ -212,6 +212,13 @@ def wingbristles2(request):
     if request.user.is_anonymous:
         return redirect("/login")
 
+    if request.method == "POST":
+        uploaded_img = request.FILES['img']
+        img1 = __reader(uploaded_img)
+
+        save_file = __upload_file_to_userdir(request, img1, ".png")
+        print(img1)
+
     return render(request, 'wings/bristles/w_bristles2.html',
                   {'head': 'Drosometer | Wings', 'img_path': '../static/images/perfect.png',
                    'img_name': 'Like this: '})
