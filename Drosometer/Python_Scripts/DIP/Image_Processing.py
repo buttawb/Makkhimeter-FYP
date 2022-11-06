@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from skimage import filters
+from skimage.filters import unsharp_mask
 # from skimage.segmentation import clear_border
 # from skimage.morphology import skeletonize
 # from skimage import measure
@@ -11,7 +12,7 @@ from skimage import filters
 from skimage import color, exposure
 
 
-def preprocess(orig_img):
+def prepreprocess(orig_img):
     img = img_as_ubyte(orig_img)
     rgb_gray = color.rgb2gray(img)
     bins = 256
@@ -21,6 +22,15 @@ def preprocess(orig_img):
     img_dark = exposure.adjust_gamma(rgb_gray, gamma=3.5, gain=1)
     equalized_d_img = exposure.equalize_hist(img_dark)
     adaptive_d_img = exposure.equalize_adapthist(img_dark, clip_limit=0.6)
+    result_1 = unsharp_mask(adaptive_d_img, radius=5, amount=2)
+
+    return adaptive_d_img, rgb_gray, result_1
+
+
+def preprocess(orig_img):
+    pre = prepreprocess(orig_img)
+    adaptive_d_img = pre[0]
+    rgb_gray = pre[1]
     # blur the image
     blur_img = filters.median(adaptive_d_img)
     binary_img = filters.threshold_sauvola(blur_img, window_size=15)
@@ -204,6 +214,3 @@ def dilation(img, val1=6, val2=8):
 # #     df['Area in µm²'] = df['area'] * (100 / 413)
 # #     df['Perimeter in µm'] = df['perimeter'] * (100 / 413)
 # #     return df
-
-
-

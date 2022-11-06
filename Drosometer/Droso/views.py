@@ -1,5 +1,6 @@
 import os
 
+import matplotlib.pyplot as plt
 from django.http import HttpResponse
 from django.contrib.auth import login, logout, authenticate
 import io
@@ -86,7 +87,6 @@ def wingdimen2(request):
         uploaded_img = request.FILES['img']
         img1 = __reader(uploaded_img)
 
-        # IMAGE CONVERSIONS FOR THE DL MODEL.
         img2 = img1.convert('RGB')
         pre_process = preprocess(img2)
 
@@ -219,6 +219,11 @@ def wingbristles2(request):
         global crop_img
         crop_img = __upload_file_to_userdir(request, img1, ".png")
         print(crop_img)
+
+        img = Image.open(crop_img)
+        img1 = prepreprocess(img)
+        plt.imsave(crop_img, img1[2], cmap='gray')
+
         return redirect("/cropper", {'img': crop_img})
 
     return render(request, 'wings/bristles/w_bristles2.html',
