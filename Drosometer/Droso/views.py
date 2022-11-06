@@ -216,12 +216,21 @@ def wingbristles2(request):
         uploaded_img = request.FILES['img']
         img1 = __reader(uploaded_img)
 
-        save_file = __upload_file_to_userdir(request, img1, ".png")
-        print(img1)
+        global crop_img
+        crop_img = __upload_file_to_userdir(request, img1, ".png")
+        print(crop_img)
+        return redirect("/cropper", {'img': crop_img})
 
     return render(request, 'wings/bristles/w_bristles2.html',
                   {'head': 'Drosometer | Wings', 'img_path': '../static/images/perfect.png',
                    'img_name': 'Like this: '})
+
+
+def cropper_bristles(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    return render(request, 'wings/bristles/cropper.html', {'img': crop_img})
 
 
 def c_us(request):

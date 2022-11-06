@@ -39,6 +39,7 @@ urlpatterns = [
     path('logout', views.logoutUser),
     path('opt', views.w_option),
     path('f_thorax', views.thorax_f),
+    path('cropper', views.cropper_bristles),
 ]
 
 
