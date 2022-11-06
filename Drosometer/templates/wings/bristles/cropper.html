@@ -1,6 +1,6 @@
+{% extends "base/head.html" %}
+{% block content %}
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -519,5 +519,32 @@
   <script src="../../../static/js/cropper-main.js"></script>
   <script async src="https://docs.opencv.org/4.5.4/opencv.js"  type="text/javascript"></script>
 </body>
-</html>
 
+<div class="section-heading">
+    <h2>Probability Table</h2>
+</div>
+<div class="default-table">
+    <table>
+        <thead>
+        <tr>
+            <th>Class</th>
+            <th>Probability</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Oregan</td>
+            <td>{{prob_oreg}}</td>
+
+        </tr>
+        <tr>
+            <td>Mutated</td>
+            <td>{{prob_mut}}</td>
+
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

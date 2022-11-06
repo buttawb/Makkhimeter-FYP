@@ -108,7 +108,7 @@ def wingdimen2(request):
                         {'head': 'Drosometer | Wings', 'img_path': dil_path, 'img_name': 'Uploaded Image'})
 
     return render(request, 'wings/dimensions/w_dimen2.html',
-                  {'head': 'Drosometer | Wings', 'img_path': '../static/images/perfect.png',
+                  {'head': 'Wings | Dimensions', 'img_path': '../static/images/perfect.png',
                    'img_name': 'Like this: '})
 
 
@@ -184,18 +184,18 @@ def wingshape2(request):
         if pred == 0:
             # RENDERING OUTPUTS ON HTML PAGE
             return render(request, 'wings/shape/w_shape2.html',
-                          {'head': 'Drosometer | Wings', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
+                          {'head': 'Wings | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
                            'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: '})
 
         elif pred == 1:
             # RENDERING OUTPUTS ON HTML PAGE
             return render(request, 'wings/shape/w_shape2.html',
-                          {'head': 'Drosometer | Wings', 'ans': 'Oregan', 'out': 'class.', 'prob_oreg': prob_oreg,
+                          {'head': 'Wings | Shape', 'ans': 'Oregan', 'out': 'class.', 'prob_oreg': prob_oreg,
                            'prob_mut': prob_mut, 'img_path': path, 'img_name': 'Uploaded Image: '})
 
     else:
         return render(request, 'wings/shape/w_shape2.html',
-                      {'head': 'Drosometer | Wings', 'img_path': '../static/images/perfect.png',
+                      {'head': 'Wings | Shape', 'img_path': '../static/images/perfect.png',
                        'img_name': 'Like this: '})
 
 
@@ -224,10 +224,10 @@ def wingbristles2(request):
         img1 = prepreprocess(img)
         plt.imsave(crop_img, img1[2], cmap='gray')
 
-        return redirect("/cropper", {'img': crop_img})
+        return redirect("/cropper", {'head': 'Bristles | Finder', 'img': crop_img})
 
     return render(request, 'wings/bristles/w_bristles2.html',
-                  {'head': 'Drosometer | Wings', 'img_path': '../static/images/perfect.png',
+                  {'head': 'Wings | Bristles', 'img_path': '../static/images/perfect.png',
                    'img_name': 'Like this: '})
 
 
@@ -235,7 +235,7 @@ def cropper_bristles(request):
     if request.user.is_anonymous:
         return redirect("/login")
 
-    return render(request, 'wings/bristles/cropper.html', {'img': crop_img})
+    return render(request, 'wings/bristles/cropper.html', {'head': 'Bristles | Finder', 'img': crop_img})
 
 
 def c_us(request):
@@ -314,4 +314,4 @@ def w_bar(request):
     #               {'head': 'Drosometer | Wings', 'img_path': dil_path1, 'img_name': 'Uploaded Image'})
     else:
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Drosometer | Wings', 'img_path': dil_path, 'img_name': 'Uploaded Image'})
+                      {'head': 'Dimensions | Exposure', 'img_path': dil_path, 'img_name': 'Uploaded Image'})
