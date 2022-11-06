@@ -23,6 +23,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', views.main),
+
+    # Login Paths
+    path('login', views.loginUser),
+    path('logout', views.logoutUser),
+
+    # Wing Paths
     path('w_dimen', views.wingdimen),
     path('w_dimen2', views.wingdimen2),
     path('w_shape', views.wingshape),
@@ -30,18 +36,22 @@ urlpatterns = [
     path('w_bristles', views.wingbristles),
     path('w_bristles2', views.wingbristles2),
     path('bar', views.w_bar),
+    path('opt', views.w_option),
+
+    # Other paths
     path('aboutus', views.a_us),
     path('contactus', views.c_us),
     path('feedback', views.f_b),
+
+    path('cropper', views.cropper_bristles),
+
+    # Eye Paths
     path('f_eye', views.eye_f),
     path('f_wing', views.wing_f),
-    path('login', views.loginUser),
-    path('logout', views.logoutUser),
-    path('opt', views.w_option),
-    path('f_thorax', views.thorax_f),
-    path('cropper', views.cropper_bristles),
-]
 
+    # path('f_thorax', views.thorax_f),
+
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

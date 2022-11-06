@@ -20,15 +20,13 @@ def loginUser(request):
         # GET AND AUTHENTICATE USERNAME AND PASSWORD
         username = request.POST.get('username')
         password = request.POST.get('password')
-        print(username, password)
-
+        # print(username, password)
         user = authenticate(username=username, password=password)
 
         if user is not None:
             # IF LOGIN CREDENTIALS ARE CORRECT.
             login(request, user)
             return redirect("/")
-
         else:
             # IF LOGIN CREDENTIALS ARE WRONG.
             return render(request, 'user/login.html', {'note': 'Wrong Login credentials detected.'})
@@ -57,10 +55,8 @@ def main(request):
         return redirect("/login")
 
     path = __find_userpath(request)
-
     # CHECK THE VERY EXISTENCE OF THE DIRECTORY
     is_exist = os.path.exists(path)
-
     if is_exist:
         pass
     else:
@@ -86,22 +82,18 @@ def wingdimen2(request):
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
         img1 = __reader(uploaded_img)
-
         img2 = img1.convert('RGB')
         pre_process = preprocess(img2)
 
         save_file = __upload_file_to_userdir(request, pre_process, '.png', flag=False)
-
         file_path = save_file
         plt.imsave(file_path, pre_process, cmap='gray')
 
         for_dil = cv2.imread(file_path, 0)
         dil = dilation(for_dil)
         save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
-
         global dil_path
         dil_path = save_dil
-
         plt.imsave(dil_path, dil, cmap='gray')
 
         return redirect('/bar',
@@ -149,15 +141,12 @@ def wingshape2(request):
         return redirect("/login")
 
     if request.method == 'POST':
-
         uploaded_img = request.FILES['img']
         img1 = __reader(uploaded_img)
         # yeh ubyte ko dena hai wind dimension
         # IMAGE CONVERSIONS FOR THE DL MODEL.
         img2 = img1.convert('RGB')
-
         path = __upload_file_to_userdir(request, img2, '.png')
-
         img3 = np.array(img2)
 
         # APPLYING MODEL
@@ -277,11 +266,11 @@ def eye_f(request):
     return render(request, 'f_e.html', {'head': 'Drosometer | Eyes'})
 
 
-def thorax_f(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-    return render(request, 'f_t.html', {'head': 'Drosometer | Thorax'})
-
+# def thorax_f(request):
+#     if request.user.is_anonymous:
+#         return redirect("/login")
+#     return render(request, 'f_t.html', {'head': 'Drosometer | Thorax'})
+#
 
 def w_option(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
