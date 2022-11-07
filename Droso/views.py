@@ -304,3 +304,4 @@ def w_bar(request):
     else:
         return render(request, 'wings/dimensions/bar.html',
                       {'head': 'Dimensions | Exposure', 'img_path': dil_path, 'img_name': 'Uploaded Image'})
+
