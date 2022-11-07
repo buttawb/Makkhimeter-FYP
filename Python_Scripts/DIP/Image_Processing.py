@@ -16,8 +16,8 @@ def prepreprocess(orig_img):
     img = img_as_ubyte(orig_img)
     rgb_gray = color.rgb2gray(img)
     bins = 256
-    equalize_img = exposure.equalize_hist(rgb_gray)
-    adaptiv_img = exposure.equalize_adapthist(rgb_gray, clip_limit=0.03)
+    # equalize_img = exposure.equalize_hist(rgb_gray)
+    # adaptiv_img = exposure.equalize_adapthist(rgb_gray, clip_limit=0.03)
     # image ko set kr rahy hain
     img_dark = exposure.adjust_gamma(rgb_gray, gamma=3.5, gain=1)
     equalized_d_img = exposure.equalize_hist(img_dark)

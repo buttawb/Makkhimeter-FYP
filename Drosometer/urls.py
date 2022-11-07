@@ -43,11 +43,14 @@ urlpatterns = [
     path('contactus', views.c_us),
     path('feedback', views.f_b),
 
-    path('cropper', views.cropper_bristles),
+    path('cropper_wing', views.cropper_bristles),
+    path('cropper_eye', views.cropper_eye),
 
     # Eye Paths
     path('f_eye', views.eye_f),
     path('f_wing', views.wing_f),
+    path('e_omat', views.eye_omat),
+    path('e_omat2', views.eye_omat2),
 
     # path('f_thorax', views.thorax_f),
 

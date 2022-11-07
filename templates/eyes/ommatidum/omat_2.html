@@ -1,0 +1,65 @@
+{% extends "base/head.html" %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Perfect Image</h2>
+        <p>A perfect and noiseless image always generate the better and accurate results.</p>
+        <section class="forms">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="section-heading">
+                            <h2>Upload Image</h2>
+                        </div>
+                        <!--                                    <form id='contact' method="post" enctype="multipart/form-data">-->
+                        <!--                                        {% csrf_token %}-->
+                        <!--                                        {{ form.as_p }}-->
+                        <!--                                        <button type="submit">Upload</button>-->
+                        <!--                                    </form>-->
+                        <form id="contact" method="post" enctype="multipart/form-data">
+                            <div class="row">
+
+
+                                <div class="col-md-12">
+                                    <fieldset>
+                                        {% csrf_token %}
+
+                                        <label for="img">Select image:</label>
+                                        <input type="file" id="img" name="img" accept="image/*"
+                                               style="padding-top: 25px; padding-bottom: 75px">
+                                    </fieldset>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <button type="submit" id="buttonID"> Next <span class="load loading"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <br>
+                        <br>
+                        <h2><em style="color: rebeccapurple"> {{ans}} </em> {{out}}</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <br><br>
+
+    </div>
+
+    <div class="col-md-6">
+        <h2>{{img_name}}</h2>
+        <p>
+            <img src="{{img_path}}">
+        </p>
+        <br>
+        <br>
+        <br>
+
+    </div>
+
+</div>
+
+{% endblock %}

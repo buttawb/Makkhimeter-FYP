@@ -213,7 +213,7 @@ def wingbristles2(request):
         img1 = prepreprocess(img)
         plt.imsave(crop_img, img1[2], cmap='gray')
 
-        return redirect("/cropper", {'head': 'Bristles | Finder', 'img': crop_img})
+        return redirect("/cropper_wing", {'head': 'Bristles | Finder', 'img': crop_img})
 
     return render(request, 'wings/bristles/w_bristles2.html',
                   {'head': 'Wings | Bristles', 'img_path': '../static/images/perfect.png',
@@ -225,6 +225,13 @@ def cropper_bristles(request):
         return redirect("/login")
 
     return render(request, 'wings/bristles/cropper.html', {'head': 'Bristles | Finder', 'img': crop_img})
+
+
+def cropper_eye(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    return render(request, 'wings/bristles/cropper.html', {'head': 'Ommatidium | Finder', 'img': img2})
 
 
 def c_us(request):
@@ -305,3 +312,33 @@ def w_bar(request):
         return render(request, 'wings/dimensions/bar.html',
                       {'head': 'Dimensions | Exposure', 'img_path': dil_path, 'img_name': 'Uploaded Image'})
 
+
+def eye_omat(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    return render(request, 'eyes/ommatidum/omat_count.html',
+                  {'head': 'Drosometer | Eyes'})
+
+
+def eye_omat2(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    if request.method == 'POST':
+        uploaded_img = request.FILES['img']
+        img1 = __reader(uploaded_img)
+
+        global img2
+        img2 = __upload_file_to_userdir(request, img1, '.png')
+
+        img = Image.open(img2)
+        img = prepreprocess(img)
+
+        plt.imsave(img2, img[2], cmap='gray')
+
+        return redirect('/cropper_eye', {'head': 'Ommatidium | Count', 'img': img2})
+
+    return render(request, 'eyes/ommatidum/omat_2.html',
+                  {'head': 'Eyes | Ommatidium Count', 'img_path': '../static/images/eye_front.png',
+                   'img_name': 'Like this: '})
