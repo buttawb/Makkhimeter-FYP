@@ -1,0 +1,129 @@
+{% extends "base/head.html" %}
+{% block content %}
+
+<!-- Banner -->
+<section class="main-banner">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="banner-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="banner-caption">
+                                <h4>Drosophila Melanogaster <em> Decision-Based </em> System</h4>
+                                <span>Welcome <span style="text-transform:uppercase"> {{request.user.username}} </span></span>
+                                <p>Do you know that the relationship between
+                                    <strong> fruit fly </strong> and <strong> human genes </strong> is so close that
+                                    often the sequences of newly discovered human genes, including disease genes, can be
+                                    matched with equivalent genes in the fly. </p>
+                                <div class="primary-button">
+                                    <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3082451/">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services -->
+<section class="services">
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <a href="feedback">
+                <div class="service-item first-item">
+
+                          <div class=""></div>
+                    <h4>Drosophila Melanogaster <br> <br><em>Wings</em></h4>
+
+                </div>
+                </a>
+            </div>
+            <div class="col-md-6" >
+                 <a href="feedback">
+                <div class="service-item second-item">
+                    <div class=""></div>
+                    <h4>Drosophila Melanogaster <br><br><em>Eyes</em></h4>
+
+                </div>
+                 </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Top Image -->
+<section class="top-image">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="../static/images/top.gif" alt="">
+                <div class="down-content">
+                    <h4>Why flies?</h4>
+                    <p>Fruit flies are also a valuable asset to scientists performing genetic research, since fruit
+                        flies and humans share 75% of those genes which cause disease. Their short lifespan is also
+                        amenable to examining changes and mutations that can occur between birth and death.</p>
+                    <div class="primary-button">
+                        <a href="#">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Left Image -->
+<section class="left-image">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="../static/images/left.jpg" alt="">
+            </div>
+            <div class="col-md-6">
+                <div class="right-content">
+                    <h4>Life span</h4>
+                    <p>Fruit fly are small (3 mm long) but not so small that they can’t be seen without a microscope.
+                        They have a short, simple reproduction cycle. It is normally about 8-14 days, depending on the
+                        environmental temperature. This means that several generations can be observed in a matter of
+                        months.</p>
+                    <div class="primary-button">
+                        <a href="#">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Right Image -->
+<section class="right-image">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="left-content">
+                    <h4>Reproduction</h4>
+                    <p>Reproduction in Drosophila is rapid. A single pair of flies can produce hundreds of offspring
+                        within a couple of weeks, and the offspring become sexually mature within one week (Lutz 1948).
+
+                        As in all insect species Drosophila melanogaster lays eggs. The eggs are placed on fruit, and
+                        hatch into fly larvae (maggots), which instantly start consuming the fruit on which they were
+                        laid (Patterson and Stone 1952).</p>
+                    <div class="primary-button">
+                        <a href="#">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <img src="../static/images/right.png" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
