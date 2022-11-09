@@ -1,18 +1,16 @@
-import os
-
-import matplotlib.pyplot as plt
-from django.http import HttpResponse
-from django.contrib.auth import login, logout, authenticate
 import io
-from django.shortcuts import render, redirect
-from Droso.models import *
+import os
+import uuid
+import glob
+import pandas as pd
 
 from PIL import Image
-import numpy as np
+from django.contrib.auth import login, logout, authenticate
+from django.shortcuts import render, redirect
+
+from Droso.models import *
 from Python_Scripts.DIP.Image_Processing import *
 from Python_Scripts.DL import dl
-import pandas as pd
-import uuid
 
 
 def loginUser(request):
@@ -35,6 +33,8 @@ def loginUser(request):
 
 
 def logoutUser(request):
+    # CLEAR USER CACHE
+    __clear_cache(__find_userpath(request) + "/cache")
     # LOGOUT USER
     logout(request)
 
@@ -55,6 +55,7 @@ def main(request):
         return redirect("/login")
 
     path = __find_userpath(request)
+    cache = path + '/cache'
     # CHECK THE VERY EXISTENCE OF THE DIRECTORY
     is_exist = os.path.exists(path)
     if is_exist:
@@ -62,6 +63,7 @@ def main(request):
     else:
         # MAKE A DIRECTORY NAMED WITH USERNAME
         os.mkdir(path)
+        os.mkdir(cache)
 
     return render(request, 'index.html', {'head': 'Drosometer | DOW-UIT'})
 
@@ -85,7 +87,7 @@ def wingdimen2(request):
         img2 = img1.convert('RGB')
         pre_process = preprocess(img2)
 
-        save_file = __upload_file_to_userdir(request, pre_process, '.png', flag=False)
+        save_file = __upload_file_to_userdir(request, pre_process, '.png', flag=False, cache=True)
         file_path = save_file
         plt.imsave(file_path, pre_process, cmap='gray')
 
@@ -128,18 +130,28 @@ def __reader(obj):
     return open_file
 
 
-def __upload_file_to_userdir(request, file, file_format, flag=True):
+def __upload_file_to_userdir(request, file, file_format, flag=True, cache=False):
     # ASSIGNS NAME AND PATH TO THE FILE
     # SAVE FILE ONLY IF FLAG IS TRUE
     path = __find_userpath(request)
     rand_name = str(uuid.uuid4())
-    final_path = path + "/" + rand_name + file_format
     if flag:
+        if cache:
+            final_path = path + "/cache/" + rand_name + file_format
+            file.save(final_path)
+            return final_path
         # UPLOADS USER FILES TO THEIR DIRECTORY
-        file.save(final_path)
-        return final_path
+        else:
+            final_path = path + "/" + rand_name + file_format
+            file.save(final_path)
+            return final_path
     else:
-        return final_path
+        if cache:
+            final_path = path + "/cache/" + rand_name + file_format
+            return final_path
+        else:
+            final_path = path + "/" + rand_name + file_format
+            return final_path
 
 
 def wingshape2(request):
@@ -301,8 +313,8 @@ def w_bar(request):
     # for_dil = request.session['dilation']
     for_dil = dilation_bar()
     dil = dilation(for_dil)
-    save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
-    plt.imsave(save_dil, dil, cmap='gray')
+    save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False, cache=True)
+    x = plt.imsave(save_dil, dil, cmap='gray')
     print(save_dil)
 
     val1 = 6
@@ -312,27 +324,25 @@ def w_bar(request):
         # VALUE GET NAI HORAI
         val1 = int(request.POST.get('range1'))
         val2 = int(request.POST.get('range2'))
-        print(val1)
-        print(val2)
 
         dil = dilation(for_dil, val1, val2)
-        save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
         plt.imsave(save_dil, dil, cmap='gray')
         print(save_dil)
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': val1, 'val2': val2})
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image',
+                       'val1': val1, 'val2': val2})
 
     if 'default' in request.POST:
         dil = dilation(for_dil)
-        save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
-        plt.imsave(save_dil, dil, cmap='gray')
+        x = plt.imsave(save_dil, dil, cmap='gray')
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 6, 'val2': 8})
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 6,
+                       'val2': 8})
 
     if 'next' in request.POST:
-        dil = dilation(for_dil, val1, val2)
-        save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
-        plt.imsave(save_dil, dil, cmap='gray')
+        # dil = dilation(for_dil, val1, val2)
+        # save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
+        # plt.imsave(save_dil, dil, cmap='gray')
         print(val1, val2)
 
     # dil = dilation(dil_path, val1, val2=5)
@@ -346,7 +356,8 @@ def w_bar(request):
     #               {'head': 'Drosometer | Wings', 'img_path': dil_path1, 'img_name': 'Uploaded Image'})
     else:
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 6, 'val2': 8})
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 6,
+                       'val2': 8})
 
 
 def eye_omat(request):
@@ -382,3 +393,12 @@ def eye_omat2(request):
 
 def register_page(request):
     return render(request, 'user/register.html')
+
+
+def __clear_cache(path):
+    path = path + '/*'
+    print(path)
+    files = glob.glob(path)
+    for all_files in files:
+        os.remove(all_files)
+    return
