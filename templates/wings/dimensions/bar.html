@@ -37,6 +37,7 @@
             width: 50%;
             margin: auto;
         }
+
         .txt2 {
             box-sizing: border-box;
             width: 50%;
@@ -63,26 +64,22 @@
 </head>
 <body>
 
-<section class="left-image">
+<section class="top-image">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-6" >
                 <h2>{{img_name}}</h2>
                 <br><br>
                 <img src={{img_path}} alt="">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <div class="right-content">
-
-                    <p>
-
-                    </p>
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                    <div class="primary-button">
-
-                        <button type="submit" id="buttonID" name="default"> Reset values to default <span class="load loading"></span></button>
-                    </div>
+                        <div class="primary-button">
+                            <button type="submit" id="buttonID" name="default"> Reset values to default <span
+                                    class="load loading"></span></button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -109,100 +106,121 @@
         </div>
 
         <div class="col-md-6">
-            <button type="submit" id="buttonID" name="check"> Check <span class="load loading"></span>
-                </button>
+            <button type="submit" id="form-submit" name="check" style="text-align: right"> Check <span
+            </button>
         </div>
-        <div class="col-md-6">
-            <button type="submit" id="buttonID" name="next" style="text-align: right"> Next <span class="load loading"></span>
-                </button>
+
+
+        <div class="col-md-12">
+            <div class="left-content">
+                <br><br>
+                <h4>One more thing...</h4>
+                <p>We have detected that the wing is placed in the <strong> center </strong> without touching any
+                    borders or frames of the
+                    image. <br>Is that true?</p>
+                <form id="contact" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-8 col-sm-8">
+                            <div class="circle-item">
+                                <button style="width: 40%;" type="submit" name="yes">
+                                    YES & NEXT
+                                </button>
+                                <br><br>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-sm-8">
+                            <div class="circle-item">
+                                <button style="width: 40%;" type="submit" name="no">
+                                    NO & NEXT
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
 
     </div>
 </form>
 
-<script >
+<script>
 
 
+    var range = document.getElementById("range1");
+    var font = document.querySelector(".txt1 .font");
 
-var range = document.getElementById("range1");
-var font = document.querySelector(".txt1 .font");
+    checkFontSize();
 
-checkFontSize();
+    range.oninput = function () {
+        console.log(this.values);
+        body.style.setProperty("font-size", this.value);
+        window.localStorage.setItem("fontSize", this.value);
+        window.localStorage.setItem("range", this.value);
 
-range.oninput = function () {
-  console.log(this.values);
-  body.style.setProperty("font-size", this.value );
-  window.localStorage.setItem("fontSize", this.value );
-  window.localStorage.setItem("range", this.value);
+    };
 
-};
+    function checkFontSize() {
+        var fontSize = window.localStorage.getItem("fontSize");
+        var rangeValue = window.localStorage.getItem("range");
 
-function checkFontSize() {
-  var fontSize = window.localStorage.getItem("fontSize");
-  var rangeValue = window.localStorage.getItem("range");
+    }
 
-  }
+    var range = document.getElementById("range1");
 
-var range = document.getElementById("range1");
+    checkFontSize();
+    range.oninput = function () {
+        console.log(this.values);
+        window.localStorage.setItem("fontSize", this.value);
+        window.localStorage.setItem("range", this.value);
+        font.innerHTML = "<p>Value is :" + "<b>" + this.value;
+    };
 
-checkFontSize();
-range.oninput = function () {
-  console.log(this.values);
-  window.localStorage.setItem("fontSize", this.value);
-  window.localStorage.setItem("range", this.value);
-  font.innerHTML = "<p>Value is :" + "<b>" + this.value;
-};
-
-function checkFontSize() {
-  var fontSize = window.localStorage.getItem("fontSize");
-  var rangeValue = window.localStorage.getItem("range");
-    font.innerHTML = "Value is : "   + range.value;
-  }
-
-
+    function checkFontSize() {
+        var fontSize = window.localStorage.getItem("fontSize");
+        var rangeValue = window.localStorage.getItem("range");
+        font.innerHTML = "Value is : " + range.value;
+    }
 
 
 </script>
-<script >
+<script>
 
 
+    var range2 = document.getElementById("range2");
+    var font2 = document.querySelector(".txt2 .font");
 
-var range2 = document.getElementById("range2");
-var font2 = document.querySelector(".txt2 .font");
+    checkFontSize();
 
-checkFontSize();
+    range2.oninput = function () {
+        console.log(this.values);
+        body.style.setProperty("font-size2", this.value);
+        window.localStorage.setItem("fontSize2", this.value);
+        window.localStorage.setItem("range2", this.value);
 
-range2.oninput = function () {
-  console.log(this.values);
-  body.style.setProperty("font-size2", this.value );
-  window.localStorage.setItem("fontSize2", this.value );
-  window.localStorage.setItem("range2", this.value);
+    };
 
-};
+    function checkFontSize() {
+        var fontSize2 = window.localStorage.getItem("fontSize2");
+        var rangeValue2 = window.localStorage.getItem("range2");
 
-function checkFontSize() {
-  var fontSize2 = window.localStorage.getItem("fontSize2");
-  var rangeValue2 = window.localStorage.getItem("range2");
+    }
 
-  }
+    var range2 = document.getElementById("range2");
 
-var range2 = document.getElementById("range2");
+    checkFontSize();
+    range2.oninput = function () {
+        console.log(this.values);
+        window.localStorage.setItem("fontSize2", this.value);
+        window.localStorage.setItem("range2", this.value);
+        font2.innerHTML = "<p>Value is :" + "<b>" + this.value;
+    };
 
-checkFontSize();
-range2.oninput = function () {
-  console.log(this.values);
-  window.localStorage.setItem("fontSize2", this.value);
-  window.localStorage.setItem("range2", this.value);
-  font2.innerHTML = "<p>Value is :" + "<b>" + this.value;
-};
-
-function checkFontSize() {
-  var fontSize2 = window.localStorage.getItem("fontSize2");
-  var rangeValue2 = window.localStorage.getItem("range2");
-    font2.innerHTML = "Value is : "   + range2.value;
-  }
-
-
+    function checkFontSize() {
+        var fontSize2 = window.localStorage.getItem("fontSize2");
+        var rangeValue2 = window.localStorage.getItem("range2");
+        font2.innerHTML = "Value is : " + range2.value;
+    }
 
 
 </script>

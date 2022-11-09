@@ -7,6 +7,7 @@ import pandas as pd
 from PIL import Image
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 
 from Droso.models import *
 from Python_Scripts.DIP.Image_Processing import *
@@ -89,12 +90,16 @@ def wingdimen2(request):
 
         save_file = __upload_file_to_userdir(request, pre_process, '.png', flag=False, cache=True)
         file_path = save_file
+
         plt.imsave(file_path, pre_process, cmap='gray')
 
         for_dil = cv2.imread(file_path, 0)
-
+        save_dil = __upload_file_to_userdir(request, 'dil', '.png', flag=False, cache=True)
         global dilation_bar
+        global save_dil_path
 
+        def save_dil_path():
+            return save_dil
         def dilation_bar():
             return for_dil
 
@@ -298,12 +303,14 @@ def eye_f(request):
 #     return render(request, 'f_t.html', {'head': 'Drosometer | Thorax'})
 #
 
-def w_option(request):
-    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-    if request.user.is_anonymous:
-        return redirect("/login")
-
-    return render(request, 'wings/dimensions/opt.html', {'head': 'Drosometer | Wings'})
+# def w_option(request):
+#     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
+#     if request.user.is_anonymous:
+#         return redirect("/login")
+#
+#     save_dil = dil_img()
+#     return render(request, 'wings/dimensions/opt.html',
+#                   {'head': 'Drosometer | Wings', 'img_path': save_dil, 'img_name': 'Uploaded Image'})
 
 
 def w_bar(request):
@@ -313,12 +320,17 @@ def w_bar(request):
     # for_dil = request.session['dilation']
     for_dil = dilation_bar()
     dil = dilation(for_dil)
-    save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False, cache=True)
-    x = plt.imsave(save_dil, dil, cmap='gray')
+    save_dil = save_dil_path()
+    plt.imsave(save_dil, dil, cmap='gray')
     print(save_dil)
 
-    val1 = 6
-    val2 = 8
+    global dil_img
+
+    def dil_img():
+        return save_dil
+
+    val1 = 7
+    val2 = 12
 
     if 'check' in request.POST:
         # VALUE GET NAI HORAI
@@ -334,30 +346,25 @@ def w_bar(request):
 
     if 'default' in request.POST:
         dil = dilation(for_dil)
-        x = plt.imsave(save_dil, dil, cmap='gray')
+        plt.imsave(save_dil, dil, cmap='gray')
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 6,
-                       'val2': 8})
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 7,
+                       'val2': 12})
 
     if 'next' in request.POST:
-        # dil = dilation(for_dil, val1, val2)
-        # save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
-        # plt.imsave(save_dil, dil, cmap='gray')
-        print(val1, val2)
+        return redirect('/opt',
+                        {'head': 'Wing | Dimensions', 'img_path': save_dil, 'img_name': 'Uploaded Image'})
 
-    # dil = dilation(dil_path, val1, val2=5)
-    # save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
-    #
-    # dil_path1 = save_dil[1]
-    #
-    # plt.imsave(dil_path1, dil, cmap='gray')
-    #
-    # return render(request, 'wings/dimensions/bar.html',
-    #               {'head': 'Drosometer | Wings', 'img_path': dil_path1, 'img_name': 'Uploaded Image'})
+    if 'yes' in request.POST:
+        return HttpResponse("YES")
+
+    if 'no' in request.POST:
+        return HttpResponse("NO")
+
     else:
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 6,
-                       'val2': 8})
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 7,
+                       'val2': 12})
 
 
 def eye_omat(request):
@@ -397,7 +404,6 @@ def register_page(request):
 
 def __clear_cache(path):
     path = path + '/*'
-    print(path)
     files = glob.glob(path)
     for all_files in files:
         os.remove(all_files)

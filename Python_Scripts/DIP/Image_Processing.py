@@ -38,7 +38,7 @@ def preprocess(orig_img):
     return binary_img
 
 
-def dilation(img, val1=6, val2=8):
+def dilation(img, val1=7, val2=12):
     # img = cv2.imread('./skimage_binary_result.png', 0)
     _, thresh = cv2.threshold(img, 80, 255, cv2.THRESH_BINARY_INV)
 

@@ -37,7 +37,7 @@ urlpatterns = [
     path('w_bristles', views.wingbristles),
     path('w_bristles2', views.wingbristles2),
     path('bar', views.w_bar),
-    path('opt', views.w_option),
+    # path('opt', views.w_option),
 
     # Other paths
     path('aboutus', views.a_us),
