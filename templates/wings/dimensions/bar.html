@@ -70,18 +70,17 @@
             <fieldset>
                 {% csrf_token %}
                 <div class="font-range">
-<!--                    <input type="range" name='range' id="range" value="15" min="15" max="50"/>-->
-                    <input type="text" id = "text" name="range">
-                </div>
-                <div class="txt">
-                    <div class="font"></div>
+                    <input type="range" name='range1' id="range1" value="6" min="5" max="50"/>
+                    <input type="range" name='range2' id="range1" value="8" min="5" max="50"/>
+                    <!--                    <input type="text" id="text" name="text">-->
                 </div>
             </fieldset>
         </div>
 
         <div class="col-md-12">
-            <button type="submit" id="buttonID"> Check <span class="load loading"></span>
-            </button>
+            <button type="submit" id="buttonID" name="check"> Check <span class="load loading"></span>
+                <button type="submit" id="buttonID" name="next"> Next <span class="load loading"></span>
+                </button>
         </div>
     </div>
 </form>

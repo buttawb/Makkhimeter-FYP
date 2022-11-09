@@ -90,14 +90,21 @@ def wingdimen2(request):
         plt.imsave(file_path, pre_process, cmap='gray')
 
         for_dil = cv2.imread(file_path, 0)
-        dil = dilation(for_dil)
-        save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
-        global dil_path
-        dil_path = save_dil
-        plt.imsave(dil_path, dil, cmap='gray')
+
+        global dilation_bar
+
+        def dilation_bar():
+            return for_dil
+
+        # request.session['dilation'] = for_dil
+        # dil = dilation(for_dil)
+        # save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
+        # global dil_path
+        # dil_path = save_dil
+        # plt.imsave(dil_path, dil, cmap='gray')
 
         return redirect('/bar',
-                        {'head': 'Drosometer | Wings', 'img_path': dil_path, 'img_name': 'Uploaded Image'})
+                        {'head': 'Drosometer | Wings'})
 
     return render(request, 'wings/dimensions/w_dimen2.html',
                   {'head': 'Wings | Dimensions', 'img_path': '../static/images/perfect.png',
@@ -291,13 +298,35 @@ def w_bar(request):
     if request.user.is_anonymous:
         return redirect("/login")
     # es image pr kaam karna hai
-    print(dil_path)
+    # for_dil = request.session['dilation']
+    for_dil = dilation_bar()
+    dil = dilation(for_dil)
+    save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
+    plt.imsave(save_dil, dil, cmap='gray')
+    print(save_dil)
+
     val1 = 0
-    if request.method == 'POST':
+    val2 = 0
+
+    if 'check' in request.POST:
         # VALUE GET NAI HORAI
-        val1 = float(request.GET['range'])
+        val1 = int(request.POST.get('range1'))
+        val2 = int(request.POST.get('range2'))
         print(val1)
-        return HttpResponse("VALUE GOT", val1)
+        print(val2)
+
+        dil = dilation(for_dil, val1, val2)
+        save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
+        plt.imsave(save_dil, dil, cmap = 'gray')
+        print(save_dil)
+        return render(request, 'wings/dimensions/bar.html',
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image'})
+
+    if 'next' in request.POST:
+        dil = dilation(for_dil, val1, val2)
+        save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
+        plt.imsave(save_dil, dil, cmap='gray')
+        print(save_dil)
 
     # dil = dilation(dil_path, val1, val2=5)
     # save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
@@ -310,7 +339,7 @@ def w_bar(request):
     #               {'head': 'Drosometer | Wings', 'img_path': dil_path1, 'img_name': 'Uploaded Image'})
     else:
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': dil_path, 'img_name': 'Uploaded Image'})
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image'})
 
 
 def eye_omat(request):
@@ -346,4 +375,3 @@ def eye_omat2(request):
 
 def register_page(request):
     return render(request, 'user/register.html')
-
