@@ -231,7 +231,7 @@ def cropper_eye(request):
     if request.user.is_anonymous:
         return redirect("/login")
 
-    return render(request, 'wings/bristles/cropper.html', {'head': 'Ommatidium | Finder', 'img': img2})
+    return render(request, 'eyes/ommatidum/cropper.html', {'head': 'Ommatidium | Finder', 'img': img2})
 
 
 def c_us(request):
@@ -342,3 +342,8 @@ def eye_omat2(request):
     return render(request, 'eyes/ommatidum/omat_2.html',
                   {'head': 'Eyes | Ommatidium Count', 'img_path': '../static/images/eye_front.png',
                    'img_name': 'Like this: '})
+
+
+def register_page(request):
+    return render(request, 'user/register.html')
+

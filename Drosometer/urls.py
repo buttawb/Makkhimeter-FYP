@@ -27,6 +27,7 @@ urlpatterns = [
     # Login Paths
     path('login', views.loginUser),
     path('logout', views.logoutUser),
+    path('register', views.register_page),
 
     # Wing Paths
     path('w_dimen', views.wingdimen),

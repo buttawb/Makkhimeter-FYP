@@ -930,7 +930,7 @@ section.buttons .container-fluid {
     transition: margin-left 0.5s ease, box-shadow 0.5s ease;
     background-color: #24252d;
     position: relative;
-    width: 420px;
+    width: 425px;
 }
 
 #sidebar > .inner {
@@ -952,7 +952,7 @@ section.buttons .container-fluid {
 	background-color: transparent;
 	border: none;
 	padding: 0px 50px;
-	color: #fff;
+	color: #000000;
 }
 
 #search form:before {
@@ -961,7 +961,7 @@ section.buttons .container-fluid {
     -webkit-transform: scaleX(-1);
     -ms-transform: scaleX(-1);
     transform: scaleX(-1);
-    color: #fff;
+    color: #000000;
     content: '\f002';
     cursor: default;
     display: block;
