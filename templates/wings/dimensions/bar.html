@@ -9,7 +9,7 @@
         }
 
         .font-range {
-            width: 50%;
+            width: 100%;
             box-sizing: border-box;
             margin: auto;
         }
@@ -22,11 +22,22 @@
 
         #range1 {
             width: 100%;
-            padding: 10px 0;
+            padding: 25px 0;
 
         }
 
-        .txt {
+        #range2 {
+            width: 100%;
+            padding: 25px 0;
+
+        }
+
+        .txt1 {
+            box-sizing: border-box;
+            width: 50%;
+            margin: auto;
+        }
+        .txt2 {
             box-sizing: border-box;
             width: 50%;
             margin: auto;
@@ -52,16 +63,32 @@
 </head>
 <body>
 
-<h2>{{img_name}}</h2>
+<section class="left-image">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>{{img_name}}</h2>
+                <br><br>
+                <img src={{img_path}} alt="">
+            </div>
+            <div class="col-md-6">
+                <div class="right-content">
 
-<img src="{{img_path}}">
+                    <p>
 
-<!--<div class="font-range">-->
-<!--    <input type="range" name = 'range1' id="range1" value="15" min="15" max="50"/>-->
-<!--</div>-->
-<!--<div class="txt">-->
-<!--    <div class="font"></div>-->
-<!--</div>-->
+                    </p>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                    <div class="primary-button">
+
+                        <button type="submit" id="buttonID" name="default"> Reset values to default <span class="load loading"></span></button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <form id="contact" method="post" enctype="multipart/form-data">
     <div class="row">
 
@@ -70,102 +97,115 @@
             <fieldset>
                 {% csrf_token %}
                 <div class="font-range">
-                    <input type="range" name='range1' id="range1" value="6" min="5" max="50"/>
-                    <input type="range" name='range2' id="range1" value="8" min="5" max="50"/>
-                    <!--                    <input type="text" id="text" name="text">-->
-                </div>
+                    <input type="range" name='range1' id="range1" value="{{val1}}" min="5" max="50"/>
+                    <div class="txt1">
+                        <div class="font"></div>
+                    </div>
+                    <input type="range" name='range2' id="range2" value="{{val2}}" min="5" max="50"/>
+                    <div class="txt2">
+                        <div class="font"></div>
+                    </div>
             </fieldset>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-6">
             <button type="submit" id="buttonID" name="check"> Check <span class="load loading"></span>
-                <button type="submit" id="buttonID" name="next"> Next <span class="load loading"></span>
                 </button>
         </div>
+        <div class="col-md-6">
+            <button type="submit" id="buttonID" name="next" style="text-align: right"> Next <span class="load loading"></span>
+                </button>
+        </div>
+
     </div>
 </form>
 
-<!--<script>-->
+<script >
 
 
-<!--    var range = document.getElementById("range");-->
-<!--    var font = document.querySelector(".txt .font");-->
 
-<!--    checkFontSize();-->
+var range = document.getElementById("range1");
+var font = document.querySelector(".txt1 .font");
 
-<!--    range.oninput = function () {-->
-<!--        console.log(this.values);-->
-<!--        body.style.setProperty("font-size", this.value);-->
-<!--        window.localStorage.setItem("fontSize", this.value);-->
-<!--        window.localStorage.setItem("range", this.value);-->
+checkFontSize();
 
-<!--    };-->
+range.oninput = function () {
+  console.log(this.values);
+  body.style.setProperty("font-size", this.value );
+  window.localStorage.setItem("fontSize", this.value );
+  window.localStorage.setItem("range", this.value);
 
-<!--    function checkFontSize() {-->
-<!--        var fontSize = window.localStorage.getItem("fontSize");-->
-<!--        var rangeValue = window.localStorage.getItem("range");-->
+};
 
-<!--    }-->
+function checkFontSize() {
+  var fontSize = window.localStorage.getItem("fontSize");
+  var rangeValue = window.localStorage.getItem("range");
 
-<!--    var range = document.getElementById("range");-->
+  }
 
-<!--    checkFontSize();-->
-<!--    range.oninput = function () {-->
-<!--        console.log(this.values);-->
-<!--        window.localStorage.setItem("fontSize", this.value);-->
-<!--        window.localStorage.setItem("range", this.value);-->
-<!--        font.innerHTML = "<p>font-size is :" + "<b>" + this.value;-->
-<!--    };-->
+var range = document.getElementById("range1");
 
-<!--    function checkFontSize() {-->
-<!--        var fontSize = window.localStorage.getItem("fontSize");-->
-<!--        var rangeValue = window.localStorage.getItem("range");-->
-<!--        font.innerHTML = "font-size is : " + range.value;-->
-<!--    }-->
+checkFontSize();
+range.oninput = function () {
+  console.log(this.values);
+  window.localStorage.setItem("fontSize", this.value);
+  window.localStorage.setItem("range", this.value);
+  font.innerHTML = "<p>Value is :" + "<b>" + this.value;
+};
+
+function checkFontSize() {
+  var fontSize = window.localStorage.getItem("fontSize");
+  var rangeValue = window.localStorage.getItem("range");
+    font.innerHTML = "Value is : "   + range.value;
+  }
 
 
-<!--</script>-->
-<!--&lt;!&ndash; Code injected by live-server &ndash;&gt;-->
-<!--<script>-->
-<!--    // <![CDATA[  <&#45;&#45; For SVG support-->
-<!--    if ('WebSocket' in window) {-->
-<!--        (function () {-->
-<!--            function refreshCSS() {-->
-<!--                var sheets = [].slice.call(document.getElementsByTagName("link"));-->
-<!--                var head = document.getElementsByTagName("head")[0];-->
-<!--                for (var i = 0; i < sheets.length; ++i) {-->
-<!--                    var elem = sheets[i];-->
-<!--                    var parent = elem.parentElement || head;-->
-<!--                    parent.removeChild(elem);-->
-<!--                    var rel = elem.rel;-->
-<!--                    if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {-->
-<!--                        var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');-->
-<!--                        elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());-->
-<!--                    }-->
-<!--                    parent.appendChild(elem);-->
-<!--                }-->
-<!--            }-->
 
-<!--            var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';-->
-<!--            var address = protocol + window.location.host + window.location.pathname + '/ws';-->
-<!--            var socket = new WebSocket(address);-->
-<!--            socket.onmessage = function (msg) {-->
-<!--                if (msg.data === 'reload') window.location.reload();-->
-<!--                else if (msg.data === 'refreshcss') refreshCSS();-->
-<!--            };-->
-<!--            if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {-->
-<!--                console.log('Live reload enabled.');-->
 
-<!--                sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);-->
-<!--            }-->
-<!--        })();-->
-<!--    } else {-->
-<!--        console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');-->
-<!--    }-->
-<!--    // ]]>-->
-<!--</script>-->
-<!--<script>-->
-<!--</script>-->
+</script>
+<script >
+
+
+
+var range2 = document.getElementById("range2");
+var font2 = document.querySelector(".txt2 .font");
+
+checkFontSize();
+
+range2.oninput = function () {
+  console.log(this.values);
+  body.style.setProperty("font-size2", this.value );
+  window.localStorage.setItem("fontSize2", this.value );
+  window.localStorage.setItem("range2", this.value);
+
+};
+
+function checkFontSize() {
+  var fontSize2 = window.localStorage.getItem("fontSize2");
+  var rangeValue2 = window.localStorage.getItem("range2");
+
+  }
+
+var range2 = document.getElementById("range2");
+
+checkFontSize();
+range2.oninput = function () {
+  console.log(this.values);
+  window.localStorage.setItem("fontSize2", this.value);
+  window.localStorage.setItem("range2", this.value);
+  font2.innerHTML = "<p>Value is :" + "<b>" + this.value;
+};
+
+function checkFontSize() {
+  var fontSize2 = window.localStorage.getItem("fontSize2");
+  var rangeValue2 = window.localStorage.getItem("range2");
+    font2.innerHTML = "Value is : "   + range2.value;
+  }
+
+
+
+
+</script>
 </body>
 
 

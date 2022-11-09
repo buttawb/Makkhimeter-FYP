@@ -305,8 +305,8 @@ def w_bar(request):
     plt.imsave(save_dil, dil, cmap='gray')
     print(save_dil)
 
-    val1 = 0
-    val2 = 0
+    val1 = 6
+    val2 = 8
 
     if 'check' in request.POST:
         # VALUE GET NAI HORAI
@@ -317,16 +317,23 @@ def w_bar(request):
 
         dil = dilation(for_dil, val1, val2)
         save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
-        plt.imsave(save_dil, dil, cmap = 'gray')
+        plt.imsave(save_dil, dil, cmap='gray')
         print(save_dil)
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image'})
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': val1, 'val2': val2})
+
+    if 'default' in request.POST:
+        dil = dilation(for_dil)
+        save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
+        plt.imsave(save_dil, dil, cmap='gray')
+        return render(request, 'wings/dimensions/bar.html',
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 6, 'val2': 8})
 
     if 'next' in request.POST:
         dil = dilation(for_dil, val1, val2)
         save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
         plt.imsave(save_dil, dil, cmap='gray')
-        print(save_dil)
+        print(val1, val2)
 
     # dil = dilation(dil_path, val1, val2=5)
     # save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
@@ -339,7 +346,7 @@ def w_bar(request):
     #               {'head': 'Drosometer | Wings', 'img_path': dil_path1, 'img_name': 'Uploaded Image'})
     else:
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image'})
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 6, 'val2': 8})
 
 
 def eye_omat(request):
