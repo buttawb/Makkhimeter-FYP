@@ -77,9 +77,10 @@
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="primary-button">
-                            <button type="submit" id="buttonID" name="default"> Reset values to default <span
+                            <button type="submit" id="buttonID" name="highlight">{{but_name}}<span
                                     class="load loading"></span></button>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -94,11 +95,11 @@
             <fieldset>
                 {% csrf_token %}
                 <div class="font-range">
-                    <input type="range" name='range1' id="range1" value="{{val1}}" min="5" max="50"/>
+                    <input type="range" name='range1' id="range1" value="{{val1}}" min="0" max="20"/>
                     <div class="txt1">
                         <div class="font"></div>
                     </div>
-                    <input type="range" name='range2' id="range2" value="{{val2}}" min="5" max="50"/>
+                    <input type="range" name='range2' id="range2" value="{{val2}}" min="0" max="20"/>
                     <div class="txt2">
                         <div class="font"></div>
                     </div>

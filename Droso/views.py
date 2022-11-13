@@ -88,6 +88,12 @@ def wingdimen2(request):
         img2 = img1.convert('RGB')
         pre_process = preprocess(img2)
 
+        orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
+        global orig_img_fn
+
+        def orig_img_fn():
+            return orig_img
+
         save_file = __upload_file_to_userdir(request, pre_process, '.png', flag=False, cache=True)
         file_path = save_file
 
@@ -100,6 +106,7 @@ def wingdimen2(request):
 
         def save_dil_path():
             return save_dil
+
         def dilation_bar():
             return for_dil
 
@@ -319,53 +326,77 @@ def w_bar(request):
     # es image pr kaam karna hai
     # for_dil = request.session['dilation']
     for_dil = dilation_bar()
-    dil = dilation(for_dil)
     save_dil = save_dil_path()
-    plt.imsave(save_dil, dil, cmap='gray')
-    print(save_dil)
 
-    global dil_img
+    if 'highlight' in request.POST:
+        dil = dilation(for_dil)
+        plt.imsave(save_dil, dil, cmap='gray')
 
-    def dil_img():
-        return save_dil
-
-    val1 = 7
-    val2 = 12
+        return render(request, 'wings/dimensions/bar.html',
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image',
+                       'val1': 7,
+                       'val2': 12, 'but_name': 'Reset to default values'})
 
     if 'check' in request.POST:
         # VALUE GET NAI HORAI
-        val1 = int(request.POST.get('range1'))
-        val2 = int(request.POST.get('range2'))
+        global values_from_slider
 
-        dil = dilation(for_dil, val1, val2)
-        plt.imsave(save_dil, dil, cmap='gray')
-        print(save_dil)
+        # def get_values_from_slider():
+        #     val1 = int(request.POST.get('range1'))
+        #     val2 = int(request.POST.get('range2'))
+        #
+        #     dil = dilation(for_dil, val1, val2)
+        #     plt.imsave(save_dil, dil, cmap='gray')
+        #     return save_dil, dil
+        get_values = get_values_from_slider(request, for_dil, save_dil)
+        save_dil = get_values[0]
+        val1 = get_values[2]
+        val2 = get_values[3]
+
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image',
-                       'val1': val1, 'val2': val2})
+                          {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image',
+                           'val1': val1, 'val2': val2, 'but_name': 'Reset to default values'})
 
     if 'default' in request.POST:
         dil = dilation(for_dil)
         plt.imsave(save_dil, dil, cmap='gray')
         return render(request, 'wings/dimensions/bar.html',
                       {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 7,
-                       'val2': 12})
-
-    if 'next' in request.POST:
-        return redirect('/opt',
-                        {'head': 'Wing | Dimensions', 'img_path': save_dil, 'img_name': 'Uploaded Image'})
+                       'val2': 12, 'but_name': 'Reset to default values'})
 
     if 'yes' in request.POST:
-        return HttpResponse("YES")
+        get_values = get_values_from_slider(request, for_dil, save_dil)
+        save_dil = get_values[0]
+        dil = get_values[1]
+
+        path1 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
+        path2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
+
+        outimg = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
+        outimg2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
+        step1 = skeleton(dil, path1, path2, outimg, outimg2)
+        print(step1)
+        return render(request, 'wings/dimensions/output.html',
+                      {'head': 'Dimensions | Result', 'img2': outimg, 'data': step1[1], 'df': step1[0],
+                       'result': outimg2, 'but_name': 'Reset to default values'})
 
     if 'no' in request.POST:
         return HttpResponse("NO")
 
     else:
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 7,
-                       'val2': 12})
+                      {'head': 'Dimensions | Exposure', 'img_path': orig_img_fn(), 'img_name': 'Uploaded Image',
+                       'val1': 7,
+                       'val2': 12, 'but_name': 'Extract wing.'})
 
+
+def get_values_from_slider(request, for_dil, save_dil):
+    val1 = int(request.POST.get('range1'))
+    val2 = int(request.POST.get('range2'))
+
+    dil = dilation(for_dil, val1, val2)
+    plt.imsave(save_dil, dil, cmap='gray')
+    return save_dil, dil, val1, val2
 
 def eye_omat(request):
     if request.user.is_anonymous:
