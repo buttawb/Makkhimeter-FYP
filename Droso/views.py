@@ -172,46 +172,47 @@ def wingshape2(request):
         return redirect("/login")
 
     if request.method == 'POST':
-        uploaded_img = request.FILES['img']
-        img1 = __reader(uploaded_img)
-        # yeh ubyte ko dena hai wind dimension
-        # IMAGE CONVERSIONS FOR THE DL MODEL.
-        img2 = img1.convert('RGB')
-        path = __upload_file_to_userdir(request, img2, '.png')
-        img3 = np.array(img2)
+        return HttpResponse("Shape module has been disabled due to the size limit of Heroku."
+#         uploaded_img = request.FILES['img']
+#         img1 = __reader(uploaded_img)
+#         # yeh ubyte ko dena hai wind dimension
+#         # IMAGE CONVERSIONS FOR THE DL MODEL.
+#         img2 = img1.convert('RGB')
+#         path = __upload_file_to_userdir(request, img2, '.png')
+#         img3 = np.array(img2)
 
-        # APPLYING MODEL
-        result = dl.dl_model(img3)
-        pred = np.argmax(result, axis=1)
-        table = pd.DataFrame(result, columns=['Mutation', 'Oregan'])
+#         # APPLYING MODEL
+#         result = dl.dl_model(img3)
+#         pred = np.argmax(result, axis=1)
+#         table = pd.DataFrame(result, columns=['Mutation', 'Oregan'])
 
-        # ITERATING
-        for index, row in table.iterrows():
-            prob_mut = row['Mutation']
-            prob_oreg = row['Oregan']
+#         # ITERATING
+#         for index, row in table.iterrows():
+#             prob_mut = row['Mutation']
+#             prob_oreg = row['Oregan']
 
-        # CREATING OBJECT AND SAVING ALL OUTPUTS TO DATABASE THROUGH MODEL
-        shape = w_shape()
-        shape.ws_o_img = path
-        if pred == 0:
-            shape.ws_pred = 'Mutation'
-        else:
-            shape.ws_pred = 'Oregan'
-        shape.ws_normal_prob = prob_oreg
-        shape.ws_mutated_prob = prob_mut
-        shape.save()
+#         # CREATING OBJECT AND SAVING ALL OUTPUTS TO DATABASE THROUGH MODEL
+#         shape = w_shape()
+#         shape.ws_o_img = path
+#         if pred == 0:
+#             shape.ws_pred = 'Mutation'
+#         else:
+#             shape.ws_pred = 'Oregan'
+#         shape.ws_normal_prob = prob_oreg
+#         shape.ws_mutated_prob = prob_mut
+#         shape.save()
 
-        if pred == 0:
-            # RENDERING OUTPUTS ON HTML PAGE
-            return render(request, 'wings/shape/w_shape2.html',
-                          {'head': 'Wings | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
-                           'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: '})
+#         if pred == 0:
+#             # RENDERING OUTPUTS ON HTML PAGE
+#             return render(request, 'wings/shape/w_shape2.html',
+#                           {'head': 'Wings | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
+#                            'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: '})
 
-        elif pred == 1:
-            # RENDERING OUTPUTS ON HTML PAGE
-            return render(request, 'wings/shape/w_shape2.html',
-                          {'head': 'Wings | Shape', 'ans': 'Oregan', 'out': 'class.', 'prob_oreg': prob_oreg,
-                           'prob_mut': prob_mut, 'img_path': path, 'img_name': 'Uploaded Image: '})
+#         elif pred == 1:
+#             # RENDERING OUTPUTS ON HTML PAGE
+#             return render(request, 'wings/shape/w_shape2.html',
+#                           {'head': 'Wings | Shape', 'ans': 'Oregan', 'out': 'class.', 'prob_oreg': prob_oreg,
+#                            'prob_mut': prob_mut, 'img_path': path, 'img_name': 'Uploaded Image: '})
 
     else:
         return render(request, 'wings/shape/w_shape2.html',
