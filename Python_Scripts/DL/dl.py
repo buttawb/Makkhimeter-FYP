@@ -5,7 +5,7 @@ import numpy as np
 
 
 def dl_model(input_img):
-    path = 'D:\Projects\Github\DM\Python_Scripts\DL\model\model.h5'
+    path = 'D:\Projects\D.M\DM\Python_Scripts\DL\model\model.h5'
     model = load_model(path)
     test_image = cv2.resize(input_img, (224, 224))
     test_image = img_to_array(test_image) / 255  # convert image to np array and normalize
