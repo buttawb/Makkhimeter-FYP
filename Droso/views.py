@@ -433,6 +433,7 @@ def register_page(request):
     return render(request, 'user/register.html')
 
 
+
 def __clear_cache(path):
     path = path + '/*'
     files = glob.glob(path)
