@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="106aa8eb-8871-4ce4-a4d6-7921abf46b0f" name="Changes" comment="Updated views.">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/428308e4-dc7d-4d95-9f2e-ef707028b2fc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectId" id="2H5V1Mg6UMx7T0QOPoCM1OfgukU" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Projects/D.M/DM&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\Github\DM\templates\eyes\ommatidum" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="106aa8eb-8871-4ce4-a4d6-7921abf46b0f" name="Changes" comment="" />
+      <created>1667574721861</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667574721861</updated>
+      <workItem from="1667574723129" duration="759000" />
+      <workItem from="1667758880030" duration="9671000" />
+      <workItem from="1667793386812" duration="369000" />
+      <workItem from="1667793969786" duration="63000" />
+      <workItem from="1667794138882" duration="92000" />
+      <workItem from="1667794262189" duration="29000" />
+      <workItem from="1667794332576" duration="93000" />
+      <workItem from="1667794472732" duration="419000" />
+      <workItem from="1667794924436" duration="54000" />
+      <workItem from="1667803216030" duration="1094000" />
+      <workItem from="1667804506001" duration="4329000" />
+      <workItem from="1667820394036" duration="5853000" />
+      <workItem from="1667888334658" duration="4394000" />
+      <workItem from="1667973153274" duration="36259000" />
+      <workItem from="1668247863292" duration="2495000" />
+      <workItem from="1668291951368" duration="581000" />
+      <workItem from="1668292593677" duration="362000" />
+      <workItem from="1668292993656" duration="234000" />
+      <workItem from="1670001440814" duration="3075000" />
+      <workItem from="1670004648001" duration="36000" />
+      <workItem from="1670135068406" duration="10000" />
+      <workItem from="1670138486046" duration="193000" />
+      <workItem from="1670215219120" duration="472000" />
+      <workItem from="1670218242602" duration="139000" />
+      <workItem from="1670222820982" duration="2295000" />
+      <workItem from="1670225167544" duration="125000" />
+      <workItem from="1670251708548" duration="119000" />
+      <workItem from="1670307075028" duration="450000" />
+      <workItem from="1670384518709" duration="964000" />
+    </task>
+    <task id="LOCAL-00001" summary="Started bristles.">
+      <created>1667760579264</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1667760579264</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Bristles 1.1">
+      <created>1667761291546</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1667761291546</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added files for bristles.">
+      <created>1667761528212</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1667761528212</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Bristles 1.2">
+      <created>1667763424595</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667763424595</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Bristles 1.3">
+      <created>1667765305329</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667765305329</updated>
+    </task>
+    <task id="LOCAL-00006" summary="File changes.">
+      <created>1667768029794</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1667768029794</updated>
+    </task>
+    <task id="LOCAL-00007" summary="File changes.">
+      <created>1667768061400</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1667768061400</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Updated.">
+      <created>1667769480258</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1667769480258</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Updated.">
+      <created>1667793687442</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1667793687442</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Started working on Eye. Added one of the eye module Ommatidium.">
+      <created>1667820613886</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1667820613886</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Started working on Eye. Added one of the eye module Ommatidium.">
+      <created>1667820636369</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1667820636369</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Added option for user registration.">
+      <created>1667973924458</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1667973924458</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Updated images.">
+      <created>1667973976759</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1667973976759</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Added option for Image dilation.">
+      <created>1667988733678</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1667988733678</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Dilation slider updated.">
+      <created>1667995601830</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1667995601830</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Separated the (to be stored in database) images and cache images (which will be deleted everytime user sign out.">
+      <created>1667999325758</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1667999325758</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Added option for algorithm selection in wing dimensions.">
+      <created>1668021139763</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1668021139763</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Started bristles." />
+    <MESSAGE value="Bristles 1.1" />
+    <MESSAGE value="Added files for bristles." />
+    <MESSAGE value="Bristles 1.2" />
+    <MESSAGE value="Bristles 1.3" />
+    <MESSAGE value="File changes." />
+    <MESSAGE value="Updated." />
+    <MESSAGE value="Started working on Eye. Added one of the eye module Ommatidium." />
+    <MESSAGE value="Added option for user registration." />
+    <MESSAGE value="Updated images." />
+    <MESSAGE value="Added option for Image dilation." />
+    <MESSAGE value="Dilation slider updated." />
+    <MESSAGE value="Separated the (to be stored in database) images and cache images (which will be deleted everytime user sign out." />
+    <MESSAGE value="Added option for algorithm selection in wing dimensions." />
+    <MESSAGE value="Updated views." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated views." />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/DM$manage.coverage" NAME="manage Coverage Results" MODIFIED="1670251728161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
