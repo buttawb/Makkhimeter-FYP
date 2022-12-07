@@ -354,8 +354,8 @@ def w_bar(request):
         val2 = get_values[3]
 
         return render(request, 'wings/dimensions/bar.html',
-                          {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image',
-                           'val1': val1, 'val2': val2, 'but_name': 'Reset to default values'})
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image',
+                       'val1': val1, 'val2': val2, 'but_name': 'Reset to default values'})
 
     if 'default' in request.POST:
         dil = dilation(for_dil)
@@ -398,6 +398,7 @@ def get_values_from_slider(request, for_dil, save_dil):
     plt.imsave(save_dil, dil, cmap='gray')
     return save_dil, dil, val1, val2
 
+
 def eye_omat(request):
     if request.user.is_anonymous:
         return redirect("/login")
@@ -431,7 +432,6 @@ def eye_omat2(request):
 
 def register_page(request):
     return render(request, 'user/register.html')
-
 
 
 def __clear_cache(path):
