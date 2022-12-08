@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="106aa8eb-8871-4ce4-a4d6-7921abf46b0f" name="Changes" comment="Updated views.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +106,7 @@
       <workItem from="1670225167544" duration="125000" />
       <workItem from="1670251708548" duration="119000" />
       <workItem from="1670307075028" duration="450000" />
-      <workItem from="1670384518709" duration="1386000" />
+      <workItem from="1670384518709" duration="1939000" />
     </task>
     <task id="LOCAL-00001" summary="Started bristles.">
       <created>1667760579264</created>
@@ -235,7 +234,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670385831302</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Updated views.">
+      <created>1670385930868</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1670385930868</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
