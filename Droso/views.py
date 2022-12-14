@@ -2,7 +2,7 @@ import io
 import os
 import uuid
 import glob
-import pandas as pd
+import imagehash
 
 from PIL import Image
 from django.contrib.auth import login, logout, authenticate
@@ -42,12 +42,63 @@ def logoutUser(request):
     return render(request, 'user/logout.html')
 
 
+def __reader(obj):
+    # FUNCTION TO READ IMAGES
+    data = obj.read()
+    file = io.BytesIO(data)
+    open_file = Image.open(file)
+
+    return open_file
+
+
+def __upload_file_to_userdir(request, file, file_format, flag=True, cache=False):
+    # ASSIGNS NAME AND PATH TO THE FILE
+    # SAVE FILE ONLY IF FLAG IS TRUE
+    path = __find_userpath(request)
+    rand_name = str(uuid.uuid4())
+    if flag:
+        if cache:
+            final_path = path + "/cache/" + rand_name + file_format
+            file.save(final_path)
+            return final_path
+        # UPLOADS USER FILES TO THEIR DIRECTORY
+        else:
+            final_path = path + "/" + rand_name + file_format
+            file.save(final_path)
+            return final_path
+    else:
+        if cache:
+            final_path = path + "/cache/" + rand_name + file_format
+            return final_path
+        else:
+            final_path = path + "/" + rand_name + file_format
+            return final_path
+
+
 def __find_userpath(request):
     # GET USERNAME AMD FIND ITS PATH
     u_name = str(request.user)
     base = 'static/users'
     path = base + '/' + u_name
     return path
+
+
+def __clear_cache(path):
+    path = path + '/*'
+    files = glob.glob(path)
+    for all_files in files:
+        os.remove(all_files)
+    return
+
+
+def image_check(img):
+    hash0 = imagehash.average_hash(img)
+    hash1 = imagehash.average_hash(Image.open('D:\Projects\D.M\DM\static\images\similarity.tif'))
+
+    if (hash0 - hash1) >= 25:
+        return False
+    else:
+        return True
 
 
 def main(request):
@@ -85,10 +136,19 @@ def wingdimen2(request):
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
         img1 = __reader(uploaded_img)
+
         img2 = img1.convert('RGB')
         pre_process = preprocess(img2)
 
         orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
+
+        # CHECK EITHER THE IMAGE IS OF WING OR NOT.
+        if not image_check(img1):
+            return render(request, 'wings/dimensions/w_dimen2.html',
+                          {'head': 'Wings | Dimensions', 'img_path': orig_img,
+                           'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
+                           'out2': 'of wing', 'out3': 'Let us know if this is by mistake.'})
+
         global orig_img_fn
 
         def orig_img_fn():
@@ -131,39 +191,6 @@ def wingshape(request):
         return redirect("/login")
 
     return render(request, 'wings/shape/w_shape.html', {'head': 'Drosometer | Wings'})
-
-
-def __reader(obj):
-    # FUNCTION TO READ IMAGES
-    data = obj.read()
-    file = io.BytesIO(data)
-    open_file = Image.open(file)
-
-    return open_file
-
-
-def __upload_file_to_userdir(request, file, file_format, flag=True, cache=False):
-    # ASSIGNS NAME AND PATH TO THE FILE
-    # SAVE FILE ONLY IF FLAG IS TRUE
-    path = __find_userpath(request)
-    rand_name = str(uuid.uuid4())
-    if flag:
-        if cache:
-            final_path = path + "/cache/" + rand_name + file_format
-            file.save(final_path)
-            return final_path
-        # UPLOADS USER FILES TO THEIR DIRECTORY
-        else:
-            final_path = path + "/" + rand_name + file_format
-            file.save(final_path)
-            return final_path
-    else:
-        if cache:
-            final_path = path + "/cache/" + rand_name + file_format
-            return final_path
-        else:
-            final_path = path + "/" + rand_name + file_format
-            return final_path
 
 
 def wingshape2(request):
@@ -432,11 +459,3 @@ def eye_omat2(request):
 
 def register_page(request):
     return render(request, 'user/register.html')
-
-
-def __clear_cache(path):
-    path = path + '/*'
-    files = glob.glob(path)
-    for all_files in files:
-        os.remove(all_files)
-    return
