@@ -408,7 +408,19 @@ def w_bar(request):
                        'result': outimg2, 'but_name': 'Reset to default values'})
 
     if 'no' in request.POST:
-        return HttpResponse("NO")
+        get_values = get_values_from_slider(request, for_dil, save_dil)
+        save_dil = get_values[0]
+        dil = get_values[1]
+
+        path1 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
+        path2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
+
+        outimg = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
+        outimg2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
+        step1 = other_option(dil, path1, path2, outimg, outimg2)
+        return render(request, 'wings/dimensions/output.html',
+                      {'head': 'Dimensions | Result', 'img2': outimg, 'data': step1[1], 'df': step1[0],
+                       'result': outimg2, 'but_name': 'Reset to default values'})
 
     else:
         return render(request, 'wings/dimensions/bar.html',

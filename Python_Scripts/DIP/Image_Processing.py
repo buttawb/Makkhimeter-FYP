@@ -82,6 +82,11 @@ def skeleton(e_im, path1, path2, outimg, outimg2):
     img = cv2.imread(path2)
     # Extract only blue channel as DAPI / nuclear (blue) staining is the best
     # channel to perform cell count.
+    result = contours(img, edge_touching_removed, outimg, outimg2)
+    return result[0], result[1]
+
+
+def contours(img, edge_touching_removed, outimg, outimg2):
     cells = img[:, :, 0]  # Blue channel. Image equivalent to grey image.
     # cells=cv2.resize(img,(386,500))
 
@@ -216,6 +221,7 @@ def skeleton(e_im, path1, path2, outimg, outimg2):
     plt.imsave(outimg2, result)
     return df, data
 
+
 # def region_props(param1, param2, properties=None):
 #     if properties is None:
 #         properties = ['label', 'area', 'perimeter']
@@ -224,3 +230,51 @@ def skeleton(e_im, path1, path2, outimg, outimg2):
 #     df['Area in µm²'] = df['area'] * (100 / 413)
 #     df['Perimeter in µm'] = df['perimeter'] * (100 / 413)
 #     return df
+
+
+def other_option(e_im, path1, path2, outimg, outimg2):
+    import cv2
+    import numpy as np
+    _, thresh2 = cv2.threshold(e_im, 75, 255, cv2.THRESH_BINARY)
+    nlabels, labels, stats, centroids = cv2.connectedComponentsWithStats(thresh2, None, None, None, 8, cv2.CV_32S)
+
+    # get CC_STAT_AREA component as stats[label, COLUMN]
+    areas = stats[1:, cv2.CC_STAT_AREA]
+
+    result = np.zeros((labels.shape), np.uint8)
+
+    for i in range(0, nlabels - 1):
+        if areas[i] >= 11000:  # keep
+            result[labels == i + 1] = 255
+    # kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (25,25))
+    # morph = cv2.morphologyEx(result, cv2.MORPH_CLOSE, kernel)
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (25, 25))
+    morph = cv2.morphologyEx(result, cv2.MORPH_CLOSE, kernel)
+    # invert morp image
+    mask = 0 - morph
+    # edge_touching_removed = clear_border(mask)
+
+    cv2.imwrite('result.png', result)
+
+    h, w = result.shape[:2]
+
+    # create zeros mask 2 pixels larger in each dimension
+    mask = np.zeros([h + 2, w + 2], np.uint8)
+
+    # floodfill outer white border with black
+    img_floodfill = cv2.floodFill(result, mask, (0, 0), 0, (5), (0), flags=8)[1]
+
+    # remove border
+    img_floodfill = img_floodfill[1:h - 1, 1:w - 1]
+
+    cv2.imwrite("crop.png", img_floodfill)
+
+    from skimage import measure, color, io
+    from skimage.segmentation import clear_border
+    import pandas as pd
+
+    img = cv2.imread("crop.png")
+    # Extract only blue channel as DAPI / nuclear (blue) staining is the best
+    # channel to perform cell count.
+    result = contours(img, img_floodfill, outimg, outimg2)
+    return result[0], result[1]
