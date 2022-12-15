@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5498300-32ce-4a50-99f0-3a7b13d0d2b7" name="Changes" comment="Added check for whether the image is of wing or not.">
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/1a920527-626c-46d8-821d-c70210fc607b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/40cdc782-e7c3-45ec-8702-9ea6c2df55ef.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/41ae761f-0f92-46a5-9ef2-359a32ab21ef.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/770f6777-7ca0-4850-b271-cc70c8ad2ebc.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/7ccf012b-17b6-4f1e-bae5-d20bb7af1677.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/88088f59-3445-45d3-9469-10904b46813b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/a868285a-1b81-40b1-9477-ab1c12f814ef.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/b3804f6a-ff34-45c1-ac0a-aec9b328ea9e.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
+    <list default="true" id="b5498300-32ce-4a50-99f0-3a7b13d0d2b7" name="Changes" comment="Added 2nd algorithm of wing dimensions.">
       <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Image_Processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Image_Processing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/crop.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/result.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +99,7 @@
       <workItem from="1671041698004" duration="38000" />
       <workItem from="1671041785236" duration="612000" />
       <workItem from="1671043775557" duration="3660000" />
-      <workItem from="1671093616464" duration="3208000" />
+      <workItem from="1671093616464" duration="3547000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
@@ -116,7 +108,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671046932084</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added 2nd algorithm of wing dimensions.">
+      <created>1671097034075</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1671097034075</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,6 +135,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Added check for whether the image is of wing or not." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added check for whether the image is of wing or not." />
+    <MESSAGE value="Added 2nd algorithm of wing dimensions." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added 2nd algorithm of wing dimensions." />
   </component>
 </project>

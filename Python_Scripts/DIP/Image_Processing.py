@@ -254,7 +254,7 @@ def other_option(e_im, path1, path2, outimg, outimg2):
     mask = 0 - morph
     # edge_touching_removed = clear_border(mask)
 
-    cv2.imwrite('result.png', result)
+    #cv2.imwrite('result.png', result)
 
     h, w = result.shape[:2]
 
@@ -267,13 +267,13 @@ def other_option(e_im, path1, path2, outimg, outimg2):
     # remove border
     img_floodfill = img_floodfill[1:h - 1, 1:w - 1]
 
-    cv2.imwrite("crop.png", img_floodfill)
+    cv2.imwrite(path1, img_floodfill)
 
     from skimage import measure, color, io
     from skimage.segmentation import clear_border
     import pandas as pd
 
-    img = cv2.imread("crop.png")
+    img = cv2.imread(path1)
     # Extract only blue channel as DAPI / nuclear (blue) staining is the best
     # channel to perform cell count.
     result = contours(img, img_floodfill, outimg, outimg2)
