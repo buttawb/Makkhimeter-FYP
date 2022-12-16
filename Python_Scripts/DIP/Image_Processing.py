@@ -156,8 +156,8 @@ def contours(img, edge_touching_removed, outimg, outimg2):
                                                     'area',
                                                     'perimeter', 'centroid'])
     df = pd.DataFrame(regions)
-    df['Area in µm²'] = df['area'] * (100 / 413)
-    df['Perimeter in µm'] = df['perimeter'] * (100 / 413)
+    df['Ar'] = df['area'] * (100 / 413)
+    df['Pr'] = df['perimeter'] * (100 / 413)
     # length=df[2:]
     # if length<4:
     #     raise 'Error'
@@ -174,6 +174,9 @@ def contours(img, edge_touching_removed, outimg, outimg2):
     output2 = img.copy()
     center1 = df['centroid-0']
     center2 = df['centroid-1']
+
+    df.rename(columns={'centroid-0': 'centroid0'}, inplace=True)
+    df.rename(columns={'centroid-1': 'centroid1'}, inplace=True)
 
     # Iterate over all non-background labels
     for i in range(2, ret3):
@@ -213,12 +216,14 @@ def contours(img, edge_touching_removed, outimg, outimg2):
                                       properties=['label',
                                                   'area', 'perimeter'])
     data = pd.DataFrame(props)
-    data['Area in µm²'] = data['area'] * (100 / 413)
-    data['Perimeter in µm'] = data['perimeter'] * (100 / 413)
+    data['Ar'] = data['area'] * (100 / 413)
+    data['Pr'] = data['perimeter'] * (100 / 413)
     data.drop(columns='area', inplace=True)
     data.drop(columns='perimeter', inplace=True)
     plt.imsave(outimg, img2)
     plt.imsave(outimg2, result)
+
+
     return df, data
 
 
@@ -254,7 +259,7 @@ def other_option(e_im, path1, path2, outimg, outimg2):
     mask = 0 - morph
     # edge_touching_removed = clear_border(mask)
 
-    #cv2.imwrite('result.png', result)
+    # cv2.imwrite('result.png', result)
 
     h, w = result.shape[:2]
 

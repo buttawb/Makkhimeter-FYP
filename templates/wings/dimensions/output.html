@@ -1,15 +1,79 @@
 {% extends "base/head.html" %}
 {% block content %}
+    <style>
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 80%;
+        }
+    </style>
 
-<div class="col-md-6">
-    <img src={{img2}} alt="" >
-</div>
-<!--<div class="col-md-6">-->
-<!--    <img src={{result}} alt="">-->
-<!--</div>-->
+    <h1>Highlighted Segments Image</h1>
+    <br>
+    <div class="col-md-6">
+        <img src={{ img2 }} alt="" class="center">
+    </div>
 
+    <!-- Tables -->
 
-<!--s-->
-<h4>{{df}}</h4>
+    <div class="alternate-table">
+        <table>
+            <thead>
+            <tr>
+                <th>Label</th>
+                <th>Centroid 1</th>
+                <th>Centroid 2</th>
+                <th>Area in µm²</th>
+                <th>Perimeter in µm</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if d %}
+                {% for i in d %}
+                    <tr>
+                        <td>{{ i.label }}</td>
+                        <td>{{ i.centroid0 }}</td>
+                        <td>{{ i.centroid1 }}</td>
+                        <td>{{ i.Ar }}</td>
+                        <td>{{ i.Pr }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <br>
+
+    <h1>Highlighted Wing Image</h1>
+    <br>
+
+    <div class="col-md-6">
+        <img src={{ img1 }} alt="" class="center">
+    </div>
+    <div class="alternate-table">
+        <table>
+            <thead>
+            <tr>
+                <th>Label</th>
+                <th>Area in µm²</th>
+                <th>Perimeter in µm</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if f %}
+                {% for j in f %}
+                    <tr>
+                        <td>{{ j.label }}</td>
+                        <td>{{ j.Ar }}</td>
+                        <td>{{ j.Pr }}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </table>
+    </div>
+
 
 {% endblock %}

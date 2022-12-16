@@ -3,6 +3,8 @@ import os
 import uuid
 import glob
 import imagehash
+import json
+import pandas as pd
 
 from PIL import Image
 from django.contrib.auth import login, logout, authenticate
@@ -402,10 +404,19 @@ def w_bar(request):
         outimg = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
         outimg2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
         step1 = skeleton(dil, path1, path2, outimg, outimg2)
-        print(step1)
+
+        df = step1[0]
+        json_records = df.reset_index().to_json(orient='records')
+        data = []
+        data = json.loads(json_records)
+
+        df2 = step1[1]
+        json_record = df2.reset_index().to_json(orient='records')
+        dat = []
+        dat = json.loads(json_record)
+
         return render(request, 'wings/dimensions/output.html',
-                      {'head': 'Dimensions | Result', 'img2': outimg, 'data': step1[1], 'df': step1[0],
-                       'result': outimg2, 'but_name': 'Reset to default values'})
+                      {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat})
 
     if 'no' in request.POST:
         get_values = get_values_from_slider(request, for_dil, save_dil)
@@ -418,9 +429,19 @@ def w_bar(request):
         outimg = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
         outimg2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
         step1 = other_option(dil, path1, path2, outimg, outimg2)
+
+        df = step1[0]
+        json_records = df.reset_index().to_json(orient='records')
+        data = []
+        data = json.loads(json_records)
+
+        df2 = step1[1]
+        json_record = df2.reset_index().to_json(orient='records')
+        dat = []
+        dat = json.loads(json_record)
+
         return render(request, 'wings/dimensions/output.html',
-                      {'head': 'Dimensions | Result', 'img2': outimg, 'data': step1[1], 'df': step1[0],
-                       'result': outimg2, 'but_name': 'Reset to default values'})
+                      {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat})
 
     else:
         return render(request, 'wings/dimensions/bar.html',
