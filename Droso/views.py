@@ -348,6 +348,11 @@ def eye_f(request):
 #     return render(request, 'wings/dimensions/opt.html',
 #                   {'head': 'Drosometer | Wings', 'img_path': save_dil, 'img_name': 'Uploaded Image'})
 
+def df_to_html(df):
+    json_records = df.reset_index().to_json(orient='records')
+    data = []
+    data = json.loads(json_records)
+    return data
 
 def w_bar(request):
     if request.user.is_anonymous:
@@ -356,6 +361,32 @@ def w_bar(request):
     # for_dil = request.session['dilation']
     for_dil = dilation_bar()
     save_dil = save_dil_path()
+
+    def algorithm_selection(algorithm, save_dil):
+        get_values = get_values_from_slider(request, for_dil, save_dil)
+        save_dil = get_values[0]
+        dil = get_values[1]
+
+        path1 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
+        path2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
+
+        outimg = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
+        outimg2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
+        step1 = algorithm(dil, path1, path2, outimg, outimg2)
+
+        df = step1[0]
+        data = df_to_html(df)
+
+        # json_records = df.reset_index().to_json(orient='records')
+        # data = []
+        # data = json.loads(json_records)
+
+        df2 = step1[1]
+        dat = df_to_html(df2)
+        # json_record = df2.reset_index().to_json(orient='records')
+        # dat = []
+        # dat = json.loads(json_record)
+        return data, dat, outimg, outimg2
 
     if 'highlight' in request.POST:
         dil = dilation(for_dil)
@@ -394,51 +425,15 @@ def w_bar(request):
                        'val2': 12, 'but_name': 'Reset to default values'})
 
     if 'yes' in request.POST:
-        get_values = get_values_from_slider(request, for_dil, save_dil)
-        save_dil = get_values[0]
-        dil = get_values[1]
-
-        path1 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
-        path2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
-
-        outimg = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
-        outimg2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
-        step1 = skeleton(dil, path1, path2, outimg, outimg2)
-
-        df = step1[0]
-        json_records = df.reset_index().to_json(orient='records')
-        data = []
-        data = json.loads(json_records)
-
-        df2 = step1[1]
-        json_record = df2.reset_index().to_json(orient='records')
-        dat = []
-        dat = json.loads(json_record)
+        result = algorithm_selection(skeleton, save_dil)
+        data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
 
         return render(request, 'wings/dimensions/output.html',
                       {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat})
 
     if 'no' in request.POST:
-        get_values = get_values_from_slider(request, for_dil, save_dil)
-        save_dil = get_values[0]
-        dil = get_values[1]
-
-        path1 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
-        path2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
-
-        outimg = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
-        outimg2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
-        step1 = other_option(dil, path1, path2, outimg, outimg2)
-
-        df = step1[0]
-        json_records = df.reset_index().to_json(orient='records')
-        data = []
-        data = json.loads(json_records)
-
-        df2 = step1[1]
-        json_record = df2.reset_index().to_json(orient='records')
-        dat = []
-        dat = json.loads(json_record)
+        result = algorithm_selection(other_option, save_dil)
+        data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
 
         return render(request, 'wings/dimensions/output.html',
                       {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat})
