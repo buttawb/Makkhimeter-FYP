@@ -1,18 +1,29 @@
 {% extends "base/head.html" %}
 {% block content %}
     <style>
-        .center {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            width: 80%;
+        .column {
+            float: left;
+            width: 50%;
+            padding: 5px;
+        }
+
+        /* Clear floats after image containers */
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
         }
     </style>
 
     <h1>Highlighted Segments Image</h1>
     <br>
-    <div class="col-md-6">
-        <img src={{ img2 }} alt="" class="center">
+    <div class="row">
+        <div class="column">
+            <img src={{ orig_img }} alt="Snow" style="width:100%">
+        </div>
+        <div class="column">
+            <img src={{ img2 }} alt="Forest" style="width:100%">
+        </div>
     </div>
 
     <!-- Tables -->
@@ -48,10 +59,25 @@
 
     <h1>Highlighted Wing Image</h1>
     <br>
+    {#    <div class="col-md-6">#}
+    {#       #}
+    {#    </div>#}
+    {#    <div class="col-md-4">#}
+    {#        <img src={{ orig_img }} alt="">#}
+    {#        <img src={{ img1 }} alt="">#}
+    {#    </div>#}
 
-    <div class="col-md-6">
-        <img src={{ img1 }} alt="" class="center">
+    <div class="row">
+        <div class="column">
+            <img src={{ orig_img }} alt="Snow" style="width:100%">
+        </div>
+        <div class="column">
+            <img src={{ img1 }} alt="Forest" style="width:100%">
+        </div>
     </div>
+
+
+
     <div class="alternate-table">
         <table>
             <thead>

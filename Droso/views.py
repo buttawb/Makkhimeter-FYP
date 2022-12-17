@@ -221,7 +221,6 @@ def wingshape2(request):
 
         # CREATING OBJECT AND SAVING ALL OUTPUTS TO DATABASE THROUGH MODEL
         shape = w_shape()
-        shape.ws_o_img = path
         if pred == 0:
             shape.ws_pred = 'Mutation'
         else:
@@ -354,10 +353,11 @@ def df_to_html(df):
     data = json.loads(json_records)
     return data
 
+
 def w_bar(request):
     if request.user.is_anonymous:
         return redirect("/login")
-    # es image pr kaam karna hai
+
     # for_dil = request.session['dilation']
     for_dil = dilation_bar()
     save_dil = save_dil_path()
@@ -386,6 +386,15 @@ def w_bar(request):
         # json_record = df2.reset_index().to_json(orient='records')
         # dat = []
         # dat = json.loads(json_record)
+
+        # STORING AREA & PERIMETER OF THE WHOLE WING IN DATABASE
+        dimen = w_dimen()
+
+        for i in dat:
+            dimen.wd_peri = list(i.values())[-1]
+            dimen.wd_area = list(i.values())[-2]
+            dimen.save()
+
         return data, dat, outimg, outimg2
 
     if 'highlight' in request.POST:
@@ -423,20 +432,23 @@ def w_bar(request):
         return render(request, 'wings/dimensions/bar.html',
                       {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 7,
                        'val2': 12, 'but_name': 'Reset to default values'})
+    orig_img = orig_img_fn()
 
     if 'yes' in request.POST:
         result = algorithm_selection(skeleton, save_dil)
         data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
 
         return render(request, 'wings/dimensions/output.html',
-                      {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat})
+                      {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat,
+                       'orig_img': orig_img})
 
     if 'no' in request.POST:
         result = algorithm_selection(other_option, save_dil)
         data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
 
         return render(request, 'wings/dimensions/output.html',
-                      {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat})
+                      {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat,
+                       'orig_img': orig_img})
 
     else:
         return render(request, 'wings/dimensions/bar.html',

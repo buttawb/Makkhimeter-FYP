@@ -1,5 +1,4 @@
 from django.db import models
-import cv2
 
 
 class w_dimen(models.Model):
@@ -60,6 +59,9 @@ class e_shape(models.Model):
 
     earea = models.FloatField(max_length=100)
     eperimeter = models.FloatField(max_length=100)
+
+    class Meta:
+        pass
 
 
 class e_ommatidium(models.Model):
