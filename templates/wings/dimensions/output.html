@@ -82,7 +82,6 @@
         <table>
             <thead>
             <tr>
-                <th>Label</th>
                 <th>Area in µm²</th>
                 <th>Perimeter in µm</th>
             </tr>
@@ -91,7 +90,6 @@
             {% if f %}
                 {% for j in f %}
                     <tr>
-                        <td>{{ j.label }}</td>
                         <td>{{ j.Ar }}</td>
                         <td>{{ j.Pr }}</td>
                     </tr>
@@ -100,6 +98,5 @@
             </tbody>
         </table>
     </div>
-
 
 {% endblock %}

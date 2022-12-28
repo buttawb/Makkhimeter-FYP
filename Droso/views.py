@@ -4,7 +4,6 @@ import uuid
 import glob
 import imagehash
 import json
-import pandas as pd
 
 from PIL import Image
 from django.contrib.auth import login, logout, authenticate
@@ -12,8 +11,23 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from Droso.models import *
-from Python_Scripts.DIP.Image_Processing import *
+
+# IMPORTING SCRIPTS
+from Python_Scripts.DIP.Wings.Wing_Bristles import *
+from Python_Scripts.DIP.Wings.Wing_Dimensions import *
+from Python_Scripts.DIP.Eyes.Eye_Ommatidium import *
+from Python_Scripts.DIP.Eyes.Eye_Dimensions import *
+from Python_Scripts.DIP.Eyes.Eye_Colour import *
+
 from Python_Scripts.DL import dl
+
+# CREATING OBJECTS
+WD_PreP = WD_PreProcessing()
+WD_P = WD_Procesing()
+WD_PostP = WD_PostProcessing()
+
+WB_PreP = WB_PreProcessing()
+EO_PreP = EO_PreProcessing()
 
 
 def loginUser(request):
@@ -140,7 +154,9 @@ def wingdimen2(request):
         img1 = __reader(uploaded_img)
 
         img2 = img1.convert('RGB')
-        pre_process = preprocess(img2)
+
+        pre_process = WD_PreP.PreProcessing_2(img2)
+        # pre_process = preprocess(img2)
 
         orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
 
@@ -269,7 +285,8 @@ def wingbristles2(request):
         print(crop_img)
 
         img = Image.open(crop_img)
-        img1 = prepreprocess(img)
+        img1 = WB_PreP.PreProcessing(img)
+        # img1 = prepreprocess(img)
         plt.imsave(crop_img, img1[2], cmap='gray')
 
         return redirect("/cropper_wing", {'head': 'Bristles | Finder', 'img': crop_img})
@@ -398,7 +415,8 @@ def w_bar(request):
         return data, dat, outimg, outimg2
 
     if 'highlight' in request.POST:
-        dil = dilation(for_dil)
+        dil = WD_P.Dilation(for_dil)
+        # dil = dilation(for_dil)
         plt.imsave(save_dil, dil, cmap='gray')
 
         return render(request, 'wings/dimensions/bar.html',
@@ -427,7 +445,8 @@ def w_bar(request):
                        'val1': val1, 'val2': val2, 'but_name': 'Reset to default values'})
 
     if 'default' in request.POST:
-        dil = dilation(for_dil)
+        dil = WD_P.Dilation(for_dil)
+        # dil = dilation(for_dil)
         plt.imsave(save_dil, dil, cmap='gray')
         return render(request, 'wings/dimensions/bar.html',
                       {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 7,
@@ -435,7 +454,7 @@ def w_bar(request):
     orig_img = orig_img_fn()
 
     if 'yes' in request.POST:
-        result = algorithm_selection(skeleton, save_dil)
+        result = algorithm_selection(WD_P.Skelatonize, save_dil)
         data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
 
         return render(request, 'wings/dimensions/output.html',
@@ -443,7 +462,8 @@ def w_bar(request):
                        'orig_img': orig_img})
 
     if 'no' in request.POST:
-        result = algorithm_selection(other_option, save_dil)
+        result = algorithm_selection(WD_P.FloodFill, save_dil)
+        # result = algorithm_selection(other_option, save_dil)
         data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
 
         return render(request, 'wings/dimensions/output.html',
@@ -461,7 +481,8 @@ def get_values_from_slider(request, for_dil, save_dil):
     val1 = int(request.POST.get('range1'))
     val2 = int(request.POST.get('range2'))
 
-    dil = dilation(for_dil, val1, val2)
+    dil = WD_P.Dilation(for_dil, val1, val2)
+    # dil = dilation(for_dil, val1, val2)
     plt.imsave(save_dil, dil, cmap='gray')
     return save_dil, dil, val1, val2
 
@@ -486,7 +507,8 @@ def eye_omat2(request):
         img2 = __upload_file_to_userdir(request, img1, '.png')
 
         img = Image.open(img2)
-        img = prepreprocess(img)
+        img = EO_PreP.PreProcessing(img)
+        #img = prepreprocess(img)
 
         plt.imsave(img2, img[2], cmap='gray')
 
