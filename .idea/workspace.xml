@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5498300-32ce-4a50-99f0-3a7b13d0d2b7" name="Changes" comment="Database fixes.">
-      <change afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Colour.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Dimensions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Ommatidium.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Wings/Wing_Bristles.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Wings/Wing_Dimensions.py" afterDir="false" />
+    <list default="true" id="b5498300-32ce-4a50-99f0-3a7b13d0d2b7" name="Changes" comment="Scripts are now CLASS based.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Image_Processing.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wings/bristles/w_bristles2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/bristles/w_bristles2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/output.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Ommatidium.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Ommatidium.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +119,7 @@
       <workItem from="1672057078466" duration="2601000" />
       <workItem from="1672147941583" duration="3815000" />
       <workItem from="1672155714984" duration="1204000" />
-      <workItem from="1672214671245" duration="6715000" />
+      <workItem from="1672214671245" duration="7091000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
@@ -172,7 +163,14 @@
       <option name="project" value="LOCAL" />
       <updated>1671299618303</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Scripts are now CLASS based.">
+      <created>1672223098695</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1672223098695</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,6 +195,7 @@
     <MESSAGE value="Wing dimensions UI modified." />
     <MESSAGE value="Modified models.py." />
     <MESSAGE value="Database fixes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Database fixes." />
+    <MESSAGE value="Scripts are now CLASS based." />
+    <option name="LAST_COMMIT_MESSAGE" value="Scripts are now CLASS based." />
   </component>
 </project>
