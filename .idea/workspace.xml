@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5498300-32ce-4a50-99f0-3a7b13d0d2b7" name="Changes" comment="Scripts are now CLASS based.">
+    <list default="true" id="b5498300-32ce-4a50-99f0-3a7b13d0d2b7" name="Changes" comment="Updated Eye Omma.">
+      <change afterPath="$PROJECT_DIR$/Droso/migrations/0002_eye_image_wing_image_w_dimen_wd_o_img.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Droso/migrations/0003_alter_w_dimen_wd_o_img.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Ommatidium.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Ommatidium.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Wings/Wing_Dimensions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Wings/Wing_Dimensions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/output.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen2.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +125,9 @@
       <workItem from="1672057078466" duration="2601000" />
       <workItem from="1672147941583" duration="3815000" />
       <workItem from="1672155714984" duration="1204000" />
-      <workItem from="1672214671245" duration="7091000" />
+      <workItem from="1672214671245" duration="11663000" />
+      <workItem from="1672255379717" duration="692000" />
+      <workItem from="1672305159468" duration="4884000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
@@ -170,7 +178,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672223098695</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Updated Eye Omma.">
+      <created>1672223568369</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1672223568369</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +211,7 @@
     <MESSAGE value="Modified models.py." />
     <MESSAGE value="Database fixes." />
     <MESSAGE value="Scripts are now CLASS based." />
-    <option name="LAST_COMMIT_MESSAGE" value="Scripts are now CLASS based." />
+    <MESSAGE value="Updated Eye Omma." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated Eye Omma." />
   </component>
 </project>

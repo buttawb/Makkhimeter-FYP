@@ -33,8 +33,6 @@
             <thead>
             <tr>
                 <th>Label</th>
-                <th>Centroid 1</th>
-                <th>Centroid 2</th>
                 <th>Area in µm²</th>
                 <th>Perimeter in µm</th>
             </tr>
@@ -44,8 +42,6 @@
                 {% for i in d %}
                     <tr>
                         <td>{{ i.label }}</td>
-                        <td>{{ i.centroid0 }}</td>
-                        <td>{{ i.centroid1 }}</td>
                         <td>{{ i.Ar }}</td>
                         <td>{{ i.Pr }}</td>
                     </tr>

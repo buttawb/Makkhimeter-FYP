@@ -111,7 +111,8 @@ def image_check(img):
     hash0 = imagehash.average_hash(img)
     hash1 = imagehash.average_hash(Image.open('D:\Projects\D.M\DM\static\images\similarity.tif'))
 
-    if (hash0 - hash1) >= 25:
+    if (hash0 - hash1) > 25:
+        print(hash0-hash1)
         return False
     else:
         return True
@@ -154,18 +155,19 @@ def wingdimen2(request):
         img1 = __reader(uploaded_img)
 
         img2 = img1.convert('RGB')
-
-        pre_process = WD_PreP.PreProcessing_2(img2)
         # pre_process = preprocess(img2)
-
-        orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
 
         # CHECK EITHER THE IMAGE IS OF WING OR NOT.
         if not image_check(img1):
+            orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
             return render(request, 'wings/dimensions/w_dimen2.html',
                           {'head': 'Wings | Dimensions', 'img_path': orig_img,
                            'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
                            'out2': 'of wing', 'out3': 'Let us know if this is by mistake.'})
+
+        orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
+
+        pre_process = WD_PreP.PreProcessing_2(img2)
 
         global orig_img_fn
 
@@ -222,6 +224,15 @@ def wingshape2(request):
         # yeh ubyte ko dena hai wind dimension
         # IMAGE CONVERSIONS FOR THE DL MODEL.
         img2 = img1.convert('RGB')
+
+        # CHECK EITHER THE IMAGE IS OF WING OR NOT.
+        if not image_check(img1):
+            path = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
+            return render(request, 'wings/dimensions/w_dimen2.html',
+                          {'head': 'Wings | Dimensions', 'img_path': path,
+                           'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
+                           'out2': 'of wing', 'out3': 'Let us know if this is by mistake.'})
+
         path = __upload_file_to_userdir(request, img2, '.png')
         img3 = np.array(img2)
 
@@ -280,9 +291,16 @@ def wingbristles2(request):
         uploaded_img = request.FILES['img']
         img1 = __reader(uploaded_img)
 
-        global crop_img
+        # CHECK EITHER THE IMAGE IS OF WING OR NOT.
+        if not image_check(img1):
+            orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
+            return render(request, 'wings/dimensions/w_dimen2.html',
+                          {'head': 'Wings | Dimensions', 'img_path': orig_img,
+                           'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
+                           'out2': 'of wing', 'out3': 'Let us know if this is by mistake.'})
+
         crop_img = __upload_file_to_userdir(request, img1, ".png")
-        print(crop_img)
+        request.session['crop_img'] = crop_img
 
         img = Image.open(crop_img)
         img1 = WB_PreP.PreProcessing(img)
@@ -299,14 +317,13 @@ def wingbristles2(request):
 def cropper_bristles(request):
     if request.user.is_anonymous:
         return redirect("/login")
-
+    crop_img = request.session['crop_img']
     return render(request, 'wings/bristles/cropper.html', {'head': 'Bristles | Finder', 'img': crop_img})
 
 
 def cropper_eye(request):
     if request.user.is_anonymous:
         return redirect("/login")
-
     return render(request, 'eyes/ommatidum/cropper.html', {'head': 'Ommatidium | Finder', 'img': img2})
 
 
@@ -508,7 +525,7 @@ def eye_omat2(request):
 
         img = Image.open(img2)
         img = EO_PreP.PreProcessing(img)
-        #img = prepreprocess(img)
+        # img = prepreprocess(img)
 
         plt.imsave(img2, img[2], cmap='gray')
 

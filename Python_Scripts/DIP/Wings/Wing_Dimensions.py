@@ -12,7 +12,8 @@ from skimage import color, exposure
 
 
 class WD_PreProcessing:
-    def __init__(self):
+    def __init__(self, img=None):
+        self.img = img
         pass
 
     def PreProcessing_1(self, img2):
@@ -87,7 +88,7 @@ class WD_Procesing:
         # result = contours(img, edge_touching_removed, outimg, outimg2)
         return result[0], result[1]
 
-    def Processing(self, img, edge_touching_removed, outimg, outimg2):
+    def Processing(self, img, edge_touching_removed, outimg, outimg2, flag=False):
         cells = img[:, :, 0]  # Blue channel. Image equivalent to grey image.
         # cells=cv2.resize(img,(386,500))
 
@@ -149,12 +150,21 @@ class WD_Procesing:
 
         img[markers == -1] = [0, 255, 255]
 
-        result = WD_PostProcessing.RegionProp(img, edge_touching_removed, outimg, outimg2, ret3, markers, cells)
-        df = result[0]
-        data = result[1]
-        return df, data
+        if flag:
+            result = WD_PostProcessing.RegionProp_FloodFill(img, edge_touching_removed, outimg, outimg2, ret3, markers,
+                                                            cells)
+            df = result[0]
+            data = result[1]
+            return df, data
+        else:
+            result = WD_PostProcessing.RegionProp_Skeleton(img, edge_touching_removed, outimg, outimg2, ret3, markers,
+                                                           cells)
+            df = result[0]
+            data = result[1]
+            return df, data
 
     def FloodFill(self, e_im, path1, path2, outimg, outimg2):
+
         import cv2
         import numpy as np
         _, thresh2 = cv2.threshold(e_im, 75, 255, cv2.THRESH_BINARY)
@@ -198,7 +208,7 @@ class WD_Procesing:
         img = cv2.imread(path1)
         # Extract only blue channel as DAPI / nuclear (blue) staining is the best
         # channel to perform cell count.
-        result = self.Processing(img)
+        result = self.Processing(img, img_floodfill, outimg, outimg2, flag=True)
         # result = contours(img, img_floodfill, outimg, outimg2)
         return result[0], result[1]
 
@@ -209,7 +219,7 @@ class WD_PostProcessing(WD_Procesing):
         pass
 
     @staticmethod
-    def RegionProp(img, edge_touching_removed, outimg, outimg2, ret3, markers, cells):
+    def RegionProp_Skeleton(img, edge_touching_removed, outimg, outimg2, ret3, markers, cells):
         regions = measure.regionprops_table(markers, cells,
                                             properties=['label',
                                                         'area',
@@ -275,6 +285,80 @@ class WD_PostProcessing(WD_Procesing):
         # st.image(result, width=400)
         # --------------------------------------------------------------------------------------
         props = measure.regionprops_table(result, edge_touching_removed,
+                                          properties=['label',
+                                                      'area', 'perimeter'])
+        data = pd.DataFrame(props)
+        data['Ar'] = data['area'] * (100 / 413)
+        data['Pr'] = data['perimeter'] * (100 / 413)
+        data.drop(columns='area', inplace=True)
+        data.drop(columns='perimeter', inplace=True)
+        plt.imsave(outimg, img2)
+        plt.imsave(outimg2, result)
+
+        return df, data
+
+    @staticmethod
+    def RegionProp_FloodFill(img, img_floodfill, outimg, outimg2, ret3, markers, cells):
+        regions = measure.regionprops_table(markers, cells,
+                                            properties=['label',
+                                                        'area',
+                                                        'perimeter', 'centroid'])
+        df = pd.DataFrame(regions)
+        df['Area in µm²'] = df['area'] * (100 / 413)
+        df['Perimeter in µm'] = df['perimeter'] * (100 / 413)
+
+        # cv2.imwrite('wshseg_colors.png', output)
+        # cv2.imwrite('wshseg_boxes.png', output2)
+
+        df = df.drop(columns='perimeter', axis=1)
+        df = df.drop(columns='area', axis=1)
+
+        # st.write(df)
+
+        output = np.zeros_like(img)
+        output2 = img.copy()
+        center1 = df['centroid-0']
+        center2 = df['centroid-1']
+
+        from skimage import color
+        img2 = color.label2rgb(markers, bg_label=0)
+
+        # Iterate over all non-background labels
+        for i in range(2, ret3):
+            a = 0
+            b = 0
+            mask = np.where(markers == i, np.uint8(255), np.uint8(0))
+            x, y, w, h = cv2.boundingRect(mask)
+            area = cv2.countNonZero(mask[y:y + h, x:x + w])
+
+            # Visualize
+            color = np.uint8(np.random.random_integers(0, 0, 3)).tolist()
+            output[mask != 0] = color
+            Y = center1[i]
+            X = center2[i]
+            l = i + 1
+
+            cv2.putText(img2, '%d' % l, (int(X), int(Y)), cv2.FONT_HERSHEY_SIMPLEX, 3.9, color, 15, cv2.LINE_AA)
+
+        # plt.imshow(img2, cmap='jet')
+        # plt.show()
+        # print(df)
+        # st.image(img2,width=400)
+
+        # area=sum(df['Area in mm^2'].iloc[2:13])
+
+        contours = cv2.findContours(img_floodfill, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours = contours[0] if len(contours) == 2 else contours[1]
+        big_contour = max(contours, key=cv2.contourArea)
+
+        # draw white filled contour on black background
+        result = np.zeros_like(img_floodfill)
+        cv2.drawContours(result, [big_contour], 0, (255, 255, 255), cv2.FILLED)
+
+        # plt.imshow(result,cmap='gray')
+        # st.image(result, width=400)
+        # --------------------------------------------------------------------------------------
+        props = measure.regionprops_table(result, img_floodfill,
                                           properties=['label',
                                                       'area', 'perimeter'])
         data = pd.DataFrame(props)

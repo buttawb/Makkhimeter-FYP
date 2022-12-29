@@ -1,9 +1,23 @@
 from django.db import models
 
 
+class Wing_Image(models.Model):
+    image = models.ImageField(upload_to='static/db_wingimages')
+
+    class Meta:
+        pass
+
+
+class Eye_Image(models.Model):
+    image = models.ImageField(upload_to='static/db_eyeimages')
+
+    class Meta:
+        pass
+
+
 class w_dimen(models.Model):
     wdimen = models.AutoField(primary_key=True)
-
+    #wd_o_img = models.ForeignKey(Wing_Image, on_delete=models.CASCADE, default=None)
     # wd_o_img = models.CharField(max_length=600)
     # wd_b_img = models.CharField(max_length=600)
 
