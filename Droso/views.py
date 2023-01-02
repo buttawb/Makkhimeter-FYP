@@ -67,6 +67,21 @@ def __reader(obj):
     return open_file
 
 
+def save_img(file, img):
+
+    rand_name = str(uuid.uuid4())
+    if img == 'wing':
+        path = "static/db_wingimages"
+        fpath = path + "/" + rand_name + ".png"
+        file.save(fpath)
+        return fpath
+    else:
+        path = "static/db_eyeimages"
+        fpath = path + "/" + rand_name + ".png"
+        file.save(fpath)
+        return fpath
+
+
 def __upload_file_to_userdir(request, file, file_format, flag=True, cache=False):
     # ASSIGNS NAME AND PATH TO THE FILE
     # SAVE FILE ONLY IF FLAG IS TRUE
@@ -112,7 +127,7 @@ def image_check(img):
     hash1 = imagehash.average_hash(Image.open('D:\Projects\D.M\DM\static\images\similarity.tif'))
 
     if (hash0 - hash1) > 25:
-        print(hash0-hash1)
+        print(hash0 - hash1)
         return False
     else:
         return True
@@ -166,6 +181,11 @@ def wingdimen2(request):
                            'out2': 'of wing', 'out3': 'Let us know if this is by mistake.'})
 
         orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
+        #fimg = save_img(img2, 'wing')
+        wing = Wing_Image()
+        wing.image = uploaded_img
+        wing.user = request.user
+        wing.save()
 
         pre_process = WD_PreP.PreProcessing_2(img2)
 

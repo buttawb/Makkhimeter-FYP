@@ -21,41 +21,41 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path('', views.main),
+                  path("admin/", admin.site.urls),
+                  path('', views.main),
 
-    # Login Paths
-    path('login', views.loginUser),
-    path('logout', views.logoutUser),
-    path('register', views.register_page),
+                  # Login Paths
+                  path('login', views.loginUser),
+                  path('logout', views.logoutUser),
+                  path('register', views.register_page),
 
-    # Wing Paths
-    path('w_dimen', views.wingdimen),
-    path('w_dimen2', views.wingdimen2),
-    path('w_shape', views.wingshape),
-    path('w_shape2', views.wingshape2),
-    path('w_bristles', views.wingbristles),
-    path('w_bristles2', views.wingbristles2),
-    path('bar', views.w_bar),
-    # path('opt', views.w_option),
+                  # Wing Paths
+                  path('w_dimen', views.wingdimen),
+                  path('w_dimen2', views.wingdimen2),
+                  path('w_shape', views.wingshape),
+                  path('w_shape2', views.wingshape2),
+                  path('w_bristles', views.wingbristles),
+                  path('w_bristles2', views.wingbristles2),
+                  path('bar', views.w_bar),
+                  # path('opt', views.w_option),
 
-    # Other paths
-    path('aboutus', views.a_us),
-    path('contactus', views.c_us),
-    path('feedback', views.f_b),
+                  # Other paths
+                  path('aboutus', views.a_us),
+                  path('contactus', views.c_us),
+                  path('feedback', views.f_b),
 
-    path('cropper_wing', views.cropper_bristles),
-    path('cropper_eye', views.cropper_eye),
+                  path('cropper_wing', views.cropper_bristles),
+                  path('cropper_eye', views.cropper_eye),
 
-    # Eye Paths
-    path('f_eye', views.eye_f),
-    path('f_wing', views.wing_f),
-    path('e_omat', views.eye_omat),
-    path('e_omat2', views.eye_omat2),
+                  # Eye Paths
+                  path('f_eye', views.eye_f),
+                  path('f_wing', views.wing_f),
+                  path('e_omat', views.eye_omat),
+                  path('e_omat2', views.eye_omat2),
 
-    # path('f_thorax', views.thorax_f),
+                  # path('f_thorax', views.thorax_f),
 
-]
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
