@@ -304,8 +304,8 @@ class WD_PostProcessing(WD_Procesing):
                                                         'area',
                                                         'perimeter', 'centroid'])
         df = pd.DataFrame(regions)
-        df['Area in µm²'] = df['area'] * (100 / 413)
-        df['Perimeter in µm'] = df['perimeter'] * (100 / 413)
+        df['Ar'] = df['area'] * (100 / 413)
+        df['Pr'] = df['perimeter'] * (100 / 413)
 
         # cv2.imwrite('wshseg_colors.png', output)
         # cv2.imwrite('wshseg_boxes.png', output2)

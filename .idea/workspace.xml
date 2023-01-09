@@ -4,26 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5498300-32ce-4a50-99f0-3a7b13d0d2b7" name="Changes" comment="Updated.">
-      <change afterPath="$PROJECT_DIR$/static/users/awb/0bd54156-301b-480c-a1da-0057b204a97f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/33efb53e-da32-40f9-b9cb-81378d60eab7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/455a0638-20aa-4e75-b0ff-45a50707111d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/5eca4906-65c0-4a1d-93a1-a31aa89e5b7a.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/74a78002-6157-4a20-a5b1-da92cf2f44b2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/ad57f92f-be08-447c-ae24-2d9e4ae91fa2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/ad581c0b-77e4-40ec-b9cb-6cb5e8610c38.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/ceb6f8f6-71e9-4b21-a0b1-2249e5ab7e2a.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="b5498300-32ce-4a50-99f0-3a7b13d0d2b7" name="Changes" comment="Uploaded images are now stored.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Droso/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Droso/migrations/0002_eye_image_wing_image_w_dimen_wd_o_img.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Droso/migrations/0003_alter_w_dimen_wd_o_img.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Droso/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drosometer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Drosometer/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/check" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/check_HoicT2C" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/check_VFHUGSs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Wings/Wing_Dimensions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Wings/Wing_Dimensions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/similaritycheck.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/user/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/bar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/bar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +130,8 @@
       <workItem from="1672305159468" duration="5305000" />
       <workItem from="1672625238811" duration="584000" />
       <workItem from="1672626035710" duration="604000" />
-      <workItem from="1672650792665" duration="5843000" />
+      <workItem from="1672650792665" duration="13476000" />
+      <workItem from="1673179741754" duration="450000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
@@ -206,7 +196,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672310090621</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Uploaded images are now stored.">
+      <created>1672656777128</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1672656777128</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -234,6 +231,7 @@
     <MESSAGE value="Scripts are now CLASS based." />
     <MESSAGE value="Updated Eye Omma." />
     <MESSAGE value="Updated." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated." />
+    <MESSAGE value="Uploaded images are now stored." />
+    <option name="LAST_COMMIT_MESSAGE" value="Uploaded images are now stored." />
   </component>
 </project>

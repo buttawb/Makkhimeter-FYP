@@ -4,7 +4,8 @@ from django.db import models
 
 class Wing_Image(models.Model):
     wing = models.AutoField(primary_key=True)
-    image = models.ImageField(upload_to="static\db_wingimages")
+    image = models.CharField(max_length=100000000)
+    # image = models.ImageField(upload_to="static\db_wingimages")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     dt = models.DateTimeField(auto_now_add=True)
 
@@ -14,7 +15,8 @@ class Wing_Image(models.Model):
 
 class Eye_Image(models.Model):
     eye = models.AutoField(primary_key=True)
-    image = models.CharField(max_length=200)
+    image = models.ImageField(upload_to="static\db_eyeimages")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     dt = models.DateTimeField(auto_now_add=True)
 
     class Meta:

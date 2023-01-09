@@ -67,19 +67,19 @@ def __reader(obj):
     return open_file
 
 
-def save_img(file, img):
-
-    rand_name = str(uuid.uuid4())
-    if img == 'wing':
-        path = "static/db_wingimages"
-        fpath = path + "/" + rand_name + ".png"
-        file.save(fpath)
-        return fpath
-    else:
-        path = "static/db_eyeimages"
-        fpath = path + "/" + rand_name + ".png"
-        file.save(fpath)
-        return fpath
+# def save_img(file, img):
+#
+#     rand_name = str(uuid.uuid4())
+#     if img == 'wing':
+#         path = "static/db_wingimages"
+#         fpath = path + "/" + rand_name + ".png"
+#         file.save(fpath)
+#         return fpath
+#     else:
+#         path = "static/db_eyeimages"
+#         fpath = path + "/" + rand_name + ".png"
+#         file.save(fpath)
+#         return fpath
 
 
 def __upload_file_to_userdir(request, file, file_format, flag=True, cache=False):
@@ -124,12 +124,13 @@ def __clear_cache(path):
 
 def image_check(img):
     hash0 = imagehash.average_hash(img)
-    hash1 = imagehash.average_hash(Image.open('D:\Projects\D.M\DM\static\images\similarity.tif'))
+    hash1 = imagehash.average_hash(Image.open("static/images/similarity.tif"))
+    print(hash0 - hash1)
 
     if (hash0 - hash1) > 25:
-        print(hash0 - hash1)
         return False
     else:
+
         return True
 
 
@@ -167,8 +168,8 @@ def wingdimen2(request):
 
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
-        img1 = __reader(uploaded_img)
 
+        img1 = __reader(uploaded_img)
         img2 = img1.convert('RGB')
         # pre_process = preprocess(img2)
 
@@ -181,11 +182,16 @@ def wingdimen2(request):
                            'out2': 'of wing', 'out3': 'Let us know if this is by mistake.'})
 
         orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
-        #fimg = save_img(img2, 'wing')
-        wing = Wing_Image()
-        wing.image = uploaded_img
-        wing.user = request.user
-        wing.save()
+        p = cv2.imread(orig_img)
+        img = img_as_ubyte(p)
+        print(p)
+        print(img)
+        # fimg = save_img(img2, 'wing')
+        global wing_d
+        wing_d = Wing_Image()
+        wing_d.image = img
+        wing_d.user = request.user
+        wing_d.save()
 
         pre_process = WD_PreP.PreProcessing_2(img2)
 
@@ -254,6 +260,12 @@ def wingshape2(request):
                            'out2': 'of wing', 'out3': 'Let us know if this is by mistake.'})
 
         path = __upload_file_to_userdir(request, img2, '.png')
+
+        wing_s = Wing_Image()
+        wing_s.image = uploaded_img
+        wing_s.user = request.user
+        wing_s.save()
+
         img3 = np.array(img2)
 
         # APPLYING MODEL
@@ -274,6 +286,7 @@ def wingshape2(request):
             shape.ws_pred = 'Oregan'
         shape.ws_normal_prob = prob_oreg
         shape.ws_mutated_prob = prob_mut
+        shape.ws_o_img = wing_s
         shape.save()
 
         if pred == 0:
@@ -313,7 +326,7 @@ def wingbristles2(request):
 
         # CHECK EITHER THE IMAGE IS OF WING OR NOT.
         if not image_check(img1):
-            orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
+            orig_img = __upload_file_to_userdir(request, img1, '.png', flag=True, cache=True)
             return render(request, 'wings/dimensions/w_dimen2.html',
                           {'head': 'Wings | Dimensions', 'img_path': orig_img,
                            'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
@@ -344,7 +357,8 @@ def cropper_bristles(request):
 def cropper_eye(request):
     if request.user.is_anonymous:
         return redirect("/login")
-    return render(request, 'eyes/ommatidum/cropper.html', {'head': 'Ommatidium | Finder', 'img': img2})
+    crop_img_eye = request.session['crop_img']
+    return render(request, 'eyes/ommatidum/cropper.html', {'head': 'Ommatidium | Finder', 'img': crop_img_eye})
 
 
 def c_us(request):
@@ -447,6 +461,7 @@ def w_bar(request):
         for i in dat:
             dimen.wd_peri = list(i.values())[-1]
             dimen.wd_area = list(i.values())[-2]
+            dimen.wd_o_img = wing_d
             dimen.save()
 
         return data, dat, outimg, outimg2
@@ -538,18 +553,24 @@ def eye_omat2(request):
 
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
-        img1 = __reader(uploaded_img)
 
-        global img2
-        img2 = __upload_file_to_userdir(request, img1, '.png')
+        eye_o = Eye_Image()
+        eye_o.image = uploaded_img
+        eye_o.user = request.user
+        eye_o.save()
 
-        img = Image.open(img2)
-        img = EO_PreP.PreProcessing(img)
-        # img = prepreprocess(img)
+        img1 = uploaded_img.read()
+        # img1 = __reader(uploaded_img)
 
-        plt.imsave(img2, img[2], cmap='gray')
+        crop_img_eye = __upload_file_to_userdir(request, img1, ".png")
+        request.session['crop_img_eye'] = crop_img_eye
 
-        return redirect('/cropper_eye', {'head': 'Ommatidium | Count', 'img': img2})
+        img = Image.open(crop_img_eye)
+        img1 = WB_PreP.PreProcessing(img)
+        # img1 = prepreprocess(img)
+        plt.imsave(crop_img_eye, img1[2], cmap='gray')
+
+        return redirect("/cropper_eye", {'head': 'Ommatidium | Finder', 'img': crop_img_eye})
 
     return render(request, 'eyes/ommatidum/omat_2.html',
                   {'head': 'Eyes | Ommatidium Count', 'img_path': '../static/images/eye_front.png',
