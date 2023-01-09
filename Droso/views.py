@@ -184,8 +184,8 @@ def wingdimen2(request):
         orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
         p = cv2.imread(orig_img)
         img = img_as_ubyte(p)
-        print(p)
-        print(img)
+        # print(p)
+        # print(img)
         # fimg = save_img(img2, 'wing')
         global wing_d
         wing_d = Wing_Image()
