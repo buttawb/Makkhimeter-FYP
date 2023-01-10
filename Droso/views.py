@@ -122,16 +122,30 @@ def __clear_cache(path):
     return
 
 
-def image_check(img):
-    hash0 = imagehash.average_hash(img)
-    hash1 = imagehash.average_hash(Image.open("static/images/similarity.tif"))
-    print(hash0 - hash1)
+def image_check(img, path):
+    img_1 = cv2.imread(path)
+    gray = cv2.cvtColor(img_1, cv2.COLOR_BGR2GRAY)
 
-    if (hash0 - hash1) > 25:
-        return False
-    else:
+    corners = cv2.goodFeaturesToTrack(gray, 1000000000, 0.01, 10)
 
+    corners = np.int0(corners)
+
+    print(len(corners))
+
+    if len(corners) > 2000:
         return True
+    else:
+        return False
+
+    # hash0 = imagehash.average_hash(img)
+    # hash1 = imagehash.average_hash(Image.open("static/images/similarity.tif"))
+    # print(hash0 - hash1)
+    #
+    # if (hash0 - hash1) > 25:
+    #     return False
+    # else:
+    #
+    #     return True
 
 
 def main(request):
@@ -174,8 +188,8 @@ def wingdimen2(request):
         # pre_process = preprocess(img2)
 
         # CHECK EITHER THE IMAGE IS OF WING OR NOT.
-        if not image_check(img1):
-            orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
+        orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
+        if not image_check(img1, orig_img):
             return render(request, 'wings/dimensions/w_dimen2.html',
                           {'head': 'Wings | Dimensions', 'img_path': orig_img,
                            'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
@@ -216,6 +230,11 @@ def wingdimen2(request):
         def dilation_bar():
             return for_dil
 
+        global mymy
+
+        def mymy():
+            return save_file
+
         # request.session['dilation'] = for_dil
         # dil = dilation(for_dil)
         # save_dil = __upload_file_to_userdir(request, dil, '.png', flag=False)
@@ -252,8 +271,8 @@ def wingshape2(request):
         img2 = img1.convert('RGB')
 
         # CHECK EITHER THE IMAGE IS OF WING OR NOT.
-        if not image_check(img1):
-            path = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
+        path = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
+        if not image_check(img1, path):
             return render(request, 'wings/dimensions/w_dimen2.html',
                           {'head': 'Wings | Dimensions', 'img_path': path,
                            'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
@@ -324,9 +343,9 @@ def wingbristles2(request):
         uploaded_img = request.FILES['img']
         img1 = __reader(uploaded_img)
 
+        orig_img = __upload_file_to_userdir(request, img1, '.png', flag=True, cache=True)
         # CHECK EITHER THE IMAGE IS OF WING OR NOT.
-        if not image_check(img1):
-            orig_img = __upload_file_to_userdir(request, img1, '.png', flag=True, cache=True)
+        if not image_check(img1, orig_img):
             return render(request, 'wings/dimensions/w_dimen2.html',
                           {'head': 'Wings | Dimensions', 'img_path': orig_img,
                            'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
@@ -435,6 +454,11 @@ def w_bar(request):
         save_dil = get_values[0]
         dil = get_values[1]
 
+        global images
+
+        def images():
+            return path1, path2, outimg, outimg2
+
         path1 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
         path2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
 
@@ -505,7 +529,11 @@ def w_bar(request):
                        'val2': 12, 'but_name': 'Reset to default values'})
     orig_img = orig_img_fn()
 
+    global flag
+    flag = True
+
     if 'yes' in request.POST:
+        flag = True
         result = algorithm_selection(WD_P.Skelatonize, save_dil)
         data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
 
@@ -514,6 +542,7 @@ def w_bar(request):
                        'orig_img': orig_img})
 
     if 'no' in request.POST:
+        flag = False
         result = algorithm_selection(WD_P.FloodFill, save_dil)
         # result = algorithm_selection(other_option, save_dil)
         data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
@@ -527,6 +556,39 @@ def w_bar(request):
                       {'head': 'Dimensions | Exposure', 'img_path': orig_img_fn(), 'img_name': 'Uploaded Image',
                        'val1': 7,
                        'val2': 12, 'but_name': 'Extract wing.'})
+
+
+def detail_dimen(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    if flag:
+        img1 = orig_img_fn()
+        img2 = save_dil_path()
+        img3 = mymy()
+
+        fin = images()
+        img4 = fin[0]
+        img5 = fin[1]
+        img6 = fin[2]
+        img7 = fin[3]
+        return render(request, 'wings/dimensions/detail_1.html',
+                      {'head': 'Dimensions | Detailed steps', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
+                       'img5': img5, 'img6': img6, 'img7': img7})
+
+    else:
+        img1 = orig_img_fn()
+        img2 = save_dil_path()
+        img3 = mymy()
+
+        fin = images()
+        img4 = fin[0]
+        img6 = fin[2]
+        img7 = fin[3]
+
+        return render(request, 'wings/dimensions/detail_2.html',
+                      {'head': 'Dimensions | Detailed steps', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
+                       'img6': img6, 'img7': img7})
 
 
 def get_values_from_slider(request, for_dil, save_dil):

@@ -31,12 +31,16 @@ urlpatterns = [
 
                   # Wing Paths
                   path('w_dimen', views.wingdimen),
+                  path('bar', views.w_bar),
                   path('w_dimen2', views.wingdimen2),
+                  path('details', views.detail_dimen),
+
                   path('w_shape', views.wingshape),
                   path('w_shape2', views.wingshape2),
+
                   path('w_bristles', views.wingbristles),
                   path('w_bristles2', views.wingbristles2),
-                  path('bar', views.w_bar),
+
                   # path('opt', views.w_option),
 
                   # Other paths

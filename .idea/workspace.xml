@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b5498300-32ce-4a50-99f0-3a7b13d0d2b7" name="Changes" comment="Uploaded images are now stored.">
-      <change afterPath="$PROJECT_DIR$/static/users/awb/420a6c68-152d-488e-92f5-a2575e73ae0f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/503b289e-de20-4600-b7c2-0c8a634fac4d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/51477f61-8cb9-47b7-8252-a8023206ee42.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/568bf36f-6f2e-4624-b2db-c6edc4ba3440.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/7be07627-25ac-4440-b020-f320039e7b05.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/8f4b69ab-e4a9-44ef-bbca-2b3946d35e89.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/f444502b-c49d-49b2-bec8-bb08445e462f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/cache/fdc6fd63-c83a-4e4d-8908-de3a0f883560.png" afterDir="false" />
+    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/templates/wings/dimensions/detail_1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/wings/dimensions/detail_2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drosometer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Drosometer/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/opt.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/output.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +25,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -42,6 +40,13 @@
       </map>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="No-shape-Model" />
+      </map>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -53,20 +58,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Drosometer" type="Python.DjangoServer" factoryName="Django server">
       <module name="Drosometer" />
@@ -96,7 +102,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b5498300-32ce-4a50-99f0-3a7b13d0d2b7" name="Changes" comment="" />
+      <changelist id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="" />
       <created>1670617927666</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -135,6 +141,7 @@
       <workItem from="1672650792665" duration="13476000" />
       <workItem from="1673179741754" duration="450000" />
       <workItem from="1673252498587" duration="2092000" />
+      <workItem from="1673321646384" duration="5790000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
