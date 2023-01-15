@@ -51,7 +51,7 @@ def loginUser(request):
 
 def logoutUser(request):
     # CLEAR USER CACHE
-    __clear_cache(__find_userpath(request) + "/cache")
+    __clear_cache(__find_userpath(request))
     # LOGOUT USER
     logout(request)
 
@@ -65,6 +65,12 @@ def __reader(obj):
     open_file = Image.open(file)
 
     return open_file
+
+
+# def compressimage(img_path):
+#     image = Image.open(img_path)
+#     image.save(img_path, quality=20, optimize=True)
+#     return image
 
 
 # def save_img(file, img):
@@ -82,28 +88,18 @@ def __reader(obj):
 #         return fpath
 
 
-def __upload_file_to_userdir(request, file, file_format, flag=True, cache=False):
+def __upload_file_to_userdir(request, file, file_format, flag=True):
     # ASSIGNS NAME AND PATH TO THE FILE
     # SAVE FILE ONLY IF FLAG IS TRUE
     path = __find_userpath(request)
     rand_name = str(uuid.uuid4())
     if flag:
-        if cache:
-            final_path = path + "/cache/" + rand_name + file_format
-            file.save(final_path)
-            return final_path
-        # UPLOADS USER FILES TO THEIR DIRECTORY
-        else:
-            final_path = path + "/" + rand_name + file_format
-            file.save(final_path)
-            return final_path
+        final_path = path + "/" + rand_name + file_format
+        file.save(final_path)
+        return final_path
     else:
-        if cache:
-            final_path = path + "/cache/" + rand_name + file_format
-            return final_path
-        else:
-            final_path = path + "/" + rand_name + file_format
-            return final_path
+        final_path = path + "/" + rand_name + file_format
+        return final_path
 
 
 def __find_userpath(request):
@@ -132,9 +128,11 @@ def image_check(img, path):
 
     print(len(corners))
 
-    if len(corners) > 2000:
+    if len(corners) > 1500:
+        print(len(corners))
         return True
     else:
+        print(len(corners))
         return False
 
     # hash0 = imagehash.average_hash(img)
@@ -155,6 +153,9 @@ def main(request):
 
     path = __find_userpath(request)
     cache = path + '/cache'
+
+    __clear_cache(__find_userpath(request))
+
     # CHECK THE VERY EXISTENCE OF THE DIRECTORY
     is_exist = os.path.exists(path)
     if is_exist:
@@ -162,7 +163,6 @@ def main(request):
     else:
         # MAKE A DIRECTORY NAMED WITH USERNAME
         os.mkdir(path)
-        os.mkdir(cache)
 
     return render(request, 'index.html', {'head': 'Drosometer | DOW-UIT'})
 
@@ -188,7 +188,7 @@ def wingdimen2(request):
         # pre_process = preprocess(img2)
 
         # CHECK EITHER THE IMAGE IS OF WING OR NOT.
-        orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
+        orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
         if not image_check(img1, orig_img):
             return render(request, 'wings/dimensions/w_dimen2.html',
                           {'head': 'Wings | Dimensions', 'img_path': orig_img,
@@ -197,30 +197,32 @@ def wingdimen2(request):
 
         orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
         p = cv2.imread(orig_img)
-        img = img_as_ubyte(p)
+
         # print(p)
         # print(img)
         # fimg = save_img(img2, 'wing')
+
         global wing_d
         wing_d = Wing_Image()
-        wing_d.image = img
+        wing_d.image = uploaded_img
         wing_d.user = request.user
         wing_d.save()
 
-        pre_process = WD_PreP.PreProcessing_2(img2)
+        WD_PreP.img = img2
+        pre_process = WD_PreP.PreProcessing_1()
 
         global orig_img_fn
 
         def orig_img_fn():
             return orig_img
 
-        save_file = __upload_file_to_userdir(request, pre_process, '.png', flag=False, cache=True)
+        save_file = __upload_file_to_userdir(request, pre_process, '.png', flag=False)
         file_path = save_file
 
         plt.imsave(file_path, pre_process, cmap='gray')
 
         for_dil = cv2.imread(file_path, 0)
-        save_dil = __upload_file_to_userdir(request, 'dil', '.png', flag=False, cache=True)
+        save_dil = __upload_file_to_userdir(request, 'dil', '.png', flag=False)
         global dilation_bar
         global save_dil_path
 
@@ -271,7 +273,7 @@ def wingshape2(request):
         img2 = img1.convert('RGB')
 
         # CHECK EITHER THE IMAGE IS OF WING OR NOT.
-        path = __upload_file_to_userdir(request, img2, '.png', flag=True, cache=True)
+        path = __upload_file_to_userdir(request, img2, '.png', flag=True)
         if not image_check(img1, path):
             return render(request, 'wings/dimensions/w_dimen2.html',
                           {'head': 'Wings | Dimensions', 'img_path': path,
@@ -343,7 +345,7 @@ def wingbristles2(request):
         uploaded_img = request.FILES['img']
         img1 = __reader(uploaded_img)
 
-        orig_img = __upload_file_to_userdir(request, img1, '.png', flag=True, cache=True)
+        orig_img = __upload_file_to_userdir(request, img1, '.png', flag=True)
         # CHECK EITHER THE IMAGE IS OF WING OR NOT.
         if not image_check(img1, orig_img):
             return render(request, 'wings/dimensions/w_dimen2.html',
@@ -352,6 +354,12 @@ def wingbristles2(request):
                            'out2': 'of wing', 'out3': 'Let us know if this is by mistake.'})
 
         crop_img = __upload_file_to_userdir(request, img1, ".png")
+
+        wing_b = Wing_Image()
+        wing_b.image = uploaded_img
+        wing_b.user = request.user
+        wing_b.save()
+
         request.session['crop_img'] = crop_img
 
         img = Image.open(crop_img)
@@ -459,12 +467,12 @@ def w_bar(request):
         def images():
             return path1, path2, outimg, outimg2
 
-        path1 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
-        path2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
+        path1 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
+        path2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
 
-        outimg = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
-        outimg2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False, cache=True)
-        step1 = algorithm(dil, path1, path2, outimg, outimg2)
+        outimg = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
+        outimg2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
+        step1 = algorithm(path1, path2, outimg, outimg2)
 
         df = step1[0]
         data = df_to_html(df)
@@ -491,7 +499,8 @@ def w_bar(request):
         return data, dat, outimg, outimg2
 
     if 'highlight' in request.POST:
-        dil = WD_P.Dilation(for_dil)
+        WD_P.preprocess_img = for_dil
+        dil = WD_P.Dilation()
         # dil = dilation(for_dil)
         plt.imsave(save_dil, dil, cmap='gray')
 
@@ -521,7 +530,8 @@ def w_bar(request):
                        'val1': val1, 'val2': val2, 'but_name': 'Reset to default values'})
 
     if 'default' in request.POST:
-        dil = WD_P.Dilation(for_dil)
+        WD_P.preprocess_img = for_dil
+        dil = WD_P.Dilation()
         # dil = dilation(for_dil)
         plt.imsave(save_dil, dil, cmap='gray')
         return render(request, 'wings/dimensions/bar.html',
@@ -534,6 +544,7 @@ def w_bar(request):
 
     if 'yes' in request.POST:
         flag = True
+
         result = algorithm_selection(WD_P.Skelatonize, save_dil)
         data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
 
@@ -595,7 +606,8 @@ def get_values_from_slider(request, for_dil, save_dil):
     val1 = int(request.POST.get('range1'))
     val2 = int(request.POST.get('range2'))
 
-    dil = WD_P.Dilation(for_dil, val1, val2)
+    WD_P.preprocess_img = for_dil
+    dil = WD_P.Dilation(val1, val2)
     # dil = dilation(for_dil, val1, val2)
     plt.imsave(save_dil, dil, cmap='gray')
     return save_dil, dil, val1, val2

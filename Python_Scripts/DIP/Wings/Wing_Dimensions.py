@@ -14,47 +14,51 @@ from skimage import color, exposure
 class WD_PreProcessing:
     def __init__(self, img=None):
         self.img = img
-        pass
 
-    def PreProcessing_1(self, img2):
+    def PreProcessing_1(self):
+        pre = self.PreProcessing_2(self.img)
+        adaptive_d_img = pre[0]
+        # rgb_gray = pre[1]
+
+        # blur the image
+        blur_img = filters.median(adaptive_d_img)
+        binary_img = filters.threshold_sauvola(blur_img, window_size=15)
+        # binary_file = (rgb_gray < binary_img)
+
+        return binary_img
+
+    def PreProcessing_2(self, img2):
         img = img_as_ubyte(img2)
         rgb_gray = color.rgb2gray(img)
-        bins = 256
+        # bins = 256
         # equalize_img = exposure.equalize_hist(rgb_gray)
         # adaptiv_img = exposure.equalize_adapthist(rgb_gray, clip_limit=0.03)
+
         # image ko set kr rahy hain
         img_dark = exposure.adjust_gamma(rgb_gray, gamma=3.5, gain=1)
-        equalized_d_img = exposure.equalize_hist(img_dark)
+        # equalized_d_img = exposure.equalize_hist(img_dark)
         adaptive_d_img = exposure.equalize_adapthist(img_dark, clip_limit=0.6)
         result_1 = unsharp_mask(adaptive_d_img, radius=5, amount=2)
 
         return adaptive_d_img, rgb_gray, result_1
 
-    def PreProcessing_2(self, img2):
-        pre = self.PreProcessing_1(img2)
-        adaptive_d_img = pre[0]
-        rgb_gray = pre[1]
-        # blur the image
-        blur_img = filters.median(adaptive_d_img)
-        binary_img = filters.threshold_sauvola(blur_img, window_size=15)
-        binary_file = (rgb_gray < binary_img)
-        return binary_img
-
 
 class WD_Procesing:
-    def __init__(self):
-        pass
+    def __init__(self, preprocess_img=None, e_img=None, proc=None):
+        self.preprocess_img = preprocess_img
+        self.e_img = e_img
+        self.proc = proc
 
-    def Dilation(self, img, val1=7, val2=12):
-        _, thresh = cv2.threshold(img, 80, 255, cv2.THRESH_BINARY_INV)
+    def Dilation(self, val1=7, val2=12):
+        _, thresh = cv2.threshold(self.preprocess_img, 80, 255, cv2.THRESH_BINARY_INV)
 
         kernel = np.ones((int(val1), int(val2)), np.uint8)
         d_im = cv2.dilate(thresh, kernel, iterations=5)
-        e_im = cv2.erode(d_im, kernel, iterations=4)
-        return e_im
+        self.e_img = cv2.erode(d_im, kernel, iterations=4)
+        return self.e_img
 
-    def Skelatonize(self, e_im, path1, path2, outimg, outimg2):
-        _, thresh2 = cv2.threshold(e_im, 75, 255, cv2.THRESH_BINARY)
+    def Skelatonize(self, path1, path2, outimg, outimg2):
+        _, thresh2 = cv2.threshold(self.e_img, 75, 255, cv2.THRESH_BINARY)
         nlabels, labels, stats, centroids = cv2.connectedComponentsWithStats(thresh2, None, None, None, 8, cv2.CV_32S)
 
         # get CC_STAT_AREA component as stats[label, COLUMN]
@@ -84,12 +88,13 @@ class WD_Procesing:
         img = cv2.imread(path2)
         # Extract only blue channel as DAPI / nuclear (blue) staining is the best
         # channel to perform cell count.
-        result = self.Processing(img, edge_touching_removed, outimg, outimg2)
+        self.proc = img
+        result = self.Processing(edge_touching_removed, outimg, outimg2)
         # result = contours(img, edge_touching_removed, outimg, outimg2)
         return result[0], result[1]
 
-    def Processing(self, img, edge_touching_removed, outimg, outimg2, flag=False):
-        cells = img[:, :, 0]  # Blue channel. Image equivalent to grey image.
+    def Processing(self, edge_touching_removed, outimg, outimg2, flag=False):
+        cells = self.proc[:, :, 0]  # Blue channel. Image equivalent to grey image.
         # cells=cv2.resize(img,(386,500))
 
         adj_img = np.zeros(cells.shape, cells.dtype)
@@ -146,28 +151,28 @@ class WD_Procesing:
 
         markers = markers + 1
 
-        markers = cv2.watershed(img, markers)
+        markers = cv2.watershed(self.proc, markers)
 
-        img[markers == -1] = [0, 255, 255]
+        self.proc[markers == -1] = [0, 255, 255]
 
         if flag:
-            result = WD_PostProcessing.RegionProp_FloodFill(img, edge_touching_removed, outimg, outimg2, ret3, markers,
+            result = WD_PostProcessing.RegionProp_FloodFill(self.proc, edge_touching_removed, outimg, outimg2, ret3, markers,
                                                             cells)
             df = result[0]
             data = result[1]
             return df, data
         else:
-            result = WD_PostProcessing.RegionProp_Skeleton(img, edge_touching_removed, outimg, outimg2, ret3, markers,
+            result = WD_PostProcessing.RegionProp_Skeleton(self.proc, edge_touching_removed, outimg, outimg2, ret3, markers,
                                                            cells)
             df = result[0]
             data = result[1]
             return df, data
 
-    def FloodFill(self, e_im, path1, path2, outimg, outimg2):
+    def FloodFill(self, path1, path2, outimg, outimg2):
 
         import cv2
         import numpy as np
-        _, thresh2 = cv2.threshold(e_im, 75, 255, cv2.THRESH_BINARY)
+        _, thresh2 = cv2.threshold(self.e_img, 75, 255, cv2.THRESH_BINARY)
         nlabels, labels, stats, centroids = cv2.connectedComponentsWithStats(thresh2, None, None, None, 8, cv2.CV_32S)
 
         # get CC_STAT_AREA component as stats[label, COLUMN]
@@ -206,9 +211,10 @@ class WD_Procesing:
         import pandas as pd
 
         img = cv2.imread(path1)
+        self.proc = img
         # Extract only blue channel as DAPI / nuclear (blue) staining is the best
         # channel to perform cell count.
-        result = self.Processing(img, img_floodfill, outimg, outimg2, flag=True)
+        result = self.Processing(img_floodfill, outimg, outimg2, flag=True)
         # result = contours(img, img_floodfill, outimg, outimg2)
         return result[0], result[1]
 
@@ -216,7 +222,7 @@ class WD_Procesing:
 class WD_PostProcessing(WD_Procesing):
     def __init__(self):
         WD_Procesing.__init__(self)
-        pass
+
 
     @staticmethod
     def RegionProp_Skeleton(img, edge_touching_removed, outimg, outimg2, ret3, markers, cells):
