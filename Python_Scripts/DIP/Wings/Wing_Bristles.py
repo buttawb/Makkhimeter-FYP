@@ -21,3 +21,4 @@ class WB_PreProcessing:
 
         return adaptive_d_img, rgb_gray, result_1
 
+

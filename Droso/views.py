@@ -126,13 +126,13 @@ def image_check(img, path):
 
     corners = np.int0(corners)
 
-    print(len(corners))
+    # print(len(corners))
 
     if len(corners) > 1500:
-        print(len(corners))
+        # print(len(corners))
         return True
     else:
-        print(len(corners))
+        # (len(corners))
         return False
 
     # hash0 = imagehash.average_hash(img)

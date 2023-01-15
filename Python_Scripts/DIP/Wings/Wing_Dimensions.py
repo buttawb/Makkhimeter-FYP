@@ -156,13 +156,15 @@ class WD_Procesing:
         self.proc[markers == -1] = [0, 255, 255]
 
         if flag:
-            result = WD_PostProcessing.RegionProp_FloodFill(self.proc, edge_touching_removed, outimg, outimg2, ret3, markers,
+            result = WD_PostProcessing.RegionProp_FloodFill(self.proc, edge_touching_removed, outimg, outimg2, ret3,
+                                                            markers,
                                                             cells)
             df = result[0]
             data = result[1]
             return df, data
         else:
-            result = WD_PostProcessing.RegionProp_Skeleton(self.proc, edge_touching_removed, outimg, outimg2, ret3, markers,
+            result = WD_PostProcessing.RegionProp_Skeleton(self.proc, edge_touching_removed, outimg, outimg2, ret3,
+                                                           markers,
                                                            cells)
             df = result[0]
             data = result[1]
@@ -222,7 +224,6 @@ class WD_Procesing:
 class WD_PostProcessing(WD_Procesing):
     def __init__(self):
         WD_Procesing.__init__(self)
-
 
     @staticmethod
     def RegionProp_Skeleton(img, edge_touching_removed, outimg, outimg2, ret3, markers, cells):
@@ -318,19 +319,25 @@ class WD_PostProcessing(WD_Procesing):
 
         df = df.drop(columns='perimeter', axis=1)
         df = df.drop(columns='area', axis=1)
+        print(df)
+
+        n_df = df[df['Ar'] > 200]
+        n_df = n_df.reset_index()
+        print(n_df)
 
         # st.write(df)
 
-        output = np.zeros_like(img)
-        output2 = img.copy()
-        center1 = df['centroid-0']
-        center2 = df['centroid-1']
+        # output = np.zeros_like(img)
+
+        center1 = n_df['centroid-0']
+        center2 = n_df['centroid-1']
 
         from skimage import color
         img2 = color.label2rgb(markers, bg_label=0)
+        output = img2.copy()
 
         # Iterate over all non-background labels
-        for i in range(2, ret3):
+        for i in range(2, len(n_df)):
             a = 0
             b = 0
             mask = np.where(markers == i, np.uint8(255), np.uint8(0))
@@ -345,6 +352,8 @@ class WD_PostProcessing(WD_Procesing):
             l = i + 1
 
             cv2.putText(img2, '%d' % l, (int(X), int(Y)), cv2.FONT_HERSHEY_SIMPLEX, 3.9, color, 15, cv2.LINE_AA)
+
+
 
         # plt.imshow(img2, cmap='jet')
         # plt.show()
@@ -375,7 +384,7 @@ class WD_PostProcessing(WD_Procesing):
         plt.imsave(outimg, img2)
         plt.imsave(outimg2, result)
 
-        return df, data
+        return n_df, data
 
 # def prepreprocess(orig_img):
 #     img = img_as_ubyte(orig_img)
