@@ -27,6 +27,8 @@ WD_P = WD_Procesing()
 WD_PostP = WD_PostProcessing()
 
 WB_PreP = WB_PreProcessing()
+WB_P = WB_Processing()
+
 EO_PreP = EO_PreProcessing()
 
 
@@ -366,6 +368,14 @@ def wingbristles2(request):
         img1 = WB_PreP.PreProcessing(img)
         # img1 = prepreprocess(img)
         plt.imsave(crop_img, img1[2], cmap='gray')
+
+        WB_P.prep = crop_img
+        bristles = WB_P.overallbristles()
+
+        b_overall = w_bristles()
+        b_overall.wb_o_img = wing_b
+        b_overall.bristle_count = bristles
+        b_overall.save()
 
         return redirect("/cropper_wing", {'head': 'Bristles | Finder', 'img': crop_img})
 

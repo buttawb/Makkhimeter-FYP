@@ -1,3 +1,5 @@
+import cv2
+from matplotlib import pyplot as plt
 from skimage import color, img_as_ubyte
 from skimage import exposure
 from skimage.filters import unsharp_mask
@@ -22,3 +24,21 @@ class WB_PreProcessing:
         return adaptive_d_img, rgb_gray, result_1
 
 
+class WB_Processing:
+    def __init__(self, prep=None):
+        self.prep = prep
+
+    def overallbristles(self):
+        self.prep = cv2.imread(self.prep, 0)
+        th, threshed = cv2.threshold(self.prep, 100, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
+
+        ## findcontours
+        cnts = cv2.findContours(threshed, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)[-2]
+
+        ## filter by area
+        xcnts = []
+        for cnt in cnts:
+            if cv2.contourArea(cnt):
+                xcnts.append(cnt)
+
+        return len(xcnts)
