@@ -1,13 +1,28 @@
 from django.contrib.auth.models import User
 from django.db import models
+from PIL import Image
+from io import BytesIO
+from django.core.files import File
+
+
+def compress(image):
+    im = Image.open(image)
+    im_io = BytesIO()
+    im.save(im_io, 'JPEG', quality=60)
+    new_image = File(im_io, name=image.name)
+    return new_image
 
 
 class Wing_Image(models.Model):
     wing = models.AutoField(primary_key=True)
-    image = models.CharField(max_length=100000000)
-    # image = models.ImageField(upload_to="static\db_wingimages")
+    image = models.ImageField(upload_to="static\db_wingimages")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     dt = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        new_image = compress(self.image)
+        self.image = new_image
+        super().save(*args, **kwargs)
 
     class Meta:
         pass
@@ -18,6 +33,11 @@ class Eye_Image(models.Model):
     image = models.ImageField(upload_to="static\db_eyeimages")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     dt = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        new_image = compress(self.image)
+        self.image = new_image
+        super().save(*args, **kwargs)
 
     class Meta:
         pass
