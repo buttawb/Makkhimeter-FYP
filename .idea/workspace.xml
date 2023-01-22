@@ -4,42 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Checks in wing dimensions.">
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0201_pn8lnTu.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/078b8746-49cf-4563-a748-119e5264ca41.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/65a888c8-c642-495f-bf56-9f9430a63eec.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/threshed.png" afterDir="false" />
+    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Overall Bristles stored in DB.">
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0184.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0224.tif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Wings/Wing_Bristles.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Wings/Wing_Bristles.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0071.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0119.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0119_R4Sqzuc.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0202.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0202_2kITXfH.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0202_EMAAJoh.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0202_M21jOMe.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0202_R5oT4rk.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0202_RpI9ekz.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0202_UM4vHsT.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0202_b5yxNc9.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0202_hDsDMDC.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0208.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0222.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0222_y3b4yi1.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0235.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image0246.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image1085_-_Copy.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image1102.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image1102_2mGpblk.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image1102_8HqJaEv.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image1102_E8HPrAl.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image1102_FrvgD3v.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image1102_MZ7Tnqk.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image1102_NtHbSEY.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image1102_TagDe6s.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image1102_U1etoWb.tif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/static/db_wingimages/image1685.tif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_125736.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/fontawesome.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/fontawesome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/templatemo-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/templatemo-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/bristles/w_bristles.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/bristles/w_bristles.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/bristles/w_bristles2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/bristles/w_bristles2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen2.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +153,15 @@
       <workItem from="1673433540975" duration="204000" />
       <workItem from="1673516726769" duration="477000" />
       <workItem from="1673758953172" duration="6844000" />
-      <workItem from="1673771946225" duration="4850000" />
+      <workItem from="1673771946225" duration="5146000" />
+      <workItem from="1673806878759" duration="3259000" />
+      <workItem from="1673875073506" duration="24000" />
+      <workItem from="1673935344032" duration="585000" />
+      <workItem from="1673976977973" duration="8864000" />
+      <workItem from="1674101548655" duration="150000" />
+      <workItem from="1674217473716" duration="4765000" />
+      <workItem from="1674237799381" duration="7205000" />
+      <workItem from="1674366625744" duration="5366000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
@@ -273,7 +261,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673777652704</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Overall Bristles stored in DB.">
+      <created>1673778852240</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1673778852240</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,6 +301,7 @@
     <MESSAGE value="Images are stored after compressing." />
     <MESSAGE value="Classes &amp; its objects modified." />
     <MESSAGE value="Checks in wing dimensions." />
-    <option name="LAST_COMMIT_MESSAGE" value="Checks in wing dimensions." />
+    <MESSAGE value="Overall Bristles stored in DB." />
+    <option name="LAST_COMMIT_MESSAGE" value="Overall Bristles stored in DB." />
   </component>
 </project>
