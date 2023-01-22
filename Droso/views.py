@@ -2,7 +2,7 @@ import io
 import os
 import uuid
 import glob
-import imagehash
+import hashlib
 import json
 
 from PIL import Image
@@ -67,6 +67,12 @@ def __reader(obj):
     open_file = Image.open(file)
 
     return open_file
+
+
+def md5(img_path):
+    mdhash = hashlib.md5(Image.open(img_path).tobytes())
+    md5_hash = mdhash.hexdigest()
+    return md5_hash
 
 
 # def compressimage(img_path):
@@ -154,7 +160,6 @@ def main(request):
         return redirect("/login")
 
     path = __find_userpath(request)
-    cache = path + '/cache'
 
     __clear_cache(__find_userpath(request))
 
@@ -204,11 +209,32 @@ def wingdimen2(request):
         # print(img)
         # fimg = save_img(img2, 'wing')
 
-        global wing_d
-        wing_d = Wing_Image()
-        wing_d.image = uploaded_img
-        wing_d.user = request.user
-        wing_d.save()
+        global md5_hash
+        md5_hash = md5(orig_img)
+
+        if not Wing_Image.objects.filter(hash=md5_hash).exists():
+            global wing_d
+            wing_d = Wing_Image()
+
+            wing_d.image = uploaded_img
+            wing_d.user = request.user
+            wing_d.hash = md5_hash
+            wing_d.save()
+
+            request.session['d_flag'] = True
+
+        else:
+            id_wd = Wing_Image.objects.filter(hash=md5_hash)
+            iddd = id_wd[0].wing
+
+            if w_dimen.objects.filter(wd_o_img=iddd).exists():
+                request.session['dont_save'] = True
+            else:
+                request.session['dont_save'] = False
+                # global exist_img
+                # exist_img = Wing_Image.objects.get(hash=md5_hash)
+
+            request.session['d_flag'] = False
 
         WD_PreP.img = img2
         pre_process = WD_PreP.PreProcessing_1()
@@ -251,7 +277,7 @@ def wingdimen2(request):
 
     return render(request, 'wings/dimensions/w_dimen2.html',
                   {'head': 'Wings | Dimensions', 'img_path': '../static/images/perfect.png',
-                   'img_name': 'Like this: '})
+                   'img_name': 'Expected Input Image '})
 
 
 def wingshape(request):
@@ -284,10 +310,14 @@ def wingshape2(request):
 
         path = __upload_file_to_userdir(request, img2, '.png')
 
+        md5_hash = md5(path)
         wing_s = Wing_Image()
-        wing_s.image = uploaded_img
-        wing_s.user = request.user
-        wing_s.save()
+
+        if not Wing_Image.objects.filter(hash=md5_hash).exists():
+            wing_s.image = uploaded_img
+            wing_s.user = request.user
+            wing_s.hash = md5_hash
+            wing_s.save()
 
         img3 = np.array(img2)
 
@@ -357,10 +387,9 @@ def wingbristles2(request):
 
         crop_img = __upload_file_to_userdir(request, img1, ".png")
 
-        wing_b = Wing_Image()
-        wing_b.image = uploaded_img
-        wing_b.user = request.user
-        wing_b.save()
+        # Agr image pehly se hi database mein pari wi hai.. tu bristles count wale table mein us [pehly se] hi image wale ki id le kr ani paregi.
+
+        hash_b = md5(crop_img)
 
         request.session['crop_img'] = crop_img
 
@@ -370,18 +399,39 @@ def wingbristles2(request):
         plt.imsave(crop_img, img1[2], cmap='gray')
 
         WB_P.prep = crop_img
-        bristles = WB_P.overallbristles()
 
-        b_overall = w_bristles()
-        b_overall.wb_o_img = wing_b
-        b_overall.bristle_count = bristles
-        b_overall.save()
+        if not Wing_Image.objects.filter(hash=hash_b).exists():
+            bristles = WB_P.overallbristles()
+
+            wing_b = Wing_Image()
+            wing_b.image = uploaded_img
+            wing_b.user = request.user
+            wing_b.hash = hash_b
+            wing_b.save()
+
+            b_overall = w_bristles()
+            b_overall.wb_o_img = wing_b
+            b_overall.bristle_count = bristles
+            b_overall.save()
+
+        else:
+            id_wd = Wing_Image.objects.filter(hash=hash_b)
+            iddd = id_wd[0].wing
+
+            if w_bristles.objects.filter(wb_o_img=iddd).exists():
+                pass
+            else:
+                bristles = WB_P.overallbristles()
+                b_overall = w_bristles()
+                b_overall.wb_o_img = Wing_Image.objects.get(hash=hash_b)
+                b_overall.bristle_count = bristles
+                b_overall.save()
 
         return redirect("/cropper_wing", {'head': 'Bristles | Finder', 'img': crop_img})
 
     return render(request, 'wings/bristles/w_bristles2.html',
                   {'head': 'Wings | Bristles', 'img_path': '../static/images/perfect.png',
-                   'img_name': 'Like this: '})
+                   'img_name': 'Expected Input Image '})
 
 
 def cropper_bristles(request):
@@ -501,10 +551,22 @@ def w_bar(request):
         dimen = w_dimen()
 
         for i in dat:
-            dimen.wd_peri = list(i.values())[-1]
-            dimen.wd_area = list(i.values())[-2]
+            peri = list(i.values())[-1]
+            area = list(i.values())[-2]
+
+        if request.session['d_flag']:
+            dimen.wd_peri = peri
+            dimen.wd_area = area
             dimen.wd_o_img = wing_d
             dimen.save()
+        else:
+            if request.session['dont_save']:
+                pass
+            else:
+                dimen.wd_peri = peri
+                dimen.wd_area = area
+                dimen.wd_o_img = Wing_Image.objects.get(hash=md5_hash)
+                dimen.save()
 
         return data, dat, outimg, outimg2
 
@@ -638,15 +700,18 @@ def eye_omat2(request):
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
-        eye_o = Eye_Image()
-        eye_o.image = uploaded_img
-        eye_o.user = request.user
-        eye_o.save()
-
         img1 = uploaded_img.read()
         # img1 = __reader(uploaded_img)
 
         crop_img_eye = __upload_file_to_userdir(request, img1, ".png")
+
+        md5_hash = md5(crop_img_eye)
+        if not Eye_Image.objects.filter(hash=md5_hash).exists():
+            eye_o = Eye_Image()
+            eye_o.image = uploaded_img
+            eye_o.user = request.user
+            eye_o.save()
+
         request.session['crop_img_eye'] = crop_img_eye
 
         img = Image.open(crop_img_eye)
