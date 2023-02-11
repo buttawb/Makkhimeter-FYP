@@ -4,11 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Used hash to avoid data redundancy.">
+    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Prompt for no inputs.">
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0086.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0097_-_Copy_3.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0119.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0194_-_Copy.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0235.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0236.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0239.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0261_-_Copy_2.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image1118_-_Copy.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image1147.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/xx.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/1a7fb922-d6d8-4815-9bc8-a8ce5c2eaa7b.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/22f0982d-b38d-4a85-b6b4-7a6e4e47544d.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/2b625545-b0e9-43e7-8afe-0c4a59311da2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/88678935-9a57-44b2-a9c1-33df3d2869fb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/918343f5-5497-4be9-9820-8f1d0da52c1f.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/d22bd7b4-4689-4c8b-bdec-e2efd35e233d.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/d7245d0f-f1b0-44e2-81ff-3bfcbf8db88e.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/e6069b9c-4ae0-41db-9b71-323f7726f009.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/f76de99f-6259-493a-869c-ba28b33f4db0.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wings/bristles/w_bristles2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/bristles/w_bristles2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drosometer/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Drosometer/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Wings/Wing_Dimensions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Wings/Wing_Dimensions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/main-banner.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/main-banner.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/head.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/output.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wings/shape/w_shape2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/shape/w_shape2.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +89,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Awble/Desktop/AJAX-File-Uploader-master/AJAX-File-Uploader-master&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -150,7 +178,12 @@
       <workItem from="1674101548655" duration="150000" />
       <workItem from="1674217473716" duration="4765000" />
       <workItem from="1674237799381" duration="7205000" />
-      <workItem from="1674366625744" duration="6467000" />
+      <workItem from="1674366625744" duration="6580000" />
+      <workItem from="1674451310661" duration="375000" />
+      <workItem from="1674639621004" duration="83000" />
+      <workItem from="1674889958404" duration="590000" />
+      <workItem from="1674890719818" duration="3247000" />
+      <workItem from="1674907399691" duration="684000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
@@ -278,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674372446270</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Prompt for no inputs.">
+      <created>1674373251578</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1674373251578</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,6 +355,7 @@
     <MESSAGE value="UI changes." />
     <MESSAGE value="Admin site models registered." />
     <MESSAGE value="Used hash to avoid data redundancy." />
-    <option name="LAST_COMMIT_MESSAGE" value="Used hash to avoid data redundancy." />
+    <MESSAGE value="Prompt for no inputs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Prompt for no inputs." />
   </component>
 </project>

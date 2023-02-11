@@ -1,17 +1,15 @@
-import io
-import os
-import uuid
 import glob
 import hashlib
+import io
 import json
+import os
+import uuid
 
-from PIL import Image
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 
 from Droso.models import *
-
+from Python_Scripts.DIP.Eyes.Eye_Ommatidium import *
 # IMPORTING SCRIPTS
 from Python_Scripts.DIP.Wings.Wing_Bristles import *
 from Python_Scripts.DIP.Wings.Wing_Dimensions import *
@@ -203,7 +201,7 @@ def wingdimen2(request):
                            'out2': 'of wing', 'out3': 'Let us know if this is by mistake.'})
 
         orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
-        p = cv2.imread(orig_img)
+        # p = cv2.imread(orig_img)
 
         # print(p)
         # print(img)

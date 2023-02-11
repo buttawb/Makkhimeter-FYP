@@ -243,22 +243,26 @@ class WD_PostProcessing(WD_Procesing):
 
         df = df.drop(columns='perimeter', axis=1)
         df = df.drop(columns='area', axis=1)
+        
+        n_df = df[df['Ar'] > 200]
+        n_df = n_df.reset_index()
+        print(n_df)
 
         # st.write(df)
 
         output = np.zeros_like(img)
         output2 = img.copy()
-        center1 = df['centroid-0']
-        center2 = df['centroid-1']
+        center1 = n_df['centroid-0']
+        center2 = n_df['centroid-1']
 
-        df.rename(columns={'centroid-0': 'centroid0'}, inplace=True)
-        df.rename(columns={'centroid-1': 'centroid1'}, inplace=True)
+        n_df.rename(columns={'centroid-0': 'centroid0'}, inplace=True)
+        n_df.rename(columns={'centroid-1': 'centroid1'}, inplace=True)
 
         from skimage import color
         img2 = color.label2rgb(markers, bg_label=0)
 
         # Iterate over all non-background labels
-        for i in range(2, ret3):
+        for i in range(2, len(n_df)):
             a = 0
             b = 0
             mask = np.where(markers == i, np.uint8(255), np.uint8(0))
@@ -302,7 +306,7 @@ class WD_PostProcessing(WD_Procesing):
         plt.imsave(outimg, img2)
         plt.imsave(outimg2, result)
 
-        return df, data
+        return n_df, data
 
     @staticmethod
     def RegionProp_FloodFill(img, img_floodfill, outimg, outimg2, ret3, markers, cells):

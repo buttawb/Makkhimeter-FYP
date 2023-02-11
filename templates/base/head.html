@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="../../static/css/templatemo-style.css"/>
     <link rel="stylesheet" href="../../static/css/owl.css"/>
     <link rel="stylesheet" href="../../static/css/w_dimen.css"/>
+
+
     {% load static %}
 
 </head>
@@ -37,7 +39,7 @@
             <!-- Header -->
             <header id="header">
                 <div class="logo">
-                    <a href="/">{{head}}</a>
+                    <a href="/">{{ head }}</a>
                 </div>
             </header>
 
@@ -88,7 +90,7 @@
 
                     </section>
                     <li>
-                        <a href="/logout">Logout ({{request.user}})</a></li>
+                        <a href="/logout">Logout ({{ request.user }})</a></li>
 
                 </ul>
             </nav>
@@ -96,7 +98,7 @@
 
             <!-- Footer -->
             <footer id="footer">
-                <p class="copyright">2022 &copy; DOW_UIT
+                <p class="copyright">2022-2023 &copy; DOW_UIT
                     <br>Developed by CS14</p>
                 <div class="filled-rounded-button">
                     <a href="/admin">SignIn as SuperUser</a>
@@ -118,6 +120,25 @@
 <script src="../../static/js/owl-carousel.js"></script>
 <script src="../../static/js/custom.js"></script>
 <script src="../../static/js/pre.js" charset="utf-8"></script>
+<script>
+
+    function do_heavy_lifting(argument) {
+        $.ajax({
+            type: 'GET',
+            data: {argument: argument}, // if necesarry
+            url: '/heavy_lifting_django_view_url/',
+            beforeSend: function () {
+                $('#loading').show();
+            },
+            success: function (data) {
+            ...
+                redirect
+            ...
+            },
+            cache: false
+        });
+    }
+</script>
 
 
 </body>
