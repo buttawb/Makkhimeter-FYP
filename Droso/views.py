@@ -752,10 +752,21 @@ def eye_col2(request):
             eye_o.user = request.user
             eye_o.save()
 
-        chartname = __upload_file_to_userdir(request, uploaded_img, '.png', flag=False)
-        E_Col.run(chartname, img_eye)
+        out = E_Col.run(img_eye)
+        labels, values, colors = out[0], out[1], out[2]
+
+        n_labels = [item.title() for item in labels]
+
+        data = {'labels': n_labels,
+                'values': values,
+                'colors': colors}
+        values = data['values']
+        total = sum(values)
+        percentages = [f'{(value / total) * 100:.2f}%' for value in values]
+        data['percentages'] = percentages
+
         return render(request, 'eyes/colour/output.html',
-                      {'head': 'Eyes | Eye Colour', 'chartname': chartname})
+                      {'head': 'Eyes | Eye Colour', 'data': data, 'img': img_eye})
 
     return render(request, 'eyes/colour/col2.html',
                   {'head': 'Eyes | Eye Colour', 'img_path': '../static/images/eye_front.png',

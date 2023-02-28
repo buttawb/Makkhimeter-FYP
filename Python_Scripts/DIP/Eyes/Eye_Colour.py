@@ -216,10 +216,10 @@ class color:
             u'feathergrey': u'#b7ae9c',
             u'hotcocoa': u'#816356',
             u'winecellar': u'#6f403c',
-            u'purplemuave': u'#9a8a94',
-            u'axis': u'#b8b6ca',
-            u'sandyrich': u'#a28e77',
-            u'beaver': u'#a18a69'
+            u'Purplemuave': u'#9a8a94',
+            u'Axis': u'#b8b6ca',
+            u'Sndyrich': u'#a28e77',
+            u'Beaver': u'#a18a69'
 
         }
         self.HTML4_HEX_TO_NAMES = self._reversedict(self.HTML4_NAMES_TO_HEX)
@@ -687,8 +687,7 @@ class eye_col:
     #     plt.pie(counts.values(), labels=lbl_color, colors=hex_colors, autopct='%.0f%%',
     #             textprops={'color': 'white', 'fontweight': 'bold'})
 
-
-    def final(self, chartname, img):
+    def final(self, img):
         image1 = self.get_image(img)
         image = self.interpolating_image(image1)
         model = []
@@ -722,8 +721,8 @@ class eye_col:
         new[3] = int(three / 4)
         return new, model
 
-    def run(self, chartname, img):
-        out = self.final(chartname, img)
+    def run(self, img):
+        out = self.final(img)
         colors = {}
         counts = out[0]
         clf = out[1][0]
@@ -734,8 +733,11 @@ class eye_col:
         hex_colors = [self.RGB2HEX(ordered_colors[i]) for i in counts.keys()]
         rgb_colors = [ordered_colors[i] for i in counts.keys()]
         lbl_color = [self.hex2name(ordered_colors[i]) for i in counts.keys()]
+        lst = list(counts.values())
 
         # plot the pie chart of those colors better for visualizing
-        plt.pie(counts.values(), labels=lbl_color, colors=hex_colors, autopct='%.0f%%',
-                textprops={'color': 'white', 'fontweight': 'bold'})
-        plt.savefig(chartname, dpi=1000, bbox_inches='tight')
+        # plt.pie(counts.values(), labels=lbl_color, colors=hex_colors, autopct='%.0f%%',
+        #         textprops={'color': 'white', 'fontweight': 'bold'})
+        # plt.savefig(chartname, dpi=1000, bbox_inches='tight')
+
+        return lbl_color, lst, hex_colors

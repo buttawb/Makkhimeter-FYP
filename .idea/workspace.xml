@@ -4,41 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Prompt for no inputs.">
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_125805.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_130127.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_130429.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131427.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_132907.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/eye.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/eye_10XPbd0.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/eye_AIJFabN.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/eye_DCzXNeR.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/eye_ZqK2AwH.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/eye_aTa6sjI.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/eye_uvBlflq.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/eye_vNRen0l.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/eye_xNws16o.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/171accdf-4ff3-4171-85ec-55959428d855.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/4364035d-b4ae-461c-87e0-b4a710a4ae82.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/eyes/colour/col.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/eyes/colour/col2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/eyes/colour/output.html" afterDir="false" />
+    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Added Eye Colour.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drosometer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Drosometer/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Colour.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Colour.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/users/awb/1a7fb922-d6d8-4815-9bc8-a8ce5c2eaa7b.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/users/awb/22f0982d-b38d-4a85-b6b4-7a6e4e47544d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/users/awb/2b625545-b0e9-43e7-8afe-0c4a59311da2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/users/awb/88678935-9a57-44b2-a9c1-33df3d2869fb.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/users/awb/918343f5-5497-4be9-9820-8f1d0da52c1f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/users/awb/d22bd7b4-4689-4c8b-bdec-e2efd35e233d.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/users/awb/d7245d0f-f1b0-44e2-81ff-3bfcbf8db88e.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/users/awb/e6069b9c-4ae0-41db-9b71-323f7726f009.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/users/awb/f76de99f-6259-493a-869c-ba28b33f4db0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/eyes/colour/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/colour/output.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -196,7 +166,7 @@
       <workItem from="1677359173601" duration="1227000" />
       <workItem from="1677408300569" duration="1473000" />
       <workItem from="1677423274813" duration="7690000" />
-      <workItem from="1677571098734" duration="4036000" />
+      <workItem from="1677571098734" duration="11691000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
@@ -331,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674373251578</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Added Eye Colour.">
+      <created>1677576898413</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1677576898413</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,16 +346,7 @@
     <MESSAGE value="Admin site models registered." />
     <MESSAGE value="Used hash to avoid data redundancy." />
     <MESSAGE value="Prompt for no inputs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Prompt for no inputs." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="django-line">
-          <url>file://$PROJECT_DIR$/templates/eyes/colour/output.html</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Added Eye Colour." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Eye Colour." />
   </component>
 </project>
