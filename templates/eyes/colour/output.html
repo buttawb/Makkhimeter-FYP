@@ -1,0 +1,45 @@
+{% extends "base/head.html" %}
+{% block content %}
+
+    {#<h1>Pie Chart</h1>#}
+    {#<canvas id="myChart"></canvas>#}
+    {##}
+    {##}
+    {#{% block script %}#}
+    {#    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>#}
+    {#    <script>#}
+    {#        var ctx = document.getElementById('myChart').getContext('2d');#}
+    {#        var data = {{ data|safe }};#}
+    {#        var myPieChart = new Chart(ctx, {#}
+    {#            type: 'pie',#}
+    {#            data: {#}
+    {#                labels: data.labels,#}
+    {#                datasets: [{#}
+    {#                    data: data.values,#}
+    {#                    backgroundColor: data.colors#}
+    {#                }]#}
+    {#            }#}
+    {#        });#}
+    {#    </script>#}
+
+    <section class="right-image">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="left-content">
+                        <h4>Colours</h4>
+                        <p>-</p>
+                        <div class="primary-button">
+                            <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3082451/">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src={{ chartname }} alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

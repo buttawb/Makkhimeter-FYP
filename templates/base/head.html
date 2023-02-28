@@ -78,7 +78,7 @@
                         <ul>
                             <li><a href="#">Dimensions</a></li>
                             <li><a href="e_omat">Ommatidium</a></li>
-                            <li><a href="#">Colour</a></li>
+                            <li><a href="eye_col">Colour</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Insights</a></li>
@@ -120,25 +120,7 @@
 <script src="../../static/js/owl-carousel.js"></script>
 <script src="../../static/js/custom.js"></script>
 <script src="../../static/js/pre.js" charset="utf-8"></script>
-<script>
 
-    function do_heavy_lifting(argument) {
-        $.ajax({
-            type: 'GET',
-            data: {argument: argument}, // if necesarry
-            url: '/heavy_lifting_django_view_url/',
-            beforeSend: function () {
-                $('#loading').show();
-            },
-            success: function (data) {
-            ...
-                redirect
-            ...
-            },
-            cache: false
-        });
-    }
-</script>
 
 
 </body>

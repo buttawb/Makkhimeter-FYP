@@ -28,6 +28,7 @@ WB_PreP = WB_PreProcessing()
 WB_P = WB_Processing()
 
 EO_PreP = EO_PreProcessing()
+E_Col = eye_col()
 
 
 def loginUser(request):
@@ -337,7 +338,7 @@ def wingshape2(request):
             shape.ws_pred = 'Oregan'
         shape.ws_normal_prob = prob_oreg
         shape.ws_mutated_prob = prob_mut
-        shape.ws_o_img = wing_s
+        shape.ws_o_img = Wing_Image.objects.get(hash=md5_hash)
         shape.save()
 
         if pred == 0:
@@ -721,6 +722,43 @@ def eye_omat2(request):
 
     return render(request, 'eyes/ommatidum/omat_2.html',
                   {'head': 'Eyes | Ommatidium Count', 'img_path': '../static/images/eye_front.png',
+                   'img_name': 'Like this: '})
+
+
+def eye_col(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    return render(request, 'eyes/colour/col.html',
+                  {'head': 'Drosometer | Eyes'})
+
+
+def eye_col2(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    if request.method == 'POST':
+        uploaded_img = request.FILES['img']
+
+        f = Image.open(uploaded_img)
+
+        img_eye = __upload_file_to_userdir(request, f, ".png", flag=False)
+        f.save(img_eye)
+
+        md5_hash = md5(img_eye)
+        if not Eye_Image.objects.filter(hash=md5_hash).exists():
+            eye_o = Eye_Image()
+            eye_o.image = uploaded_img
+            eye_o.user = request.user
+            eye_o.save()
+
+        chartname = __upload_file_to_userdir(request, uploaded_img, '.png', flag=False)
+        E_Col.run(chartname, img_eye)
+        return render(request, 'eyes/colour/output.html',
+                      {'head': 'Eyes | Eye Colour', 'chartname': chartname})
+
+    return render(request, 'eyes/colour/col2.html',
+                  {'head': 'Eyes | Eye Colour', 'img_path': '../static/images/eye_front.png',
                    'img_name': 'Like this: '})
 
 

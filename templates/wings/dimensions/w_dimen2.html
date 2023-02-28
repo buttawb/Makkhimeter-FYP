@@ -1,69 +1,106 @@
 {% extends "base/head.html" %}
+
 {% block content %}
 
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Exemplary Image</h2>
-            <p class="shaiz">A perfect and noiseless image always generate the better and accurate results.</p>
-            <section class="forms">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="section-heading">
-                                <h2>Upload Image</h2>
-                            </div>
-                            <!--                                    <form id='contact' method="post" enctype="multipart/form-data">-->
-                            <!--
-                            <<button type="submit">Upload</button>-->
-                            <!--                                    </form>-->
-                            <form id="contact" method="post" name='upload' enctype="multipart/form-data">
-                                <div class="row">
-
-
-                                    <div class="col-md-12">
-                                        <fieldset>
-                                            {% csrf_token %}
-
-                                            <label for="img">Select image:</label>
-                                            <input type="file" id="img" name="img" accept="image/*" required=""
-                                                   style="padding-top: 25px; padding-bottom: 75px">
-                                        </fieldset>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <button type="submit" id="buttonID" onclick="do_heavy_lifting('argument');> Upload & Next <span
-                                                class="load loading"></span>
-                                        </button>
-                                    </div>
+    <div id="page-content">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Exemplary Image</h2>
+                <p class="shaiz">A perfect and noiseless image always generate the better and accurate results.</p>
+                <section class="forms">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="section-heading">
+                                    <h2>Upload Image</h2>
                                 </div>
-                            </form>
+                                <form id="contact" method="post" name='upload' enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <fieldset>
+                                                {% csrf_token %}
+                                                <label for="img">Select image:</label>
+                                                <input type="file" id="img" name="img" accept="image/*" required="" style="padding-top: 25px; padding-bottom: 75px">
+                                            </fieldset>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button type="submit" id="buttonID"> Upload & Next</button>
+                                        </div>
+                                    </div>
+                                </form>
 
-                            <br>
-                            <br>
-                            <h2>{{ out1 }}<em style="color: rebeccapurple"> {{ ans }} </em> {{ out2 }}</h2>
-                            <h4><a href="feedback">{{ out3 }}</a></h4>
+                                <br>
+                                <br>
+                                <h2>{{ out1 }}<em style="color: rebeccapurple"> {{ ans }} </em> {{ out2 }}</h2>
+                                <h4><a href="feedback">{{ out3 }}</a></h4>
 
-
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-
-            <br><br>
-
+                </section>
+                <br><br>
+            </div>
+            <div class="col-md-6">
+                <h2>{{ img_name }}</h2>
+                <p><img src="{{ img_path }}"></p>
+                <br>
+                <br>
+                <br>
+            </div>
         </div>
-
-        <div class="col-md-6">
-            <h2>{{ img_name }}</h2>
-            <p>
-                <img src="{{ img_path }}">
-            </p>
-            <br>
-            <br>
-            <br>
-
-        </div>
-
     </div>
-    <div id="loading" style="display:none">
+
+    <!-- Loading spinner -->
+    <div id="loading-spinner">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#contact").submit(function() {
+                // Display the loading spinner on the entire page
+                $("#loading-spinner").css("display", "flex");
+
+                // Lock the page contents while the spinner is displayed
+                $("#page-content").addClass("overlay");
+
+                return true;
+            });
+        });
+    </script>
+
+    <style>
+        /* Loading spinner styles */
+        #loading-spinner {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #loading-spinner .spinner-border {
+            color: #fff;
+        }
+
+        /* Overlay styles */
+        #page-content.overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+            pointer-events: none;
+        }
+    </style>
+
 {% endblock %}
