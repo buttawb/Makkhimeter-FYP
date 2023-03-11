@@ -3,8 +3,10 @@ import hashlib
 import io
 import json
 import os
+import tempfile
 import uuid
 
+import pandas as pd
 from django.contrib.auth import login, logout, authenticate
 from django.shortcuts import render, redirect
 
@@ -29,6 +31,10 @@ WB_P = WB_Processing()
 
 EO_PreP = EO_PreProcessing()
 E_Col = eye_col()
+
+segment = Segmenting()
+extract = Extraction()
+post = PostProcessing()
 
 
 def loginUser(request):
@@ -102,6 +108,9 @@ def __upload_file_to_userdir(request, file, file_format, flag=True):
     rand_name = str(uuid.uuid4())
     if flag:
         final_path = path + "/" + rand_name + file_format
+        if file_format.lower() == ".jpg" or file_format.lower() == ".jpeg":
+            # Convert the image to RGB mode before saving it as a JPEG file
+            file = file.convert("RGB")
         file.save(final_path)
         return final_path
     else:
@@ -386,7 +395,8 @@ def wingbristles2(request):
 
         crop_img = __upload_file_to_userdir(request, img1, ".png")
 
-        # Agr image pehly se hi database mein pari wi hai.. tu bristles count wale table mein us [pehly se] hi image wale ki id le kr ani paregi.
+        # Agr image pehly se hi database mein pari wi hai..
+        # #tu bristles count wale table mein us [pehly se] hi image wale ki id le kr ani paregi.
 
         hash_b = md5(crop_img)
 
@@ -443,7 +453,7 @@ def cropper_bristles(request):
 def cropper_eye(request):
     if request.user.is_anonymous:
         return redirect("/login")
-    crop_img_eye = request.session['crop_img']
+    crop_img_eye = request.session['crop_img_eye']
     return render(request, 'eyes/ommatidum/cropper.html', {'head': 'Ommatidium | Finder', 'img': crop_img_eye})
 
 
@@ -698,11 +708,14 @@ def eye_omat2(request):
 
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
-
-        img1 = uploaded_img.read()
-        # img1 = __reader(uploaded_img)
-
-        crop_img_eye = __upload_file_to_userdir(request, img1, ".png")
+        img1 = Image.open(uploaded_img)
+        # with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        #     f.save(temp_file.name)
+        crop_img_eye = __upload_file_to_userdir(request, img1, ".png", flag=True)
+        # img1 = uploaded_img.read()
+        #
+        #
+        # crop_img_eye = __upload_file_to_userdir(request, img1, ".png")
 
         md5_hash = md5(crop_img_eye)
         if not Eye_Image.objects.filter(hash=md5_hash).exists():
@@ -765,13 +778,62 @@ def eye_col2(request):
         percentages = [f'{(value / total) * 100:.2f}%' for value in values]
         data['percentages'] = percentages
 
+        dff = pd.DataFrame(data)
+        df = dff.to_dict('records')
+
         return render(request, 'eyes/colour/output.html',
-                      {'head': 'Eyes | Eye Colour', 'data': data, 'img': img_eye})
+                      {'head': 'Eyes | Eye Colour', 'data': data, 'img': img_eye, 'd': df})
 
     return render(request, 'eyes/colour/col2.html',
                   {'head': 'Eyes | Eye Colour', 'img_path': '../static/images/eye_front.png',
                    'img_name': 'Like this: '})
 
 
+def eyedimen(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+    return render(request, 'eyes/Dimensions/e_dimen.html', {'head': 'Drosometer | Eyes'})
+
+
+def eyedimen2(request):
+    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    if request.method == 'POST':
+        uploaded_img = request.FILES['img']
+
+        img1 = __reader(uploaded_img)
+        img2 = img1.convert('RGB')
+        orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
+        img = cv2.imread(orig_img)
+        seg_img = segment.Segmentation(img)
+        result, d_im = extract.Processing(seg_img)
+        data = post.Tables(result, d_im)
+        dil_img = __upload_file_to_userdir(request, d_im, '.png', flag=False)
+        plt.imsave(dil_img, d_im)
+        new_data = df_to_html(data)
+        for i in new_data:
+            peri = list(i.values())[-1]
+            area = list(i.values())[-2]
+
+        return render(request, 'eyes/Dimensions/eyedimen_output.html',
+                      {"orig": orig_img, "dil": dil_img, "Ar": area, "Pr": peri})
+
+    return render(request, 'eyes/Dimensions/e_dimen2.html',
+                  {'head': 'Eyes | Dimensions', 'img_path': '../static/images/eye_front.png',
+                   'img_name': 'Like this: '})
+
+
+def dashboard(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+    return render(request, "dashboard/dashboard.html",
+                  {'head': 'Dashboard | Drosometer'})
+
+
 def register_page(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
     return render(request, 'user/register.html')

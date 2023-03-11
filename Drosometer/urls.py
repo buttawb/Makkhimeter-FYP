@@ -54,8 +54,15 @@ urlpatterns = [
                   path('e_omat', views.eye_omat),
                   path('e_omat2', views.eye_omat2),
                   path('cropper_eye', views.cropper_eye),
+
                   path('eye_col', views.eye_col),
                   path('col2', views.eye_col2),
+
+                  path('e_dimen', views.eyedimen),
+                  path('e_dimen2', views.eyedimen2),
+
+                  # Dashboard Paths
+                  path('dashboard', views.dashboard),
 
                   # path('f_thorax', views.thorax_f),
 

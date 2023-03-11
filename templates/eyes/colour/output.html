@@ -7,14 +7,9 @@
                 <div class="col-md-6">
                     <div class="left-content">
                         <h2>Eye Colour</h2>
+                        <br><br>
                         <p>
                             <img src="{{ img }}">
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
                             <br></p>
 
                     </div>
@@ -30,6 +25,37 @@
                     <div class="chart-container">
                         <canvas id="myChart"></canvas>
                     </div>
+
+                    <!-- Tables -->
+
+                    <div class="alternate-table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Colour Name</th>
+                                <th>Pixel Value</th>
+                                <th>Hex Value</th>
+                                <th>Percentage</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if d %}
+                                {% for row in d %}
+                                    <tr>
+                                        <td>{{ row.labels }}</td>
+                                        <td>{{ row.values }}</td>
+                                        <td>{{ row.colors }}</td>
+                                        <td>{{ row.percentages }}</td>
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                    <br>
+
+
                     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                     <script>
                         var data = {{ data|safe }};
