@@ -11,5 +11,4 @@ admin.site.register(w_bristles)
 admin.site.register(e_colour)
 admin.site.register(e_dimension)
 admin.site.register(e_ommatidium)
-admin.site.register(colour)
 

@@ -758,12 +758,20 @@ def eye_col2(request):
         img_eye = __upload_file_to_userdir(request, f, ".png", flag=False)
         f.save(img_eye)
 
+        mf = False
         md5_hash = md5(img_eye)
-        if not Eye_Image.objects.filter(hash=md5_hash).exists():
-            eye_o = Eye_Image()
+        eye_o = Eye_Image()
+        e_flag = False
+
+        if Eye_Image.objects.filter(hash=md5_hash).exists():
+            e_flag = True
+
+        if not e_flag:
             eye_o.image = uploaded_img
             eye_o.user = request.user
+            eye_o.hash = md5_hash
             eye_o.save()
+            mf = True
 
         out = E_Col.run(img_eye)
         labels, values, colors = out[0], out[1], out[2]
@@ -780,6 +788,48 @@ def eye_col2(request):
 
         dff = pd.DataFrame(data)
         df = dff.to_dict('records')
+
+        # For saving the data
+        e_c = e_colour()
+
+        lab = []
+        hexval = []
+        per = []
+
+        for i in df:
+            lab.append(i['labels'])
+            hexval.append(i['values'])
+            per.append(i['percentages'])
+
+        # Finding the predicted colour
+        float_values = [float(p.strip('%')) for p in per]
+        max_value = max(float_values)
+        max_index = float_values.index(max_value)
+
+        if not e_flag:
+
+            if mf:
+                e_c.ec_o_img = eye_o
+            else:
+                e_c.ec_o_img = Eye_Image.objects.get(hash=md5_hash)
+
+            e_c.c1_hex = hexval[0]
+            e_c.c2_hex = hexval[1]
+            e_c.c3_hex = hexval[2]
+            e_c.c4_hex = hexval[3]
+
+            e_c.c1_name = lab[0]
+            e_c.c2_name = lab[1]
+            e_c.c3_name = lab[2]
+            e_c.c4_name = lab[3]
+
+            e_c.c1_p = float_values[0]
+            e_c.c2_p = float_values[1]
+            e_c.c3_p = float_values[2]
+            e_c.c4_p = float_values[3]
+
+            e_c.pred = lab[max_index]
+            e_c.save()
 
         return render(request, 'eyes/colour/output.html',
                       {'head': 'Eyes | Eye Colour', 'data': data, 'img': img_eye, 'd': df})

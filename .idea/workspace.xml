@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Charts are now on Chart.js" />
+    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Fix things.">
+      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_130429.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_BCckZNa.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_Dk0zQx6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_MfwuRAy.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_a2ZX1Eq.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_uzjUV8L.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/head.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -172,7 +186,7 @@
       <workItem from="1679156286174" duration="1467000" />
       <workItem from="1679162554258" duration="135000" />
       <workItem from="1679162742526" duration="52000" />
-      <workItem from="1679162911822" duration="1187000" />
+      <workItem from="1679162911822" duration="6633000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
@@ -321,7 +335,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677595520795</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Fix things.">
+      <created>1679164220689</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1679164220689</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -361,6 +382,7 @@
     <MESSAGE value="Prompt for no inputs." />
     <MESSAGE value="Added Eye Colour." />
     <MESSAGE value="Charts are now on Chart.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="Charts are now on Chart.js" />
+    <MESSAGE value="Fix things." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix things." />
   </component>
 </project>

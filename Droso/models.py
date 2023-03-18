@@ -109,13 +109,13 @@ class w_bristles(models.Model):
         verbose_name = "Wing Bristle"
 
 
-class colour(models.Model):
-    color = models.AutoField(primary_key=True)
-    color_name = models.CharField(max_length=100,
-                                  verbose_name="Colour Name")
-
-    class Meta:
-        verbose_name = "Colour"
+# class colour(models.Model):
+#     color = models.AutoField(primary_key=True)
+#     color_name = models.CharField(max_length=100,
+#                                   verbose_name="Colour Name")
+#
+#     class Meta:
+#         verbose_name = "Colour"
 
 
 class e_colour(models.Model):
@@ -125,41 +125,60 @@ class e_colour(models.Model):
                                  default=None,
                                  verbose_name="Original Image ID")
 
-    col1 = models.ForeignKey(colour,
-                             on_delete=models.CASCADE,
-                             default=None,
-                             verbose_name="Colour 1 ID",
-                             related_name="a")
-    col2 = models.ForeignKey(colour,
-                             on_delete=models.CASCADE,
-                             default=None,
-                             verbose_name="Colour 2 ID",
-                             related_name="b")
-    col3 = models.ForeignKey(colour,
-                             on_delete=models.CASCADE,
-                             default=None,
-                             verbose_name="Colour 3 ID",
-                             related_name="c")
-    col4 = models.ForeignKey(colour,
-                             on_delete=models.CASCADE,
-                             default=None,
-                             verbose_name="Colour 4 ID",
-                             related_name="d")
+    # col1 = models.ForeignKey(colour,
+    #                          on_delete=models.CASCADE,
+    #                          default=None,
+    #                          verbose_name="Colour 1 ID",
+    #                          related_name="a")
+    # col2 = models.ForeignKey(colour,
+    #                          on_delete=models.CASCADE,
+    #                          default=None,
+    #                          verbose_name="Colour 2 ID",
+    #                          related_name="b")
+    # col3 = models.ForeignKey(colour,
+    #                          on_delete=models.CASCADE,
+    #                          default=None,
+    #                          verbose_name="Colour 3 ID",
+    #                          related_name="c")
+    # col4 = models.ForeignKey(colour,
+    #                          on_delete=models.CASCADE,
+    #                          default=None,
+    #                          verbose_name="Colour 4 ID",
+    #                          related_name="d")
 
-    colour_1 = models.FloatField(max_length=100,
-                                 verbose_name="Colour 1 %")
-    colour_2 = models.FloatField(max_length=100,
-                                 verbose_name="Colour 2 %")
-    colour_3 = models.FloatField(max_length=100,
-                                 verbose_name="Colour 3 %")
-    colour_4 = models.FloatField(max_length=100,
-                                 verbose_name="Colour 4 %")
+    c1_hex = models.CharField(max_length=100,
+                              verbose_name="Colour 1 Hex Value")
+    c2_hex = models.CharField(max_length=100,
+                              verbose_name="Colour 2 Hex Value")
+    c3_hex = models.CharField(max_length=100,
+                              verbose_name="Colour 3 Hex Value")
+    c4_hex = models.CharField(max_length=100,
+                              verbose_name="Colour 4 Hex Value")
+
+    c1_p = models.FloatField(max_length=100,
+                             verbose_name="Colour 1 %")
+    c2_p = models.FloatField(max_length=100,
+                             verbose_name="Colour 2 %")
+    c3_p = models.FloatField(max_length=100,
+                             verbose_name="Colour 3 %")
+    c4_p = models.FloatField(max_length=100,
+                             verbose_name="Colour 4 %")
+
+    c1_name = models.CharField(max_length=100,
+                                verbose_name="Colour 1 name")
+    c2_name = models.CharField(max_length=100,
+                                verbose_name="Colour 2 name")
+    c3_name = models.CharField(max_length=100,
+                                verbose_name="Colour 3 name")
+    c4_name = models.CharField(max_length=100,
+                                verbose_name="Colour 4 name")
 
     pred = models.CharField(max_length=10,
                             verbose_name="Predicted Colour")
 
-    class Meta:
-        verbose_name = "Eye Colour"
+
+class Meta:
+    verbose_name = "Eye Colour"
 
 
 class e_dimension(models.Model):
