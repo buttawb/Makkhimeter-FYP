@@ -4,39 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Charts are now on Chart.js">
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_125805.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_130016.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_130429.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131125.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_2PvTwYw.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_ALiMP12.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_IKZLH27.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_TJJXcD7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_UblmKh3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_YssPsNx.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_bZKNzXU.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_daJh3xL.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_dqghee6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347_wId6l8e.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_132317.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_132317_30UFq7O.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0078.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0207.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/dashboard/dashboard.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/eyes/Dimensions/e_dimen.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/eyes/Dimensions/e_dimen2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/eyes/Dimensions/eyedimen_output.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drosometer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Drosometer/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Dimensions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Dimensions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/eyes/colour/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/colour/output.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/output.html" afterDir="false" />
-    </list>
+    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Charts are now on Chart.js" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,6 +38,7 @@
         <entry key="$PROJECT_DIR$" value="No-shape-Model" />
       </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Colour.py" root0="FORCE_HIGHLIGHTING" />
@@ -85,22 +54,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Awble/Desktop/AJAX-File-Uploader-master/AJAX-File-Uploader-master&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "G:/Projects/D.M/DM",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Drosometer" type="Python.DjangoServer" factoryName="Django server">
       <module name="Drosometer" />
@@ -199,6 +168,11 @@
       <workItem from="1678383706460" duration="650000" />
       <workItem from="1678448921892" duration="7237000" />
       <workItem from="1678517882365" duration="1639000" />
+      <workItem from="1679156237226" duration="25000" />
+      <workItem from="1679156286174" duration="1467000" />
+      <workItem from="1679162554258" duration="135000" />
+      <workItem from="1679162742526" duration="52000" />
+      <workItem from="1679162911822" duration="1187000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
