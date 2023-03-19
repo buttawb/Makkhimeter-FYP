@@ -179,7 +179,7 @@ def main(request):
         # MAKE A DIRECTORY NAMED WITH USERNAME
         os.mkdir(path)
 
-    return render(request, 'index.html', {'head': 'Drosometer | DOW-UIT'})
+    return render(request, 'index.html', {'head': 'Drosometer | DOW-UIT', 'user_name': request.user.username.upper()})
 
 
 def wingdimen(request):
@@ -187,7 +187,8 @@ def wingdimen(request):
     if request.user.is_anonymous:
         return redirect("/login")
 
-    return render(request, 'wings/dimensions/w_dimen.html', {'head': 'Drosometer | Wings'})
+    return render(request, 'wings/dimensions/w_dimen.html',
+                  {'head': 'Drosometer | Wings', 'user_name': request.user.username.upper()})
 
 
 def wingdimen2(request):
@@ -208,7 +209,8 @@ def wingdimen2(request):
             return render(request, 'wings/dimensions/w_dimen2.html',
                           {'head': 'Wings | Dimensions', 'img_path': orig_img,
                            'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
-                           'out2': 'of wing', 'out3': 'Let us know if this is by mistake.'})
+                           'out2': 'of wing', 'out3': 'Let us know if this is by mistake.',
+                           'user_name': request.user.username.upper()})
 
         orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
         # p = cv2.imread(orig_img)
@@ -281,11 +283,11 @@ def wingdimen2(request):
         # plt.imsave(dil_path, dil, cmap='gray')
 
         return redirect('/bar',
-                        {'head': 'Drosometer | Wings'})
+                        {'head': 'Drosometer | Wings', 'user_name': request.user.username.upper()})
 
     return render(request, 'wings/dimensions/w_dimen2.html',
                   {'head': 'Wings | Dimensions', 'img_path': '../static/images/perfect.png',
-                   'img_name': 'Expected Input Image '})
+                   'img_name': 'Expected Input Image ', 'user_name': request.user.username.upper()})
 
 
 def wingshape(request):
@@ -293,7 +295,8 @@ def wingshape(request):
     if request.user.is_anonymous:
         return redirect("/login")
 
-    return render(request, 'wings/shape/w_shape.html', {'head': 'Drosometer | Wings'})
+    return render(request, 'wings/shape/w_shape.html',
+                  {'head': 'Drosometer | Wings', 'user_name': request.user.username.upper()})
 
 
 def wingshape2(request):
@@ -314,7 +317,8 @@ def wingshape2(request):
             return render(request, 'wings/dimensions/w_dimen2.html',
                           {'head': 'Wings | Dimensions', 'img_path': path,
                            'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
-                           'out2': 'of wing', 'out3': 'Let us know if this is by mistake.'})
+                           'out2': 'of wing', 'out3': 'Let us know if this is by mistake.',
+                           'user_name': request.user.username.upper()})
 
         path = __upload_file_to_userdir(request, img2, '.png')
 
@@ -354,18 +358,20 @@ def wingshape2(request):
             # RENDERING OUTPUTS ON HTML PAGE
             return render(request, 'wings/shape/w_shape2.html',
                           {'head': 'Wings | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
-                           'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: '})
+                           'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: ',
+                           'user_name': request.user.username.upper()})
 
         elif pred == 1:
             # RENDERING OUTPUTS ON HTML PAGE
             return render(request, 'wings/shape/w_shape2.html',
                           {'head': 'Wings | Shape', 'ans': 'Oregan', 'out': 'class.', 'prob_oreg': prob_oreg,
-                           'prob_mut': prob_mut, 'img_path': path, 'img_name': 'Uploaded Image: '})
+                           'prob_mut': prob_mut, 'img_path': path, 'img_name': 'Uploaded Image: ',
+                           'user_name': request.user.username.upper()})
 
     else:
         return render(request, 'wings/shape/w_shape2.html',
                       {'head': 'Wings | Shape', 'img_path': '../static/images/perfect.png',
-                       'img_name': 'Like this: '})
+                       'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
 
 
 def wingbristles(request):
@@ -373,7 +379,8 @@ def wingbristles(request):
     if request.user.is_anonymous:
         return redirect("/login")
 
-    return render(request, 'wings/bristles/w_bristles.html', {'head': 'Drosometer | Wings'})
+    return render(request, 'wings/bristles/w_bristles.html',
+                  {'head': 'Drosometer | Wings', 'user_name': request.user.username.upper()})
 
 
 def wingbristles2(request):
@@ -391,7 +398,8 @@ def wingbristles2(request):
             return render(request, 'wings/dimensions/w_dimen2.html',
                           {'head': 'Wings | Dimensions', 'img_path': orig_img,
                            'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
-                           'out2': 'of wing', 'out3': 'Let us know if this is by mistake.'})
+                           'out2': 'of wing', 'out3': 'Let us know if this is by mistake.',
+                           'user_name': request.user.username.upper()})
 
         crop_img = __upload_file_to_userdir(request, img1, ".png")
 
@@ -436,25 +444,28 @@ def wingbristles2(request):
                 b_overall.bristle_count = bristles
                 b_overall.save()
 
-        return redirect("/cropper_wing", {'head': 'Bristles | Finder', 'img': crop_img})
+        return redirect("/cropper_wing",
+                        {'head': 'Bristles | Finder', 'img': crop_img, 'user_name': request.user.username.upper()})
 
     return render(request, 'wings/bristles/w_bristles2.html',
                   {'head': 'Wings | Bristles', 'img_path': '../static/images/perfect.png',
-                   'img_name': 'Expected Input Image '})
+                   'img_name': 'Expected Input Image ', 'user_name': request.user.username.upper()})
 
 
 def cropper_bristles(request):
     if request.user.is_anonymous:
         return redirect("/login")
     crop_img = request.session['crop_img']
-    return render(request, 'wings/bristles/cropper.html', {'head': 'Bristles | Finder', 'img': crop_img})
+    return render(request, 'wings/bristles/cropper.html',
+                  {'head': 'Bristles | Finder', 'img': crop_img, 'user_name': request.user.username.upper()})
 
 
 def cropper_eye(request):
     if request.user.is_anonymous:
         return redirect("/login")
     crop_img_eye = request.session['crop_img_eye']
-    return render(request, 'eyes/ommatidum/cropper.html', {'head': 'Ommatidium | Finder', 'img': crop_img_eye})
+    return render(request, 'eyes/ommatidum/cropper.html',
+                  {'head': 'Ommatidium | Finder', 'img': crop_img_eye, 'user_name': request.user.username.upper()})
 
 
 def c_us(request):
@@ -462,7 +473,8 @@ def c_us(request):
     if request.user.is_anonymous:
         return redirect("/login")
 
-    return render(request, 'others/contactus.html', {'head': 'Drosometer | Contact Us'})
+    return render(request, 'others/contactus.html',
+                  {'head': 'Drosometer | Contact Us', 'user_name': request.user.username.upper()})
 
 
 def a_us(request):
@@ -470,7 +482,8 @@ def a_us(request):
     if request.user.is_anonymous:
         return redirect("/login")
 
-    return render(request, 'others/aboutus.html', {'head': 'Drosometer | About Us'})
+    return render(request, 'others/aboutus.html',
+                  {'head': 'Drosometer | About Us', 'user_name': request.user.username.upper()})
 
 
 def f_b(request):
@@ -478,14 +491,15 @@ def f_b(request):
     if request.user.is_anonymous:
         return redirect("/login")
 
-    return render(request, 'others/feedback.html', {'head': 'Drosometer | Give Feedback'})
+    return render(request, 'others/feedback.html',
+                  {'head': 'Drosometer | Give Feedback', 'user_name': request.user.username.upper()})
 
 
 def wing_f(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
     if request.user.is_anonymous:
         return redirect("/login")
-    return render(request, 'f_w.html', {'head': 'Drosometer | Wings'})
+    return render(request, 'f_w.html', {'head': 'Drosometer | Wings', 'user_name': request.user.username.upper()})
 
 
 def eye_f(request):
@@ -493,7 +507,7 @@ def eye_f(request):
     if request.user.is_anonymous:
         return redirect("/login")
 
-    return render(request, 'f_e.html', {'head': 'Drosometer | Eyes'})
+    return render(request, 'f_e.html', {'head': 'Drosometer | Eyes', 'user_name': request.user.username.upper()})
 
 
 # def thorax_f(request):
@@ -588,7 +602,7 @@ def w_bar(request):
         return render(request, 'wings/dimensions/bar.html',
                       {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image',
                        'val1': 7,
-                       'val2': 12, 'but_name': 'Reset to default values'})
+                       'val2': 12, 'but_name': 'Reset to default values', 'user_name': request.user.username.upper()})
 
     if 'check' in request.POST:
         # VALUE GET NAI HORAI
@@ -608,7 +622,8 @@ def w_bar(request):
 
         return render(request, 'wings/dimensions/bar.html',
                       {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image',
-                       'val1': val1, 'val2': val2, 'but_name': 'Reset to default values'})
+                       'val1': val1, 'val2': val2, 'but_name': 'Reset to default values',
+                       'user_name': request.user.username.upper()})
 
     if 'default' in request.POST:
         WD_P.preprocess_img = for_dil
@@ -617,7 +632,7 @@ def w_bar(request):
         plt.imsave(save_dil, dil, cmap='gray')
         return render(request, 'wings/dimensions/bar.html',
                       {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 7,
-                       'val2': 12, 'but_name': 'Reset to default values'})
+                       'val2': 12, 'but_name': 'Reset to default values', 'user_name': request.user.username.upper()})
     orig_img = orig_img_fn()
 
     global flag
@@ -631,7 +646,7 @@ def w_bar(request):
 
         return render(request, 'wings/dimensions/output.html',
                       {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat,
-                       'orig_img': orig_img})
+                       'orig_img': orig_img, 'user_name': request.user.username.upper()})
 
     if 'no' in request.POST:
         flag = False
@@ -641,13 +656,13 @@ def w_bar(request):
 
         return render(request, 'wings/dimensions/output.html',
                       {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat,
-                       'orig_img': orig_img})
+                       'orig_img': orig_img, 'user_name': request.user.username.upper()})
 
     else:
         return render(request, 'wings/dimensions/bar.html',
                       {'head': 'Dimensions | Exposure', 'img_path': orig_img_fn(), 'img_name': 'Uploaded Image',
                        'val1': 7,
-                       'val2': 12, 'but_name': 'Extract wing.'})
+                       'val2': 12, 'but_name': 'Extract wing.', 'user_name': request.user.username.upper()})
 
 
 def detail_dimen(request):
@@ -666,7 +681,7 @@ def detail_dimen(request):
         img7 = fin[3]
         return render(request, 'wings/dimensions/detail_1.html',
                       {'head': 'Dimensions | Detailed steps', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
-                       'img5': img5, 'img6': img6, 'img7': img7})
+                       'img5': img5, 'img6': img6, 'img7': img7, 'user_name': request.user.username.upper()})
 
     else:
         img1 = orig_img_fn()
@@ -680,7 +695,7 @@ def detail_dimen(request):
 
         return render(request, 'wings/dimensions/detail_2.html',
                       {'head': 'Dimensions | Detailed steps', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
-                       'img6': img6, 'img7': img7})
+                       'img6': img6, 'img7': img7, 'user_name': request.user.username.upper()})
 
 
 def get_values_from_slider(request, for_dil, save_dil):
@@ -699,7 +714,7 @@ def eye_omat(request):
         return redirect("/login")
 
     return render(request, 'eyes/ommatidum/omat_count.html',
-                  {'head': 'Drosometer | Eyes'})
+                  {'head': 'Drosometer | Eyes', 'user_name': request.user.username.upper()})
 
 
 def eye_omat2(request):
@@ -731,11 +746,12 @@ def eye_omat2(request):
         # img1 = prepreprocess(img)
         plt.imsave(crop_img_eye, img1[2], cmap='gray')
 
-        return redirect("/cropper_eye", {'head': 'Ommatidium | Finder', 'img': crop_img_eye})
+        return redirect("/cropper_eye", {'head': 'Ommatidium | Finder', 'img': crop_img_eye,
+                                         'user_name': request.user.username.upper()})
 
     return render(request, 'eyes/ommatidum/omat_2.html',
-                  {'head': 'Eyes | Ommatidium Count', 'img_path': '../static/images/eye_front.png',
-                   'img_name': 'Like this: '})
+                  {'head': 'Eyes | Ommatidium Count', 'img_path': '../static/images/eye_front.jpg',
+                   'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
 
 
 def eye_col(request):
@@ -743,7 +759,7 @@ def eye_col(request):
         return redirect("/login")
 
     return render(request, 'eyes/colour/col.html',
-                  {'head': 'Drosometer | Eyes'})
+                  {'head': 'Drosometer | Eyes', 'user_name': request.user.username.upper()})
 
 
 def eye_col2(request):
@@ -832,17 +848,18 @@ def eye_col2(request):
             e_c.save()
 
         return render(request, 'eyes/colour/output.html',
-                      {'head': 'Eyes | Eye Colour', 'data': data, 'img': img_eye, 'd': df})
+                      {'head': 'Eyes | Eye Colour', 'data': data, 'img': img_eye, 'd': df, 'main': lab[max_index],
+                       'user_name': request.user.username.upper()})
 
     return render(request, 'eyes/colour/col2.html',
-                  {'head': 'Eyes | Eye Colour', 'img_path': '../static/images/eye_front.png',
-                   'img_name': 'Like this: '})
+                  {'head': 'Eyes | Eye Colour', 'img_path': '../static/images/eye_front.jpg',
+                   'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
 
 
 def eyedimen(request):
     if request.user.is_anonymous:
         return redirect("/login")
-    return render(request, 'eyes/Dimensions/e_dimen.html', {'head': 'Drosometer | Eyes'})
+    return render(request, 'eyes/Dimensions/e_dimen.html', {'head': 'Drosometer | Eyes', 'user_name': request.user.username.upper()})
 
 
 def eyedimen2(request):
@@ -868,19 +885,33 @@ def eyedimen2(request):
             area = list(i.values())[-2]
 
         return render(request, 'eyes/Dimensions/eyedimen_output.html',
-                      {"orig": orig_img, "dil": dil_img, "Ar": area, "Pr": peri})
+                      {"orig": orig_img, "dil": dil_img, "Ar": area, "Pr": peri, 'user_name': request.user.username.upper()})
 
     return render(request, 'eyes/Dimensions/e_dimen2.html',
-                  {'head': 'Eyes | Dimensions', 'img_path': '../static/images/eye_front.png',
-                   'img_name': 'Like this: '})
+                  {'head': 'Eyes | Dimensions', 'img_path': '../static/images/eye_front.jpg',
+                   'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
 
 
 def dashboard(request):
     if request.user.is_anonymous:
         return redirect("/login")
     return render(request, "dashboard/dashboard.html",
-                  {'head': 'Dashboard | Drosometer'})
+                  {'head': 'Dashboard | Drosometer', 'user_name': request.user.username.upper()})
 
+
+# def wingfront(request):
+#     if request.user.is_anonymous:
+#         return redirect("/login")
+#     return render(request, "others/wing.html",
+#                   {'head': 'Wing | Drosophila'})
+#
+#
+# def eyefront(request):
+#     if request.user.is_anonymous:
+#         return redirect("/login")
+#     return render(request, "others/eye.html",
+#                   {'head': 'EYE | Drosophila'})
+#
 
 def register_page(request):
     if request.user.is_anonymous:

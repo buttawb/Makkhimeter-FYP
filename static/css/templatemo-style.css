@@ -52,8 +52,8 @@ button {
     background-color: transparent;
 	display: inline-block;
 	padding: 8px 20px;
-	color: #535ba0;
-	border: 2px solid #535ba0;
+	color: #626ad1;
+	border: 2px solid #626ad1;
 	transition: all 0.5s;
 }
 .primary-button a:hover,
@@ -111,7 +111,7 @@ section {
 	padding-right: 0px;
 }
 .main-banner .banner-content {
-	background-image: url(../images/main-banner.jpg);
+	background-image: url(../images/main-banner.gif);
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -133,7 +133,7 @@ section {
 
 .main-banner .banner-content .banner-caption em {
 	font-style: normal;
-	color: #535ba0;
+	color: #626ad1;
 }
 
 .main-banner .banner-content .banner-caption span {
@@ -227,7 +227,7 @@ section {
 }
 
 .services .service-item:hover {
-	background-color: #535ba0;
+	background-color: #626ad1;
 }
 .services .service-item:hover h4,
 .services .service-item:hover p {
@@ -359,7 +359,7 @@ section.contact-form {
 .contact-form input:focus {
     outline: none;
     box-shadow: none;
-    border-color: #535ba0;
+    border-color: #626ad1;
 }
 
 .contact-form textarea {
@@ -380,7 +380,7 @@ section.contact-form {
 .contact-form textarea:focus {
     outline: none;
     box-shadow: none;
-    border-color: #535ba0;
+    border-color: #626ad1;
 }
 
 .contact-form button {
@@ -389,9 +389,9 @@ section.contact-form {
     text-transform: uppercase;
     display: inline-block;
     padding: 8px 20px;
-    color: #535ba0;
+    color: #626ad1;
     background-color: transparent;
-    border: 2px solid #535ba0;
+    border: 2px solid #626ad1;
     transition: all 0.5s;
     cursor: pointer;
 }
@@ -543,7 +543,7 @@ ul.table-pagination li a {
 
 ul.table-pagination li a:hover,
 ul.table-pagination li.active a {
-    background-color: #535ba0;
+    background-color: #626ad1;
     color: #fff;
 }
 
@@ -592,7 +592,7 @@ section.forms .container-fluid {
 .forms textarea:focus {
     outline: none;
     box-shadow: none;
-    border-color: #535ba0;
+    border-color: #626ad1;
 }
 
 .forms .radio-item,
@@ -667,7 +667,7 @@ input[type="radio"] + label:before {
 input[type="checkbox"]:checked + label:before,
 input[type="radio"]:checked + label:before {
     content: '\f00c';
-    background-color: #535ba0;
+    background-color: #626ad1;
     color: #fff;
 }
 
@@ -705,12 +705,12 @@ section.buttons .container-fluid {
     text-align: center;
     letter-spacing: 0.5px;
     color: #fff;
-    border: 2px solid #535ba0;
+    border: 2px solid #626ad1;
     transition: all 0.5s;
     background-color: rgba(83,91,160,1);
 }
 .filled-rectangle-button a:hover {
-    color: #535ba0;
+    color: #626ad1;
     background-color: rgba(83,91,160,0.25);
 }
 
@@ -726,8 +726,8 @@ section.buttons .container-fluid {
     width: 100%;
     text-align: center;
     letter-spacing: 0.5px;
-    color: #535ba0;
-    border: 2px solid #535ba0;
+    color: #626ad1;
+    border: 2px solid #626ad1;
     transition: all 0.5s;
     background-color: rgba(83,91,160,0.0);
 }
@@ -749,7 +749,7 @@ section.buttons .container-fluid {
     text-align: center;
     letter-spacing: 0.5px;
     color: #fff;
-    border: 2px solid #535ba0;
+    border: 2px solid #626ad1;
     transition: all 0.5s;
     background-color: rgba(83,91,160,1);
     border-radius: 5px;
@@ -771,8 +771,8 @@ section.buttons .container-fluid {
     width: 100%;
     text-align: center;
     letter-spacing: 0.5px;
-    color: #535ba0;
-    border: 2px solid #535ba0;
+    color: #626ad1;
+    border: 2px solid #626ad1;
     transition: all 0.5s;
     background-color: rgba(83,91,160,0.0);
     border-radius: 5px;
@@ -795,7 +795,7 @@ section.buttons .container-fluid {
     text-align: center;
     letter-spacing: 0.5px;
     color: #fff;
-    border: 2px solid #535ba0;
+    border: 2px solid #626ad1;
     transition: all 0.5s;
     background-color: rgba(83,91,160,1);
     border-radius: 20px;
@@ -817,8 +817,8 @@ section.buttons .container-fluid {
     width: 100%;
     text-align: center;
     letter-spacing: 0.5px;
-    color: #535ba0;
-    border: 2px solid #535ba0;
+    color: #626ad1;
+    border: 2px solid #626ad1;
     transition: all 0.5s;
     background-color: rgba(83,91,160,0.0);
     border-radius: 20px;
@@ -844,7 +844,7 @@ section.buttons .container-fluid {
     text-align: center;
     letter-spacing: 0.5px;
     color: #fff;
-    border: 2px solid #535ba0;
+    border: 2px solid #626ad1;
     transition: all 0.5s;
     background-color: rgba(83,91,160,1);
     border-radius: 20px;
@@ -869,8 +869,8 @@ section.buttons .container-fluid {
     width: 100%;
     text-align: center;
     letter-spacing: 0.5px;
-    color: #535ba0;
-    border: 2px solid #535ba0;
+    color: #626ad1;
+    border: 2px solid #626ad1;
     transition: all 0.5s;
     background-color: rgba(83,91,160,0.0);
     border-radius: 20px;
@@ -1022,25 +1022,25 @@ section.buttons .container-fluid {
 
 @media screen and (max-width: 1680px) {
     #sidebar {
-        width: 380px;
+        width: 300px;
     }
     #sidebar > .inner {
         padding: 0px 30px;
-        width: 380px;
+        width: 300px;
     }
     #sidebar .toggle {
         height: 100px;
-        left: 380px;
+        left: 300px;
         line-height: 100px;
     }
     #sidebar .toggle:before {
         font-size: 24px;
     }
     #sidebar.inactive {
-        margin-left: -380px;
+        margin-left: -300px;
     }
     #sidebar > .inner > #search  {
-	    width: 380px;
+	    width: 300px;
 	    margin-left: -30px;
 	}
 	#menu {
@@ -1191,7 +1191,7 @@ section.buttons .container-fluid {
 }
 
 .owl-carousel button.active {
-	background-color: #535ba0!important;
+	background-color: #626ad1!important;
 }
 
 
@@ -1203,7 +1203,7 @@ section.buttons .container-fluid {
     display: -ms-flex;
     display: flex;
     position: relative;
-    background-color: #535ba0;
+    background-color: #626ad1;
     margin: -100px -100px 100px -100px;
 }
 
@@ -1278,7 +1278,7 @@ section.buttons .container-fluid {
 
 #menu ul a:hover,
 #menu ul span:hover {
-    color: #535ba0;
+    color: #626ad1;
 }
 
 #menu ul a.opener,
@@ -1316,7 +1316,7 @@ section.buttons .container-fluid {
 
 #menu ul a.opener:hover:before,
 #menu ul span.opener:hover:before {
-    color: #535ba0;
+    color: #626ad1;
 }
 
 #menu ul a.opener.active + ul,

@@ -2,8 +2,26 @@
 {% block content %}
 
     <div class="row">
+        <div class="col-md-12">
+            <div class="container">
+                <div class="horizontal">
+                    <div class="verticals ten offset-by-one">
+
+                        <ol class="breadcrumb breadcrumb-fill2">
+                            <li><a href="/"><i class="fa fa-home"></i></a></li>
+                            <li><a href="/eye_col">Eye Colour</a></li>
+                            <li><a> / </a></li>
+                            <li class="active">Input</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-md-6">
-            <h2>Perfect Image</h2>
+            <br>
+            <br>
+
+            <h2>Exemplary Image</h2>
             <p>A perfect and noiseless image always generate the better and accurate results.</p>
             <section class="forms">
                 <div class="container-fluid">
@@ -32,14 +50,15 @@
                                     </div>
 
                                     <div class="col-md-12">
-                                        <button type="submit" id="buttonID"> Find Colours <span class="load loading"></span>
+                                        <button type="submit" id="buttonID"> Find Colours <span
+                                                class="load loading"></span>
                                         </button>
                                     </div>
                                 </div>
                             </form>
                             <br>
                             <br>
-                            <h2><em style="color: rebeccapurple"> {{ans}} </em> {{out}}</h2>
+                            <h2><em style="color: rebeccapurple"> {{ ans }} </em> {{ out }}</h2>
                         </div>
                     </div>
                 </div>
@@ -50,9 +69,11 @@
         </div>
 
         <div class="col-md-6">
-            <h2>{{img_name}}</h2>
+            <br>
+            <br>
+            <h2>{{ img_name }}</h2>
             <p>
-                <img src="{{img_path}}">
+                <img src="{{ img_path }}">
             </p>
             <br>
             <br>

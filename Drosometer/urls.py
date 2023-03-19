@@ -49,6 +49,8 @@ urlpatterns = [
                   path('aboutus', views.a_us),
                   path('contactus', views.c_us),
                   path('feedback', views.f_b),
+                  # path('wing', views.wingfront),
+                  # path('eye', views.eyefront),
 
                   # Eye Paths
                   path('e_omat', views.eye_omat),

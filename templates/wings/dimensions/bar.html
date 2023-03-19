@@ -1,236 +1,255 @@
 {% extends "base/head.html" %}
 {% block content %}
 
-<head>
-    <style>
-        body {
-            padding: 0;
-            margin: 0;
-        }
+    <head>
+        <style>
+            body {
+                padding: 0;
+                margin: 0;
+            }
 
-        .font-range {
-            width: 100%;
-            box-sizing: border-box;
-            margin: auto;
-        }
+            .font-range {
+                width: 100%;
+                box-sizing: border-box;
+                margin: auto;
+            }
 
-        #range {
-            width: 100%;
-            padding: 10px 0;
+            #range {
+                width: 100%;
+                padding: 10px 0;
 
-        }
+            }
 
-        #range1 {
-            width: 100%;
-            padding: 25px 0;
+            #range1 {
+                width: 100%;
+                padding: 25px 0;
 
-        }
+            }
 
-        #range2 {
-            width: 100%;
-            padding: 25px 0;
+            #range2 {
+                width: 100%;
+                padding: 25px 0;
 
-        }
+            }
 
-        .txt1 {
-            box-sizing: border-box;
-            width: 50%;
-            margin: auto;
-        }
+            .txt1 {
+                box-sizing: border-box;
+                width: 50%;
+                margin: auto;
+            }
 
-        .txt2 {
-            box-sizing: border-box;
-            width: 50%;
-            margin: auto;
-        }
+            .txt2 {
+                box-sizing: border-box;
+                width: 50%;
+                margin: auto;
+            }
 
-        button {
-            padding: 10px 20px;
-            background: #eaeaea;
-            border: none;
-            box-shadow: 0 0 10px 0 #ff000025;
-            transition: all ease .3s;
-        }
+            button {
+                padding: 10px 20px;
+                background: #eaeaea;
+                border: none;
+                box-shadow: 0 0 10px 0 #ff000025;
+                transition: all ease .3s;
+            }
 
-        button a {
-            text-decoration: none;
-            color: rgb(255, 0, 0);
-        }
+            button a {
+                text-decoration: none;
+                color: rgb(255, 0, 0);
+            }
 
-        button:hover {
-            background: #ddd;
-        }
-    </style>
-</head>
-<body>
+            button:hover {
+                background: #ddd;
+            }
+        </style>
+    </head>
+    <body>
 
-<section class="top-image">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6" >
-                <h2>{{img_name}}</h2>
-                <br><br>
-                <img src={{img_path}} alt="">
-            </div>
-            <div class="col-md-8">
-                <div class="right-content">
-                    <form method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="primary-button">
-                            <button type="submit" id="buttonID" name="highlight">{{but_name}}<span
-                                    class="load loading"></span></button>
+    <section class="top-image">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="container">
+                        <div class="horizontal">
+                            <div class="verticals ten offset-by-one">
+
+                                <ol class="breadcrumb breadcrumb-fill2">
+                                    <li><a href="/"><i class="fa fa-home"></i></a></li>
+                                    <li><a href="/w_dimen">Wing Dimensions</a></li>
+                                    <li><a> / </a></li>
+                                    <li><a href="/w_dimen2">Input</a></li>
+                                    <li><a> / </a></li>
+                                    <li class="active">Editor</li>
+                                </ol>
+                            </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <br>
+                    <br>
+                    <h2>{{ img_name }}</h2>
+                    <br><br>
+                    <img src={{ img_path }} alt="">
+                </div>
+                <div class="col-md-8">
+                    <div class="right-content">
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="primary-button">
+                                <button type="submit" id="buttonID" name="highlight">{{ but_name }}<span
+                                        class="load loading"></span></button>
+                            </div>
 
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<form id="contact" method="post" enctype="multipart/form-data">
-    <div class="row">
+    </section>
+    <form id="contact" method="post" enctype="multipart/form-data">
+        <div class="row">
 
 
-        <div class="col-md-12">
-            <fieldset>
-                {% csrf_token %}
-                <div class="font-range">
-                    <input type="range" name='range1' id="range1" value="{{val1}}" min="0" max="20"/>
-                    <div class="txt1">
-                        <div class="font"></div>
-                    </div>
-                    <input type="range" name='range2' id="range2" value="{{val2}}" min="0" max="20"/>
-                    <div class="txt2">
-                        <div class="font"></div>
-                    </div>
-            </fieldset>
-        </div>
-
-        <div class="col-md-6">
-            <button type="submit" id="form-submit" name="check" style="text-align: right"> Check <span
-            </button>
-        </div>
-
-	<br>
-<br>
-<br>
-        <div class="col-md-12">
-            <div class="left-content">
-                <br><br>
-                <h4>One more thing...</h4>
-<br>
-                <p>We have detected that the wing is placed in the <strong> center </strong> without touching any
-                    borders or frames of the
-                    image. <br>Is that true?</p>
-<br>
-<br>
-                <form id="contact" action="" method="post" enctype="multipart/form-data">
+            <div class="col-md-12">
+                <fieldset>
                     {% csrf_token %}
-                    <div class="row">
-                        <div class="col-md-8 col-sm-8">
-                            <div class="circle-item">
-                                <button style="width: 40%;" type="submit" name="yes">
-                                    YES & NEXT
-                                </button>
-                                <br><br>
-                            </div>
+                    <div class="font-range">
+                        <input type="range" name='range1' id="range1" value="{{ val1 }}" min="0" max="20"/>
+                        <div class="txt1">
+                            <div class="font"></div>
                         </div>
-                        <div class="col-md-8 col-sm-8">
-                            <div class="circle-item">
-                                <button style="width: 40%;" type="submit" name="no">
-                                    NO & NEXT
-                                </button>
-                            </div>
+                        <input type="range" name='range2' id="range2" value="{{ val2 }}" min="0" max="20"/>
+                        <div class="txt2">
+                            <div class="font"></div>
                         </div>
-                    </div>
-                </form>
+                </fieldset>
             </div>
+
+            <div class="col-md-6">
+                <button type="submit" id="form-submit" name="check" style="text-align: right"> Check <span
+                </button>
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <div class="col-md-12">
+                <div class="left-content">
+                    <br><br>
+                    <h4>One more thing...</h4>
+                    <br>
+                    <p>We have detected that the wing is placed in the <strong> center </strong> without touching any
+                        borders or frames of the
+                        image. <br>Is that true?</p>
+                    <br>
+                    <br>
+                    <form id="contact" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8">
+                                <div class="circle-item">
+                                    <button style="width: 40%;" type="submit" name="yes">
+                                        YES & NEXT
+                                    </button>
+                                    <br><br>
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-8">
+                                <div class="circle-item">
+                                    <button style="width: 40%;" type="submit" name="no">
+                                        NO & NEXT
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
         </div>
+    </form>
 
-    </div>
-</form>
-
-<script>
+    <script>
 
 
-    var range = document.getElementById("range1");
-    var font = document.querySelector(".txt1 .font");
+        var range = document.getElementById("range1");
+        var font = document.querySelector(".txt1 .font");
 
-    checkFontSize();
+        checkFontSize();
 
-    range.oninput = function () {
-        console.log(this.values);
-        body.style.setProperty("font-size", this.value);
-        window.localStorage.setItem("fontSize", this.value);
-        window.localStorage.setItem("range", this.value);
+        range.oninput = function () {
+            console.log(this.values);
+            body.style.setProperty("font-size", this.value);
+            window.localStorage.setItem("fontSize", this.value);
+            window.localStorage.setItem("range", this.value);
 
-    };
+        };
 
-    function checkFontSize() {
-        var fontSize = window.localStorage.getItem("fontSize");
-        var rangeValue = window.localStorage.getItem("range");
+        function checkFontSize() {
+            var fontSize = window.localStorage.getItem("fontSize");
+            var rangeValue = window.localStorage.getItem("range");
 
-    }
+        }
 
-    var range = document.getElementById("range1");
+        var range = document.getElementById("range1");
 
-    checkFontSize();
-    range.oninput = function () {
-        console.log(this.values);
-        window.localStorage.setItem("fontSize", this.value);
-        window.localStorage.setItem("range", this.value);
-        font.innerHTML = "<p>Value is :" + "<b>" + this.value;
-    };
+        checkFontSize();
+        range.oninput = function () {
+            console.log(this.values);
+            window.localStorage.setItem("fontSize", this.value);
+            window.localStorage.setItem("range", this.value);
+            font.innerHTML = "<p>Value is :" + "<b>" + this.value;
+        };
 
-    function checkFontSize() {
-        var fontSize = window.localStorage.getItem("fontSize");
-        var rangeValue = window.localStorage.getItem("range");
-        font.innerHTML = "Value is : " + range.value;
-    }
-
-
-</script>
-<script>
+        function checkFontSize() {
+            var fontSize = window.localStorage.getItem("fontSize");
+            var rangeValue = window.localStorage.getItem("range");
+            font.innerHTML = "Value is : " + range.value;
+        }
 
 
-    var range2 = document.getElementById("range2");
-    var font2 = document.querySelector(".txt2 .font");
-
-    checkFontSize();
-
-    range2.oninput = function () {
-        console.log(this.values);
-        body.style.setProperty("font-size2", this.value);
-        window.localStorage.setItem("fontSize2", this.value);
-        window.localStorage.setItem("range2", this.value);
-
-    };
-
-    function checkFontSize() {
-        var fontSize2 = window.localStorage.getItem("fontSize2");
-        var rangeValue2 = window.localStorage.getItem("range2");
-
-    }
-
-    var range2 = document.getElementById("range2");
-
-    checkFontSize();
-    range2.oninput = function () {
-        console.log(this.values);
-        window.localStorage.setItem("fontSize2", this.value);
-        window.localStorage.setItem("range2", this.value);
-        font2.innerHTML = "<p>Value is :" + "<b>" + this.value;
-    };
-
-    function checkFontSize() {
-        var fontSize2 = window.localStorage.getItem("fontSize2");
-        var rangeValue2 = window.localStorage.getItem("range2");
-        font2.innerHTML = "Value is : " + range2.value;
-    }
+    </script>
+    <script>
 
 
-</script>
-</body>
+        var range2 = document.getElementById("range2");
+        var font2 = document.querySelector(".txt2 .font");
+
+        checkFontSize();
+
+        range2.oninput = function () {
+            console.log(this.values);
+            body.style.setProperty("font-size2", this.value);
+            window.localStorage.setItem("fontSize2", this.value);
+            window.localStorage.setItem("range2", this.value);
+
+        };
+
+        function checkFontSize() {
+            var fontSize2 = window.localStorage.getItem("fontSize2");
+            var rangeValue2 = window.localStorage.getItem("range2");
+
+        }
+
+        var range2 = document.getElementById("range2");
+
+        checkFontSize();
+        range2.oninput = function () {
+            console.log(this.values);
+            window.localStorage.setItem("fontSize2", this.value);
+            window.localStorage.setItem("range2", this.value);
+            font2.innerHTML = "<p>Value is :" + "<b>" + this.value;
+        };
+
+        function checkFontSize() {
+            var fontSize2 = window.localStorage.getItem("fontSize2");
+            var rangeValue2 = window.localStorage.getItem("range2");
+            font2.innerHTML = "Value is : " + range2.value;
+        }
+
+
+    </script>
+    </body>
 
 
 {% endblock %}

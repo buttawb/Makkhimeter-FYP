@@ -1,28 +1,52 @@
 {% extends "base/head.html" %}
+{% load custom_filters %}
 {% block content %}
 
     <section class="right-image">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-md-12">
+                    <div class="container">
+                        <div class="horizontal">
+                            <div class="verticals ten offset-by-one">
+
+                                <ol class="breadcrumb breadcrumb-fill2">
+                                    <li><a href="/"><i class="fa fa-home"></i></a></li>
+                                    <li><a href="/eye_col">Eye Colour</a></li>
+                                    <li><a> / </a></li>
+                                    <li><a href="/col2">Input</a></li>
+                                    <li><a> / </a></li>
+                                    <li class="active">Results</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-6">
                     <div class="left-content">
+                        <br>
+                        <br>
                         <h2>Eye Colour</h2>
                         <br><br>
                         <p>
                             <img src="{{ img }}">
-                            <br></p>
+                        </p>
+                        <br>
+                        <br>
+                        <h2> Dominant Colour: <em style="color: rebeccapurple"> {{ main }} </em></h2>
+
 
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <style>
-                        canvas {
-                            max-width: 100%;
-                            height: auto;
-                        }
-                    </style>
 
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <br>
+                    <br>
                     <div class="chart-container">
+
                         <canvas id="myChart"></canvas>
                     </div>
 
@@ -52,6 +76,7 @@
                             </tbody>
                         </table>
                     </div>
+
                     <br>
                     <br>
 
@@ -97,6 +122,7 @@
             </div>
         </div>
     </section>
+
 
 
 {% endblock %}
