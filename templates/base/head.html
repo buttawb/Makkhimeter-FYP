@@ -198,6 +198,7 @@
         .breadcrumb .fa:hover {
             transform: scale(1.15)
         }
+
     </style>
 
 
@@ -212,12 +213,17 @@
     <div id="main">
         <div class="inner">
 
+
             <!-- Header -->
             <header id="header">
+
                 <div class="logo">
+
                     <a href="/">{{ head }}</a>
 
+
                 </div>
+
             </header>
 
 
@@ -343,6 +349,31 @@
 <script src="../../static/js/owl-carousel.js"></script>
 <script src="../../static/js/custom.js"></script>
 <script src="../../static/js/pre.js" charset="utf-8"></script>
+
+<script>
+    var uploadBtns = document.querySelectorAll(".uploadBtn");
+
+    for (var i = 0; i < uploadBtns.length; i++) {
+        uploadBtns[i].addEventListener("click", function (event) {
+            // prevent the default form submission
+            event.preventDefault();
+
+            // check if a file has been selected
+            var fileInput = document.getElementById("img");
+            if (fileInput.files.length > 0) {
+                // hide the upload button and show the spinner
+                this.style.display = "none";
+                document.getElementById("waitBtn").style.display = "block";
+
+                // submit the form
+                document.getElementById("contact upload-form").submit();
+            } else {
+                // if no file selected, alert the user
+                alert("Please select an image.");
+            }
+        });
+    }
+</script>
 
 
 </body>

@@ -37,7 +37,8 @@
                                 <div class="section-heading">
                                     <h2>Upload Image</h2>
                                 </div>
-                                <form id="contact" method="post" name='upload' enctype="multipart/form-data">
+                                <form id="contact upload-form" method="post" name='upload'
+                                      enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <fieldset>
@@ -46,10 +47,19 @@
                                                 <input type="file" id="img" name="img" accept="image/*" required=""
                                                        style="padding-top: 25px; padding-bottom: 75px">
                                             </fieldset>
+
                                         </div>
                                         <div class="col-md-12">
-                                            <button type="submit" id="buttonID"> Upload & Next</button>
+                                            <button type="submit" id="uploadBtn" class="uploadBtn"> Upload & Next
+                                            </button>
+
                                         </div>
+                                        <button class="btn btn-primary" type="button" disabled id="waitBtn"
+                                                style="display: none">
+                                            <span class="spinner-border spinner-border-sm" role="status"
+                                                  aria-hidden="true"></span>
+                                            <span class="visually-hidden">Please wait...</span>
+                                        </button>
                                     </div>
                                 </form>
 
@@ -76,6 +86,18 @@
             </div>
         </div>
     </div>
+
+
+    <!-- Button spinners -->
+
+
+
+
+    <!-- End Button spinners -->
+
+
+
+
 
 
 

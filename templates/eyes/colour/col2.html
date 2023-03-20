@@ -35,25 +35,30 @@
                             <!--                                        {{ form.as_p }}-->
                             <!--                                        <button type="submit">Upload</button>-->
                             <!--                                    </form>-->
-                            <form id="contact" method="post" enctype="multipart/form-data">
+
+                            <form id="contact upload-form" method="post" name='upload'
+                                  enctype="multipart/form-data">
                                 <div class="row">
-
-
                                     <div class="col-md-12">
                                         <fieldset>
                                             {% csrf_token %}
-
-                                            <label for="img">Select image:</label>
-                                            <input type="file" id="img" name="img" accept="image/*"
+                                            <label for="img"> Select image: </label>
+                                            <input type="file" id="img" name="img" accept="image/*" required=""
                                                    style="padding-top: 25px; padding-bottom: 75px">
                                         </fieldset>
-                                    </div>
 
-                                    <div class="col-md-12">
-                                        <button type="submit" id="buttonID"> Find Colours <span
-                                                class="load loading"></span>
-                                        </button>
                                     </div>
+                                    <div class="col-md-12">
+                                        <button type="submit" id="uploadBtn" class="uploadBtn"> Find Colours
+                                        </button>
+
+                                    </div>
+                                    <button class="btn btn-primary" type="button" disabled id="waitBtn"
+                                            style="display: none">
+                                            <span class="spinner-border spinner-border-sm" role="status"
+                                                  aria-hidden="true"></span>
+                                        <span class="visually-hidden">Please wait...</span>
+                                    </button>
                                 </div>
                             </form>
                             <br>

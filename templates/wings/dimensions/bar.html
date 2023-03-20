@@ -100,6 +100,7 @@
                                         class="load loading"></span></button>
                             </div>
 
+
                         </form>
                     </div>
                 </div>
@@ -122,13 +123,16 @@
                         <div class="txt2">
                             <div class="font"></div>
                         </div>
+                    </div>
                 </fieldset>
             </div>
 
             <div class="col-md-6">
-                <button type="submit" id="form-submit" name="check" style="text-align: right"> Check <span
+                <button type="submit" id="form-submit" name="check" style="text-align: right"> Check
+                    <span></span>
                 </button>
             </div>
+
 
             <br>
             <br>
@@ -148,18 +152,30 @@
                         <div class="row">
                             <div class="col-md-8 col-sm-8">
                                 <div class="circle-item">
-                                    <button style="width: 40%;" type="submit" name="yes">
+                                    <button style="width: 40%;" type="submit" name="yes" >
                                         YES & NEXT
                                     </button>
                                     <br><br>
                                 </div>
+                                <button class="btn btn-primary" type="button" disabled id="waitBtn"
+                                        style="display: none">
+                                            <span class="spinner-border spinner-border-sm" role="status"
+                                                  aria-hidden="true"></span>
+                                    <span class="visually-hidden">Please wait...</span>
+                                </button>
                             </div>
                             <div class="col-md-8 col-sm-8">
                                 <div class="circle-item">
-                                    <button style="width: 40%;" type="submit" name="no">
+                                    <button style="width: 40%;" type="submit"  name="no">
                                         NO & NEXT
                                     </button>
                                 </div>
+                                <button class="btn btn-primary" type="button" disabled id="waitBtn"
+                                        style="display: none">
+                                            <span class="spinner-border spinner-border-sm" role="status"
+                                                  aria-hidden="true"></span>
+                                    <span class="visually-hidden">Please wait...</span>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -247,6 +263,29 @@
             font2.innerHTML = "Value is : " + range2.value;
         }
 
+
+    </script>
+
+
+    <script>
+        document.getElementById("uploadBtn").addEventListener("click", function (event) {
+            // prevent the default form submission
+            event.preventDefault();
+
+            // check if a file has been selected
+            var fileInput = document.getElementById("img");
+            if (fileInput.files.length > 0) {
+                // hide the upload button and show the spinner
+                document.getElementById("uploadBtn").style.display = "none";
+                document.getElementById("waitBtn").style.display = "block";
+
+                // submit the form
+                document.getElementById("contact upload-form").submit();
+            } else {
+                // if no file selected, alert the user
+                alert("Please select an image.");
+            }
+        });
 
     </script>
     </body>
