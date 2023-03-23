@@ -600,9 +600,9 @@ def w_bar(request):
         plt.imsave(save_dil, dil, cmap='gray')
 
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image',
-                       'val1': 7,
-                       'val2': 12, 'but_name': 'Reset to default values', 'user_name': request.user.username.upper()})
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image',
+                       'val1': 7, 'val2': 12, 'img_p': orig_img_fn(), 'img_n': 'Original Image',
+                       'but_name': 'Reset to default values', 'user_name': request.user.username.upper()})
 
     if 'check' in request.POST:
         # VALUE GET NAI HORAI
@@ -621,7 +621,8 @@ def w_bar(request):
         val2 = get_values[3]
 
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image',
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image',
+                       'img_p': orig_img_fn(), 'img_n': 'Original Image',
                        'val1': val1, 'val2': val2, 'but_name': 'Reset to default values',
                        'user_name': request.user.username.upper()})
 
@@ -631,8 +632,9 @@ def w_bar(request):
         # dil = dilation(for_dil)
         plt.imsave(save_dil, dil, cmap='gray')
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Uploaded Image', 'val1': 7,
-                       'val2': 12, 'but_name': 'Reset to default values', 'user_name': request.user.username.upper()})
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image', 'val1': 7,
+                       'val2': 12, 'but_name': 'Reset to default values',
+                       'img_p': orig_img_fn(), 'img_n': 'Original Image', 'user_name': request.user.username.upper()})
     orig_img = orig_img_fn()
 
     global flag
@@ -660,9 +662,9 @@ def w_bar(request):
 
     else:
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': orig_img_fn(), 'img_name': 'Uploaded Image',
-                       'val1': 7,
-                       'val2': 12, 'but_name': 'Extract wing.', 'user_name': request.user.username.upper()})
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image',
+                       'val1': 7, 'val2': 12, 'img_p': orig_img_fn(), 'img_n': 'Original Image',
+                       'but_name': 'Extract binary', 'user_name': request.user.username.upper()})
 
 
 def detail_dimen(request):
@@ -859,7 +861,8 @@ def eye_col2(request):
 def eyedimen(request):
     if request.user.is_anonymous:
         return redirect("/login")
-    return render(request, 'eyes/Dimensions/e_dimen.html', {'head': 'Drosometer | Eyes', 'user_name': request.user.username.upper()})
+    return render(request, 'eyes/Dimensions/e_dimen.html',
+                  {'head': 'Drosometer | Eyes', 'user_name': request.user.username.upper()})
 
 
 def eyedimen2(request):
@@ -885,7 +888,8 @@ def eyedimen2(request):
             area = list(i.values())[-2]
 
         return render(request, 'eyes/Dimensions/eyedimen_output.html',
-                      {"orig": orig_img, "dil": dil_img, "Ar": area, "Pr": peri, 'user_name': request.user.username.upper()})
+                      {"orig": orig_img, "dil": dil_img, "Ar": area, "Pr": peri,
+                       'user_name': request.user.username.upper()})
 
     return render(request, 'eyes/Dimensions/e_dimen2.html',
                   {'head': 'Eyes | Dimensions', 'img_path': '../static/images/eye_front.jpg',

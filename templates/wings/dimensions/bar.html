@@ -17,18 +17,24 @@
             #range {
                 width: 100%;
                 padding: 10px 0;
+                outline-color: #626ad1;
+                background: #626ad1;
 
             }
 
             #range1 {
                 width: 100%;
                 padding: 25px 0;
+                background-color: #626ad1;
+                outline-color: #626ad1;
+                fill: #626ad1;;
 
             }
 
             #range2 {
                 width: 100%;
                 padding: 25px 0;
+                background: #626ad1;
 
             }
 
@@ -46,9 +52,9 @@
 
             button {
                 padding: 10px 20px;
-                background: #eaeaea;
+                background: #ffffff;
                 border: none;
-                box-shadow: 0 0 10px 0 #ff000025;
+                box-shadow: 0 0 4px 0 #626ad1;
                 transition: all ease .3s;
             }
 
@@ -58,7 +64,7 @@
             }
 
             button:hover {
-                background: #ddd;
+                background: #626ad1;
             }
         </style>
     </head>
@@ -91,6 +97,13 @@
                     <br><br>
                     <img src={{ img_path }} alt="">
                 </div>
+                <div class="col-md-6">
+                    <br>
+                    <br>
+                    <h2>{{ img_n }}</h2>
+                    <br><br>
+                    <img src={{ img_p }} alt="">
+                </div>
                 <div class="col-md-8">
                     <div class="right-content">
                         <form method="post" enctype="multipart/form-data">
@@ -115,7 +128,8 @@
                 <fieldset>
                     {% csrf_token %}
                     <div class="font-range">
-                        <input type="range" name='range1' id="range1" value="{{ val1 }}" min="0" max="20"/>
+                        <input type="range" name='range1' id="range1" class="form-label" value="{{ val1 }}" min="0"
+                               max="20"/>
                         <div class="txt1">
                             <div class="font"></div>
                         </div>
@@ -123,6 +137,7 @@
                         <div class="txt2">
                             <div class="font"></div>
                         </div>
+
                     </div>
                 </fieldset>
             </div>
@@ -152,7 +167,7 @@
                         <div class="row">
                             <div class="col-md-8 col-sm-8">
                                 <div class="circle-item">
-                                    <button style="width: 40%;" type="submit" name="yes" >
+                                    <button style="width: 40%;" type="submit" name="yes">
                                         YES & NEXT
                                     </button>
                                     <br><br>
@@ -166,7 +181,7 @@
                             </div>
                             <div class="col-md-8 col-sm-8">
                                 <div class="circle-item">
-                                    <button style="width: 40%;" type="submit"  name="no">
+                                    <button style="width: 40%;" type="submit" name="no">
                                         NO & NEXT
                                     </button>
                                 </div>
