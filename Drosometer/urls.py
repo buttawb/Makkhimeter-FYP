@@ -64,9 +64,12 @@ urlpatterns = [
                   path('e_dimen2', views.eyedimen2),
 
                   # Dashboard Paths
-                  path('dashboard', views.dashboard),
+                  path('w_dashboard', views.wing_dashboard),
+                  path('e_dashboard', views.eye_dashboard),
 
                   # path('f_thorax', views.thorax_f),
+
+                  # path('check', views.fetch_data),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

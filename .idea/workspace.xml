@@ -4,55 +4,44 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="UI changes/fixes.">
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0071.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0097_-_Copy_3.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0196.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0236.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0239.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0261_-_Copy_2.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image1102.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image1147.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image1676.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/04047aaf-db06-41d3-b118-ad67d754c79d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/05f25f0b-b43f-4d3f-be42-f2c00190463e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/0682dd0a-573c-4525-b2c2-dedea5aadf86.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/11bc338a-15d2-44da-a52c-b74c90019437.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/343304dd-60b0-43d1-bca1-4c0840ce1086.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/5b268cf6-6f3c-4c87-b3ba-a708c332d341.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/65a7d18b-eb01-4510-9521-d5d0eb4c56d7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/6829e783-da53-46cf-a936-cabb988b01e1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/694809a5-ae5b-4c0b-b1a3-3c7fe2232802.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/7fc69c53-d0c8-426b-80ae-5ccdce75bdff.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/8d09bcaa-b8f4-40c6-8ff7-83d43bf1dbec.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/941b11bb-4f00-4871-83f3-8c236c9b15e3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/9a07d959-b0bd-49a8-a9e6-783fbeb04c39.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/a015f97e-94e1-40bb-a03d-5b61172d9dee.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/af67e258-a14a-467d-9d43-eb25a60bfb02.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/c06b314e-41cf-4f98-86de-e1b01129e60e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/c538d0c3-d0f1-4f77-99e0-38f0a0e159a5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/dfb614f0-d91f-4f3b-8c34-76bd07bf52ac.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/e9af52f9-1d71-4efd-a303-9aadd513b74d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/f201b4f0-648a-4b83-adb6-e82d0e7c243d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/fd071a8c-8a38-4c2c-b565-9cfb59828212.png" afterDir="false" />
+    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Started dashboard.">
+      <change afterPath="$PROJECT_DIR$/static/users/awb/054159c1-f2fc-41c1-907b-37e229ec88be.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/090fdd3a-4052-4da3-8370-d7bba102f016.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/2f0daa1e-17e1-4dbc-abd6-4117b0377b75.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/30081294-ded6-4e5f-9b4d-8a8166c9018e.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/3c7c8403-0f51-46d3-a46b-4ad2c41fc138.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/3ee7a593-0505-488b-b24d-9b99ac7df81f.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/441308fb-fc35-4237-9faf-8db605c6c5c6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/4eb460af-9e23-42d9-8393-a6c4c4d0a62a.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/54468cdd-17b5-41ae-ba95-601bb4ad3e8d.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/5d922a3f-7db3-4309-9169-b9d2b714c940.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/6793e1b0-7976-44d6-b710-ae8512ddf298.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/6a6e56a1-7cfe-4dea-9b16-0ca4f28f1fc0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/72043da8-19ef-446a-b018-75878012228f.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/7c9bfd01-c0ba-48c9-b32a-3940f353c69a.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/84bf373a-272e-4458-97b7-1bf892b47110.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/a03a12e7-beac-467b-8561-19579d0f65f9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/ae49b50c-4b35-4a53-bca4-307fba3852c3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/ba3909c8-a6ab-4c16-b18f-73c4e159f4cd.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/cd9b573c-e079-4214-89b0-f79d9c1c83ad.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/d95137cc-6f6e-49a8-b414-199c2f497a80.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/e208d63b-fbeb-4481-a321-c28096edc490.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/e5eaefd4-3186-491c-a2a7-039d3080e01b.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/e7b592d7-2b34-4770-a277-0665904684db.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/ee4db03e-22b3-4d02-b666-244311221c8d.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/f12f32ff-60ff-417f-bf74-b47617f9d516.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/f1c4cb8a-604c-4306-ac65-c67de6a385fb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/f66bacaa-7af2-43e7-bae4-4bc472017333.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/dashboard/e_dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/bootstrap.min.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/pre.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/templatemo-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/templatemo-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/w_dimen.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Drosometer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Drosometer/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Colour.py" beforeDir="false" afterPath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Colour.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/dashboard/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/eyes/Dimensions/e_dimen2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/Dimensions/e_dimen2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/eyes/colour/col2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/colour/col2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/dashboard/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard/w_dashboard.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/eyes/colour/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/colour/output.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/eyes/ommatidum/omat_2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/ommatidum/omat_2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wings/bristles/w_bristles2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/bristles/w_bristles2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/bar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/bar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/output.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wings/shape/w_shape2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/shape/w_shape2.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,22 +92,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;G:/Projects/D.M/DM&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "G:/Projects/D.M/DM/db.sqlite3",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Drosometer" type="Python.DjangoServer" factoryName="Django server">
       <module name="Drosometer" />
@@ -228,7 +217,10 @@
       <workItem from="1679390594166" duration="626000" />
       <workItem from="1679497785477" duration="870000" />
       <workItem from="1679506610913" duration="3723000" />
-      <workItem from="1679560691050" duration="6636000" />
+      <workItem from="1679560691050" duration="6739000" />
+      <workItem from="1679841223108" duration="337000" />
+      <workItem from="1679841749037" duration="69000" />
+      <workItem from="1679842276847" duration="13901000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
@@ -405,7 +397,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679298785861</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Started dashboard.">
+      <created>1679568075093</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1679568075093</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -424,7 +423,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added check for whether the image is of wing or not." />
     <MESSAGE value="Added 2nd algorithm of wing dimensions." />
     <MESSAGE value="Minor updates." />
     <MESSAGE value="Wing dimensions UI modified." />
@@ -449,6 +447,7 @@
     <MESSAGE value="Eye colours stored in DB." />
     <MESSAGE value="Added breadcrumbs &amp; UI changes." />
     <MESSAGE value="UI changes/fixes." />
-    <option name="LAST_COMMIT_MESSAGE" value="UI changes/fixes." />
+    <MESSAGE value="Started dashboard." />
+    <option name="LAST_COMMIT_MESSAGE" value="Started dashboard." />
   </component>
 </project>

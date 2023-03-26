@@ -711,10 +711,7 @@ class eye_col:
             one += np.count_nonzero(values[i] == 1)
             two += np.count_nonzero(values[i] == 2)
             three += np.count_nonzero(values[i] == 3)
-        print(zero)
-        print(one)
-        print(two)
-        print(three)
+
         new[0] = int(zero / 4)
         new[1] = int(one / 4)
         new[2] = int(two / 4)

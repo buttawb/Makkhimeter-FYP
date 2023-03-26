@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="db" uuid="729a4f2d-8984-473f-814d-7396a977d207">
+    <data-source source="LOCAL" name="db.sqlite3" uuid="61f762ee-6ea4-4e0d-9d42-6166179913f4">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\Projects\D.M\DM\db.sqlite3</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="Django default" uuid="facb070b-05ab-4362-8109-f905695b3aa7">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/Drosometer/settings.py</remarks>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\Projects\D.M\DM\db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/db.sqlite3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

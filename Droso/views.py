@@ -8,7 +8,7 @@ import uuid
 
 import pandas as pd
 from django.contrib.auth import login, logout, authenticate
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 
 from Droso.models import *
 from Python_Scripts.DIP.Eyes.Eye_Ommatidium import *
@@ -733,13 +733,30 @@ def eye_omat2(request):
         #
         #
         # crop_img_eye = __upload_file_to_userdir(request, img1, ".png")
-
+        ommatdia = WB_P.overallbristles()
         md5_hash = md5(crop_img_eye)
+
         if not Eye_Image.objects.filter(hash=md5_hash).exists():
-            eye_o = Eye_Image()
-            eye_o.image = uploaded_img
-            eye_o.user = request.user
-            eye_o.save()
+            eye_d = Eye_Image()
+            eye_d.image = uploaded_img
+            eye_d.user = request.user
+            eye_d.hash = md5_hash
+            eye_d.save()
+
+            eo = e_ommatidium()
+            eo.eo_o_img = Eye_Image()
+            eo.ommatidium_count = ommatdia
+            eo.save()
+
+        else:
+            id_ed = Eye_Image.objects.filter(hash=md5_hash)
+            id = id_ed[0].eye
+
+            if not e_dimension.objects.filter(ed_o_img=id).exists():
+                eo = e_ommatidium()
+                eo.eo_o_img = Eye_Image.objects.get(hash=md5_hash)
+                eo.ommatidium_count = ommatdia
+                eo.save()
 
         request.session['crop_img_eye'] = crop_img_eye
 
@@ -799,9 +816,10 @@ def eye_col2(request):
         data = {'labels': n_labels,
                 'values': values,
                 'colors': colors}
+
         values = data['values']
         total = sum(values)
-        percentages = [f'{(value / total) * 100:.2f}%' for value in values]
+        percentages = [f'{(value / total) * 100:.2f}' for value in values]
         data['percentages'] = percentages
 
         dff = pd.DataFrame(data)
@@ -816,11 +834,15 @@ def eye_col2(request):
 
         for i in df:
             lab.append(i['labels'])
-            hexval.append(i['values'])
+            hexval.append(i['colors'])
             per.append(i['percentages'])
 
         # Finding the predicted colour
-        float_values = [float(p.strip('%')) for p in per]
+        float_values = per
+
+        # hex_strings = [f"#{val:x}".zfill(7) for val in float_values]
+        # float_values = str(hex_strings)
+
         max_value = max(float_values)
         max_index = float_values.index(max_value)
 
@@ -846,11 +868,14 @@ def eye_col2(request):
             e_c.c3_p = float_values[2]
             e_c.c4_p = float_values[3]
 
-            e_c.pred = lab[max_index]
+            e_c.pred_name = lab[max_index]
+            e_c.pred_hex = hexval[max_index]
             e_c.save()
 
+        js = json.dumps(data)
         return render(request, 'eyes/colour/output.html',
-                      {'head': 'Eyes | Eye Colour', 'data': data, 'img': img_eye, 'd': df, 'main': lab[max_index],
+                      {'head': 'Eyes | Eye Colour', 'img': img_eye, 'd': df, 'main': lab[max_index],
+                       'data': js,
                        'user_name': request.user.username.upper()})
 
     return render(request, 'eyes/colour/col2.html',
@@ -876,6 +901,14 @@ def eyedimen2(request):
         img1 = __reader(uploaded_img)
         img2 = img1.convert('RGB')
         orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
+
+        # if not image_check(img1, orig_img):
+        #     return render(request, 'eyes/dimensions/e_dimen2.html',
+        #                   {'head': 'Wings | Dimensions', 'img_path': orig_img,
+        #                    'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
+        #                    'out2': 'of eye', 'out3': 'Let us know if this is by mistake.',
+        #                    'user_name': request.user.username.upper()})
+
         img = cv2.imread(orig_img)
         seg_img = segment.Segmentation(img)
         result, d_im = extract.Processing(seg_img)
@@ -883,9 +916,36 @@ def eyedimen2(request):
         dil_img = __upload_file_to_userdir(request, d_im, '.png', flag=False)
         plt.imsave(dil_img, d_im)
         new_data = df_to_html(data)
+
         for i in new_data:
             peri = list(i.values())[-1]
             area = list(i.values())[-2]
+
+        md5_hash = md5(orig_img)
+
+        if not Eye_Image.objects.filter(hash=md5_hash).exists():
+            eye_d = Eye_Image()
+            eye_d.image = uploaded_img
+            eye_d.user = request.user
+            eye_d.hash = md5_hash
+            eye_d.save()
+
+            ed = e_dimension()
+            ed.ed_o_img = Eye_Image()
+            ed.earea = area
+            ed.eperimeter = peri
+            ed.save()
+
+        else:
+            id_ed = Eye_Image.objects.filter(hash=md5_hash)
+            id = id_ed[0].eye
+
+            if not e_dimension.objects.filter(ed_o_img=id).exists():
+                ed = e_dimension()
+                ed.ed_o_img = Eye_Image.objects.get(hash=md5_hash)
+                ed.earea = area
+                ed.eperimeter = peri
+                ed.save()
 
         return render(request, 'eyes/Dimensions/eyedimen_output.html',
                       {"orig": orig_img, "dil": dil_img, "Ar": area, "Pr": peri,
@@ -896,11 +956,91 @@ def eyedimen2(request):
                    'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
 
 
-def dashboard(request):
+def fetch_wingdata(request):
+    area_peri = w_dimen.objects.all()
+    nom_mut = w_shape.objects.all()
+    bristle = w_bristles.objects.all()
+
+    return area_peri, nom_mut, bristle
+
+
+def wing_dashboard(request):
     if request.user.is_anonymous:
         return redirect("/login")
-    return render(request, "dashboard/dashboard.html",
-                  {'head': 'Dashboard | Drosometer', 'user_name': request.user.username.upper()})
+
+    data = fetch_wingdata(request)
+    area = []
+    peri = []
+    bristles = []
+
+    pred = []
+
+    for i in data[0]:
+        area.append(i.wd_area)
+        peri.append(i.wd_peri)
+
+    for i in data[1]:
+        pred.append(i.ws_pred)
+
+    for i in data[2]:
+        bristles.append(i.bristle_count)
+
+    if not area:
+        area = [0]
+    if not peri:
+        peri = [0]
+    if not bristles:
+        bristles = [0]
+
+    return render(request, "dashboard/w_dashboard.html",
+                  {
+                      'head': 'Wing | Insights', 'user_name': request.user.username.upper(),
+                      'area_avg': round(sum(area) / len(area), 2), 'peri_avg': round(sum(peri) / len(peri), 2),
+                      'bristles_avg': round(sum(bristles) / len(bristles), 2), 'peri_min': min(peri),
+                      'peri_max': max(peri), 'area_min': min(area), 'area_max': max(area),
+                      'normal': pred.count('Oregan'), 'mutation': pred.count('Mutation')
+                  })
+
+
+def fetch_eyedata(request):
+    area_peri = e_dimension.objects.all()
+    e_color = e_colour.objects.all()
+    ommatidia = e_ommatidium.objects.all()
+
+    return area_peri, e_color, ommatidia
+
+
+def eye_dashboard(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    data = fetch_eyedata(request)
+
+    area = []
+    peri = []
+    ommatidia = []
+
+    for i in data[0]:
+        area.append(i.earea)
+        peri.append(i.eperimeter)
+
+    for i in data[2]:
+        ommatidia.append(i.ommatidium_count)
+
+    if not area:
+        area = [0]
+    if not peri:
+        peri = [0]
+    if not ommatidia:
+        ommatidia = [0]
+
+    return render(request, "dashboard/e_dashboard.html",
+                  {
+                      'head': 'Eye | Insights', 'user_name': request.user.username.upper(),
+                      'area_avg': round(sum(area) / len(area), 2), 'peri_avg': round(sum(peri) / len(peri), 2),
+                      'omm_avg': round(sum(ommatidia) / len(ommatidia), 2), 'peri_min': min(peri),
+                      'peri_max': max(peri), 'area_min': min(area), 'area_max': max(area),
+                  })
 
 
 # def wingfront(request):
@@ -922,3 +1062,8 @@ def register_page(request):
         return redirect("/login")
 
     return render(request, 'user/register.html')
+
+# def fetch_data(request):
+#     w_area = w_dimen.objects.all()
+#     for i in w_area:
+#         return HttpResponse(i.wd_area)

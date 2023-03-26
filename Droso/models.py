@@ -165,16 +165,18 @@ class e_colour(models.Model):
                              verbose_name="Colour 4 %")
 
     c1_name = models.CharField(max_length=100,
-                                verbose_name="Colour 1 name")
+                               verbose_name="Colour 1 name")
     c2_name = models.CharField(max_length=100,
-                                verbose_name="Colour 2 name")
+                               verbose_name="Colour 2 name")
     c3_name = models.CharField(max_length=100,
-                                verbose_name="Colour 3 name")
+                               verbose_name="Colour 3 name")
     c4_name = models.CharField(max_length=100,
-                                verbose_name="Colour 4 name")
+                               verbose_name="Colour 4 name")
 
-    pred = models.CharField(max_length=10,
-                            verbose_name="Predicted Colour")
+    pred_name = models.CharField(max_length=10,
+                                 verbose_name="Predicted Colour")
+    pred_hex = models.CharField(max_length=100,
+                                verbose_name="Predicted COlour Hex Value")
 
 
 class Meta:
