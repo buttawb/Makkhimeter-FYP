@@ -209,3 +209,5 @@ class e_ommatidium(models.Model):
     class Meta:
         verbose_name = "Eye Ommatidium"
         verbose_name_plural = "Eye Ommatidium"
+
+

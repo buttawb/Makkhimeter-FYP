@@ -42,3 +42,4 @@ class WB_Processing:
                 xcnts.append(cnt)
 
         return len(xcnts)
+

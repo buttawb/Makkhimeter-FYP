@@ -1,3 +1,4 @@
+import cv2
 from skimage import color, img_as_ubyte
 from skimage import exposure
 from skimage.filters import unsharp_mask
@@ -20,3 +21,18 @@ class EO_PreProcessing:
         result_1 = unsharp_mask(adaptive_d_img, radius=5, amount=2)
 
         return adaptive_d_img, rgb_gray, result_1
+
+    def overallommatidium(self, img):
+        self.prep = cv2.imread(img, 0)
+        th, threshed = cv2.threshold(self.prep, 100, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)
+
+        ## findcontours
+        cnts = cv2.findContours(threshed, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)[-2]
+
+        ## filter by area
+        xcnts = []
+        for cnt in cnts:
+            if cv2.contourArea(cnt):
+                xcnts.append(cnt)
+
+        return len(xcnts)

@@ -733,30 +733,6 @@ def eye_omat2(request):
         #
         #
         # crop_img_eye = __upload_file_to_userdir(request, img1, ".png")
-        ommatdia = WB_P.overallbristles()
-        md5_hash = md5(crop_img_eye)
-
-        if not Eye_Image.objects.filter(hash=md5_hash).exists():
-            eye_d = Eye_Image()
-            eye_d.image = uploaded_img
-            eye_d.user = request.user
-            eye_d.hash = md5_hash
-            eye_d.save()
-
-            eo = e_ommatidium()
-            eo.eo_o_img = Eye_Image()
-            eo.ommatidium_count = ommatdia
-            eo.save()
-
-        else:
-            id_ed = Eye_Image.objects.filter(hash=md5_hash)
-            id = id_ed[0].eye
-
-            if not e_dimension.objects.filter(ed_o_img=id).exists():
-                eo = e_ommatidium()
-                eo.eo_o_img = Eye_Image.objects.get(hash=md5_hash)
-                eo.ommatidium_count = ommatdia
-                eo.save()
 
         request.session['crop_img_eye'] = crop_img_eye
 
@@ -764,6 +740,31 @@ def eye_omat2(request):
         img1 = WB_PreP.PreProcessing(img)
         # img1 = prepreprocess(img)
         plt.imsave(crop_img_eye, img1[2], cmap='gray')
+
+        ommatdia = EO_PreP.overallommatidium(crop_img_eye)
+        md5_hash = md5(crop_img_eye)
+
+        if not Eye_Image.objects.filter(hash=md5_hash).exists():
+            eye_o = Eye_Image()
+            eye_o.image = uploaded_img
+            eye_o.user = request.user
+            eye_o.hash = md5_hash
+            eye_o.save()
+
+            eo = e_ommatidium()
+            eo.eo_o_img = eye_o
+            eo.ommatidium_count = ommatdia
+            eo.save()
+
+        else:
+            id_eo = Eye_Image.objects.filter(hash=md5_hash)
+            iddd = id_eo[0].eye
+
+            if not e_ommatidium.objects.filter(eo_o_img=iddd).exists():
+                eo = e_ommatidium()
+                eo.eo_o_img = Eye_Image.objects.get(hash=md5_hash)
+                eo.ommatidium_count = ommatdia
+                eo.save()
 
         return redirect("/cropper_eye", {'head': 'Ommatidium | Finder', 'img': crop_img_eye,
                                          'user_name': request.user.username.upper()})
@@ -931,7 +932,7 @@ def eyedimen2(request):
             eye_d.save()
 
             ed = e_dimension()
-            ed.ed_o_img = Eye_Image()
+            ed.ed_o_img = eye_d
             ed.earea = area
             ed.eperimeter = peri
             ed.save()
