@@ -59,6 +59,8 @@
                             <br>
                             <br>
                             <h2><em style="color: rebeccapurple"> {{ ans }} </em> {{ out }}</h2>
+                            <br>
+                            <h4><em style="color: rebeccapurple"> {{ sub_class }} <br> </em> {{ key }}</h4>
                             <h4><a href="feedback">{{ out3 }}</a></h4>
 
                         </div>
@@ -83,37 +85,41 @@
 
         </div>
 
+        <div class="col-md-12">
+            <!-- Tables -->
+
+            <div class="section-heading">
+                <h2>Probability Table</h2>
+            </div>
+            <div class="default-table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Class</th>
+                        <th>Probability</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Oregan</td>
+                        <td>{{ prob_oreg }}</td>
+
+                    </tr>
+                    <tr>
+                        <td>Mutated</td>
+                        <td>{{ prob_mut }}</td>
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
     </div>
 
 
-    <!-- Tables -->
 
-    <div class="section-heading">
-        <h2>Probability Table</h2>
-    </div>
-    <div class="default-table">
-        <table>
-            <thead>
-            <tr>
-                <th>Class</th>
-                <th>Probability</th>
-
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Oregan</td>
-                <td>{{ prob_oreg }}</td>
-
-            </tr>
-            <tr>
-                <td>Mutated</td>
-                <td>{{ prob_mut }}</td>
-
-            </tbody>
-        </table>
-
-    </div>
 
 
 {% endblock %}

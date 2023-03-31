@@ -8,8 +8,12 @@ import uuid
 
 import pandas as pd
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
+from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.shortcuts import render, redirect, HttpResponse
+from django.urls import reverse_lazy
 
+from Droso.forms import CustomUserCreationForm
 from Droso.models import *
 from Python_Scripts.DIP.Eyes.Eye_Ommatidium import *
 # IMPORTING SCRIPTS
@@ -354,12 +358,38 @@ def wingshape2(request):
         shape.ws_o_img = Wing_Image.objects.get(hash=md5_hash)
         shape.save()
 
+        mutation = dl.k_model(path)
+
         if pred == 0:
             # RENDERING OUTPUTS ON HTML PAGE
-            return render(request, 'wings/shape/w_shape2.html',
-                          {'head': 'Wings | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
-                           'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: ',
-                           'user_name': request.user.username.upper()})
+            for subclass in mutation:
+                print(subclass)
+                if subclass == 1 or 0:
+                    return render(request, 'wings/shape/w_shape2.html',
+                                  {'head': 'Wings | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
+                                   'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: ',
+                                   'sub_class': 'VG^1 or Xa /+ or Ser^1 / +', 'key': 'Broken Mutant Wing.',
+                                   'user_name': request.user.username.upper()})
+                if subclass == 4:
+                    return render(request, 'wings/shape/w_shape2.html',
+                                  {'head': 'Wings | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
+                                   'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: ',
+                                   'sub_class': 'E^1', 'key': 'Colour differences. ',
+                                   'user_name': request.user.username.upper()})
+                if subclass == 5:
+                    return render(request, 'wings/shape/w_shape2.html',
+                                  {'head': 'Wings | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
+                                   'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: ',
+                                   'sub_class': 'Ser^1 / +', 'key': 'Broken Wing.',
+                                   'user_name': request.user.username.upper()})
+                if subclass == 2 or 3 or 6:
+                    return render(request, 'wings/shape/w_shape2.html',
+                                  {'head': 'Wings | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
+                                   'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: ',
+                                   'sub_class': 'Ser^1 / +', 'key': 'Damaged Wing.',
+                                   'user_name': request.user.username.upper()})
+
+
 
         elif pred == 1:
             # RENDERING OUTPUTS ON HTML PAGE
@@ -1059,10 +1089,16 @@ def eye_dashboard(request):
 #
 
 def register_page(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-
-    return render(request, 'user/register.html')
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # Log the user in.
+            login(request, user)
+            return redirect('/')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'user/register.html', {'form': form})
 
 # def fetch_data(request):
 #     w_area = w_dimen.objects.all()

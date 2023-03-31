@@ -14,18 +14,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth.views import PasswordResetDoneView
 from django.urls import path
 from Droso import views
 from django.conf import settings
-
+from Droso.views import loginUser
 from django.conf.urls.static import static
+
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
                   path("admin/", admin.site.urls),
                   path('', views.main),
 
                   # Login Paths
-                  path('login', views.loginUser),
+                  path('login', loginUser),
                   path('logout', views.logoutUser),
                   path('register', views.register_page),
 
