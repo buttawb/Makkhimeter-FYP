@@ -5,6 +5,7 @@ import json
 import os
 import tempfile
 import uuid
+from django.http import JsonResponse
 
 import pandas as pd
 from django.contrib.auth import login, logout, authenticate
