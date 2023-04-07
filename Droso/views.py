@@ -3,27 +3,19 @@ import hashlib
 import io
 import json
 import os
-import tempfile
 import uuid
-from django.http import JsonResponse
 
-import pandas as pd
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import UserCreationForm, PasswordResetForm
-from django.contrib.auth.views import PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView
-from django.shortcuts import render, redirect, HttpResponse
-from django.urls import reverse_lazy
+from django.shortcuts import render, redirect
 
 from Droso.forms import CustomUserCreationForm
 from Droso.models import *
+from Python_Scripts.DIP.Eyes.Eye_Colour import *
+from Python_Scripts.DIP.Eyes.Eye_Dimensions import *
 from Python_Scripts.DIP.Eyes.Eye_Ommatidium import *
 # IMPORTING SCRIPTS
 from Python_Scripts.DIP.Wings.Wing_Bristles import *
 from Python_Scripts.DIP.Wings.Wing_Dimensions import *
-from Python_Scripts.DIP.Eyes.Eye_Ommatidium import *
-from Python_Scripts.DIP.Eyes.Eye_Dimensions import *
-from Python_Scripts.DIP.Eyes.Eye_Colour import *
-
 from Python_Scripts.DL import dl
 
 # CREATING OBJECTS
@@ -112,14 +104,16 @@ def __upload_file_to_userdir(request, file, file_format, flag=True):
     path = __find_userpath(request)
     rand_name = str(uuid.uuid4())
     if flag:
-        final_path = path + "/" + rand_name + file_format
+        filename = rand_name + file_format
+        final_path = os.path.join(path, filename)
         if file_format.lower() == ".jpg" or file_format.lower() == ".jpeg":
             # Convert the image to RGB mode before saving it as a JPEG file
             file = file.convert("RGB")
         file.save(final_path)
         return final_path
     else:
-        final_path = path + "/" + rand_name + file_format
+        filename = rand_name + file_format
+        final_path = os.path.join(path, filename)
         return final_path
 
 
@@ -219,45 +213,57 @@ def wingdimen2(request):
 
         orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
         # p = cv2.imread(orig_img)
+        global dimen_flag
+        hash_d = md5(orig_img)
+
+        dimen_flag = False
+        try:
+            wing = Wing_Image.objects.get(hash=hash_d)
+            global wing_object
+            wing_object = wing
+            dimen_flag = True
+
+        except Wing_Image.DoesNotExist:
+            global wingg
+            wingg = Wing_Image()
+            wingg.image = uploaded_img
+            wingg.user = request.user
+            wingg.hash = hash_d
+            wingg.save()
 
         # print(p)
         # print(img)
         # fimg = save_img(img2, 'wing')
 
-        global md5_hash
-        md5_hash = md5(orig_img)
-
-        if not Wing_Image.objects.filter(hash=md5_hash).exists():
-            global wing_d
-            wing_d = Wing_Image()
-
-            wing_d.image = uploaded_img
-            wing_d.user = request.user
-            wing_d.hash = md5_hash
-            wing_d.save()
-
-            request.session['d_flag'] = True
-
-        else:
-            id_wd = Wing_Image.objects.filter(hash=md5_hash)
-            iddd = id_wd[0].wing
-
-            if w_dimen.objects.filter(wd_o_img=iddd).exists():
-                request.session['dont_save'] = True
-            else:
-                request.session['dont_save'] = False
-                # global exist_img
-                # exist_img = Wing_Image.objects.get(hash=md5_hash)
-
-            request.session['d_flag'] = False
+        # global md5_hash
+        # md5_hash = md5(orig_img)
+        #
+        # if not Wing_Image.objects.filter(hash=md5_hash).exists():
+        #     global wing_d
+        #     wing_d = Wing_Image()
+        #
+        #     wing_d.image = uploaded_img
+        #     wing_d.user = request.user
+        #     wing_d.hash = md5_hash
+        #     wing_d.save()
+        #
+        #     request.session['d_flag'] = True
+        #
+        # else:
+        #     id_wd = Wing_Image.objects.filter(hash=md5_hash)
+        #     iddd = id_wd[0].wing
+        #
+        #     if w_dimen.objects.filter(wd_o_img=iddd).exists():
+        #         request.session['dont_save'] = True
+        #     else:
+        #         request.session['dont_save'] = False
+        #         # global exist_img
+        #         # exist_img = Wing_Image.objects.get(hash=md5_hash)
+        #
+        #     request.session['d_flag'] = False
 
         WD_PreP.img = img2
         pre_process = WD_PreP.PreProcessing_1()
-
-        global orig_img_fn
-
-        def orig_img_fn():
-            return orig_img
 
         save_file = __upload_file_to_userdir(request, pre_process, '.png', flag=False)
         file_path = save_file
@@ -266,19 +272,22 @@ def wingdimen2(request):
 
         for_dil = cv2.imread(file_path, 0)
         save_dil = __upload_file_to_userdir(request, 'dil', '.png', flag=False)
+
         global dilation_bar
         global save_dil_path
-
-        def save_dil_path():
-            return save_dil
-
-        def dilation_bar():
-            return for_dil
-
+        global orig_img_fn
+        global wing_dimen_ui
         global mymy
 
-        def mymy():
-            return save_file
+        wing_dimen_ui = uploaded_img
+
+        orig_img_fn = orig_img
+
+        save_dil_path = save_dil
+
+        dilation_bar = for_dil
+
+        mymy = save_file
 
         # request.session['dilation'] = for_dil
         # dil = dilation(for_dil)
@@ -293,6 +302,184 @@ def wingdimen2(request):
     return render(request, 'wings/dimensions/w_dimen2.html',
                   {'head': 'Wings | Dimensions', 'img_path': '../static/images/perfect.png',
                    'img_name': 'Expected Input Image ', 'user_name': request.user.username.upper()})
+
+
+def w_bar(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    # for_dil = request.session['dilation']
+    for_dil = dilation_bar
+    save_dil = save_dil_path
+
+    def algorithm_selection(algorithm, save_dil):
+        get_values = get_values_from_slider(request, for_dil, save_dil)
+        save_dil = get_values[0]
+        dil = get_values[1]
+
+        global images
+
+        def images():
+            return path1, path2, outimg, outimg2
+
+        path1 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
+        path2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
+
+        outimg = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
+        outimg2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
+        step1 = algorithm(path1, path2, outimg, outimg2)
+
+        df = step1[0]
+        data = df_to_html(df)
+
+        # json_records = df.reset_index().to_json(orient='records')
+        # data = []
+        # data = json.loads(json_records)
+
+        df2 = step1[1]
+        dat = df_to_html(df2)
+        # json_record = df2.reset_index().to_json(orient='records')
+        # dat = []
+        # dat = json.loads(json_record)
+
+        # STORING IN DATABASE
+
+        if not dimen_flag:
+            dimen = w_dimen()
+            for i in dat:
+                dimen.wd_peri = list(i.values())[-1]
+                dimen.wd_area = list(i.values())[-2]
+                dimen.wd_o_img = wingg
+            dimen.save()
+        else:
+            try:
+                dimen = w_dimen.objects.get(wd_o_img=wing_object)
+            except w_dimen.DoesNotExist:
+                dimen = w_dimen()
+                for i in dat:
+                    dimen.wd_peri = list(i.values())[-1]
+                    dimen.wd_area = list(i.values())[-2]
+                dimen.wd_o_img = wing_object
+                dimen.save()
+
+        return data, dat, outimg, outimg2
+
+    if 'highlight' in request.POST:
+        WD_P.preprocess_img = for_dil
+        dil = WD_P.Dilation()
+        # dil = dilation(for_dil)
+        plt.imsave(save_dil, dil, cmap='gray')
+
+        return render(request, 'wings/dimensions/bar.html',
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image',
+                       'val1': 7, 'val2': 12, 'img_p': orig_img_fn, 'img_n': 'Original Image',
+                       'but_name': 'Reset to default values', 'user_name': request.user.username.upper()})
+
+    if 'check' in request.POST:
+        # VALUE GET NAI HORAI
+        global values_from_slider
+
+        # def get_values_from_slider():
+        #     val1 = int(request.POST.get('range1'))
+        #     val2 = int(request.POST.get('range2'))
+        #
+        #     dil = dilation(for_dil, val1, val2)
+        #     plt.imsave(save_dil, dil, cmap='gray')
+        #     return save_dil, dil
+        get_values = get_values_from_slider(request, for_dil, save_dil)
+        save_dil = get_values[0]
+        val1 = get_values[2]
+        val2 = get_values[3]
+
+        return render(request, 'wings/dimensions/bar.html',
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image',
+                       'img_p': orig_img_fn, 'img_n': 'Original Image',
+                       'val1': val1, 'val2': val2, 'but_name': 'Reset to default values',
+                       'user_name': request.user.username.upper()})
+
+    if 'default' in request.POST:
+        WD_P.preprocess_img = for_dil
+        dil = WD_P.Dilation()
+        # dil = dilation(for_dil)
+        plt.imsave(save_dil, dil, cmap='gray')
+        return render(request, 'wings/dimensions/bar.html',
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image', 'val1': 7,
+                       'val2': 12, 'but_name': 'Reset to default values',
+                       'img_p': orig_img_fn, 'img_n': 'Original Image', 'user_name': request.user.username.upper()})
+    orig_img = orig_img_fn
+
+    global flag
+    flag = True
+
+    if 'yes' in request.POST:
+        flag = True
+
+        result = algorithm_selection(WD_P.Skelatonize, save_dil)
+        data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
+
+        return render(request, 'wings/dimensions/output.html',
+                      {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat,
+                       'orig_img': orig_img, 'user_name': request.user.username.upper()})
+
+    if 'no' in request.POST:
+        flag = False
+        result = algorithm_selection(WD_P.FloodFill, save_dil)
+        # result = algorithm_selection(other_option, save_dil)
+        data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
+
+        return render(request, 'wings/dimensions/output.html',
+                      {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat,
+                       'orig_img': orig_img, 'user_name': request.user.username.upper()})
+
+    else:
+        return render(request, 'wings/dimensions/bar.html',
+                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image',
+                       'val1': 7, 'val2': 12, 'img_p': orig_img_fn, 'img_n': 'Original Image',
+                       'but_name': 'Extract binary', 'user_name': request.user.username.upper()})
+
+
+def detail_dimen(request):
+    if request.user.is_anonymous:
+        return redirect("/login")
+
+    if flag:
+        img1 = orig_img_fn
+        img2 = save_dil_path
+        img3 = mymy
+
+        fin = images()
+        img4 = fin[0]
+        img5 = fin[1]
+        img6 = fin[2]
+        img7 = fin[3]
+        return render(request, 'wings/dimensions/detail_1.html',
+                      {'head': 'Dimensions | Detailed steps', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
+                       'img5': img5, 'img6': img6, 'img7': img7, 'user_name': request.user.username.upper()})
+
+    else:
+        img1 = orig_img_fn
+        img2 = save_dil_path
+        img3 = mymy
+
+        fin = images()
+        img4 = fin[0]
+        img6 = fin[2]
+        img7 = fin[3]
+
+        return render(request, 'wings/dimensions/detail_2.html',
+                      {'head': 'Dimensions | Detailed steps', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
+                       'img6': img6, 'img7': img7, 'user_name': request.user.username.upper()})
+
+
+def get_values_from_slider(request, for_dil, save_dil):
+    val1 = int(request.POST.get('range1'))
+    val2 = int(request.POST.get('range2'))
+
+    WD_P.preprocess_img = for_dil
+    dil = WD_P.Dilation(val1, val2)
+    # dil = dilation(for_dil, val1, val2)
+    plt.imsave(save_dil, dil, cmap='gray')
+    return save_dil, dil, val1, val2
 
 
 def wingshape(request):
@@ -328,13 +515,6 @@ def wingshape2(request):
         path = __upload_file_to_userdir(request, img2, '.png')
 
         md5_hash = md5(path)
-        wing_s = Wing_Image()
-
-        if not Wing_Image.objects.filter(hash=md5_hash).exists():
-            wing_s.image = uploaded_img
-            wing_s.user = request.user
-            wing_s.hash = md5_hash
-            wing_s.save()
 
         img3 = np.array(img2)
 
@@ -349,15 +529,38 @@ def wingshape2(request):
             prob_oreg = row['Oregan']
 
         # CREATING OBJECT AND SAVING ALL OUTPUTS TO DATABASE THROUGH MODEL
-        shape = w_shape()
-        if pred == 0:
-            shape.ws_pred = 'Mutation'
-        else:
-            shape.ws_pred = 'Oregan'
-        shape.ws_normal_prob = prob_oreg
-        shape.ws_mutated_prob = prob_mut
-        shape.ws_o_img = Wing_Image.objects.get(hash=md5_hash)
-        shape.save()
+        try:
+            wing = Wing_Image.objects.get(hash=md5_hash)
+            shape = w_shape.objects.filter(ws_o_img=wing).first()
+
+            if not shape:
+                s = w_shape()
+                if pred == 0:
+                    s.ws_pred = 'Mutation'
+                else:
+                    s.ws_pred = 'Oregan'
+                s.ws_normal_prob = prob_oreg
+                s.ws_mutated_prob = prob_mut
+                s.ws_o_img = wing
+                s.save()
+
+        except Wing_Image.DoesNotExist:
+
+            wing = Wing_Image()
+            wing.image = uploaded_img
+            wing.user = request.user
+            wing.hash = md5_hash
+            wing.save()
+
+            s = w_shape()
+            if pred == 0:
+                s.ws_pred = 'Mutation'
+            else:
+                s.ws_pred = 'Oregan'
+            s.ws_normal_prob = prob_oreg
+            s.ws_mutated_prob = prob_mut
+            s.ws_o_img = wing
+            s.save()
 
         mutation = dl.k_model(path)
 
@@ -448,32 +651,25 @@ def wingbristles2(request):
 
         WB_P.prep = crop_img
 
-        if not Wing_Image.objects.filter(hash=hash_b).exists():
-            bristles = WB_P.overallbristles()
+        try:
+            wing = Wing_Image.objects.get(hash=hash_b)
+            w_brisltes = w_bristles.objects.filter(wb_o_img=wing).first()
+            if not w_brisltes:
+                w_brisltes = w_bristles()
+                w_brisltes.wb_o_img = wing
+                w_brisltes.bristle_count = WB_P.overallbristles()
+                w_brisltes.save()
+        except Wing_Image.DoesNotExist:
+            wing = Wing_Image()
+            wing.image = uploaded_img
+            wing.user = request.user
+            wing.hash = hash_b
+            wing.save()
 
-            wing_b = Wing_Image()
-            wing_b.image = uploaded_img
-            wing_b.user = request.user
-            wing_b.hash = hash_b
-            wing_b.save()
-
-            b_overall = w_bristles()
-            b_overall.wb_o_img = wing_b
-            b_overall.bristle_count = bristles
-            b_overall.save()
-
-        else:
-            id_wd = Wing_Image.objects.filter(hash=hash_b)
-            iddd = id_wd[0].wing
-
-            if w_bristles.objects.filter(wb_o_img=iddd).exists():
-                pass
-            else:
-                bristles = WB_P.overallbristles()
-                b_overall = w_bristles()
-                b_overall.wb_o_img = Wing_Image.objects.get(hash=hash_b)
-                b_overall.bristle_count = bristles
-                b_overall.save()
+            w_brisltes = w_bristles()
+            w_brisltes.wb_o_img = wing
+            w_brisltes.bristle_count = WB_P.overallbristles()
+            w_brisltes.save()
 
         return redirect("/cropper_wing",
                         {'head': 'Bristles | Finder', 'img': crop_img, 'user_name': request.user.username.upper()})
@@ -563,185 +759,6 @@ def df_to_html(df):
     return data
 
 
-def w_bar(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-
-    # for_dil = request.session['dilation']
-    for_dil = dilation_bar()
-    save_dil = save_dil_path()
-
-    def algorithm_selection(algorithm, save_dil):
-        get_values = get_values_from_slider(request, for_dil, save_dil)
-        save_dil = get_values[0]
-        dil = get_values[1]
-
-        global images
-
-        def images():
-            return path1, path2, outimg, outimg2
-
-        path1 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
-        path2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
-
-        outimg = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
-        outimg2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
-        step1 = algorithm(path1, path2, outimg, outimg2)
-
-        df = step1[0]
-        data = df_to_html(df)
-
-        # json_records = df.reset_index().to_json(orient='records')
-        # data = []
-        # data = json.loads(json_records)
-
-        df2 = step1[1]
-        dat = df_to_html(df2)
-        # json_record = df2.reset_index().to_json(orient='records')
-        # dat = []
-        # dat = json.loads(json_record)
-
-        # STORING AREA & PERIMETER OF THE WHOLE WING IN DATABASE
-        dimen = w_dimen()
-
-        for i in dat:
-            peri = list(i.values())[-1]
-            area = list(i.values())[-2]
-
-        if request.session['d_flag']:
-            dimen.wd_peri = peri
-            dimen.wd_area = area
-            dimen.wd_o_img = wing_d
-            dimen.save()
-        else:
-            if request.session['dont_save']:
-                pass
-            else:
-                dimen.wd_peri = peri
-                dimen.wd_area = area
-                dimen.wd_o_img = Wing_Image.objects.get(hash=md5_hash)
-                dimen.save()
-
-        return data, dat, outimg, outimg2
-
-    if 'highlight' in request.POST:
-        WD_P.preprocess_img = for_dil
-        dil = WD_P.Dilation()
-        # dil = dilation(for_dil)
-        plt.imsave(save_dil, dil, cmap='gray')
-
-        return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image',
-                       'val1': 7, 'val2': 12, 'img_p': orig_img_fn(), 'img_n': 'Original Image',
-                       'but_name': 'Reset to default values', 'user_name': request.user.username.upper()})
-
-    if 'check' in request.POST:
-        # VALUE GET NAI HORAI
-        global values_from_slider
-
-        # def get_values_from_slider():
-        #     val1 = int(request.POST.get('range1'))
-        #     val2 = int(request.POST.get('range2'))
-        #
-        #     dil = dilation(for_dil, val1, val2)
-        #     plt.imsave(save_dil, dil, cmap='gray')
-        #     return save_dil, dil
-        get_values = get_values_from_slider(request, for_dil, save_dil)
-        save_dil = get_values[0]
-        val1 = get_values[2]
-        val2 = get_values[3]
-
-        return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image',
-                       'img_p': orig_img_fn(), 'img_n': 'Original Image',
-                       'val1': val1, 'val2': val2, 'but_name': 'Reset to default values',
-                       'user_name': request.user.username.upper()})
-
-    if 'default' in request.POST:
-        WD_P.preprocess_img = for_dil
-        dil = WD_P.Dilation()
-        # dil = dilation(for_dil)
-        plt.imsave(save_dil, dil, cmap='gray')
-        return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image', 'val1': 7,
-                       'val2': 12, 'but_name': 'Reset to default values',
-                       'img_p': orig_img_fn(), 'img_n': 'Original Image', 'user_name': request.user.username.upper()})
-    orig_img = orig_img_fn()
-
-    global flag
-    flag = True
-
-    if 'yes' in request.POST:
-        flag = True
-
-        result = algorithm_selection(WD_P.Skelatonize, save_dil)
-        data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
-
-        return render(request, 'wings/dimensions/output.html',
-                      {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat,
-                       'orig_img': orig_img, 'user_name': request.user.username.upper()})
-
-    if 'no' in request.POST:
-        flag = False
-        result = algorithm_selection(WD_P.FloodFill, save_dil)
-        # result = algorithm_selection(other_option, save_dil)
-        data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
-
-        return render(request, 'wings/dimensions/output.html',
-                      {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat,
-                       'orig_img': orig_img, 'user_name': request.user.username.upper()})
-
-    else:
-        return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image',
-                       'val1': 7, 'val2': 12, 'img_p': orig_img_fn(), 'img_n': 'Original Image',
-                       'but_name': 'Extract binary', 'user_name': request.user.username.upper()})
-
-
-def detail_dimen(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-
-    if flag:
-        img1 = orig_img_fn()
-        img2 = save_dil_path()
-        img3 = mymy()
-
-        fin = images()
-        img4 = fin[0]
-        img5 = fin[1]
-        img6 = fin[2]
-        img7 = fin[3]
-        return render(request, 'wings/dimensions/detail_1.html',
-                      {'head': 'Dimensions | Detailed steps', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
-                       'img5': img5, 'img6': img6, 'img7': img7, 'user_name': request.user.username.upper()})
-
-    else:
-        img1 = orig_img_fn()
-        img2 = save_dil_path()
-        img3 = mymy()
-
-        fin = images()
-        img4 = fin[0]
-        img6 = fin[2]
-        img7 = fin[3]
-
-        return render(request, 'wings/dimensions/detail_2.html',
-                      {'head': 'Dimensions | Detailed steps', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
-                       'img6': img6, 'img7': img7, 'user_name': request.user.username.upper()})
-
-
-def get_values_from_slider(request, for_dil, save_dil):
-    val1 = int(request.POST.get('range1'))
-    val2 = int(request.POST.get('range2'))
-
-    WD_P.preprocess_img = for_dil
-    dil = WD_P.Dilation(val1, val2)
-    # dil = dilation(for_dil, val1, val2)
-    plt.imsave(save_dil, dil, cmap='gray')
-    return save_dil, dil, val1, val2
-
-
 def eye_omat(request):
     if request.user.is_anonymous:
         return redirect("/login")
@@ -775,27 +792,26 @@ def eye_omat2(request):
         ommatdia = EO_PreP.overallommatidium(crop_img_eye)
         md5_hash = md5(crop_img_eye)
 
-        if not Eye_Image.objects.filter(hash=md5_hash).exists():
-            eye_o = Eye_Image()
-            eye_o.image = uploaded_img
-            eye_o.user = request.user
-            eye_o.hash = md5_hash
-            eye_o.save()
-
-            eo = e_ommatidium()
-            eo.eo_o_img = eye_o
-            eo.ommatidium_count = ommatdia
-            eo.save()
-
-        else:
-            id_eo = Eye_Image.objects.filter(hash=md5_hash)
-            iddd = id_eo[0].eye
-
-            if not e_ommatidium.objects.filter(eo_o_img=iddd).exists():
+        try:
+            eye = Eye_Image.objects.get(hash=md5_hash)
+            omm = e_ommatidium.objects.filter(eo_o_img=eye).first()
+            if not e_ommatidium:
                 eo = e_ommatidium()
-                eo.eo_o_img = Eye_Image.objects.get(hash=md5_hash)
+                eo.eo_o_img = eye
                 eo.ommatidium_count = ommatdia
                 eo.save()
+
+        except Eye_Image.DoesNotExist:
+            eye = Eye_Image()
+            eye.image = uploaded_img
+            eye.user = request.user
+            eye.hash = md5_hash
+            eye.save()
+
+            eo = e_ommatidium()
+            eo.eo_o_img = eye
+            eo.ommatidium_count = ommatdia
+            eo.save()
 
         return redirect("/cropper_eye", {'head': 'Ommatidium | Finder', 'img': crop_img_eye,
                                          'user_name': request.user.username.upper()})
@@ -825,20 +841,7 @@ def eye_col2(request):
         img_eye = __upload_file_to_userdir(request, f, ".png", flag=False)
         f.save(img_eye)
 
-        mf = False
         md5_hash = md5(img_eye)
-        eye_o = Eye_Image()
-        e_flag = False
-
-        if Eye_Image.objects.filter(hash=md5_hash).exists():
-            e_flag = True
-
-        if not e_flag:
-            eye_o.image = uploaded_img
-            eye_o.user = request.user
-            eye_o.hash = md5_hash
-            eye_o.save()
-            mf = True
 
         out = E_Col.run(img_eye)
         labels, values, colors = out[0], out[1], out[2]
@@ -856,9 +859,6 @@ def eye_col2(request):
 
         dff = pd.DataFrame(data)
         df = dff.to_dict('records')
-
-        # For saving the data
-        e_c = e_colour()
 
         lab = []
         hexval = []
@@ -878,13 +878,41 @@ def eye_col2(request):
         max_value = max(float_values)
         max_index = float_values.index(max_value)
 
-        if not e_flag:
+        try:
+            eye = Eye_Image.objects.get(hash=md5_hash)
+            col = e_colour.objects.filter(ec_o_img=eye).first()
 
-            if mf:
-                e_c.ec_o_img = eye_o
-            else:
-                e_c.ec_o_img = Eye_Image.objects.get(hash=md5_hash)
+            if not e_colour:
+                e_c = e_colour()
+                e_c.ec_o_img = eye
+                e_c.c1_hex = hexval[0]
+                e_c.c2_hex = hexval[1]
+                e_c.c3_hex = hexval[2]
+                e_c.c4_hex = hexval[3]
 
+                e_c.c1_name = lab[0]
+                e_c.c2_name = lab[1]
+                e_c.c3_name = lab[2]
+                e_c.c4_name = lab[3]
+
+                e_c.c1_p = float_values[0]
+                e_c.c2_p = float_values[1]
+                e_c.c3_p = float_values[2]
+                e_c.c4_p = float_values[3]
+
+                e_c.pred_name = lab[max_index]
+                e_c.pred_hex = hexval[max_index]
+                e_c.save()
+
+        except Eye_Image.DoesNotExist:
+            eye = Eye_Image()
+            eye.image = uploaded_img
+            eye.user = request.user
+            eye.hash = md5_hash
+            eye.save()
+
+            e_c = e_colour()
+            e_c.ec_o_img = eye
             e_c.c1_hex = hexval[0]
             e_c.c2_hex = hexval[1]
             e_c.c3_hex = hexval[2]
@@ -955,29 +983,28 @@ def eyedimen2(request):
 
         md5_hash = md5(orig_img)
 
-        if not Eye_Image.objects.filter(hash=md5_hash).exists():
-            eye_d = Eye_Image()
-            eye_d.image = uploaded_img
-            eye_d.user = request.user
-            eye_d.hash = md5_hash
+        try:
+            eye = Eye_Image.objects.get(hash=md5_hash)
+            ed = e_dimension.objects.filter(ed_o_img=eye).first()
+            if not ed:
+                eye_d = e_dimension()
+                eye_d.ed_o_img = eye
+                eye_d.earea = area
+                eye_d.eperimeter = peri
+                eye_d.save()
+
+        except Eye_Image.DoesNotExist:
+            eye = Eye_Image()
+            eye.image = uploaded_img
+            eye.user = request.user
+            eye.hash = md5_hash
+            eye.save()
+
+            eye_d = e_dimension()
+            eye_d.ed_o_img = eye
+            eye_d.earea = area
+            eye_d.eperimeter = peri
             eye_d.save()
-
-            ed = e_dimension()
-            ed.ed_o_img = eye_d
-            ed.earea = area
-            ed.eperimeter = peri
-            ed.save()
-
-        else:
-            id_ed = Eye_Image.objects.filter(hash=md5_hash)
-            id = id_ed[0].eye
-
-            if not e_dimension.objects.filter(ed_o_img=id).exists():
-                ed = e_dimension()
-                ed.ed_o_img = Eye_Image.objects.get(hash=md5_hash)
-                ed.earea = area
-                ed.eperimeter = peri
-                ed.save()
 
         return render(request, 'eyes/Dimensions/eyedimen_output.html',
                       {"orig": orig_img, "dil": dil_img, "Ar": area, "Pr": peri,
@@ -1101,7 +1128,15 @@ def register_page(request):
         form = CustomUserCreationForm()
     return render(request, 'user/register.html', {'form': form})
 
+
 # def fetch_data(request):
 #     w_area = w_dimen.objects.all()
 #     for i in w_area:
 #         return HttpResponse(i.wd_area)
+
+def myteam(request):
+    if request.user.is_anonymous:
+        return redirect('/login')
+
+    return render(request, 'team/team.html',
+                  {'head': 'Drosometer | Designer Team', 'user_name': request.user.username.upper()})

@@ -49,7 +49,7 @@ urlpatterns = [
                   path('f_wing', views.wing_f),
 
                   # Other paths
-                  path('aboutus', views.a_us),
+                  path('aboutus', views.myteam),
                   path('contactus', views.c_us),
                   path('feedback', views.f_b),
                   # path('wing', views.wingfront),
