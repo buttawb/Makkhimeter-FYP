@@ -243,7 +243,7 @@ class WD_PostProcessing(WD_Procesing):
 
         df = df.drop(columns='perimeter', axis=1)
         df = df.drop(columns='area', axis=1)
-        
+
         n_df = df[df['Ar'] > 200]
         n_df = n_df.reset_index()
         print(n_df)
@@ -356,8 +356,6 @@ class WD_PostProcessing(WD_Procesing):
             l = i + 1
 
             cv2.putText(img2, '%d' % l, (int(X), int(Y)), cv2.FONT_HERSHEY_SIMPLEX, 3.9, color, 15, cv2.LINE_AA)
-
-
 
         # plt.imshow(img2, cmap='jet')
         # plt.show()

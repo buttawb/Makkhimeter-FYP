@@ -213,7 +213,7 @@ def wingdimen2(request):
             return render(request, 'wings/dimensions/w_dimen2.html',
                           {'head': 'wing | Dimensions', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
-                           'out2': 'an image or not of required format.', 'out3': '',
+                           'out2': ' an image or not of required format.', 'out3': '',
                            'out4': 'Accepted formats include TIFF, PNG, '
                                    'JPG & JPEG.',
                            'user_name': request.user.username.upper()})
@@ -472,7 +472,7 @@ def detail_dimen(request):
         img6 = fin[2]
         img7 = fin[3]
         return render(request, 'wings/dimensions/detail_1.html',
-                      {'head': 'Dimensions | Detailed steps', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
+                      {'head': 'Dimensions | Image transformation', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
                        'img5': img5, 'img6': img6, 'img7': img7, 'user_name': request.user.username.upper()})
 
     else:
@@ -486,7 +486,7 @@ def detail_dimen(request):
         img7 = fin[3]
 
         return render(request, 'wings/dimensions/detail_2.html',
-                      {'head': 'Dimensions | Detailed steps', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
+                      {'head': 'Dimensions | Image transformation', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
                        'img6': img6, 'img7': img7, 'user_name': request.user.username.upper()})
 
 
