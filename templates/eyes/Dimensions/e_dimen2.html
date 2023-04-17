@@ -2,9 +2,6 @@
 
 {% block content %}
 
-
-
-
     <div id="page-content">
 
         <div class="row">
@@ -12,7 +9,6 @@
                 <div class="container">
                     <div class="horizontal">
                         <div class="verticals ten offset-by-one">
-
                             <ol class="breadcrumb breadcrumb-fill2">
                                 <li><a href="/"><i class="fa fa-home"></i></a></li>
                                 <li><a href="/e_dimen">Eye Dimensions</a></li>
@@ -23,16 +19,18 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-md-6">
-
                 <section class="forms">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-                                <h2>Exemplary Image</h2>
-                                <p>A perfect and noiseless image always generate the better and accurate results.</p>
+                                <h2>Eye Dimensions</h2>
+                                <br>
+                                <p>A perfect and noiseless image always generates better and accurate results.</p>
                                 <div class="section-heading">
-                                    <bR>
+                                    <br>
                                     <br>
                                     <h2>Upload Image</h2>
                                 </div>
@@ -46,12 +44,10 @@
                                                 <input type="file" id="img" name="img" accept="image/*" required=""
                                                        style="padding-top: 25px; padding-bottom: 75px">
                                             </fieldset>
-
                                         </div>
                                         <div class="col-md-12">
                                             <button type="submit" id="uploadBtn" class="uploadBtn"> Upload & Next
                                             </button>
-
                                         </div>
                                         <button class="btn btn-primary" type="button" disabled id="waitBtn"
                                                 style="display: none">
@@ -61,43 +57,46 @@
                                         </button>
                                     </div>
                                 </form>
-
                                 <br>
                                 <br>
-                                <h2>{{ out1 }}<em style="color: rebeccapurple"> {{ ans }} </em> {{ out2 }}</h2>
+                                <h2>{{ out1 }}<em style="color: rebeccapurple">{{ ans }}</em>{{ out2 }}</h2>
                                 <h4><a href="feedback">{{ out3 }}</a></h4>
-
+                                <h4>{{ out4 }}</h4>
                             </div>
                         </div>
                     </div>
                 </section>
-                <br><br>
+
             </div>
-            <br>
             <div class="col-md-6">
-                <br>
-                <br>
-                <h2>{{ img_name }}</h2>
-                <p><img src="{{ img_path }}"></p>
-                <br>
-                <br>
-                <br>
+                <section class="forms">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>{{ img_name }}</h2>
+                                <br>
+                                <div class="img-container">
+                                    <img src="{{ img_path }}" alt="image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
+
+            <style>
+                .img-container {
+                    max-width: 400px; /* set the maximum width you want */
+                    margin: auto; /* center the container */
+                }
+
+                .img-container img {
+                    max-width: 100%; /* make the image responsive */
+                    height: auto; /* auto-adjust the height */
+                }
+            </style>
+
+
         </div>
     </div>
-
-
-    <!-- Button spinners -->
-
-
-
-
-    <!-- End Button spinners -->
-
-
-
-
-
-
-
 {% endblock %}
