@@ -1,0 +1,17 @@
+[python]
+packages = [
+    {name = "django", version = "4.1.3"},
+    {name = "pillow", version = "9.2.0"},
+    {name = "opencv-python", version = "4.6.0.66"},
+    {name = "numpy", version = "1.21.5"},
+    {name = "keras", version = "2.11.0"},
+    {name = "pandas", version = "1.4.4"},
+    {name = "matplotlib", version = "3.5.3"},
+    {name = "scikit-image", version = "0.19.3"},
+    {name = "tensorflow"},
+    {name = "keras-preprocessing"}
+]
+
+[[bin]]
+name = "Makkhi"
+path = "manage.py"

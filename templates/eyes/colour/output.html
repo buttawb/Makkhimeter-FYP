@@ -198,6 +198,21 @@
                                 <th>Colour Name</th>
                                 <th>Pixel Value</th>
                                 <th>Hex Value</th>
+                                <th>
+                                    <div class="slider-header" data-color="red">
+                                        .
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="slider-header" data-color="green">
+                                        .
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="slider-header" data-color="blue">
+                                        .
+                                    </div>
+                                </th>
                                 <th>Percentage</th>
                             </tr>
                             </thead>
@@ -208,7 +223,12 @@
                                         <td>{{ row.labels }}</td>
                                         <td>{{ row.values }}</td>
                                         <td>{{ row.colors }}</td>
+                                        <td>{{ row.R }}</td>
+                                        <td>{{ row.G }}</td>
+                                        <td>{{ row.B }}</td>
+
                                         <td>{{ row.percentages }}%</td>
+
                                     </tr>
                                 {% endfor %}
                             {% endif %}
@@ -219,6 +239,43 @@
             </div>
         </div>
     </section>
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include jQuery UI library -->
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+
+    <!-- Include jQuery UI CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Loop through all slider and slider-header elements
+        $(".slider, .slider-header").each(function () {
+            // Get the element and its color
+            var element = $(this);
+            var color = element.data("color");
+
+            // Set the background gradient
+            element.css("background", "linear-gradient(to right, white, " + color + ", rgba(0,0,0,0.7))");
+
+            if (element.hasClass("slider")) {
+                // If the element is a slider, set the value and position
+                var value = element.data("value");
+
+                // Set the slider value
+                var sliderValue = element.find(".slider-value");
+                sliderValue.text(value).css("font-weight", "bold");
+
+                // Set the slider position
+                var min = 0;
+                var max = 255;
+                var position = (value - min) / (max - min) * 100;
+                element.children().css("left", position + "%");
+            }
+        });
+    </script>
 
 
 

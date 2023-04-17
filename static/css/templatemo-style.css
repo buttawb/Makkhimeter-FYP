@@ -6,7 +6,6 @@ https://templatemo.com/tm-529-ramayana
 
 */
 
-
 @import url(fontawesome.css);
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab:400,700");
 
@@ -56,10 +55,11 @@ button {
     border: 2px solid #626ad1;
     transition: all 0.5s;
 }
+
 .primary-button a:hover,
 button:hover {
     color: #fff;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(83, 91, 160, 1);
 }
 
 section#search {
@@ -110,6 +110,7 @@ section {
     padding-left: 0px;
     padding-right: 0px;
 }
+
 .main-banner .banner-content {
     background-image: url(../images/main-banner.gif);
     background-size: cover;
@@ -118,7 +119,7 @@ section {
 
 .main-banner .banner-content .banner-caption {
     max-width: 450px;
-    background-color: rgba(250,250,250,0.95);
+    background-color: rgba(250, 250, 250, 0.95);
     margin: 50px;
     padding: 50px;
 }
@@ -187,6 +188,7 @@ section {
 .services .first-item .icon {
     background-image: url(../images/icon_01.png);
 }
+
 .services .first-item:hover .icon {
     background-image: url(../images/icon_hover_01.png);
 }
@@ -194,6 +196,7 @@ section {
 .services .second-item .icon {
     background-image: url(../images/icon_02.png);
 }
+
 .services .second-item:hover .icon {
     background-image: url(../images/icon_hover_02.png);
 }
@@ -201,6 +204,7 @@ section {
 .services .third-item .icon {
     background-image: url(../images/icon_03.png);
 }
+
 .services .third-item:hover .icon {
     background-image: url(../images/icon_hover_03.png);
 }
@@ -208,6 +212,7 @@ section {
 .services .fourth-item .icon {
     background-image: url(../images/icon_04.png);
 }
+
 .services .fourth-item:hover .icon {
     background-image: url(../images/icon_hover_04.png);
 }
@@ -215,6 +220,7 @@ section {
 .services .fivth-item .icon {
     background-image: url(../images/icon_05.png);
 }
+
 .services .fivth-item:hover .icon {
     background-image: url(../images/icon_hover_05.png);
 }
@@ -222,6 +228,7 @@ section {
 .services .sixth-item .icon {
     background-image: url(../images/icon_06.png);
 }
+
 .services .sixth-item:hover .icon {
     background-image: url(../images/icon_hover_06.png);
 }
@@ -229,6 +236,7 @@ section {
 .services .service-item:hover {
     background-color: #626ad1;
 }
+
 .services .service-item:hover h4,
 .services .service-item:hover p {
     color: #fff;
@@ -239,7 +247,7 @@ section {
     transition: all 0.5s;
 }
 
-.services .service-item  p {
+.services .service-item p {
     margin-bottom: 0px;
     transition: all 0.5s;
 }
@@ -398,7 +406,7 @@ section.contact-form {
 
 .contact-form button:hover {
     color: #fff;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(83, 91, 160, 1);
 }
 
 
@@ -406,7 +414,7 @@ section.contact-form {
 
 section.tables {
     margin-top: 80px;
-    border-top: 3px solid #eee!important;
+    border-top: 3px solid #eee !important;
     padding-top: 100px;
 }
 
@@ -695,6 +703,7 @@ section.buttons .container-fluid {
 .filled-rectangle-button {
     margin-bottom: 30px;
 }
+
 .filled-rectangle-button a {
     font-size: 14px;
     font-weight: 700;
@@ -707,16 +716,18 @@ section.buttons .container-fluid {
     color: #fff;
     border: 2px solid #626ad1;
     transition: all 0.5s;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(83, 91, 160, 1);
 }
+
 .filled-rectangle-button a:hover {
     color: #626ad1;
-    background-color: rgba(83,91,160,0.25);
+    background-color: rgba(83, 91, 160, 0.25);
 }
 
 .border-rectangle-button {
     margin-bottom: 30px;
 }
+
 .border-rectangle-button a {
     font-size: 14px;
     font-weight: 700;
@@ -729,16 +740,18 @@ section.buttons .container-fluid {
     color: #626ad1;
     border: 2px solid #626ad1;
     transition: all 0.5s;
-    background-color: rgba(83,91,160,0.0);
+    background-color: rgba(83, 91, 160, 0.0);
 }
+
 .border-rectangle-button a:hover {
     color: #fff;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(83, 91, 160, 1);
 }
 
 .filled-radius-button {
     margin-bottom: 30px;
 }
+
 .filled-radius-button a {
     font-size: 14px;
     font-weight: 700;
@@ -751,17 +764,19 @@ section.buttons .container-fluid {
     color: #fff;
     border: 2px solid #626ad1;
     transition: all 0.5s;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(83, 91, 160, 1);
     border-radius: 5px;
 }
+
 .filled-radius-button a:hover {
     color: #fff;
-    background-color: rgba(83,91,160,0.25);
+    background-color: rgba(83, 91, 160, 0.25);
 }
 
 .border-radius-button {
     margin-bottom: 30px;
 }
+
 .border-radius-button a {
     font-size: 14px;
     font-weight: 700;
@@ -774,17 +789,19 @@ section.buttons .container-fluid {
     color: #626ad1;
     border: 2px solid #626ad1;
     transition: all 0.5s;
-    background-color: rgba(83,91,160,0.0);
+    background-color: rgba(83, 91, 160, 0.0);
     border-radius: 5px;
 }
+
 .border-radius-button a:hover {
     color: #fff;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(83, 91, 160, 1);
 }
 
 .filled-rounded-button {
     margin-bottom: 30px;
 }
+
 .filled-rounded-button a {
     font-size: 14px;
     font-weight: 700;
@@ -797,17 +814,19 @@ section.buttons .container-fluid {
     color: #fff;
     border: 2px solid #626ad1;
     transition: all 0.5s;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(83, 91, 160, 1);
     border-radius: 20px;
 }
+
 .filled-rounded-button a:hover {
     color: #fff;
-    background-color: rgba(83,91,160,0.25);
+    background-color: rgba(83, 91, 160, 0.25);
 }
 
 .border-rounded-button {
     margin-bottom: 30px;
 }
+
 .border-rounded-button a {
     font-size: 14px;
     font-weight: 700;
@@ -820,20 +839,23 @@ section.buttons .container-fluid {
     color: #626ad1;
     border: 2px solid #626ad1;
     transition: all 0.5s;
-    background-color: rgba(83,91,160,0.0);
+    background-color: rgba(83, 91, 160, 0.0);
     border-radius: 20px;
 }
+
 .border-rounded-button a:hover {
     color: #fff;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(83, 91, 160, 1);
 }
 
 .filled-icon-button {
     margin-bottom: 30px;
 }
+
 .filled-icon-button i {
     margin-right: 8px;
 }
+
 .filled-icon-button a {
     font-size: 14px;
     font-weight: 700;
@@ -846,20 +868,23 @@ section.buttons .container-fluid {
     color: #fff;
     border: 2px solid #626ad1;
     transition: all 0.5s;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(83, 91, 160, 1);
     border-radius: 20px;
 }
+
 .filled-icon-button a:hover {
     color: #fff;
-    background-color: rgba(83,91,160,0.25);
+    background-color: rgba(83, 91, 160, 0.25);
 }
 
 .border-icon-button {
     margin-bottom: 30px;
 }
+
 .border-icon-button i {
     margin-right: 8px;
 }
+
 .border-icon-button a {
     font-size: 14px;
     font-weight: 700;
@@ -872,12 +897,13 @@ section.buttons .container-fluid {
     color: #626ad1;
     border: 2px solid #626ad1;
     transition: all 0.5s;
-    background-color: rgba(83,91,160,0.0);
+    background-color: rgba(83, 91, 160, 0.0);
     border-radius: 20px;
 }
+
 .border-icon-button a:hover {
     color: #fff;
-    background-color: rgba(83,91,160,1);
+    background-color: rgba(83, 91, 160, 1);
 }
 
 /* Page Heading */
@@ -931,6 +957,7 @@ section.buttons .container-fluid {
     background-color: #242529;
     position: relative;
     width: 325px;
+    z-index: 2;
 }
 
 #sidebar > .inner {
@@ -939,13 +966,14 @@ section.buttons .container-fluid {
     padding: 0px 50px;
 }
 
-#sidebar > .inner > #search  {
+#sidebar > .inner > #search {
     background-color: #2d2e39;
     height: 100px;
     width: 325px;
     display: inline-block;
     margin-left: -50px;
 }
+
 #sidebar > .inner > #search input {
     width: 100%;
     height: 100px;
@@ -1024,32 +1052,39 @@ section.buttons .container-fluid {
     #sidebar {
         width: 325px;
     }
+
     #sidebar > .inner {
         padding: 0px 30px;
         width: 325px;
     }
+
     #sidebar .toggle {
         height: 100px;
         left: 325px;
         line-height: 100px;
     }
+
     #sidebar .toggle:before {
         font-size: 24px;
     }
+
     #sidebar.inactive {
         margin-left: -325px;
     }
-    #sidebar > .inner > #search  {
+
+    #sidebar > .inner > #search {
         width: 325px;
         margin-left: -30px;
     }
+
     #menu {
         margin-top: 30px;
     }
+
     .featured-posts {
-        margin-left: -30px!important;
-        margin-right: -30px!important;
-        padding: 30px!important;
+        margin-left: -30px !important;
+        margin-right: -30px !important;
+        padding: 30px !important;
     }
 }
 
@@ -1062,9 +1097,11 @@ section.buttons .container-fluid {
         top: 0;
         z-index: 10000;
     }
+
     #sidebar.inactive {
         box-shadow: none;
     }
+
     #sidebar > .inner {
         -webkit-overflow-scrolling: touch;
         height: 100%;
@@ -1074,20 +1111,24 @@ section.buttons .container-fluid {
         position: absolute;
         top: 0;
     }
+
     #sidebar > .inner:after {
         content: '';
         display: block;
         height: 4em;
         width: 100%;
     }
+
     #sidebar .toggle {
         width: 6em;
     }
+
     #sidebar .toggle:before {
         font-size: 1.5rem;
         color: #fff;
-        background-color: rgba(83,91,160,0.75);
+        background-color: rgba(83, 91, 160, 0.75);
     }
+
     body.is-preload #sidebar {
         display: none;
     }
@@ -1095,24 +1136,30 @@ section.buttons .container-fluid {
 
 @media screen and (max-width: 845px) {
     #header .logo a {
-        margin-right: 30px!important;
+        margin-right: 30px !important;
     }
+
     #main > .inner {
         padding: 15px;
     }
+
     #header {
-        margin: -15px!important;
+        margin: -15px !important;
     }
+
     section.main-banner {
         margin-top: 30px;
     }
+
     .page-heading h1 {
         margin-top: 80px;
     }
+
     #sidebar .toggle {
         text-indent: 8.25em;
         width: 7.25em;
     }
+
     #sidebar .toggle:before {
         color: #fff;
         margin-left: -0.0855em;
@@ -1120,9 +1167,11 @@ section.buttons .container-fluid {
         font-size: 20px;
         z-index: 1;
     }
+
     #sidebar .toggle:before {
         background-color: transparent;
     }
+
     #sidebar .toggle:after {
         background: rgba(83, 91, 160, 0.90);
         border-radius: 5px;
@@ -1133,20 +1182,25 @@ section.buttons .container-fluid {
         top: 15px;
         width: 80px;
     }
+
     .left-image .right-content {
         margin-top: 40px;
         margin-left: 0px;
     }
+
     .right-image .left-content {
         margin-bottom: 40px;
         margin-right: 0px;
     }
+
     .main-banner {
         text-align: center;
     }
+
     .main-banner .banner-content .banner-caption {
         padding: 30px;
     }
+
     .contact-form button {
         margin-bottom: 30px;
     }
@@ -1185,13 +1239,13 @@ section.buttons .container-fluid {
 .owl-carousel button.owl-dot {
     width: 10px;
     height: 10px;
-    background-color: #2d2e39!important;
+    background-color: #2d2e39 !important;
     margin-left: 5px;
     outline: none;
 }
 
 .owl-carousel button.active {
-    background-color: #626ad1!important;
+    background-color: #626ad1 !important;
 }
 
 
@@ -1202,9 +1256,13 @@ section.buttons .container-fluid {
     display: -webkit-flex;
     display: -ms-flex;
     display: flex;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
     background-color: #626ad1;
-    margin: -100px -100px 100px -100px;
+    margin: 0;
 }
 
 #header .logo {
@@ -1214,6 +1272,7 @@ section.buttons .container-fluid {
     height: 80px;
     line-height: 80px;
 }
+
 #header .logo a {
     font-size: 30px;
     text-transform: uppercase;
@@ -1222,7 +1281,8 @@ section.buttons .container-fluid {
     font-weight: 700;
     margin-right: 100px;
 }
-.logo{
+
+.logo {
     background-color: #626ad1;
 }
 
@@ -1271,6 +1331,7 @@ section.buttons .container-fluid {
     font-weight: 300;
     padding: 15px 0px;
 }
+
 #menu ul li ul a,
 #menu ul li ul span {
     padding: 10px 0px;

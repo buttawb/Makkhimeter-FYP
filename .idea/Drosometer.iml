@@ -16,8 +16,10 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="C:\Users\Awble\anaconda3" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jquery-3.6.0" level="application" />
     <orderEntry type="library" name="chart.js" level="application" />
     <orderEntry type="library" name="jquery.fileupload" level="application" />
+    <orderEntry type="library" name="jquery-ui" level="application" />
   </component>
   <component name="PackageRequirementsSettings">
     <option name="removeUnused" value="true" />
