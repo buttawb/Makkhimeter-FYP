@@ -1,5 +1,4 @@
 {% extends "base/head.html" %}
-{% load custom_filters %}
 {% block content %}
 
     <section class="right-image">
@@ -141,55 +140,173 @@
                         <!-- End Pie Chart -->
 
                     </div>
-                    {#                    <div class="chart-container">#}
-                    {##}
-                    {#                        <canvas id="myChart"></canvas>#}
-                    {#                    </div>#}
-
-                    <!-- Tables -->
-
-
-                    {#                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>#}
-                    {#                    <script>#}
-                    {#                        var data = {{ data|safe }};#}
-                    {#                        var ctx = document.getElementById('myChart').getContext('2d');#}
-                    {#                        var myChart = new Chart(ctx, {#}
-                    {#                            type: 'pie',#}
-                    {#                            data: {#}
-                    {#                                labels: data.labels,#}
-                    {#                                datasets: [{#}
-                    {#                                    data: data.values,#}
-                    {#                                    backgroundColor: data.colors,#}
-                    {#                                    hoverBackgroundColor: data.colors#}
-                    {#                                }]#}
-                    {#                            },#}
-                    {#                            options: {#}
-                    {#                                title: {#}
-                    {#                                    display: true,#}
-                    {#                                    text: 'Eye Colour'#}
-                    {#                                },#}
-                    {#                                tooltips: {#}
-                    {#                                    callbacks: {#}
-                    {#                                        label: function (tooltipItem, data) {#}
-                    {#                                            var dataset = data.datasets[tooltipItem.datasetIndex];#}
-                    {#                                            var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {#}
-                    {#                                                return previousValue + currentValue;#}
-                    {#                                            });#}
-                    {#                                            var currentValue = dataset.data[tooltipItem.index];#}
-                    {#                                            var percentage = parseFloat((currentValue / total * 100).toFixed(2));#}
-                    {#                                            return percentage + '%';#}
-                    {#                                        }#}
-                    {#                                    }#}
-                    {#                                },#}
-                    {#                                responsive: true,#}
-                    {#                                maintainAspectRatio: false#}
-                    {#                            }#}
-                    {#                        });#}
-                    {#                    </script>#}
                 </div>
 
+                {#                    <div class="chart-container">#}
+                {##}
+                {#                        <canvas id="myChart"></canvas>#}
+                {#                    </div>#}
 
-                <div class="col-md-12">
+                <!-- Tables -->
+
+
+                {#                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>#}
+                {#                    <script>#}
+                {#                        var data = {{ data|safe }};#}
+                {#                        var ctx = document.getElementById('myChart').getContext('2d');#}
+                {#                        var myChart = new Chart(ctx, {#}
+                {#                            type: 'pie',#}
+                {#                            data: {#}
+                {#                                labels: data.labels,#}
+                {#                                datasets: [{#}
+                {#                                    data: data.values,#}
+                {#                                    backgroundColor: data.colors,#}
+                {#                                    hoverBackgroundColor: data.colors#}
+                {#                                }]#}
+                {#                            },#}
+                {#                            options: {#}
+                {#                                title: {#}
+                {#                                    display: true,#}
+                {#                                    text: 'Eye Colour'#}
+                {#                                },#}
+                {#                                tooltips: {#}
+                {#                                    callbacks: {#}
+                {#                                        label: function (tooltipItem, data) {#}
+                {#                                            var dataset = data.datasets[tooltipItem.datasetIndex];#}
+                {#                                            var total = dataset.data.reduce(function (previousValue, currentValue, currentIndex, array) {#}
+                {#                                                return previousValue + currentValue;#}
+                {#                                            });#}
+                {#                                            var currentValue = dataset.data[tooltipItem.index];#}
+                {#                                            var percentage = parseFloat((currentValue / total * 100).toFixed(2));#}
+                {#                                            return percentage + '%';#}
+                {#                                        }#}
+                {#                                    }#}
+                {#                                },#}
+                {#                                responsive: true,#}
+                {#                                maintainAspectRatio: false#}
+                {#                            }#}
+                {#                        });#}
+                {#                    </script>#}
+
+                <div class="col-md-4">
+
+                    <br>
+                    <br>
+
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        <!-- First Pie Chart -->
+                        <div id="pieChart1"
+                             style="min-height: 450px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;"
+                             class="echart"></div>
+
+                        <!-- Second Pie Chart -->
+
+
+                        <script>
+                            // Data for the first pie chart
+                            {#const data1 = {#}
+                            {#    labels: ['Red', 'Blue', 'Green', 'Yellow'],#}
+                            {#    values: [15, 30, 45, 10],#}
+                            {#    colors: ['#FF0000', '#0000FF', '#008000', '#FFFF00']};#}
+
+                            // Convert the data dictionary to JSON format
+                            const data2 = JSON.parse('{{ data2|safe }}');
+
+                            // Extract the data from the JSON object
+
+                            const r = data2.R;
+                            const g = data2.G;
+                            const b = data2.B;
+                            const per = (r+g+b) / 3060;
+                            const roundedPer = per.toFixed(2);
+
+                            document.addEventListener("DOMContentLoaded", () => {
+                                // Initialize the first pie chart
+                                echarts.init(document.querySelector("#pieChart1")).setOption({
+                                    title: {
+                                        text: 'RGB Values',
+                                        subtext: 'Total % of RGB ' + roundedPer,
+                                        left: 'center'
+                                    },
+                                    tooltip: {
+                                        trigger: 'item'
+                                    },
+
+                                    series: [{
+                                        name: '',
+                                        type: 'pie',
+                                        radius: '50%',
+                                        data: [
+                                            {
+                                                value: r,
+                                                name: 'R',
+                                                itemStyle: { // define the style for this data item
+                                                    color: {
+                                                        type: 'linear',
+                                                        x: 0,
+                                                        y: 0,
+                                                        x2: 0,
+                                                        y2: 1,
+                                                        colorStops: [
+                                                            {offset: 0, color: 'white'}, // set the color at the start of the gradient
+                                                            {offset: 1, color: 'red'} // set the color at the end of the gradient
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                value: g,
+                                                name: 'G',
+                                                itemStyle: {
+                                                    color: {
+                                                        type: 'linear',
+                                                        x: 0,
+                                                        y: 0,
+                                                        x2: 0,
+                                                        y2: 1,
+                                                        colorStops: [
+                                                            {offset: 0, color: 'white'},
+                                                            {offset: 1, color: 'green'}
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                value: b,
+                                                name: 'B',
+                                                itemStyle: {
+                                                    color: {
+                                                        type: 'linear',
+                                                        x: 0,
+                                                        y: 0,
+                                                        x2: 0,
+                                                        y2: 1,
+                                                        colorStops: [
+                                                            {offset: 0, color: 'white'},
+                                                            {offset: 1, color: 'blue'}
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        ],
+
+                                        emphasis: {
+                                            itemStyle: {
+                                                shadowBlur: 10,
+                                                shadowOffsetX: 0,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                            }
+                                        }
+                                    }]
+                                });
+                            });
+                        </script>
+
+                        <!-- End Pie Chart -->
+                    </div>
+                </div>
+                <div class="col-md-8">
 
                     <div class="alternate-table">
                         <table>
@@ -236,6 +353,8 @@
                         </table>
                     </div>
                 </div>
+
+
             </div>
         </div>
     </section>

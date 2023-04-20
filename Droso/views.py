@@ -17,6 +17,7 @@ from Droso.models import *
 from Python_Scripts.DIP.Eyes.Eye_Colour import *
 from Python_Scripts.DIP.Eyes.Eye_Dimensions import *
 from Python_Scripts.DIP.Eyes.Eye_Ommatidium import *
+from django.contrib.auth.models import Group
 
 # IMPORTING SCRIPTS
 from Python_Scripts.DIP.Wings.Wing_Bristles import *
@@ -167,6 +168,8 @@ def image_check(img, path):
 
 
 def main(request):
+    if Group.objects.exists():
+        return HttpResponse("Redirect to homepage")
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
     if request.user.is_anonymous:
         return redirect("/login")
@@ -187,6 +190,8 @@ def main(request):
 
 
 def wingdimen(request):
+    if Group.objects.exists():
+        return HttpResponse("You are blocked. ")
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
     if request.user.is_anonymous:
         return redirect("/login")
@@ -472,7 +477,8 @@ def detail_dimen(request):
         img6 = fin[2]
         img7 = fin[3]
         return render(request, 'wings/dimensions/detail_1.html',
-                      {'head': 'Dimensions | Image transformation', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
+                      {'head': 'Dimensions | Image transformation', 'img1': img1, 'img2': img2, 'img3': img3,
+                       'img4': img4,
                        'img5': img5, 'img6': img6, 'img7': img7, 'user_name': request.user.username.upper()})
 
     else:
@@ -486,7 +492,8 @@ def detail_dimen(request):
         img7 = fin[3]
 
         return render(request, 'wings/dimensions/detail_2.html',
-                      {'head': 'Dimensions | Image transformation', 'img1': img1, 'img2': img2, 'img3': img3, 'img4': img4,
+                      {'head': 'Dimensions | Image transformation', 'img1': img1, 'img2': img2, 'img3': img3,
+                       'img4': img4,
                        'img6': img6, 'img7': img7, 'user_name': request.user.username.upper()})
 
 
@@ -922,6 +929,14 @@ def eye_col2(request):
 
         md5_hash = md5(img_eye)
 
+        # data = {'labels': ['Red', 'Green', 'Blue', 'Yellow', 'Orange'],
+        #         'values': [25, 35, 15, 10, 15],
+        #         'colors': ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FFA500'],
+        #         'percentages': [25, 35, 15, 10, 15],
+        #         'R': [255, 0, 0, 255, 255],
+        #         'G': [0, 255, 0, 255, 165],
+        #         'B': [0, 0, 255, 0, 0]}
+
         out = E_Col.run(img_eye)
         labels, values, colors = out[0], out[1], out[2]
 
@@ -939,6 +954,14 @@ def eye_col2(request):
         dff = pd.DataFrame(data)
 
         dff[['R', 'G', 'B']] = pd.DataFrame(dff['colors'].apply(hex_to_rgb).tolist(), index=dff.index)
+
+        rgb_sums = {'R': 0, 'G': 0, 'B': 0}
+
+        for color in dff['colors']:
+            r, g, b = tuple(int(color.lstrip('#')[i:i + 2], 16) for i in (0, 2, 4))
+            rgb_sums['R'] += r
+            rgb_sums['G'] += g
+            rgb_sums['B'] += b
 
         df = dff.to_dict('records')
 
@@ -1015,9 +1038,10 @@ def eye_col2(request):
             e_c.save()
 
         js = json.dumps(data)
+        fin_rgb = json.dumps(rgb_sums)
         return render(request, 'eyes/colour/output.html',
                       {'head': 'Eyes | Eye Colour', 'img': img_eye, 'd': df, 'main': lab[max_index],
-                       'data': js,
+                       'data': js, 'data2': fin_rgb,
                        'user_name': request.user.username.upper()})
 
     return render(request, 'eyes/colour/col2.html',
@@ -1243,3 +1267,7 @@ def myteam(request):
         return redirect('/login')
 
     return HttpResponse("This page is under construction. It'll be updated soon. :))")
+
+
+def finalpage(request):
+    return render(request, 'base/refactor.html')
