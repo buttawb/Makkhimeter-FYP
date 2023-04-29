@@ -243,11 +243,12 @@
 
 
                         <div class="verticals ten offset-by-one">
-
-                            <ol class="breadcrumb breadcrumb-fill2">
-                                <li><a href="/"><i class="fa fa-home"></i></a></li>
-                                <li><a href="/">Hi, {{ user_name }}</a></li>
-                            </ol>
+                            {% block hide_button %}
+                                <ol class="breadcrumb breadcrumb-fill2">
+                                    <li><a href="/"><i class="fa fa-home"></i></a></li>
+                                    <li><a href="/">Hey, {{ user_name }}</a></li>
+                                </ol>
+                            {% endblock %}
                         </div>
                     </div>
                 </div>
@@ -274,12 +275,17 @@
                             <li><a href="eye_col">Colour</a></li>
                         </ul>
                     </li>
-                    <li><span class="opener">Insights</span>
-                        <ul>
-                            <li><a href="w_dashboard">Wing</a></li>
-                            <li><a href="e_dashboard">Eye</a></li>
-                        </ul>
-                    </li>
+
+                    {% if request.user.is_superuser %}
+
+                        <li><span class="opener">Insights</span>
+                            <ul>
+                                <li><a href="w_dashboard">Wing</a></li>
+                                <li><a href="e_dashboard">Eye</a></li>
+                            </ul>
+                        </li>
+
+                    {% endif %}
                     <li><a href="feedback">Give Feedback</a></li>
                     <li><a href="aboutus">About Us</a></li>
                     <li><a href="contactus">Contact Us</a></li>
@@ -319,24 +325,32 @@
                 </div>
             </div>
 
-            <nav id="menu">
-                <ul>
+            {% if user.is_authenticated %}
+                <nav id="menu">
+                    <ul>
+                        <li><a href="/logout">Logout ({{ user.username }})</a></li>
+                    </ul>
+                </nav>
+            {% else %}
+                <nav id="menu">
+                    <ul>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Register</a></li>
+                    </ul>
+                </nav>
+            {% endif %}
 
-                    <li>
-                        <a href="/logout">Logout ({{ request.user }})</a></li>
-
-                </ul>
-
-            </nav>
 
 
             <!-- Footer -->
             <footer id="footer">
                 <p class="copyright">2022-2023 &copy; DOW_UIT
                     <br>Developed by CS14</p>
-                <div class="filled-rounded-button">
-                    <a href="/admin">SignIn as SuperUser</a>
-                </div>
+                {% if request.user.is_superuser %}
+                    <div class="filled-rounded-button">
+                        <a href="/admin">View Database</a>
+                    </div>
+                {% endif %}
             </footer>
 
         </div>

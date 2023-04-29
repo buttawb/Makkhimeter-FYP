@@ -215,20 +215,28 @@
 
                             // Extract the data from the JSON object
 
-                            const r = data2.R;
-                            const g = data2.G;
-                            const b = data2.B;
-                            const per = (r+g+b) / 3060;
+                            const r = (data2.R / 1020) * 100;
+                            const g = (data2.G / 1020) * 100;
+                            const b = (data2.B / 1020) * 100;
+                            const per = (r + g + b) / 3;
                             const roundedPer = per.toFixed(2);
+
+                            {#const rr = per.toFixed(2);#}
+                            {#const rg = per.toFixed(2);#}
+                            {#const rb = per.toFixed(2);#}
+
 
                             document.addEventListener("DOMContentLoaded", () => {
                                 // Initialize the first pie chart
                                 echarts.init(document.querySelector("#pieChart1")).setOption({
                                     title: {
                                         text: 'RGB Values',
-                                        subtext: 'Total % of RGB ' + roundedPer,
+                                        subtext: '% of R: ' + r.toFixed(2) + '\n' + '% of G: ' + g.toFixed(2) + '\n' + '% of B: ' + b.toFixed(2) + '\n',
+
+
                                         left: 'center'
                                     },
+
                                     tooltip: {
                                         trigger: 'item'
                                     },

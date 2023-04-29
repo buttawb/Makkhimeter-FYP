@@ -269,28 +269,16 @@
                                         labels: ['January'],
                                         datasets: [{
                                             label: 'Bristles',
-                                            data: [{
-                                                x: 20,
-                                                y: 1
-                                            },
+                                            data: [{% for d in data %}
                                                 {
-                                                    x: 40,
-                                                    y: 2
+                                                    x: {{ d.0 }},
+                                                    y: {{ d.1 }},
+                                                    r: {{ bubble_size }},
                                                 },
-                                                {
-                                                    x: 15,
-                                                    y: 3
-                                                },
-                                                {
-                                                    x: 32,
-                                                    y: 4
-                                                }
-                                            ],
+                                            {% endfor %}],
                                             borderColor: 'rgb(255, 99, 132)',
                                             backgroundColor: 'rgba(255, 99, 132, 0.5)'
-                                        },
-
-                                        ]
+                                        }]
                                     },
                                     options: {
                                         responsive: true,
@@ -298,12 +286,49 @@
                                             legend: {
                                                 position: 'top',
                                             },
+                                        },
+                                        scales: {
+                                            y: {
+                                                ticks: {
+                                                    callback: function (value, index, values) {
+                                                        // convert value to integer
+                                                        value = parseInt(value);
+                                                        // if it's a whole number, return it, otherwise return an empty string
+                                                        return Number.isInteger(value) ? value : '';
+                                                    },
+                                                    font: {
+                                                        size: 14,
+                                                    },
+                                                    // set the angle of the y-axis labels
+                                                    angle: -45,
+                                                },
+                                                // add the y-axis label
+                                                title: {
+                                                    display: true,
+                                                    text: 'Serial Numbers',
+                                                    font: {
+                                                        size: 12
 
-                                        }
+                                                    },
+                                                },
+                                            },
+                                            x: {
+                                                // add the x-axis label
+                                                title: {
+                                                    display: true,
+                                                    text: 'Bristle Range',
+                                                    font: {
+                                                        size: 12
+
+                                                    },
+                                                },
+                                            },
+                                        },
                                     }
                                 });
                             });
                         </script>
+
                         <!-- End Bubble Chart -->
 
                     </div>

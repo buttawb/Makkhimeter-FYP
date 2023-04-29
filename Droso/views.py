@@ -24,6 +24,11 @@ from Python_Scripts.DIP.Wings.Wing_Bristles import *
 from Python_Scripts.DIP.Wings.Wing_Dimensions import *
 from Python_Scripts.DL import dl
 
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib import messages
+
 # CREATING OBJECTS
 WD_PreP = WD_PreProcessing()
 WD_P = WD_Procesing()
@@ -57,6 +62,18 @@ def loginUser(request):
             return render(request, 'user/login.html', {'note': 'Wrong Login credentials detected.'})
 
     return render(request, 'user/login.html', {'note2': 'Enter username and password to continue...'})
+
+
+def reset_password(request):
+    if request.method == 'POST':
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            form.save(request=request)
+            messages.success(request, 'An email has been sent with instructions to reset your password.')
+            return redirect('login')
+    else:
+        form = PasswordResetForm()
+    return render(request, 'user/password_reset.html', {'form': form})
 
 
 def logoutUser(request):
@@ -125,7 +142,10 @@ def __upload_file_to_userdir(request, file, file_format, flag=True):
 
 def __find_userpath(request):
     # GET USERNAME AMD FIND ITS PATH
-    u_name = str(request.user)
+    if request.user.is_authenticated:
+        u_name = str(request.user)
+    else:
+        u_name = 'Anonymous'
     base = 'static/users'
     path = base + '/' + u_name
     return path
@@ -171,8 +191,6 @@ def main(request):
     if Group.objects.exists():
         return HttpResponse("Redirect to homepage")
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-    if request.user.is_anonymous:
-        return redirect("/login")
 
     path = __find_userpath(request)
 
@@ -190,11 +208,7 @@ def main(request):
 
 
 def wingdimen(request):
-    if Group.objects.exists():
-        return HttpResponse("You are blocked. ")
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-    if request.user.is_anonymous:
-        return redirect("/login")
 
     return render(request, 'wings/dimensions/w_dimen.html',
                   {'head': 'Makkhimeter | wing', 'user_name': request.user.username.upper()})
@@ -202,8 +216,6 @@ def wingdimen(request):
 
 def wingdimen2(request):
     # If the user tries to access any page with URL without signing in, redirect to login page.
-    if request.user.is_anonymous:
-        return redirect("/login")
 
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
@@ -251,7 +263,11 @@ def wingdimen2(request):
             global wingg
             wingg = Wing_Image()
             wingg.image = uploaded_img
-            wingg.user = request.user
+            if request.user.is_authenticated:
+                wingg.user = request.user
+            else:
+                anonymous_user = User.objects.get(pk=9999)
+                wingg.user = anonymous_user
             wingg.hash = hash_d
             wingg.save()
 
@@ -329,9 +345,6 @@ def wingdimen2(request):
 
 
 def w_bar(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-
     # for_dil = request.session['dilation']
     for_dil = dilation_bar
     save_dil = save_dil_path
@@ -376,9 +389,10 @@ def w_bar(request):
                 dimen.wd_o_img = wingg
             dimen.save()
         else:
-            try:
-                dimen = w_dimen.objects.get(wd_o_img=wing_object)
-            except w_dimen.DoesNotExist:
+            dimen_queryset = w_dimen.objects.filter(wd_o_img=wing_object)
+            if dimen_queryset.exists():
+                dimen = dimen_queryset.first()
+            else:
                 dimen = w_dimen()
                 for i in dat:
                     dimen.wd_peri = list(i.values())[-1]
@@ -463,9 +477,6 @@ def w_bar(request):
 
 
 def detail_dimen(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-
     if flag:
         img1 = orig_img_fn
         img2 = save_dil_path
@@ -510,8 +521,6 @@ def get_values_from_slider(request, for_dil, save_dil):
 
 def wingshape(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-    if request.user.is_anonymous:
-        return redirect("/login")
 
     return render(request, 'wings/shape/w_shape.html',
                   {'head': 'Makkhimeter | wing', 'user_name': request.user.username.upper()})
@@ -519,8 +528,6 @@ def wingshape(request):
 
 def wingshape2(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-    if request.user.is_anonymous:
-        return redirect("/login")
 
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
@@ -589,7 +596,11 @@ def wingshape2(request):
 
             wing = Wing_Image()
             wing.image = uploaded_img
-            wing.user = request.user
+            if request.user.is_authenticated:
+                wing.user = request.user
+            else:
+                anonymous_user = User.objects.get(pk=9999)
+                wing.user = anonymous_user
             wing.hash = md5_hash
             wing.save()
 
@@ -648,8 +659,6 @@ def wingshape2(request):
 
 def wingbristles(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-    if request.user.is_anonymous:
-        return redirect("/login")
 
     return render(request, 'wings/bristles/w_bristles.html',
                   {'head': 'Makkhimeter | wing', 'user_name': request.user.username.upper()})
@@ -657,8 +666,6 @@ def wingbristles(request):
 
 def wingbristles2(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-    if request.user.is_anonymous:
-        return redirect("/login")
 
     if request.method == "POST":
         uploaded_img = request.FILES['img']
@@ -715,7 +722,11 @@ def wingbristles2(request):
         except Wing_Image.DoesNotExist:
             wing = Wing_Image()
             wing.image = uploaded_img
-            wing.user = request.user
+            if request.user.is_authenticated:
+                wing.user = request.user
+            else:
+                anonymous_user = User.objects.get(pk=9999)
+                wing.user = anonymous_user
             wing.hash = hash_b
             wing.save()
 
@@ -733,16 +744,12 @@ def wingbristles2(request):
 
 
 def cropper_bristles(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
     crop_img = request.session['crop_img']
     return render(request, 'wings/bristles/cropper.html',
                   {'head': 'Bristles | Finder', 'img': crop_img, 'user_name': request.user.username.upper()})
 
 
 def cropper_eye(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
     crop_img_eye = request.session['crop_img_eye']
     return render(request, 'eyes/ommatidum/cropper.html',
                   {'head': 'Ommatidium | Finder', 'img': crop_img_eye, 'user_name': request.user.username.upper()})
@@ -750,8 +757,6 @@ def cropper_eye(request):
 
 def c_us(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-    if request.user.is_anonymous:
-        return redirect("/login")
 
     return render(request, 'others/contactus.html',
                   {'head': 'Makkhimeter | Contact Us', 'user_name': request.user.username.upper()})
@@ -759,8 +764,6 @@ def c_us(request):
 
 def a_us(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-    if request.user.is_anonymous:
-        return redirect("/login")
 
     return HttpResponse("This page is going to be updated soon :)) ")
     # return render(request, 'others/aboutus.html',
@@ -769,8 +772,6 @@ def a_us(request):
 
 def f_b(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-    if request.user.is_anonymous:
-        return redirect("/login")
 
     return render(request, 'others/feedback.html',
                   {'head': 'Makkhimeter | Give Feedback', 'user_name': request.user.username.upper()})
@@ -778,15 +779,12 @@ def f_b(request):
 
 def wing_f(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-    if request.user.is_anonymous:
-        return redirect("/login")
+
     return render(request, 'f_w.html', {'head': 'Makkhimeter | wing', 'user_name': request.user.username.upper()})
 
 
 def eye_f(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-    if request.user.is_anonymous:
-        return redirect("/login")
 
     return render(request, 'f_e.html', {'head': 'Makkhimeter | Eyes', 'user_name': request.user.username.upper()})
 
@@ -814,17 +812,11 @@ def df_to_html(df):
 
 
 def eye_omat(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-
     return render(request, 'eyes/ommatidum/omat_count.html',
                   {'head': 'Makkhimeter | Eyes', 'user_name': request.user.username.upper()})
 
 
 def eye_omat2(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
@@ -874,7 +866,11 @@ def eye_omat2(request):
         except Eye_Image.DoesNotExist:
             eye = Eye_Image()
             eye.image = uploaded_img
-            eye.user = request.user
+            if request.user.is_authenticated:
+                eye.user = request.user
+            else:
+                anonymous_user = User.objects.get(pk=9999)
+                eye.user = anonymous_user
             eye.hash = md5_hash
             eye.save()
 
@@ -892,17 +888,11 @@ def eye_omat2(request):
 
 
 def eye_col(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-
     return render(request, 'eyes/colour/col.html',
                   {'head': 'Makkhimeter | Eyes', 'user_name': request.user.username.upper()})
 
 
 def eye_col2(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
@@ -1012,7 +1002,11 @@ def eye_col2(request):
         except Eye_Image.DoesNotExist:
             eye = Eye_Image()
             eye.image = uploaded_img
-            eye.user = request.user
+            if request.user.is_authenticated:
+                eye.user = request.user
+            else:
+                anonymous_user = User.objects.get(pk=9999)
+                eye.user = anonymous_user
             eye.hash = md5_hash
             eye.save()
 
@@ -1057,16 +1051,12 @@ def hex_to_rgb(hex_value):
 
 
 def eyedimen(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
     return render(request, 'eyes/Dimensions/e_dimen.html',
                   {'head': 'Makkhimeter | Eyes', 'user_name': request.user.username.upper()})
 
 
 def eyedimen2(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-    if request.user.is_anonymous:
-        return redirect("/login")
 
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
@@ -1124,7 +1114,11 @@ def eyedimen2(request):
         except Eye_Image.DoesNotExist:
             eye = Eye_Image()
             eye.image = uploaded_img
-            eye.user = request.user
+            if request.user.is_authenticated:
+                eye.user = request.user
+            else:
+                anonymous_user = User.objects.get(pk=9999)
+                eye.user = anonymous_user
             eye.hash = md5_hash
             eye.save()
 
@@ -1152,9 +1146,6 @@ def fetch_wingdata(request):
 
 
 def wing_dashboard(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-
     data = fetch_wingdata(request)
     area = []
     peri = []
@@ -1179,13 +1170,23 @@ def wing_dashboard(request):
     if not bristles:
         bristles = [0]
 
+    bristle_counts = list(w_bristles.objects.values_list('bristle_count', flat=True))
+
+    # prepare the data for the bubble chart
+    data = []
+    for i, count in enumerate(bristle_counts):
+        data.append([count, i, 1])  # format the data as [x, y, size]
+
+    bubble_size = 20 if len(data) <= 10 else (1000 // len(data))
+
     return render(request, "dashboard/w_dashboard.html",
                   {
                       'head': 'Wing | Insights', 'user_name': request.user.username.upper(),
                       'area_avg': round(sum(area) / len(area), 2), 'peri_avg': round(sum(peri) / len(peri), 2),
                       'bristles_avg': round(sum(bristles) / len(bristles), 2), 'peri_min': min(peri),
                       'peri_max': max(peri), 'area_min': min(area), 'area_max': max(area),
-                      'normal': pred.count('Oregan'), 'mutation': pred.count('Mutation')
+                      'normal': pred.count('Oregan'), 'mutation': pred.count('Mutation'), 'data': data,
+                      'bubble_size': bubble_size
                   })
 
 
@@ -1198,9 +1199,6 @@ def fetch_eyedata(request):
 
 
 def eye_dashboard(request):
-    if request.user.is_anonymous:
-        return redirect("/login")
-
     data = fetch_eyedata(request)
 
     area = []
@@ -1221,16 +1219,33 @@ def eye_dashboard(request):
     if not ommatidia:
         ommatidia = [0]
 
+    ommatidia_counts = list(e_ommatidium.objects.values_list('ommatidium_count', flat=True))
+
+    # prepare the data for the bubble chart
+    data = []
+    for i, count in enumerate(ommatidia_counts):
+        data.append([count, i, 1])  # format the data as [x, y, size]
+
+    bubble_size = 20 if len(data) <= 10 else (1000 // len(data))
+
+    colors = list(e_colour.objects.values_list('pred_name', 'pred_hex'))
+    colors = [{'pred_name': item[0], 'pred_hex': item[1]} for item in colors]
+
+    # Pass the colors data to the template
+    context = {'colors': colors}
+    print(context)
+
     return render(request, "dashboard/e_dashboard.html",
                   {
                       'head': 'Eye | Insights', 'user_name': request.user.username.upper(),
                       'area_avg': round(sum(area) / len(area), 2), 'peri_avg': round(sum(peri) / len(peri), 2),
                       'omm_avg': round(sum(ommatidia) / len(ommatidia), 2), 'peri_min': min(peri),
-                      'peri_max': max(peri), 'area_min': min(area), 'area_max': max(area),
+                      'peri_max': max(peri), 'area_min': min(area), 'area_max': max(area), 'data': data,
+                      'bubble_size': bubble_size, 'colors': json.dumps(context['colors'])
                   })
 
 
-# def wingfront(request):
+# def wingfront(request):S
 #     if request.user.is_anonymous:
 #         return redirect("/login")
 #     return render(request, "others/wing.html",
@@ -1250,7 +1265,7 @@ def register_page(request):
         if form.is_valid():
             user = form.save()
             # Log the user in.
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             return redirect('/')
     else:
         form = CustomUserCreationForm()

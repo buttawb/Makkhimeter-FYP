@@ -4,6 +4,8 @@ from PIL import Image
 from io import BytesIO
 from django.core.files import File
 
+from Drosometer import settings
+
 
 def compress(image):
     im = Image.open(image)
@@ -18,7 +20,7 @@ class Wing_Image(models.Model):
     image = models.ImageField(upload_to="static\db_wingimages",
                               verbose_name="Image")
     user = models.ForeignKey(User,
-                             on_delete=models.CASCADE,
+                             on_delete=models.CASCADE, null=True, blank=True,
                              verbose_name="User ID")
     hash = models.CharField(max_length=33,
                             verbose_name="MD5 Hash of Image")
@@ -39,7 +41,7 @@ class Eye_Image(models.Model):
     image = models.ImageField(upload_to="static\db_eyeimages",
                               verbose_name="Image")
     user = models.ForeignKey(User,
-                             on_delete=models.CASCADE,
+                             on_delete=models.CASCADE, null=True, blank=True,
                              verbose_name="User ID")
     hash = models.CharField(max_length=33,
                             verbose_name="MD5 Hash of Image")
@@ -59,7 +61,7 @@ class w_dimen(models.Model):
     wdimen = models.AutoField(primary_key=True)
     wd_o_img = models.ForeignKey(Wing_Image,
                                  on_delete=models.CASCADE,
-                                 default=None,
+                                 default=None, null=True, blank=True,
                                  verbose_name="Original Image ID")
     # wd_o_img = models.CharField(max_length=600)
     # wd_b_img = models.CharField(max_length=600)
@@ -80,7 +82,7 @@ class w_shape(models.Model):
     wshape = models.AutoField(primary_key=True)
     ws_o_img = models.ForeignKey(Wing_Image,
                                  on_delete=models.CASCADE,
-                                 default=None,
+                                 default=None, null=True, blank=True,
                                  verbose_name="Original Image ID")
     # ws_o_img = models.CharField(max_length=600)
     ws_pred = models.CharField(max_length=10,
@@ -100,7 +102,7 @@ class w_shape(models.Model):
 class w_bristles(models.Model):
     wbrisltes = models.AutoField(primary_key=True)
     wb_o_img = models.ForeignKey(Wing_Image,
-                                 on_delete=models.CASCADE,
+                                 on_delete=models.CASCADE, null=True, blank=True,
                                  default=None,
                                  verbose_name="Original Image ID")
     bristle_count = models.IntegerField(verbose_name="Wing overall Bristles")
@@ -122,7 +124,7 @@ class e_colour(models.Model):
     ecolour = models.AutoField(primary_key=True)
     ec_o_img = models.ForeignKey(Eye_Image,
                                  on_delete=models.CASCADE,
-                                 default=None,
+                                 default=None, null=True, blank=True,
                                  verbose_name="Original Image ID")
 
     # col1 = models.ForeignKey(colour,
@@ -187,7 +189,7 @@ class e_dimension(models.Model):
     edimension = models.AutoField(primary_key=True)
     ed_o_img = models.ForeignKey(Eye_Image,
                                  on_delete=models.CASCADE,
-                                 default=None,
+                                 default=None, null=True, blank=True,
                                  verbose_name="Original Image ID")
     earea = models.FloatField(max_length=100,
                               verbose_name="Eye overall Area")
@@ -202,12 +204,10 @@ class e_ommatidium(models.Model):
     emodel = models.AutoField(primary_key=True)
     eo_o_img = models.ForeignKey(Eye_Image,
                                  on_delete=models.CASCADE,
-                                 default=None,
+                                 default=None, null=True, blank=True,
                                  verbose_name="Original Image ID")
     ommatidium_count = models.IntegerField(verbose_name="Eye overall Ommatidium")
 
     class Meta:
         verbose_name = "Eye Ommatidium"
         verbose_name_plural = "Eye Ommatidium"
-
-

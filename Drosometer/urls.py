@@ -14,12 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.contrib.auth.views import PasswordResetDoneView
+
 from django.urls import path
 from Droso import views
 from django.conf import settings
 from Droso.views import loginUser
 from django.conf.urls.static import static
+
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
+    PasswordResetCompleteView
 
 from django.contrib.auth import views as auth_views
 
@@ -70,11 +73,21 @@ urlpatterns = [
                   path('w_dashboard', views.wing_dashboard),
                   path('e_dashboard', views.eye_dashboard),
 
+
                   # path('f_thorax', views.thorax_f),
 
                   # path('check', views.fetch_data),
 
                   path('destructon', views.finalpage),
+
+                  # path('password_reset/', auth_views.PasswordResetView.as_view(
+                  #     template_name='templates/user/password_reset.html'), name='password_reset'),
+                  # path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(
+                  #     template_name='templates/user/password_reset_done.html'), name='password_reset_done'),
+                  # path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
+                  #     template_name='templates/user/password_reset_confirm.html'), name='password_reset_confirm'),
+                  # path('reset/done/', auth_views.PasswordResetCompleteView.as_view(
+                  #     template_name='templates/user/password_reset_complete.html'), name='password_reset_complete'),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
