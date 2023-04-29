@@ -211,3 +211,16 @@ class e_ommatidium(models.Model):
     class Meta:
         verbose_name = "Eye Ommatidium"
         verbose_name_plural = "Eye Ommatidium"
+
+
+class ContactMessage(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        pass
+
+    def __str__(self):
+        return self.name

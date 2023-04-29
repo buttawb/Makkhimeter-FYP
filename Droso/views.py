@@ -6,7 +6,7 @@ import os
 import uuid
 
 from django.contrib.auth import login, logout, authenticate
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
@@ -204,7 +204,7 @@ def main(request):
         # MAKE A DIRECTORY NAMED WITH USERNAME
         os.mkdir(path)
 
-    return render(request, 'index.html', {'head': 'Makkhimeter | DOW-UIT', 'user_name': request.user.username.upper()})
+    return render(request, 'index.html', {'head': 'Makkhimeter ', 'user_name': request.user.username.upper()})
 
 
 def wingdimen(request):
@@ -238,14 +238,14 @@ def wingdimen2(request):
         # CHECK EITHER THE IMAGE IS OF WING OR NOT.
         img1 = __reader(uploaded_img)
         img2 = img1.convert('RGB')
-        orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
-
-        if not image_check(img1, orig_img):
-            return render(request, 'wings/dimensions/w_dimen2.html',
-                          {'head': 'wing | Dimensions', 'img_path': orig_img,
-                           'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
-                           'out2': ' of wing', 'out3': 'Let us know if this is by mistake.',
-                           'user_name': request.user.username.upper()})
+        # orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
+        #
+        # if not image_check(img1, orig_img):
+        #     return render(request, 'wings/dimensions/w_dimen2.html',
+        #                   {'head': 'wing | Dimensions', 'img_path': orig_img,
+        #                    'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
+        #                    'out2': ' of wing', 'out3': 'Let us know if this is by mistake.',
+        #                    'user_name': request.user.username.upper()})
 
         orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
         # p = cv2.imread(orig_img)
@@ -551,14 +551,14 @@ def wingshape2(request):
         # IMAGE CONVERSIONS FOR THE DL MODEL.
         img2 = img1.convert('RGB')
 
-        # CHECK EITHER THE IMAGE IS OF WING OR NOT.
-        path = __upload_file_to_userdir(request, img2, '.png', flag=True)
-        if not image_check(img1, path):
-            return render(request, 'wings/dimensions/w_dimen2.html',
-                          {'head': 'wing | Dimensions', 'img_path': path,
-                           'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
-                           'out2': ' of wing', 'out3': 'Let us know if this is by mistake.',
-                           'user_name': request.user.username.upper()})
+        # # CHECK EITHER THE IMAGE IS OF WING OR NOT.
+        # path = __upload_file_to_userdir(request, img2, '.png', flag=True)
+        # if not image_check(img1, path):
+        #     return render(request, 'wings/dimensions/w_dimen2.html',
+        #                   {'head': 'wing | Dimensions', 'img_path': path,
+        #                    'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
+        #                    'out2': ' of wing', 'out3': 'Let us know if this is by mistake.',
+        #                    'user_name': request.user.username.upper()})
 
         path = __upload_file_to_userdir(request, img2, '.png')
 
@@ -686,14 +686,14 @@ def wingbristles2(request):
 
         img1 = __reader(uploaded_img)
 
-        orig_img = __upload_file_to_userdir(request, img1, '.png', flag=True)
-        # CHECK EITHER THE IMAGE IS OF WING OR NOT.
-        if not image_check(img1, orig_img):
-            return render(request, 'wings/dimensions/w_dimen2.html',
-                          {'head': 'wing | Dimensions', 'img_path': orig_img,
-                           'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
-                           'out2': ' of wing', 'out3': 'Let us know if this is by mistake.',
-                           'user_name': request.user.username.upper()})
+        # orig_img = __upload_file_to_userdir(request, img1, '.png', flag=True)
+        # # CHECK EITHER THE IMAGE IS OF WING OR NOT.
+        # if not image_check(img1, orig_img):
+        #     return render(request, 'wings/dimensions/w_dimen2.html',
+        #                   {'head': 'wing | Dimensions', 'img_path': orig_img,
+        #                    'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
+        #                    'out2': ' of wing', 'out3': 'Let us know if this is by mistake.',
+        #                    'user_name': request.user.username.upper()})
 
         crop_img = __upload_file_to_userdir(request, img1, ".png")
 
@@ -757,6 +757,17 @@ def cropper_eye(request):
 
 def c_us(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        message = request.POST['message']
+
+        contact_message = ContactMessage(name=name, email=email, message=message)
+        contact_message.save()
+
+        return render(request, 'others/contactus.html',
+                      {'head': 'Makkhimeter | Contact Us', 'user_name': request.user.username.upper(),
+                       'text': 'Your feedback has been ', 'text2': 'submitted.'})
 
     return render(request, 'others/contactus.html',
                   {'head': 'Makkhimeter | Contact Us', 'user_name': request.user.username.upper()})
@@ -1146,6 +1157,8 @@ def fetch_wingdata(request):
 
 
 def wing_dashboard(request):
+    if request.user.id == 9999:
+        return render(request, 'index.html')
     data = fetch_wingdata(request)
     area = []
     peri = []
@@ -1199,6 +1212,8 @@ def fetch_eyedata(request):
 
 
 def eye_dashboard(request):
+    if request.user.id == 9999:
+        return render(request, 'index.html')
     data = fetch_eyedata(request)
 
     area = []
@@ -1278,10 +1293,7 @@ def register_page(request):
 #         return HttpResponse(i.wd_area)
 
 def myteam(request):
-    if request.user.is_anonymous:
-        return redirect('/login')
-
-    return HttpResponse("This page is under construction. It'll be updated soon. :))")
+    return render(request, 'team/team.html', {'head': 'TEAM ', 'user_name': request.user.username.upper()})
 
 
 def finalpage(request):

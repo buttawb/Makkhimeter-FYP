@@ -3,7 +3,6 @@ echo Flushing Database...
 
 
 call venv\Scripts\activate.bat
-echo Creating new migrations...
 
 python manage.py flush
 
