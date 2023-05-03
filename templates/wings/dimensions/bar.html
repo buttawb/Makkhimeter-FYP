@@ -70,56 +70,57 @@
     </head>
     <body>
 
-    <section class="top-image">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="container">
-                        <div class="horizontal">
-                            <div class="verticals ten offset-by-one">
+    <div id="page-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container">
+                    <div class="horizontal">
+                        <div class="verticals ten offset-by-one">
 
-                                <ol class="breadcrumb breadcrumb-fill2">
-                                    <li><a href="/"><i class="fa fa-home"></i></a></li>
-                                    <li><a href="/w_dimen">Wing Dimensions</a></li>
-                                    <li><a> / </a></li>
-                                    <li><a href="javascript:history.go(-1)">Input</a></li>
-                                    <li><a> / </a></li>
-                                    <li class="active">Editor</li>
-                                </ol>
-                            </div>
+                            <ol class="breadcrumb breadcrumb-fill2">
+                                <li><a href="/"><i class="fa fa-home"></i></a></li>
+                                <li><a href="/w_dimen">Wing Dimensions</a></li>
+                                <li><a> / </a></li>
+                                <li><a href="javascript:history.go(-1)">Input</a></li>
+                                <li><a> / </a></li>
+                                <li class="active">Editor</li>
+                            </ol>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <br>
-                    <br>
-                    <h2>{{ img_name }}</h2>
-                    <br><br>
-                    <img src={{ img_path }} alt="">
-                </div>
-                <div class="col-md-6">
-                    <br>
-                    <br>
-                    <h2>{{ img_n }}</h2>
-                    <br><br>
-                    <img src={{ img_p }} alt="">
-                </div>
-                <div class="col-md-8">
-                    <div class="right-content">
-                        <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <div class="primary-button">
-                                <button type="submit" id="buttonID" name="highlight">{{ but_name }}<span
-                                        class="load loading"></span></button>
-                            </div>
+            </div>
+            <div class="col-md-6">
+                <br>
+                <br>
+                <h2>{{ img_name }}</h2>
+                <br><br>
+                <img src={{ img_path }} alt="">
+            </div>
+            <div class="col-md-6">
+                <br>
+                <br>
+                <h2>{{ img_n }}</h2>
+                <br><br>
+                <img src={{ img_p }} alt="">
+            </div>
+            <div class="col-md-8">
+                <div class="right-content">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="primary-button">
+                            <br>
+                            <br>
+                            <button type="submit" id="buttonID" name="highlight">{{ but_name }}<span
+                                    class="load loading"></span></button>
+                        </div>
 
 
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+
     <form id="contact" method="post" enctype="multipart/form-data">
         <div class="row">
 
@@ -142,60 +143,27 @@
                 </fieldset>
             </div>
 
-            <div class="col-md-6">
+
+            <div class="content col-md-6">
+                <br>
+                <Br>
+                <p>Modify the slider parameters solely when there is a disjointed venation structure or when the lines
+                    fail to connect adequately within the wing. </p>
+
                 <button type="submit" id="form-submit" name="check" style="text-align: right"> Check
                     <span></span>
                 </button>
             </div>
 
-
-            <br>
-            <br>
-            <br>
-            <div class="col-md-12">
-                <div class="left-content">
-                    <br><br>
-                    <h4>One more thing...</h4>
-                    <br>
-                    <p>We have detected that the wing is placed in the <strong> center </strong> without touching any
-                        borders or frames of the
-                        image. <br>Is that true?</p>
-                    <br>
-                    <br>
-                    <form id="contact" action="" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-md-8 col-sm-8">
-                                <div class="circle-item">
-                                    <button style="width: 40%;" type="submit" name="yes">
-                                        YES & NEXT
-                                    </button>
-                                    <br><br>
-                                </div>
-                                <button class="btn btn-primary" type="button" disabled id="waitBtn"
-                                        style="display: none">
-                                            <span class="spinner-border spinner-border-sm" role="status"
-                                                  aria-hidden="true"></span>
-                                    <span class="visually-hidden">Please wait...</span>
-                                </button>
-                            </div>
-                            <div class="col-md-8 col-sm-8">
-                                <div class="circle-item">
-                                    <button style="width: 40%;" type="submit" name="no">
-                                        NO & NEXT
-                                    </button>
-                                </div>
-                                <button class="btn btn-primary" type="button" disabled id="waitBtn"
-                                        style="display: none">
-                                            <span class="spinner-border spinner-border-sm" role="status"
-                                                  aria-hidden="true"></span>
-                                    <span class="visually-hidden">Please wait...</span>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <div class="content col-md-6">
+                <br>
+                <Br>
+                <p>Image set. Proceed to next step.</p>
+                <button type="submit" id="form-submit" name="next" style="text-align: right"> Next
+                    <span></span>
+                </button>
             </div>
+
 
         </div>
     </form>
@@ -229,7 +197,8 @@
             console.log(this.values);
             window.localStorage.setItem("fontSize", this.value);
             window.localStorage.setItem("range", this.value);
-            font.innerHTML = "<p>Value is :" + "<b>" + this.value;
+            font.innerHTML = "<p>Value is :<span style='font-family: Poppins, sans-serif'>" + "<b>" + this.value + "</span></b></p>";
+
         };
 
         function checkFontSize() {
@@ -269,7 +238,8 @@
             console.log(this.values);
             window.localStorage.setItem("fontSize2", this.value);
             window.localStorage.setItem("range2", this.value);
-            font2.innerHTML = "<p>Value is :" + "<b>" + this.value;
+            font2.innerHTML = "<p>Value is :<span style='font-family: Poppins, sans-serif'>" + "<b>" + this.value + "</span></b></p>";
+
         };
 
         function checkFontSize() {

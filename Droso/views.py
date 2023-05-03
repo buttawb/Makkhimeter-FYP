@@ -6,10 +6,11 @@ import os
 import uuid
 
 from django.contrib.auth import login, logout, authenticate
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
+from django.core import serializers
 
 from Droso.forms import CustomUserCreationForm
 from Droso.models import *
@@ -344,15 +345,96 @@ def wingdimen2(request):
                    'img_name': 'Expected Input Image ', 'user_name': request.user.username.upper()})
 
 
+def finale(request, for_dil, save_dil, orig_img):
+    # # save_dil = request.session['save_dil']
+    # # orig_img = request.session['orig_img']
+    # # for_dil = request.session['for_dil']
+    #
+    # def algorithm_selection(algorithm, save_dil):
+    #     get_values = get_values_from_slider(request, for_dil, save_dil)
+    #     save_dil = get_values[0]
+    #     dil = get_values[1]
+    #
+    #     global images
+    #
+    #     def images():
+    #         return path1, path2, outimg, outimg2
+    #
+    #     path1 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
+    #     path2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
+    #
+    #     outimg = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
+    #     outimg2 = __upload_file_to_userdir(request, 'xyz', '.png', flag=False)
+    #     step1 = algorithm(path1, path2, outimg, outimg2)
+    #
+    #     df = step1[0]
+    #     data = df_to_html(df)
+    #
+    #     # json_records = df.reset_index().to_json(orient='records')
+    #     # data = []
+    #     # data = json.loads(json_records)
+    #
+    #     df2 = step1[1]
+    #     dat = df_to_html(df2)
+    #     # json_record = df2.reset_index().to_json(orient='records')
+    #     # dat = []
+    #     # dat = json.loads(json_record)
+    #
+    #     # STORING IN DATABASE
+    #
+    #     if not dimen_flag:
+    #         dimen = w_dimen()
+    #         for i in dat:
+    #             dimen.wd_peri = list(i.values())[-1]
+    #             dimen.wd_area = list(i.values())[-2]
+    #             dimen.wd_o_img = wingg
+    #         dimen.save()
+    #     else:
+    #         dimen_queryset = w_dimen.objects.filter(wd_o_img=wing_object)
+    #         if dimen_queryset.exists():
+    #             dimen = dimen_queryset.first()
+    #         else:
+    #             dimen = w_dimen()
+    #             for i in dat:
+    #                 dimen.wd_peri = list(i.values())[-1]
+    #                 dimen.wd_area = list(i.values())[-2]
+    #             dimen.wd_o_img = wing_object
+    #             dimen.save()
+    #
+    #     return data, dat, outimg, outimg2
+    #
+    # if 'yes' in request.POST:
+    #     flag = True
+    #
+    #     result = algorithm_selection(WD_P.Skelatonize, save_dil)
+    #     data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
+    #
+    #     return render(request, 'wings/dimensions/output.html',
+    #                   {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat,
+    #                    'orig_img': orig_img, 'user_name': request.user.username.upper()})
+    #
+    # if 'no' in request.POST:
+    #     flag = False
+    #     result = algorithm_selection(WD_P.FloodFill, save_dil)
+    #     # result = algorithm_selection(other_option, save_dil)
+    #     data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
+    #
+    #     return render(request, 'wings/dimensions/output.html',
+    #                   {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat,
+    #                    'orig_img': orig_img, 'user_name': request.user.username.upper()})
+
+    return render(request, 'wings/dimensions/algorithm.html',
+                  {'head': 'Dimensions | Selection', 'img_path': save_dil, 'img_name': 'Binary Image',
+                   'img_p': orig_img_fn, 'img_n': 'Original Image',
+                   'user_name': request.user.username.upper()})
+
+
 def w_bar(request):
     # for_dil = request.session['dilation']
     for_dil = dilation_bar
     save_dil = save_dil_path
 
-    def algorithm_selection(algorithm, save_dil):
-        get_values = get_values_from_slider(request, for_dil, save_dil)
-        save_dil = get_values[0]
-        dil = get_values[1]
+    def algorithm_selection(algorithm):
 
         global images
 
@@ -435,24 +517,34 @@ def w_bar(request):
                        'val1': val1, 'val2': val2, 'but_name': 'Reset to default values',
                        'user_name': request.user.username.upper()})
 
-    if 'default' in request.POST:
-        WD_P.preprocess_img = for_dil
-        dil = WD_P.Dilation()
-        # dil = dilation(for_dil)
-        plt.imsave(save_dil, dil, cmap='gray')
-        return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image', 'val1': 7,
-                       'val2': 12, 'but_name': 'Reset to default values',
-                       'img_p': orig_img_fn, 'img_n': 'Original Image', 'user_name': request.user.username.upper()})
-    orig_img = orig_img_fn
+    if 'next' in request.POST:
+        get_values = get_values_from_slider(request, for_dil, save_dil)
+        save_dil = get_values[0]
+        return finale(request, for_dil, save_dil, orig_img_fn)
+
+        # request.session['orig_img'] = orig_img_fn
+        # request.session['save_dil'] = save_dil
+        # request.session['for_dil'] = for_dil
+        #
+        # get_values = get_values_from_slider(request, for_dil, save_dil)
+        # save_dil = get_values[0]
+        # val1 = get_values[2]
+        # val2 = get_values[3]
+        #
+        # return render(request, 'wings/dimensions/algorithm.html',
+        #               {'head': 'Dimensions | Selection', 'img_path': save_dil, 'img_name': 'Binary Image',
+        #                'img_p': orig_img_fn, 'img_n': 'Original Image',
+        #                'val1': val1, 'val2': val2, 'but_name': 'Reset to default values',
+        #                'user_name': request.user.username.upper()})
 
     global flag
     flag = True
+    orig_img = orig_img_fn
 
     if 'yes' in request.POST:
         flag = True
 
-        result = algorithm_selection(WD_P.Skelatonize, save_dil)
+        result = algorithm_selection(WD_P.Skelatonize)
         data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
 
         return render(request, 'wings/dimensions/output.html',
@@ -461,7 +553,8 @@ def w_bar(request):
 
     if 'no' in request.POST:
         flag = False
-        result = algorithm_selection(WD_P.FloodFill, save_dil)
+
+        result = algorithm_selection(WD_P.FloodFill)
         # result = algorithm_selection(other_option, save_dil)
         data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
 
@@ -469,11 +562,30 @@ def w_bar(request):
                       {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat,
                        'orig_img': orig_img, 'user_name': request.user.username.upper()})
 
+    if 'feedback' in request.POST:
+        priority = request.POST.get('demo-priority')
+
+        f = Feedback_wing()
+
+        if request.user.is_authenticated:
+            f.user = request.user
+        else:
+            f.user = User.objects.get(pk=9999)
+
+        if not dimen_flag:
+            f.image = wingg
+        else:
+            f.image = wing_object
+        f.priority = priority
+        f.module = 'Dimensions'
+        f.save()
+        return render(request, 'others/feedback_success.html')
+
     else:
         return render(request, 'wings/dimensions/bar.html',
                       {'head': 'Dimensions | Exposure', 'img_path': save_dil, 'img_name': 'Binary Image',
                        'val1': 7, 'val2': 12, 'img_p': orig_img_fn, 'img_n': 'Original Image',
-                       'but_name': 'Extract binary', 'user_name': request.user.username.upper()})
+                       'but_name': 'Show binary', 'user_name': request.user.username.upper()})
 
 
 def detail_dimen(request):
@@ -528,7 +640,6 @@ def wingshape(request):
 
 def wingshape2(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
@@ -539,7 +650,7 @@ def wingshape2(request):
             ext_validator(uploaded_img)
         except (KeyError, ValidationError):
             # If the file was not uploaded or is not a valid image, render an error page
-            return render(request, 'wings/dimensions/w_dimen2.html',
+            return render(request, 'wings/shape/w_shape2.html',
                           {'head': 'Wing | Shape', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
@@ -550,15 +661,6 @@ def wingshape2(request):
         # yeh ubyte ko dena hai wind dimension
         # IMAGE CONVERSIONS FOR THE DL MODEL.
         img2 = img1.convert('RGB')
-
-        # # CHECK EITHER THE IMAGE IS OF WING OR NOT.
-        # path = __upload_file_to_userdir(request, img2, '.png', flag=True)
-        # if not image_check(img1, path):
-        #     return render(request, 'wings/dimensions/w_dimen2.html',
-        #                   {'head': 'wing | Dimensions', 'img_path': path,
-        #                    'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
-        #                    'out2': ' of wing', 'out3': 'Let us know if this is by mistake.',
-        #                    'user_name': request.user.username.upper()})
 
         path = __upload_file_to_userdir(request, img2, '.png')
 
@@ -578,8 +680,8 @@ def wingshape2(request):
 
         # CREATING OBJECT AND SAVING ALL OUTPUTS TO DATABASE THROUGH MODEL
         try:
-            wing = Wing_Image.objects.get(hash=md5_hash)
-            shape = w_shape.objects.filter(ws_o_img=wing).first()
+            new_wing_shape = Wing_Image.objects.get(hash=md5_hash)
+            shape = w_shape.objects.filter(ws_o_img=new_wing_shape).first()
 
             if not shape:
                 s = w_shape()
@@ -589,20 +691,20 @@ def wingshape2(request):
                     s.ws_pred = 'Oregan'
                 s.ws_normal_prob = prob_oreg
                 s.ws_mutated_prob = prob_mut
-                s.ws_o_img = wing
+                s.ws_o_img = new_wing_shape
                 s.save()
 
         except Wing_Image.DoesNotExist:
 
-            wing = Wing_Image()
-            wing.image = uploaded_img
+            new_wing_shape = Wing_Image()
+            new_wing_shape.image = uploaded_img
             if request.user.is_authenticated:
-                wing.user = request.user
+                new_wing_shape.user = request.user
             else:
                 anonymous_user = User.objects.get(pk=9999)
-                wing.user = anonymous_user
-            wing.hash = md5_hash
-            wing.save()
+                new_wing_shape.user = anonymous_user
+            new_wing_shape.hash = md5_hash
+            new_wing_shape.save()
 
             s = w_shape()
             if pred == 0:
@@ -611,50 +713,125 @@ def wingshape2(request):
                 s.ws_pred = 'Oregan'
             s.ws_normal_prob = prob_oreg
             s.ws_mutated_prob = prob_mut
-            s.ws_o_img = wing
+            s.ws_o_img = new_wing_shape
             s.save()
-
+        global wing_shape
+        wing_shape = new_wing_shape
         mutation = dl.k_model(path)
 
-        if pred == 0:
-            # RENDERING OUTPUTS ON HTML PAGE
-            for subclass in mutation:
-                print(subclass)
-                if subclass == 1 or 0:
-                    return render(request, 'wings/shape/w_shape2.html',
-                                  {'head': 'wing | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
-                                   'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: ',
-                                   'sub_class': 'VG^1 or Xa /+ or Ser^1 / +', 'key': 'Broken Mutant Wing.',
-                                   'user_name': request.user.username.upper()})
-                if subclass == 4:
-                    return render(request, 'wings/shape/w_shape2.html',
-                                  {'head': 'wing | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
-                                   'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: ',
-                                   'sub_class': 'E^1', 'key': 'Colour differences. ',
-                                   'user_name': request.user.username.upper()})
-                if subclass == 5:
-                    return render(request, 'wings/shape/w_shape2.html',
-                                  {'head': 'wing | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
-                                   'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: ',
-                                   'sub_class': 'Ser^1 / +', 'key': 'Broken Wing.',
-                                   'user_name': request.user.username.upper()})
-                if subclass == 2 or 3 or 6:
-                    return render(request, 'wings/shape/w_shape2.html',
-                                  {'head': 'wing | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
-                                   'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: ',
-                                   'sub_class': 'Ser^1 / +', 'key': 'Damaged Wing.',
-                                   'user_name': request.user.username.upper()})
-        elif pred == 1:
-            # RENDERING OUTPUTS ON HTML PAGE
-            return render(request, 'wings/shape/w_shape2.html',
-                          {'head': 'wing | Shape', 'ans': 'Oregan', 'out': 'class.', 'prob_oreg': prob_oreg,
-                           'prob_mut': prob_mut, 'img_path': path, 'img_name': 'Uploaded Image: ',
-                           'user_name': request.user.username.upper()})
+        request.session['path'] = path
+        prob_oreg = float(prob_oreg)
+        prob_mut = float(prob_mut)
 
-    else:
-        return render(request, 'wings/shape/w_shape2.html',
-                      {'head': 'wing | Shape', 'img_path': '../static/images/perfect.png',
-                       'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
+        request.session['prob_oreg'] = prob_oreg
+        request.session['prob_mut'] = prob_mut
+
+        pred = float(pred)
+
+        request.session['pred'] = pred
+
+        mutation_text = {
+            0: 'Broken Mutant Wing.',
+            1: 'Broken Mutant Wing.',
+            2: 'Damaged Wing.',
+            3: 'Damaged Wing.',
+            4: 'Colour differences. ',
+            5: 'Broken Wing.',
+            6: 'Damaged Wing.'
+        }
+
+        mutation_value = {
+            0: 'VG^1 or Xa /+ or Ser^1 / +',
+            1: 'VG^1 or Xa /+ or Ser^1 / +',
+            2: 'Ser^1 / +',
+            3: 'Ser^1 / +',
+            4: 'E^1',
+            5: 'Ser^1 / +',
+            6: 'Ser^1 / +'
+        }
+        mutation_text_list = [mutation_text[val] for val in mutation]
+        mutation_value_list = [mutation_value[val] for val in mutation]
+
+        request.session['mutation_text_list'] = mutation_text_list
+        request.session['mutation_value_list'] = mutation_value_list
+        return redirect("/out")
+
+    return render(request, 'wings/shape/w_shape2.html',
+                  {'head': 'wing | Shape', 'img_path': '../static/images/perfect.png',
+                   'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
+
+
+def shape_output(request):
+    if request.method == 'POST':
+        priority = request.POST.get('demo-priority')
+
+        f = Feedback_wing()
+
+        if request.user.is_authenticated:
+            f.user = request.user
+        else:
+            f.user = User.objects.get(pk=9999)
+
+        f.image = wing_shape
+        f.priority = priority
+        f.module = 'Shape'
+        f.save()
+        return render(request, 'others/feedback_success.html')
+
+    pred = request.session['pred']
+    prob_mut = request.session['prob_mut']
+    prob_oreg = request.session['prob_oreg']
+    path = request.session['path']
+
+    if pred == 0:
+        # RENDERING OUTPUTS ON HTML PAGE
+        return render(request, 'wings/shape/out.html',
+                      {'head': 'wing | Shape', 'ans': 'Mutated', 'out': 'class.', 'prob_mut': prob_mut,
+                       'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: ',
+                       'sub_class': request.session['mutation_value_list'][0],
+                       'key': request.session['mutation_text_list'][0],
+                       'user_name': request.user.username.upper()})
+
+    elif pred == 1:
+        # RENDERING OUTPUTS ON HTML PAGE
+        return render(request, 'wings/shape/out.html',
+                      {'head': 'wing | Shape', 'ans': 'Oregan', 'out': 'class.', 'prob_oreg': prob_oreg,
+                       'prob_mut': prob_mut, 'img_path': path, 'img_name': 'Uploaded Image: ',
+                       'user_name': request.user.username.upper()})
+
+
+# def fb_w_shape(request):
+#     if request.method == 'POST':
+#         priority = request.POST.get('demo-priority')
+#         f = Feedback_wing()
+#         if request.user.is_authenticated:
+#             f.user = request.user
+#         else:
+#             f.user = User.objects.get(pk=9999)
+#
+#         if shape_flag:
+#             f.image = wing_shape
+#         else:
+#             f.image = new_wing_shape
+#         f.priority = priority
+#         f.module = 'Shape'
+#         f.save()
+#         return render(request, 'others/feedback_success.html')
+#
+#     if request.session['predic'] == 0:
+#         return render(request, 'wings/shape/out.html', {'head': 'wing | Shape', 'ans': 'Oregan', 'out': 'class.',
+#                                                         'prob_oreg': request.session['pred_oreg'],
+#                                                         'prob_mut': request.session['pred_mut'],
+#                                                         'img_path': request.session['path'],
+#                                                         'img_name': 'Uploaded Image: ',
+#                                                         'user_name': request.user.username.upper()})
+#     else
+#         return render(request, 'wings/shape/out.html', {'head': 'wing | Shape', 'ans': 'Mutant', 'out': 'class.',
+#                                                         'prob_oreg': request.session['pred_oreg'],
+#                                                         'prob_mut': request.session['pred_mut'],
+#                                                         'img_path': request.session['path'],
+#                                                         'img_name': 'Uploaded Image: ',
+#                                                         'user_name': request.user.username.upper()})
 
 
 def wingbristles(request):
@@ -667,7 +844,7 @@ def wingbristles(request):
 def wingbristles2(request):
     # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
 
-    if request.method == "POST":
+    if request.method == 'POST':
         uploaded_img = request.FILES['img']
         try:
             # Validate the uploaded image file
@@ -677,7 +854,7 @@ def wingbristles2(request):
 
         except (KeyError, ValidationError):
             # If the file was not uploaded or is not a valid image, render an error page
-            return render(request, 'wings/dimensions/w_dimen2.html',
+            return render(request, 'wings/bristles/w_bristles2.html',
                           {'head': 'wing | Bristles', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
@@ -702,15 +879,6 @@ def wingbristles2(request):
 
         hash_b = md5(crop_img)
 
-        request.session['crop_img'] = crop_img
-
-        img = Image.open(crop_img)
-        img1 = WB_PreP.PreProcessing(img)
-        # img1 = prepreprocess(img)
-        plt.imsave(crop_img, img1[2], cmap='gray')
-
-        WB_P.prep = crop_img
-
         try:
             wing = Wing_Image.objects.get(hash=hash_b)
             w_brisltes = w_bristles.objects.filter(wb_o_img=wing).first()
@@ -734,6 +902,18 @@ def wingbristles2(request):
             w_brisltes.wb_o_img = wing
             w_brisltes.bristle_count = WB_P.overallbristles()
             w_brisltes.save()
+        request.session['crop_img'] = crop_img
+        global wing_bristle
+        wing_bristle = wing
+
+        wing_image_dict = serializers.serialize('python', [wing])[0]['fields']
+
+        img = Image.open(crop_img)
+        img1 = WB_PreP.PreProcessing(img)
+        # img1 = prepreprocess(img)
+        plt.imsave(crop_img, img1[2], cmap='gray')
+
+        WB_P.prep = crop_img
 
         return redirect("/cropper_wing",
                         {'head': 'Bristles | Finder', 'img': crop_img, 'user_name': request.user.username.upper()})
@@ -744,12 +924,45 @@ def wingbristles2(request):
 
 
 def cropper_bristles(request):
+    if request.method == 'POST':
+        priority = request.POST.get('demo-priority')
+
+        f = Feedback_wing()
+
+        if request.user.is_authenticated:
+            f.user = request.user
+        else:
+            f.user = User.objects.get(pk=9999)
+
+        f.image = wing_bristle
+
+        f.priority = priority
+        f.module = 'Ommatidium'
+        f.save()
+        return render(request, 'others/feedback_success.html')
+
     crop_img = request.session['crop_img']
     return render(request, 'wings/bristles/cropper.html',
                   {'head': 'Bristles | Finder', 'img': crop_img, 'user_name': request.user.username.upper()})
 
 
 def cropper_eye(request):
+    if request.method == 'POST':
+        priority = request.POST.get('demo-priority')
+
+        f = Feedback_eye()
+
+        if request.user.is_authenticated:
+            f.user = request.user
+        else:
+            f.user = User.objects.get(pk=9999)
+
+        f.image = eye_omat_obj
+
+        f.priority = priority
+        f.module = 'Ommatidium'
+        f.save()
+        return render(request, 'others/feedback_success.html')
     crop_img_eye = request.session['crop_img_eye']
     return render(request, 'eyes/ommatidum/cropper.html',
                   {'head': 'Ommatidium | Finder', 'img': crop_img_eye, 'user_name': request.user.username.upper()})
@@ -890,6 +1103,8 @@ def eye_omat2(request):
             eo.ommatidium_count = ommatdia
             eo.save()
 
+        global eye_omat_obj
+        eye_omat_obj = eye
         return redirect("/cropper_eye", {'head': 'Ommatidium | Finder', 'img': crop_img_eye,
                                          'user_name': request.user.username.upper()})
 
@@ -1042,16 +1257,47 @@ def eye_col2(request):
             e_c.pred_hex = hexval[max_index]
             e_c.save()
 
+        global eye_col_obj
+        eye_col_obj = eye
         js = json.dumps(data)
         fin_rgb = json.dumps(rgb_sums)
-        return render(request, 'eyes/colour/output.html',
-                      {'head': 'Eyes | Eye Colour', 'img': img_eye, 'd': df, 'main': lab[max_index],
-                       'data': js, 'data2': fin_rgb,
-                       'user_name': request.user.username.upper()})
+
+        request.session['df'] = df
+        request.session['img_eye'] = img_eye
+        request.session['fin_rgb'] = fin_rgb
+        request.session['js'] = js
+        request.session['main'] = lab[max_index]
+
+        return redirect('/e_c_o')
 
     return render(request, 'eyes/colour/col2.html',
                   {'head': 'Eyes | Eye Colour', 'img_path': '../static/images/eye_front.jpg',
                    'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
+
+
+def eye_col_output(request):
+    if request.method == 'POST':
+        priority = request.POST.get('demo-priority')
+
+        f = Feedback_eye()
+
+        if request.user.is_authenticated:
+            f.user = request.user
+        else:
+            f.user = User.objects.get(pk=9999)
+
+        f.image = eye_col_obj
+
+        f.priority = priority
+        f.module = 'Colour'
+        f.save()
+        return render(request, 'others/feedback_success.html')
+
+    return render(request, 'eyes/colour/output.html',
+                  {'head': 'Eyes | Eye Colour', 'img': request.session['img_eye'], 'd': request.session['df'],
+                   'main': request.session['main'],
+                   'data': request.session['js'], 'data2': request.session['fin_rgb'],
+                   'user_name': request.user.username.upper()})
 
 
 def hex_to_rgb(hex_value):
@@ -1138,14 +1384,46 @@ def eyedimen2(request):
             eye_d.earea = area
             eye_d.eperimeter = peri
             eye_d.save()
+        global eye_obj
+        eye_omat_obj = eye
 
-        return render(request, 'eyes/Dimensions/eyedimen_output.html',
-                      {"orig": orig_img, "dil": dil_img, "Ar": area, "Pr": peri,
-                       'user_name': request.user.username.upper()})
+        request.session['orig_img'] = orig_img
+        request.session['dil'] = dil_img
+        request.session['area'] = area
+        request.session['peri'] = peri
+
+        return redirect('/e_d_o')
 
     return render(request, 'eyes/Dimensions/e_dimen2.html',
                   {'head': 'Eyes | Dimensions', 'img_path': '../static/images/eye_front.jpg',
                    'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
+
+
+def e_dimen_out(request):
+    if request.method == 'POST':
+        priority = request.POST.get('demo-priority')
+
+        f = Feedback_eye()
+
+        if request.user.is_authenticated:
+            f.user = request.user
+        else:
+            f.user = User.objects.get(pk=9999)
+
+        f.image = eye_obj
+
+        f.priority = priority
+        f.module = 'Dimensions'
+        f.save()
+        return render(request, 'others/feedback_success.html')
+
+    orig_img = request.session['orig_img']
+    dil_img = request.session['dil']
+    area = request.session['area']
+    peri = request.session['peri']
+    return render(request, 'eyes/Dimensions/eyedimen_output.html',
+                  {"orig": orig_img, "dil": dil_img, "Ar": area, "Pr": peri,
+                   'user_name': request.user.username.upper()})
 
 
 def fetch_wingdata(request):
@@ -1157,7 +1435,7 @@ def fetch_wingdata(request):
 
 
 def wing_dashboard(request):
-    if request.user.id == 9999:
+    if not request.user.is_superuser:
         return render(request, 'index.html')
     data = fetch_wingdata(request)
     area = []
@@ -1212,7 +1490,7 @@ def fetch_eyedata(request):
 
 
 def eye_dashboard(request):
-    if request.user.id == 9999:
+    if not request.user.is_superuser:
         return render(request, 'index.html')
     data = fetch_eyedata(request)
 

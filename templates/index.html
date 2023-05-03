@@ -24,17 +24,18 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="banner-caption">
-                                    <h4>Drosophila Melanogaster <em> Decision-Based </em> System</h4>
-                                    <span>Welcome <span
-                                            style="text-transform:uppercase"><strong> {{ request.user.username }} </strong></span></span>
-                                    <p>Do you know that the relationship between
-                                        <strong> fruit fly </strong> and <strong> human genes </strong> is so close that
-                                        often the sequences of newly discovered human genes, including disease genes,
-                                        can be
-                                        matched with equivalent genes in the fly. </p>
-                                    <div class="primary-button">
-                                        <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3082451/">Read More</a>
-                                    </div>
+                                    <h4>Unlocking the Secrets of <em>Drosophila</em> Through Image Analysis</h4>
+                                    {#                                    <span>Welcome <span#}
+                                    {#                                            style="text-transform:uppercase"><strong> {{ request.user.username }} </strong></span></span>#}
+                                    <p>
+                                        <br>
+                                        <br>
+                                        Welcome to our web application,
+                                        <strong
+                                                style="text-transform:uppercase"> {{ request.user.username }} </strong>
+                                        your go-to resource for analyzing and
+                                        understanding the intricacies of Drosophila.</p>
+
                                 </div>
                             </div>
                         </div>
@@ -52,7 +53,7 @@
                     <div class="service-item first-item">
 
                         <h4>Wing Dimensions</h4>
-                        <p>Find the area and perimeter of the seven segments.</p>
+                        <p>Calculate the area and perimeter of seven distinct segments.</p>
                         <br>
                         <h4><a href="w_dimen2" target="_blank"> Visit ↗ </a></h4>
 
@@ -63,7 +64,7 @@
                     <div class="service-item second-item">
 
                         <h4>Wing Shape</h4>
-                        <p>Detect either the fly is mutated or normal.</p>
+                        <p>Distinguish between mutated and normal Drosophila with precision.</p>
                         <br>
                         <h4><a href="w_shape2" target="_blank"> Visit ↗ </a></h4>
                     </div>
@@ -72,7 +73,7 @@
                     <div class="service-item third-item">
 
                         <h4>Wing Bristles</h4>
-                        <p>Get the count of the bristles from the wing. </p>
+                        <p>Determine the bristle count in a Drosophila wing accurately.</p>
                         <br>
                         <h4><a href="w_bristles2" target="_blank"> Visit ↗ </a></h4>
                     </div>
@@ -81,7 +82,7 @@
                     <div class="service-item fourth-item">
 
                         <h4>Eye Dimensions</h4>
-                        <p>Find the area and perimeter of the Drosophila eye. </p>
+                        <p>Compute the area and perimeter of the Drosophila eye precisely.</p>
                         <br>
                         <h4><a href="e_dimen2" target="_blank"> Visit ↗ </a></h4>
                     </div>
@@ -90,7 +91,7 @@
                     <div class="service-item fivth-item">
 
                         <h4>Eye Colour</h4>
-                        <p>Detect the different colours from an eye. </p>
+                        <p>Detect the various colors present in a Drosophila eye meticulously.</p>
                         <br>
                         <h4><a href="col2" target="_blank"> Visit ↗ </a></h4>
                     </div>
@@ -99,7 +100,7 @@
                     <div class="service-item sixth-item">
 
                         <h4>Eye Ommatidium</h4>
-                        <p>Get the count of the ommatidium from the eye. </p>
+                        <p>Determine the ommatidium count in the eye.</p>
                         <br>
                         <h4><a href="e_omat2" target="_blank"> Visit ↗ </a></h4>
                     </div>
@@ -116,9 +117,13 @@
                     <img src="../static/images/top.gif" alt="">
                     <div class="down-content">
                         <h4>Why flies?</h4>
-                        <p>Fruit flies are also a valuable asset to scientists performing genetic research, since fruit
-                            flies and humans share 75% of those genes which cause disease. Their short lifespan is also
-                            amenable to examining changes and mutations that can occur between birth and death.</p>
+                        <p>Fruit flies have been widely used in scientific research for over a century. They are easy to
+                            breed and maintain in the laboratory, have a short lifespan, and produce a large number of
+                            offspring. Additionally, fruit flies share many genetic similarities with humans, making
+                            them an ideal model organism for genetic research. In fact, 75% of the genes that cause
+                            disease in humans can be found in fruit flies. With our web application, you can explore the
+                            genetic makeup of fruit flies and study their traits, mutations, and more. Start your
+                            research today!</p>
                         <div class="primary-button">
                             <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3082451/">Read More</a>
                         </div>
@@ -138,13 +143,11 @@
                 <div class="col-md-6">
                     <div class="right-content">
                         <h4>Life span</h4>
-                        <p>Fruit fly are small (3 mm long) but not so small that they can’t be seen without a
-                            microscope.
-                            They have a short, simple reproduction cycle. It is normally about 8-14 days, depending on
-                            the
-                            environmental temperature. This means that several generations can be observed in a matter
-                            of
-                            months.</p>
+                        <p>Fruit flies have a relatively short lifespan of about 8-14 days, which can vary depending on
+                            the environmental temperature. Despite their small size of 3mm, they are easily visible
+                            without a microscope. Their simple and rapid reproductive cycle allows for several
+                            generations to be observed within a matter of months, making them an ideal subject for
+                            research.</p>
                         <div class="primary-button">
                             <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3082451/">Read More</a>
                         </div>
@@ -161,15 +164,14 @@
                 <div class="col-md-6">
                     <div class="left-content">
                         <h4>Reproduction</h4>
-                        <p>Reproduction in Drosophila is rapid. A single pair of flies can produce hundreds of offspring
-                            within a couple of weeks, and the offspring become sexually mature within one week (Lutz
-                            1948).
+                        <p>Reproduction in Drosophila is remarkably efficient. In just a matter of weeks, a single pair
+                            of flies can produce hundreds of offspring. These offspring mature sexually within a mere
+                            week, showcasing the species' impressive rate of growth and development (Lutz 1948). As with
+                            other insect species, Drosophila melanogaster lays eggs which subsequently hatch into larvae
+                            (maggots) that consume the fruit upon which they were laid (Patterson and Stone 1952).
 
-                            As in all insect species Drosophila melanogaster lays eggs. The eggs are placed on fruit,
-                            and
-                            hatch into fly larvae (maggots), which instantly start consuming the fruit on which they
-                            were
-                            laid (Patterson and Stone 1952).</p>
+
+                        </p>
                         <div class="primary-button">
                             <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3082451/">Read More</a>
                         </div>

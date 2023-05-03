@@ -366,6 +366,53 @@
             </div>
         </div>
     </section>
+
+
+    <section class="forms">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2>Feedback</h2>
+                    </div>
+                    <form id="contact" action="" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>We're always striving to improve our service. The results were: </p>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="circle-item">
+                                    <input name="demo-priority" type="radio" id="demo-small" value="A"
+                                           checked>
+                                    <label for="demo-small">Very Satisfied</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="circle-item">
+                                    <input name="demo-priority" type="radio" id="demo-medium" value="B">
+                                    <label for="demo-medium">Somewhat Satisfied</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="circle-item">
+                                    <input name="demo-priority" type="radio" id="demo-old" value="C">
+                                    <label for="demo-old">Not Satisfied</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border-icon-button">
+                                <button type="submit" name="feedback"><i class="fa fa-check"></i>Send feedback</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
     <!-- Include jQuery library -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

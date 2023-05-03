@@ -1,0 +1,154 @@
+{% extends "base/head.html" %}
+
+{% block content %}
+
+    <div id="page-content">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container">
+                    <div class="horizontal">
+                        <div class="verticals ten offset-by-one">
+                            <ol class="breadcrumb breadcrumb-fill2">
+                                <li><a href="/"><i class="fa fa-home"></i></a></li>
+                                <li><a href="/w_shape">Wing Shape</a></li>
+                                <li><a> / </a></li>
+                                <li><a href="/w_shape2">Input</a></li>
+                                <li><a> / </a></li>
+                                <li class="active">Results</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <section class="forms">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>Classification Results</h2>
+
+                                <div class="section-heading">
+                                    <br>
+                                    <h2>Probability Table</h2>
+                                </div>
+                                <div class="default-table">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th>Class</th>
+                                            <th>Probability</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Oregan</td>
+                                            <td>{{ prob_oreg }}</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>Mutated</td>
+                                            <td>{{ prob_mut }}</td>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <br>
+                                <br>
+                                <h2><em style="color: rebeccapurple"> {{ ans }} </em> {{ out }}</h2>
+                                <br>
+                                <h4><em style="color: rebeccapurple"> {{ sub_class }} <br> </em> {{ key }}</h4>
+                                <h4><a href="feedback">{{ out3 }}</a></h4>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+            <div class="col-md-6">
+                <section class="forms">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>{{ img_name }}</h2>
+                                <br>
+                                <div class="img-container">
+                                    <img src="{{ img_path }}" alt="image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+
+            <!-- Tables -->
+
+
+            <style>
+                .img-container {
+                    max-width: 400px; /* set the maximum width you want */
+                    margin: auto; /* center the container */
+                }
+
+                .img-container img {
+                    max-width: 100%; /* make the image responsive */
+                    height: auto; /* auto-adjust the height */
+                }
+            </style>
+
+
+        </div>
+    </div>
+
+
+    <section class="forms">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="section-heading">
+                        <h2>Feedback</h2>
+                    </div>
+                    <form id="contact" action="" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>We're always striving to improve our service. The results were: </p>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="circle-item">
+                                    <input name="demo-priority" type="radio" id="demo-small" value="A"
+                                           checked>
+                                    <label for="demo-small">Very Satisfied</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="circle-item">
+                                    <input name="demo-priority" type="radio" id="demo-medium" value="B">
+                                    <label for="demo-medium">Somewhat Satisfied</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                                <div class="circle-item">
+                                    <input name="demo-priority" type="radio" id="demo-old" value="C">
+                                    <label for="demo-old">Not Satisfied</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border-icon-button">
+                                <button type="submit" name="feedback"><i class="fa fa-check"></i>Send feedback</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

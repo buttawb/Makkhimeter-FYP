@@ -1,0 +1,185 @@
+{% extends "base/head.html" %}
+{% block content %}
+
+    <head>
+        <style>
+            body {
+                padding: 0;
+                margin: 0;
+            }
+
+            .font-range {
+                width: 100%;
+                box-sizing: border-box;
+                margin: auto;
+            }
+
+            #range {
+                width: 100%;
+                padding: 10px 0;
+                outline-color: #626ad1;
+                background: #626ad1;
+
+            }
+
+            #range1 {
+                width: 100%;
+                padding: 25px 0;
+                background-color: #626ad1;
+                outline-color: #626ad1;
+                fill: #626ad1;;
+
+            }
+
+            #range2 {
+                width: 100%;
+                padding: 25px 0;
+                background: #626ad1;
+
+            }
+
+            .txt1 {
+                box-sizing: border-box;
+                width: 50%;
+                margin: auto;
+            }
+
+            .txt2 {
+                box-sizing: border-box;
+                width: 50%;
+                margin: auto;
+            }
+
+            button {
+                padding: 10px 20px;
+                background: #ffffff;
+                border: none;
+                box-shadow: 0 0 4px 0 #626ad1;
+                transition: all ease .3s;
+            }
+
+            button a {
+                text-decoration: none;
+                color: rgb(255, 0, 0);
+            }
+
+            button:hover {
+                background: #626ad1;
+            }
+        </style>
+    </head>
+    <body>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container">
+                <div class="horizontal">
+                    <div class="verticals ten offset-by-one">
+
+                        <ol class="breadcrumb breadcrumb-fill2">
+                            <li><a href="/"><i class="fa fa-home"></i></a></li>
+                            <li><a href="/w_dimen">Wing Dimensions</a></li>
+                            <li><a> / </a></li>
+                            <li><a href="javascript:history.go(-1)">Input</a></li>
+                            <li><a> / </a></li>
+                            <li><a href="javascript:history.go(-1)">Editor</a></li>
+                            <li><a> / </a></li>
+                            <li class="active">OPV</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="right-image">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="left-content">
+
+                        <form id="contact" method="post" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="left-content">
+                                        <h4><br><br>Object Position Verification</h4>
+                                        <p><br>Is the object in the image centered within the frame, or is it touching
+                                            the borders/corners? Please select one of the following options: <br><br>
+                                        </p>
+                                        <br>
+                                        <br>
+                                        <form id="contact" action="" method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <div class="col-md-10 col-sm-10">
+                                                    <div class="circle-item">
+                                                        <button style="width: 40%;" type="submit" name="yes">
+                                                            Centered
+                                                        </button>
+                                                        <br><br>
+                                                    </div>
+                                                    <button class="btn btn-primary" type="button" disabled
+                                                            id="waitBtn"
+                                                            style="display: none">
+                                            <span class="spinner-border spinner-border-sm" role="status"
+                                                  aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Please wait...</span>
+                                                    </button>
+                                                </div>
+                                                <div class="col-md-10 col-sm-10">
+                                                    <div class="circle-item">
+                                                        <button style="width: 40%;" type="submit" name="no">
+                                                            Touching borders/corners
+                                                        </button>
+                                                    </div>
+                                                    <button class="btn btn-primary" type="button" disabled
+                                                            id="waitBtn"
+                                                            style="display: none">
+                                            <span class="spinner-border spinner-border-sm" role="status"
+                                                  aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Please wait...</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="{{ img_path }}" alt="">
+                </div>
+
+
+            </div>
+        </div>
+
+    </section>
+    </body>
+    <script>
+        // Get references to the two buttons and the "Please wait" button
+        const centeredBtn = document.querySelector('button[name="yes"]');
+        const touchingBtn = document.querySelector('button[name="no"]');
+        const waitBtn = document.querySelector('#waitBtn');
+
+        // Add click event listeners to both buttons
+        centeredBtn.addEventListener('click', handleButtonClick);
+        touchingBtn.addEventListener('click', handleButtonClick);
+
+        function handleButtonClick() {
+            // Hide the two buttons
+            centeredBtn.style.display = 'none';
+            touchingBtn.style.display = 'none';
+
+            // Show the "Please wait" button
+            waitBtn.style.display = 'block';
+        }
+
+
+    </script>
+
+{% endblock %}

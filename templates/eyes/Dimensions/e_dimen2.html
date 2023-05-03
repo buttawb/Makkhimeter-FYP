@@ -28,11 +28,11 @@
                             <div class="col-md-12">
                                 <h2>Eye Dimensions</h2>
                                 <br>
-                                <p>A perfect and noiseless image always generates better and accurate results.</p>
+                                <p>For optimal results, we recommend uploading an image that is clear, well-lit, and
+                                    free from any visual distractions such as background clutter or image noise.
+                                    <br><br></p>
                                 <div class="section-heading">
-                                    <br>
-                                    <br>
-                                    <h2>Upload Image</h2>
+
                                 </div>
                                 <form id="contact upload-form" method="post" name='upload'
                                       enctype="multipart/form-data">
@@ -43,6 +43,8 @@
                                                 <label for="img">Select image:</label>
                                                 <input type="file" id="img" name="img" accept="image/*" required=""
                                                        style="padding-top: 25px; padding-bottom: 75px">
+                                                <p>Accepted formats include <em>TIFF</em>, <em>JPG</em>, <em>JPEG</em>,
+                                                    and <em>PNG</em>.</p>
                                             </fieldset>
                                         </div>
                                         <div class="col-md-12">
@@ -99,4 +101,6 @@
 
         </div>
     </div>
+
+
 {% endblock %}

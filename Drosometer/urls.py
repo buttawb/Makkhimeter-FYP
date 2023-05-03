@@ -43,6 +43,8 @@ urlpatterns = [
 
                   path('w_shape', views.wingshape),
                   path('w_shape2', views.wingshape2),
+                  path('w_shape_fb', views.shape_output),
+                  path('out', views.shape_output),
 
                   path('w_bristles', views.wingbristles),
                   path('w_bristles2', views.wingbristles2),
@@ -65,14 +67,15 @@ urlpatterns = [
 
                   path('eye_col', views.eye_col),
                   path('col2', views.eye_col2),
+                  path('e_c_o', views.eye_col_output),
 
                   path('e_dimen', views.eyedimen),
                   path('e_dimen2', views.eyedimen2),
+                  path('e_d_o', views.e_dimen_out),
 
                   # Dashboard Paths
                   path('w_dashboard', views.wing_dashboard),
                   path('e_dashboard', views.eye_dashboard),
-
 
                   # path('f_thorax', views.thorax_f),
 
