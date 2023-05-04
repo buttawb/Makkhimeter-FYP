@@ -30,7 +30,11 @@
                                 <br>
                                 <p>For optimal results, we recommend uploading an image that is clear, well-lit, and
                                     free from any visual distractions such as background clutter or image noise.
-                                    <br><br></p>
+                                    <br><br>
+                                    This module is designed to identify if a wing is normal or mutated only accepts TIFF
+                                    image files. This module also provides information about the type of mutation if a
+                                    mutation is detected in the wing.<br><br>
+                                </p>
                                 <div class="section-heading">
 
                                 </div>
@@ -60,6 +64,9 @@
                                 </form>
                                 <br>
                                 <br>
+                                <h2>{{ out1 }}<em style="color: rebeccapurple">{{ ans1 }}</em>{{ out2 }}</h2>
+                                <h4><a href="feedback">{{ out3 }}</a></h4>
+                                <h4>{{ out4 }}</h4>
                                 <h2><em style="color: rebeccapurple"> {{ ans }} </em> {{ out }}</h2>
                                 <br>
                                 <h4><em style="color: rebeccapurple"> {{ sub_class }} <br> </em> {{ key }}</h4>

@@ -16,6 +16,28 @@
               crossorigin="anonymous">
         <link rel="stylesheet" href="../../../static/css/cropper.css">
         <link rel="stylesheet" href="../../../static/css/main.css">
+
+
+        <style>
+            .btn {
+                background-color: #626ad1 !important;
+                outline: 2px solid #fff !important;
+
+                box-shadow: black !important;
+                border-color: black !important;
+            }
+
+            .btn2 {
+                background-color: #108a00 !important;
+                outline: 2px solid #fff !important;
+            }
+
+            .navbar-brand {
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+        </style>
     </head>
     <body>
     <!--[if lt IE 9]>
@@ -30,7 +52,7 @@
     <!-- Header -->
     <header class="navbar navbar-light navbar-expand-md">
         <div class="container">
-            <a class="navbar-brand" href="./">Bristle Count</a>
+            <a class="navbar-brand"><br>Bristle Count</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
                     aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -298,7 +320,7 @@
 
 
                 <div class="btn-group btn-group-crop">
-                    <button type="button" class="btn btn-success" data-method="getCroppedCanvas"
+                    <button type="button" class="btn btn-success btn2" data-method="getCroppedCanvas"
                             data-option="{ &quot;maxWidth&quot;: 4096, &quot;maxHeight&quot;: 4096 }">
             <span class="docs-tooltip" data-toggle="tooltip" title="Start counting">
               Count

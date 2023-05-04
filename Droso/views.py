@@ -652,7 +652,7 @@ def wingshape2(request):
             # If the file was not uploaded or is not a valid image, render an error page
             return render(request, 'wings/shape/w_shape2.html',
                           {'head': 'Wing | Shape', 'img_path': 'static/images/404.gif',
-                           'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
+                           'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans1': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
                            'out4': 'Accepted formats include TIFF',
                            'user_name': request.user.username.upper()})
