@@ -10,3 +10,4 @@ tensorflow
 keras-preprocessing
 scikit-learn
 django-extensions 
+django-admin-interface

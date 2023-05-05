@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import *
 
-
 # Register your models here.
 
 admin.site.register(w_dimen)
@@ -13,4 +12,5 @@ admin.site.register(e_colour)
 admin.site.register(e_dimension)
 admin.site.register(e_ommatidium)
 admin.site.register(ContactMessage)
-
+admin.site.register(Feedback_wing)
+admin.site.register(Feedback_eye)
