@@ -341,7 +341,7 @@ def wingdimen2(request):
                         {'head': 'Makkhimeter | wing', 'user_name': request.user.username.upper()})
 
     return render(request, 'wings/dimensions/w_dimen2.html',
-                  {'head': 'Wing | Dimensions', 'img_path': '../static/images/perfect.png',
+                  {'head': 'Wing | Dimensions', 'img_path': '../static/images/perfect.jpg',
                    'img_name': 'Expected Input Image ', 'user_name': request.user.username.upper()})
 
 
@@ -757,7 +757,7 @@ def wingshape2(request):
         return redirect("/out")
 
     return render(request, 'wings/shape/w_shape2.html',
-                  {'head': 'Wing | Shape', 'img_path': '../static/images/perfect.png',
+                  {'head': 'Wing | Shape', 'img_path': '../static/images/perfect.jpg',
                    'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
 
 
@@ -919,7 +919,7 @@ def wingbristles2(request):
                         {'head': 'Bristles | Counter', 'img': crop_img, 'user_name': request.user.username.upper()})
 
     return render(request, 'wings/bristles/w_bristles2.html',
-                  {'head': 'Wing | Bristles', 'img_path': '../static/images/perfect.png',
+                  {'head': 'Wing | Bristles', 'img_path': '../static/images/perfect.jpg',
                    'img_name': 'Expected Input Image ', 'user_name': request.user.username.upper()})
 
 
