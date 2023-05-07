@@ -7,12 +7,12 @@ from django.core.files import File
 from Drosometer import settings
 
 
-def compress(image):
-    im = Image.open(image)
-    im_io = BytesIO()
-    im.save(im_io, 'JPEG', quality=60)
-    new_image = File(im_io, name=image.name)
-    return new_image
+# def compress(image):
+#     im = Image.open(image)
+#     im_io = BytesIO()
+#     im.save(im_io, 'JPEG', quality=60)
+#     new_image = File(im_io, name=image.name)
+#     return new_image
 
 
 class Wing_Image(models.Model):
@@ -27,10 +27,10 @@ class Wing_Image(models.Model):
     dt = models.DateTimeField(auto_now_add=True,
                               verbose_name="Date & Time")
 
-    def save(self, *args, **kwargs):
-        new_image = compress(self.image)
-        self.image = new_image
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     new_image = compress(self.image)
+    #     self.image = new_image
+    #     super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Wing Image"
@@ -48,10 +48,10 @@ class Eye_Image(models.Model):
     dt = models.DateTimeField(auto_now_add=True,
                               verbose_name="Date & Time")
 
-    def save(self, *args, **kwargs):
-        new_image = compress(self.image)
-        self.image = new_image
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     new_image = compress(self.image)
+    #     self.image = new_image
+    #     super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Eye Image"
