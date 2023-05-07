@@ -216,10 +216,13 @@
                             const data2 = JSON.parse('{{ data2|safe }}');
 
                             // Extract the data from the JSON object
-
-                            const r = (data2.R / 1020) * 100;
-                            const g = (data2.G / 1020) * 100;
-                            const b = (data2.B / 1020) * 100;
+                            const r = data2.R;
+                            const g = data2.G;
+                            const b = data2.B;
+                            const sum = r + g + b;
+                            const normalizedR = (r / sum) * 100;
+                            const normalizedG = (g / sum) * 100;
+                            const normalizedB = (b / sum) * 100;
                             const per = (r + g + b) / 3;
                             const roundedPer = per.toFixed(2);
 
@@ -233,7 +236,7 @@
                                 echarts.init(document.querySelector("#pieChart1")).setOption({
                                     title: {
                                         text: 'RGB Values',
-                                        subtext: '% of R: ' + r.toFixed(2) + '\n' + '% of G: ' + g.toFixed(2) + '\n' + '% of B: ' + b.toFixed(2) + '\n',
+                                        subtext: '% of R: ' + normalizedR.toFixed(2) + '\n' + '% of G: ' + normalizedG.toFixed(2) + '\n' + '% of B: ' + normalizedB.toFixed(2) + '\n',
 
 
                                         left: 'center'

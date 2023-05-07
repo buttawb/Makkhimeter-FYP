@@ -1185,6 +1185,10 @@ def eye_col2(request):
         hexval = []
         per = []
 
+        # Calculate the total sum of RGB values
+
+        # Calculate the percentage of each RGB value
+
         for i in df:
             lab.append(i['labels'])
             hexval.append(i['colors'])
