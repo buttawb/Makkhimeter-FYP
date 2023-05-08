@@ -153,10 +153,10 @@ def __find_userpath(request):
 
 
 def __clear_cache(path):
-    path = path + '/*'
-    files = glob.glob(path)
-    for all_files in files:
-        os.remove(all_files)
+    #path = path + '/*'
+    #files = glob.glob(path)
+    #for all_files in files:
+        #os.remove(all_files)
     return
 
 

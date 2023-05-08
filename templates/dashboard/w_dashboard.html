@@ -276,11 +276,11 @@
                                                 {
                                                     x: {{ d.0 }},
                                                     y: {{ d.1 }},
-                                                    r: {{ bubble_size }},
                                                 },
                                             {% endfor %}],
                                             borderColor: 'rgb(255, 99, 132)',
-                                            backgroundColor: 'rgba(255, 99, 132, 0.5)'
+                                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                                            radius: 3 // default bubble size
                                         }]
                                     },
                                     options: {
@@ -311,7 +311,6 @@
                                                     text: 'Serial Numbers',
                                                     font: {
                                                         size: 12
-
                                                     },
                                                 },
                                             },
@@ -319,10 +318,9 @@
                                                 // add the x-axis label
                                                 title: {
                                                     display: true,
-                                                    text: 'Bristle Range',
+                                                    text: 'Ommatidium Range',
                                                     font: {
                                                         size: 12
-
                                                     },
                                                 },
                                             },
@@ -330,6 +328,7 @@
                                     }
                                 });
                             });
+
                         </script>
 
                         <!-- End Bubble Chart -->
