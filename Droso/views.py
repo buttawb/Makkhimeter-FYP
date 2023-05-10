@@ -1,36 +1,31 @@
-import glob
 import hashlib
 import io
 import json
 import os
 import uuid
 
+from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render, redirect
+from django.contrib.auth.forms import PasswordResetForm
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
-from django.core import serializers
+from django.http import HttpResponse
+from django.shortcuts import redirect
+from django.shortcuts import render
 
 from Droso.forms import CustomUserCreationForm
 from Droso.models import *
-
-from Python_Scripts.DIP.Eyes.Eye_Colour import *
-from Python_Scripts.DIP.Eyes.Eye_Dimensions import *
-from Python_Scripts.DIP.Eyes.Eye_Ommatidium import *
-from django.contrib.auth.models import Group
-
 # IMPORTING SCRIPTS
-from Python_Scripts.DIP.Wings.Wing_Bristles import *
-from Python_Scripts.DIP.Wings.Wing_Dimensions import *
-from Python_Scripts.DL import dl
+# EYES
+from Python_Scripts.Eyes.Eye_Colour import *
+from Python_Scripts.Eyes.Eye_Dimensions import *
+from Python_Scripts.Eyes.Eye_Ommatidium import *
+# WINGS
+from Python_Scripts.Wings.Wing_Bristles.Wing_Bristles import *
+from Python_Scripts.Wings.Wing_Dimensions.Wing_Dimensions import *
+from Python_Scripts.Wings.Wing_Shape import dl
 
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordResetForm
-from django.contrib import messages
-
-# CREATING OBJECTS
+# CREATING SCRIPT CLASSES OBJECTS
 WD_PreP = WD_PreProcessing()
 WD_P = WD_Procesing()
 WD_PostP = WD_PostProcessing()
@@ -96,6 +91,7 @@ def __reader(obj):
 
 
 def md5(img_path):
+    # TO CONVERT IMAGE TO ITS 128 BIT HEXADECIMAL - OUTPUT IS OF 32 DIGITS
     mdhash = hashlib.md5(Image.open(img_path).tobytes())
     md5_hash = mdhash.hexdigest()
     return md5_hash
@@ -127,6 +123,7 @@ def __upload_file_to_userdir(request, file, file_format, flag=True):
     # SAVE FILE ONLY IF FLAG IS TRUE
     path = __find_userpath(request)
     rand_name = str(uuid.uuid4())
+
     if flag:
         filename = rand_name + file_format
         final_path = os.path.join(path, filename)
@@ -161,6 +158,7 @@ def __clear_cache(path):
 
 
 def image_check(img, path):
+    # VALIDATOR TO VALIDATE EITHER THE IMAGE IS OF WING OR NOT
     img_1 = cv2.imread(path)
     gray = cv2.cvtColor(img_1, cv2.COLOR_BGR2GRAY)
 
@@ -189,9 +187,10 @@ def image_check(img, path):
 
 
 def main(request):
-    if Group.objects.exists():
-        return HttpResponse("Redirect to homepage")
-    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
+    # LANDING PAGE
+
+    # if Group.objects.exists():
+    #     return HttpResponse("Redirect to homepage")
 
     path = __find_userpath(request)
 
@@ -209,38 +208,33 @@ def main(request):
 
 
 def wingdimen(request):
-    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-
     return render(request, 'wings/dimensions/w_dimen.html',
                   {'head': 'Makkhimeter | wing', 'user_name': request.user.username.upper()})
 
 
 def wingdimen2(request):
-    # If the user tries to access any page with URL without signing in, redirect to login page.
-
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
         try:
             # Validate the uploaded image file
-            allowed_extensions = ['png', 'tif', 'jpg', 'jpeg']
+            allowed_extensions = ['tif']
             ext_validator = FileExtensionValidator(allowed_extensions=allowed_extensions)
             ext_validator(uploaded_img)
+
         except (KeyError, ValidationError):
-            # If the file was not uploaded or is not a valid image, render an error page
+            # IF THE UPLOADED IMAGE IS NOT OF REQUIRED FORMAT, RENDER THE ERROR PAGE
             return render(request, 'wings/dimensions/w_dimen2.html',
                           {'head': 'wing | Dimensions', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
-                           'out4': 'Accepted formats include TIFF, PNG, '
-                                   'JPG & JPEG.',
+                           'out4': 'Accepted formats include TIFF.',
                            'user_name': request.user.username.upper()})
 
-        # CHECK EITHER THE IMAGE IS OF WING OR NOT.
         img1 = __reader(uploaded_img)
         img2 = img1.convert('RGB')
-        # orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
-        #
+
+        # CHECK EITHER THE IMAGE IS OF WING OR NOT
         # if not image_check(img1, orig_img):
         #     return render(request, 'wings/dimensions/w_dimen2.html',
         #                   {'head': 'wing | Dimensions', 'img_path': orig_img,
@@ -252,15 +246,16 @@ def wingdimen2(request):
         # p = cv2.imread(orig_img)
 
         hash_d = md5(orig_img)
-
         dimen_flag = False
 
         try:
+            # GET THE IMAGE ID IF IT EXIST
             wing = Wing_Image.objects.get(hash=hash_d)
             request.session['wing_object_pk'] = wing.pk
             dimen_flag = True
 
         except Wing_Image.DoesNotExist:
+            # IF NOT THEN ADD AN ENTRY IN DB
             wingg = Wing_Image()
 
             wingg.image = uploaded_img
@@ -321,6 +316,7 @@ def wingdimen2(request):
         # global wing_dimen_ui
         # global mymy
 
+        # SAVE SOME IMAGE PATHS FOR LATER USE (FOR TRANSFORMATION STEPS) IN SECURED SESSION
         request.session['orig_img_fn'] = orig_img
         request.session['save_dil_path'] = save_dil
         request.session['dilation_bar'] = file_path
@@ -427,7 +423,7 @@ def finale(request, for_dil, save_dil, orig_img):
 
 
 def w_bar(request):
-    # for_dil = request.session['dilation']
+    # GET IMAGE PATHS FROM SAVED SESSIONS
     file_path = request.session['dilation_bar']
     for_dil = cv2.imread(file_path, 0)
     save_dil = request.session['save_dil_path']
@@ -460,8 +456,7 @@ def w_bar(request):
         # dat = []
         # dat = json.loads(json_record)
 
-        # STORING IN DATABASE
-
+        # STORING WING DIMENSIONS IF IT DOESN'T EXIST, IF IT DOES DON'T SAVE.
         if not request.session['dimen_flag']:
             dimen = w_dimen()
 
@@ -487,6 +482,7 @@ def w_bar(request):
 
         return data, dat, outimg, outimg2
 
+    # IF THE FORM IS POSTED FOR "RESET TO DEFAULT VALUES" OF SLIDER/DILATION
     if 'highlight' in request.POST:
         WD_P.preprocess_img = for_dil
         dil = WD_P.Dilation()
@@ -498,8 +494,8 @@ def w_bar(request):
                        'val1': 7, 'val2': 12, 'img_p': request.session['orig_img_fn'], 'img_n': 'Original Image',
                        'but_name': 'Reset to default values', 'user_name': request.user.username.upper()})
 
+    # IF THE FORM IS POSTED FOR "CHECK" - CUSTOM SLIDER/DILATION VALUES
     if 'check' in request.POST:
-        # VALUE GET NAI HORAI
         # global values_from_slider
 
         # def get_values_from_slider():
@@ -520,6 +516,7 @@ def w_bar(request):
                        'val1': val1, 'val2': val2, 'but_name': 'Reset to default values',
                        'user_name': request.user.username.upper()})
 
+    # IF FORM IS POSTED TO PROCEED TO NEXT STEP
     if 'next' in request.POST:
         get_values = get_values_from_slider(request, for_dil, save_dil)
         save_dil = get_values[0]
@@ -544,6 +541,8 @@ def w_bar(request):
     request.session['flag'] = flag
     orig_img = request.session['orig_img_fn']
 
+    # FORM HANDLING FOR CENTERED/TOUCHING BORDERS IMAGE
+    # BOTH RUN DIFFERENT FUNCTIONS
     if 'yes' in request.POST:
         flag = True
 
@@ -565,6 +564,7 @@ def w_bar(request):
                       {'d': data, 'head': 'Dimensions | Result', 'img2': outimg, 'img1': outimg2, 'f': dat,
                        'orig_img': orig_img, 'user_name': request.user.username.upper()})
 
+    # TO STORE FEEDBACK (IF GIVEN) IN DB
     if 'feedback' in request.POST:
         priority = request.POST.get('demo-priority')
 
@@ -595,6 +595,7 @@ def w_bar(request):
 
 
 def detail_dimen(request):
+    # FOR STEPS OF IMAGE TRANSFORMATION IN WING DIMENSIONS
     if request.session['flag']:
         img1 = request.session['orig_img_fn']
         img2 = request.session['save_dil_path']
@@ -637,38 +638,32 @@ def get_values_from_slider(request, for_dil, save_dil):
 
 
 def wingshape(request):
-    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-
     return render(request, 'wings/shape/w_shape.html',
                   {'head': 'Makkhimeter | Wing', 'user_name': request.user.username.upper()})
 
 
 def wingshape2(request):
-    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
         try:
             # Validate the uploaded image file
-            allowed_extensions = ['tif', 'png', 'jpg', 'jpeg']
+            allowed_extensions = ['tif']
             ext_validator = FileExtensionValidator(allowed_extensions=allowed_extensions)
             ext_validator(uploaded_img)
+
         except (KeyError, ValidationError):
             # If the file was not uploaded or is not a valid image, render an error page
             return render(request, 'wings/shape/w_shape2.html',
                           {'head': 'Wing | Shape', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans1': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
-                           'out4': 'Accepted formats include TIFF, JPG, JPEG, PNG',
+                           'out4': 'Accepted formats include TIFF.',
                            'user_name': request.user.username.upper()})
 
         img1 = __reader(uploaded_img)
-        # yeh ubyte ko dena hai wind dimension
-        # IMAGE CONVERSIONS FOR THE DL MODEL.
         img2 = img1.convert('RGB')
-
         path = __upload_file_to_userdir(request, img2, '.jpeg')
-
         img3 = np.array(img2)
 
         # APPLYING MODEL
@@ -683,7 +678,7 @@ def wingshape2(request):
 
         md5_hash = md5(path)
 
-        # CREATING OBJECT AND SAVING ALL OUTPUTS TO DATABASE THROUGH MODEL
+        # CREATING OBJECT AND SAVING ALL OUTPUTS TO DATABASE
         try:
             new_wing_shape = Wing_Image.objects.get(hash=md5_hash)
             shape = w_shape.objects.get(ws_o_img=new_wing_shape)
@@ -720,6 +715,7 @@ def wingshape2(request):
             s.ws_mutated_prob = prob_mut
             s.ws_o_img = new_wing_shape
             s.save()
+
         request.session['wing_shape_pk'] = new_wing_shape.pk
         mutation = dl.k_model(path)
 
@@ -734,6 +730,7 @@ def wingshape2(request):
 
         request.session['pred'] = pred
 
+        # FOR IDENTIFICATION OF DIFFERENT CLASSES OF MUTATION - UNDER DEVELOPMENT
         mutation_text = {
             0: 'Broken Mutant Wing.',
             1: 'Broken Mutant Wing.',
@@ -839,20 +836,16 @@ def shape_output(request):
 
 
 def wingbristles(request):
-    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-
     return render(request, 'wings/bristles/w_bristles.html',
                   {'head': 'Makkhimeter | wing', 'user_name': request.user.username.upper()})
 
 
 def wingbristles2(request):
-    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
         try:
             # Validate the uploaded image file
-            allowed_extensions = ['tif', 'png', 'jpg', 'jpeg']
+            allowed_extensions = ['tif']
             ext_validator = FileExtensionValidator(allowed_extensions=allowed_extensions)
             ext_validator(uploaded_img)
 
@@ -971,7 +964,6 @@ def cropper_eye(request):
 
 
 def c_us(request):
-    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
     if request.method == 'POST':
         name = request.POST['name']
         email = request.POST['email']
@@ -989,29 +981,21 @@ def c_us(request):
 
 
 def a_us(request):
-    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-
     return HttpResponse("This page is going to be updated soon :)) ")
     # return render(request, 'others/aboutus.html',
     #               {'head': 'Makkhimeter | About Us', 'user_name': request.user.username.upper()})
 
 
 def f_b(request):
-    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-
     return render(request, 'others/feedback.html',
                   {'head': 'Makkhimeter | Give Feedback', 'user_name': request.user.username.upper()})
 
 
 def wing_f(request):
-    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-
     return render(request, 'f_w.html', {'head': 'Makkhimeter | wing', 'user_name': request.user.username.upper()})
 
 
 def eye_f(request):
-    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-
     return render(request, 'f_e.html', {'head': 'Makkhimeter | Eyes', 'user_name': request.user.username.upper()})
 
 
@@ -1048,7 +1032,7 @@ def eye_omat2(request):
 
         try:
             # Validate the uploaded image file
-            allowed_extensions = ['jpg', 'jpeg', 'png', 'tif']
+            allowed_extensions = ['jpg', 'jpeg', 'png']
             ext_validator = FileExtensionValidator(allowed_extensions=allowed_extensions)
             ext_validator(uploaded_img)
 
@@ -1058,7 +1042,7 @@ def eye_omat2(request):
                           {'head': 'Eye | Ommatidium', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
-                           'out4': 'Accepted formats include JPG & JPEG',
+                           'out4': 'Accepted formats include PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
 
         img1 = Image.open(uploaded_img)
@@ -1125,7 +1109,7 @@ def eye_col2(request):
 
         try:
             # Validate the uploaded image file
-            allowed_extensions = ['tif', 'jpg', 'jpeg', 'png']
+            allowed_extensions = ['jpg', 'jpeg', 'png']
             ext_validator = FileExtensionValidator(allowed_extensions=allowed_extensions)
             ext_validator(uploaded_img)
 
@@ -1135,8 +1119,7 @@ def eye_col2(request):
                           {'head': 'Eye | Colour', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
-                           'out4': 'Accepted formats include TIFF, PNG, '
-                                   'JPG & JPEG.',
+                           'out4': 'Accepted formats include PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
 
         f = Image.open(uploaded_img)
@@ -1317,14 +1300,12 @@ def eyedimen(request):
 
 
 def eyedimen2(request):
-    # IF THE USER TRIES TO ACCESS ANY PAGE WITH URL WITHOUT SIGNING IN. REDIRECT TO LOGIN PAGE.
-
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
         try:
             # Validate the uploaded image file
-            allowed_extensions = ['png', 'tif', 'jpg', 'jpeg']
+            allowed_extensions = ['png', 'jpg', 'jpeg']
             ext_validator = FileExtensionValidator(allowed_extensions=allowed_extensions)
             ext_validator(uploaded_img)
         except (KeyError, ValidationError):
@@ -1333,8 +1314,7 @@ def eyedimen2(request):
                           {'head': 'Eye | Dimensions', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
-                           'out4': 'Accepted formats include TIFF, PNG, '
-                                   'JPG & JPEG.',
+                           'out4': 'Accepted formats include PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
 
         img1 = __reader(uploaded_img)
@@ -1438,13 +1418,14 @@ def fetch_wingdata(request):
 
 
 def wing_dashboard(request):
+    # IF THE USER IS NOT SUPERUSER DON'T ALLOW THE ACCESS TO THIS PAGE
     if not request.user.is_superuser:
         return render(request, 'index.html')
+
     data = fetch_wingdata(request)
     area = []
     peri = []
     bristles = []
-
     pred = []
 
     for i in data[0]:
@@ -1493,10 +1474,11 @@ def fetch_eyedata(request):
 
 
 def eye_dashboard(request):
+    # IF THE USER IS NOT SUPERUSER DON'T ALLOW THE ACCESS TO THIS PAGE
     if not request.user.is_superuser:
         return render(request, 'index.html')
-    data = fetch_eyedata(request)
 
+    data = fetch_eyedata(request)
     area = []
     peri = []
     ommatidia = []

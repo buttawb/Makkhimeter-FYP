@@ -4,7 +4,60 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Removed global variables/functions from views." />
+    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Removed global variables/functions from views.">
+      <change afterPath="$PROJECT_DIR$/Python_Scripts/Eyes/Eye_Colour.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Python_Scripts/Eyes/Eye_Dimensions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Python_Scripts/Eyes/Eye_Ommatidium.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Python_Scripts/Wings/Wing_Bristles/Wing_Bristles.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Python_Scripts/Wings/Wing_Dimensions/Wing_Dimensions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Python_Scripts/Wings/Wing_Shape/dl.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Python_Scripts/Wings/Wing_Shape/model.h5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Python_Scripts/Wings/Wing_Shape/model.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_125805.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_130429.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0119.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0224.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0236.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image1118_-_Copy.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/0ab9caa1-6bf0-4c9a-939e-3c133acdbd5f.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/497f84f4-d934-4065-99cb-d6a02561b998.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/5b8a7af8-cf1a-4791-9f63-6d9ee61fc44e.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/8a80a5b1-7b03-4b72-a313-e576f2becfb8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/acfcca9b-aaec-4d89-801b-cc1ddf4cf4ab.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/b9f466eb-fc49-4c00-945a-563a2b9118a0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/ced1a298-5389-455b-9d34-4d9dc6f7eaef.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/e277f1c9-0b1a-4f2c-b23e-43a12e55ae77.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/f8a77a4e-58b1-4e8c-a72c-95d0e1abb317.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/0642a7ee-47f1-4c0b-8263-8c642d9f3264.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/0a3d1fe3-907b-414a-bac1-c559aad41741.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/57c9bef8-423c-40aa-96cc-f9dd7217ec41.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/92073a47-af05-4ef0-80ba-0134fe85ce18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/cb90794e-3c7f-4cba-a0a1-9944141a815b.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/cbfee5e1-654e-4f37-8eea-e29c414f31fa.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/awb/d40d219d-017d-4329-a60c-8bf0e4834631.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Drosometer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Drosometer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Colour.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Dimensions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Eyes/Eye_Ommatidium.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Wings/Wing_Bristles.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Scripts/DIP/Wings/Wing_Dimensions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Scripts/DL/dl.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Scripts/DL/model/model.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Python_Scripts/DL/model/model.pkl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/head.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/dashboard/e_dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard/e_dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/dashboard/w_dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard/w_dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/eyes/Dimensions/e_dimen2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/Dimensions/e_dimen2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/eyes/colour/col2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/colour/col2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/eyes/colour/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/colour/output.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/eyes/ommatidum/omat_2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/ommatidum/omat_2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/bristles/w_bristles2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/bristles/w_bristles2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/shape/w_shape2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/shape/w_shape2.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -239,6 +292,7 @@
       <workItem from="1683564067798" duration="683000" />
       <workItem from="1683625074652" duration="2777000" />
       <workItem from="1683664011218" duration="5575000" />
+      <workItem from="1683727576759" duration="5408000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
