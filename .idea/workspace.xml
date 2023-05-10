@@ -4,91 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Minor changes.">
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/20221007_131347.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/IMG_20221224_233222.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/WhatsApp_Image_2023-05-09_at_23.18.05.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/bristles.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/eye_front.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0119.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0202.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image1187.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/043da206-d2ad-4300-9378-7dfc2a67fede.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/0669c864-0dd2-464b-b252-d3fe043b9469.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/09ea41d8-37e2-4857-bc0c-a3cd42fcf875.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/0cca65e2-7549-405f-828f-e07c8ad9c0f9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/0db110d5-093c-4151-b336-b42b0b4699f9.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/11ef1154-bc38-4b22-a4b7-6c1890b81e40.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/1a9440e5-9cb5-49ca-8153-8a14212c9f7b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/244cc381-604f-49bc-9675-ede7dc97147b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/2560a000-a771-4411-99d7-68f92673c186.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/341cb37b-a561-4daa-9ac7-2f71adc02da7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/42c4dcc9-0e09-49dd-be09-51c69693c88a.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/51b04b25-e16c-49a9-a6ee-0720da2e86ed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/5213a6fe-8031-494c-aba5-4e8733afa1d5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/65d868b1-295f-4389-9ca5-f23ee1fffd19.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/68588218-51e5-4afa-88d7-e1a34a945ca5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/686a154a-a57b-4dda-bb05-310788a5b63a.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/71887da4-fd98-4bc1-a44d-26594d041a51.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/74f3bd35-e1b5-4153-ba8a-9b45ec938392.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/75e420d4-52a1-49bd-a38a-0e0e2aca4247.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/7adef0fd-70c9-4180-8678-0b9b1efcc304.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/7b2d9c82-96e5-4859-b3f8-ea52654a4956.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/82042c7f-c37f-464b-a2a2-5ffe96fd3fed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/8d58c54b-45ce-424e-bbc8-9282d1aa2711.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/8f568808-a997-4dbd-8e45-208a0f6e45ef.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/91ce60e5-6ac4-4372-8b51-1496c66f5a04.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/a1b05cbe-a241-490a-a6ef-a283a181eb8f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/a36ff990-b7da-4051-b771-05b4aaf86018.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/a5ca8548-81f1-4782-aadc-4c179fdaee35.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/a62c35ff-f1e3-42a5-8cc6-ea4a10a170e5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/a7f16659-5bc3-4edc-9712-85a895996b24.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/ab676ab5-4dc4-4598-a31b-313b220d9fc2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/affe539b-7e83-49cf-8e3f-e6622c51778c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/b2657945-4db8-4d4a-91a2-ee7eb2d2adaa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/b846d0a7-6efc-4852-b9d3-43a5a63d02d3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/b9da0ba0-9dda-42ce-a4f4-e907943653b8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/bbebf57d-84e7-4078-b4ae-5e23c69c8a09.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/bbf9bb29-a9cc-4085-85b4-1710097f27bd.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/bc31c23b-c516-40ae-bafc-56b2bf0f78dd.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/bf58c539-f2af-4619-b788-a97c139aa95e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/c15405e1-7a4f-45bc-a530-c0197c43a23f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/c1b6cc5c-628d-46f1-8fe3-c19b9e2fa84d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/cabbbbf3-9c82-4b67-83d1-dccbe80a6133.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/cc681387-418a-4f60-92dc-1aa6ff718726.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/cea14967-6ac0-4e4a-8456-f9ab3896a541.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/d035e8fe-8127-4f12-85a6-b9c0c183da44.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/d227fb72-a3a8-48ad-a95a-427747dab66c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/d8927c35-3156-4d76-a7b9-df67adcbccf5.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/da6fdc1e-2da2-4e4f-88f0-e737afd959e5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/dbfdb0c1-95f9-43fc-a590-461d04ee0708.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/dc695af9-7e10-402d-9781-85beb0408d0b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/dd5d8cc4-1119-4cf1-962a-6f9c8f1fd71f.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/e009f879-739b-432b-acdc-f6d292c51323.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/e368e4c9-bd6e-49db-bcf8-bea28e2ff2b1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/e3e35082-da01-4165-becc-fd1c7531c9eb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/e6dde8d8-5653-4716-9a5a-ecc850a974ef.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/ea6dea77-2834-4c8f-9140-df26f72c14ff.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/f665ef6f-823a-40ef-b46b-0586c9f5c930.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/f7fe017b-c2ec-499f-957d-ad0324c79d57.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/fee4461d-72b1-4aff-9164-f6287438c852.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/096960b1-cefe-4aef-b101-6028d89e4051.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/0d994f46-48e2-4872-87e3-9cae6b16918b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/11d96257-6296-4b5a-8cd1-350dab0db255.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/172a166f-a093-4dab-8d02-287bd46dd53c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/2c5a18dc-7120-4dde-9296-e6ba62f6354d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/34fbab8e-2ef9-42f5-8fd1-b0036af02409.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/3f25142a-a26f-421f-9ab8-74e481a7fcbd.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/687400d5-3882-4cd6-8df7-e3f4d322592d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/77e9f48e-fdf1-4487-a903-99cd09d44ba3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/7ce22e92-a965-4337-b970-1466147e3e7e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/803c7f6c-55b8-4063-bdcc-7e710b6463d9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/f6b17b15-01d9-4962-b0fc-ae0fc3d5e3f8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/awb/f77ac3e3-ce8f-4e92-b979-59824021bbef.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/eyes/colour/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/colour/output.html" afterDir="false" />
-    </list>
+    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Removed global variables/functions from views." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -322,7 +238,7 @@
       <workItem from="1683466180099" duration="1837000" />
       <workItem from="1683564067798" duration="683000" />
       <workItem from="1683625074652" duration="2777000" />
-      <workItem from="1683664011218" duration="5260000" />
+      <workItem from="1683664011218" duration="5575000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
@@ -625,7 +541,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683467667520</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Removed global variables/functions from views.">
+      <created>1683669539644</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1683669539644</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -644,7 +567,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Debugging screens available for W_Dimen." />
     <MESSAGE value="Images are stored after compressing." />
     <MESSAGE value="Classes &amp; its objects modified." />
     <MESSAGE value="Checks in wing dimensions." />
@@ -669,6 +591,7 @@
     <MESSAGE value="Added UIT/DOW Logos &amp; about us." />
     <MESSAGE value="Added FEEDBACK for each submodule." />
     <MESSAGE value="Minor changes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor changes." />
+    <MESSAGE value="Removed global variables/functions from views." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed global variables/functions from views." />
   </component>
 </project>
