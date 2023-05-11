@@ -210,6 +210,7 @@ window.onload = function () {
               download.download = uploadedImageName;
               download.href = result.toDataURL(uploadedImageType);
             }
+            // contour code
             var href=download.href ;
             var a=href.split(';');
             var image = new Image();

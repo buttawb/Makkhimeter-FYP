@@ -681,7 +681,7 @@ def wingshape2(request):
         # CREATING OBJECT AND SAVING ALL OUTPUTS TO DATABASE
         try:
             new_wing_shape = Wing_Image.objects.get(hash=md5_hash)
-            shape = w_shape.objects.get(ws_o_img=new_wing_shape)
+            shape = w_shape.objects.filter(ws_o_img=new_wing_shape)
 
             if not shape:
                 s = w_shape()
