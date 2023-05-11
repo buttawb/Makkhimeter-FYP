@@ -242,7 +242,7 @@ def wingdimen2(request):
         #                    'out2': ' of wing', 'out3': 'Let us know if this is by mistake.',
         #                    'user_name': request.user.username.upper()})
 
-        orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
+        orig_img = __upload_file_to_userdir(request, img2, '.jpeg', flag=True)
         # p = cv2.imread(orig_img)
 
         hash_d = md5(orig_img)
@@ -868,17 +868,23 @@ def wingbristles2(request):
         #                    'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
         #                    'out2': ' of wing', 'out3': 'Let us know if this is by mistake.',
         #                    'user_name': request.user.username.upper()})
-
+        img2 = img1.convert('RGB')
         crop_img = __upload_file_to_userdir(request, img1, ".png")
+        crop_img_hash = __upload_file_to_userdir(request, img2, ".jpeg")
 
         # Agr image pehly se hi database mein pari wi hai..
         # #tu bristles count wale table mein us [pehly se] hi image wale ki id le kr ani paregi.
 
-        hash_b = md5(crop_img)
+        hash_b = md5(crop_img_hash)
+        img = Image.open(crop_img)
+
+        img1 = WB_PreP.PreProcessing(img)
+        plt.imsave(crop_img, img1[2], cmap='gray')
+        WB_P.prep = crop_img
 
         try:
             wing = Wing_Image.objects.get(hash=hash_b)
-            w_brisltes = w_bristles.objects.get(wb_o_img=wing)
+            w_brisltes = w_bristles.objects.filter(wb_o_img=wing)
             if not w_brisltes:
                 w_brisltes = w_bristles()
                 w_brisltes.wb_o_img = wing
@@ -902,13 +908,6 @@ def wingbristles2(request):
 
         request.session['crop_img'] = crop_img
         request.session['wing_bristle_pk'] = wing.pk
-
-        img = Image.open(crop_img)
-        img1 = WB_PreP.PreProcessing(img)
-        # img1 = prepreprocess(img)
-        plt.imsave(crop_img, img1[2], cmap='gray')
-
-        WB_P.prep = crop_img
 
         return redirect("/cropper_wing",
                         {'head': 'Bristles | Counter', 'img': crop_img, 'user_name': request.user.username.upper()})
@@ -1048,6 +1047,8 @@ def eye_omat2(request):
         img1 = Image.open(uploaded_img)
         # with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         #     f.save(temp_file.name)
+        eye_hash = __upload_file_to_userdir(request, img1, ".jpeg", flag=True)
+        img1.save(eye_hash)
         crop_img_eye = __upload_file_to_userdir(request, img1, ".png", flag=True)
         # img1 = uploaded_img.read()
         #
@@ -1057,12 +1058,12 @@ def eye_omat2(request):
         request.session['crop_img_eye'] = crop_img_eye
 
         img = Image.open(crop_img_eye)
-        img1 = WB_PreP.PreProcessing(img)
+        img1 = EO_PreP.PreProcessing(img)
         # img1 = prepreprocess(img)
         plt.imsave(crop_img_eye, img1[2], cmap='gray')
 
         ommatdia = EO_PreP.overallommatidium(crop_img_eye)
-        md5_hash = md5(crop_img_eye)
+        md5_hash = md5(eye_hash)
 
         try:
             eye = Eye_Image.objects.get(hash=md5_hash)
@@ -1124,7 +1125,7 @@ def eye_col2(request):
 
         f = Image.open(uploaded_img)
 
-        img_eye = __upload_file_to_userdir(request, f, ".png", flag=False)
+        img_eye = __upload_file_to_userdir(request, f, ".jpeg", flag=False)
         f.save(img_eye)
 
         md5_hash = md5(img_eye)
@@ -1317,9 +1318,9 @@ def eyedimen2(request):
                            'out4': 'Accepted formats include PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
 
-        img1 = __reader(uploaded_img)
-        img2 = img1.convert('RGB')
-        orig_img = __upload_file_to_userdir(request, img2, '.png', flag=True)
+        eye_hash = Image.open(uploaded_img)
+        orig_hash = __upload_file_to_userdir(request, eye_hash, '.jpeg', flag=True)
+        eye_hash.save(orig_hash)
 
         # if not image_check(img1, orig_img):
         #     return render(request, 'eyes/dimensions/e_dimen2.html',
@@ -1327,7 +1328,7 @@ def eyedimen2(request):
         #                    'img_name': 'Uploaded Image: ', 'out1': 'The image uploaded is ', 'ans': 'NOT',
         #                    'out2': 'of eye', 'out3': 'Let us know if this is by mistake.',
         #                    'user_name': request.user.username.upper()})
-
+        orig_img = orig_hash
         img = cv2.imread(orig_img)
         seg_img = segment.Segmentation(img)
         result, d_im = extract.Processing(seg_img)
@@ -1340,7 +1341,7 @@ def eyedimen2(request):
             peri = list(i.values())[-1]
             area = list(i.values())[-2]
 
-        md5_hash = md5(orig_img)
+        md5_hash = md5(orig_hash)
 
         try:
             eye = Eye_Image.objects.get(hash=md5_hash)
