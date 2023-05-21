@@ -63,6 +63,9 @@
                                 <br>
                                 <h4><em style="color: rebeccapurple"> {{ sub_class }} <br> </em> {{ key }}</h4>
                                 <h4><a href="feedback">{{ out3 }}</a></h4>
+                                <br>
+                                <br>
+                                <button onclick="window.location.href='{% url 'generate_pdf' %}'">Generate Results PDF</button>
                             </div>
                         </div>
                     </div>
@@ -151,4 +154,9 @@
             </div>
         </div>
     </section>
+
+    <!-- Add this button in your 'out.html' template -->
+
+
+
 {% endblock %}

@@ -9,5 +9,6 @@ scikit-image>=0.19.3
 tensorflow
 keras-preprocessing
 scikit-learn
-django-extensions 
+django-extensions
 django-admin-interface
+reportlab

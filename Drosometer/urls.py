@@ -92,6 +92,7 @@ urlpatterns = [
                   # path('reset/done/', auth_views.PasswordResetCompleteView.as_view(
                   #     template_name='templates/user/password_reset_complete.html'), name='password_reset_complete'),
 
+                  path('generate-pdf/', views.generate_pdf_view, name='generate_pdf'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

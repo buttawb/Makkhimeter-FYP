@@ -1275,11 +1275,11 @@ section.buttons .container-fluid {
 
 @font-face {
     font-family: 'Psychoart';
-    src: url('/static/fonts/MiraclesAutumn-Rpx1A.otf') format('opentype');
+    src: url('/static/fonts/Aloevera-OVoWO.ttf') format('opentype');
 }
 
 #header .logo a {
-    font-size: 70px;
+    font-size: 60px;
     text-transform: capitalize;
     letter-spacing: 1px;
     color: #fff;

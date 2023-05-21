@@ -24,7 +24,7 @@
     <section class="right-image">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="left-content">
 
                         <h2>Eye Colour</h2>
@@ -143,15 +143,58 @@
 
                     </div>
                 </div>
-                <div class="col-md-2">
 
-                    <br>
-                    <br>
-                    <br>
-                    <br>
 
+                <div class="col-md-8">
+
+                    <div class="alternate-table">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Colour Name</th>
+                                <th>Hex Value</th>
+                                <th>
+                                    <div class="slider-header" data-color="red">
+                                        .
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="slider-header" data-color="green">
+                                        .
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="slider-header" data-color="blue">
+                                        .
+                                    </div>
+                                </th>
+                                <th>Percentage</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if d %}
+                                {% for row in d %}
+                                    <tr>
+                                        <td>{{ row.labels }}</td>
+                                        <td>{{ row.colors }}</td>
+                                        <td>{{ row.R }}</td>
+                                        <td>{{ row.G }}</td>
+                                        <td>{{ row.B }}</td>
+
+                                        <td>{{ row.percentages }}%</td>
+
+                                    </tr>
+                                {% endfor %}
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4">
                     <div class="card-body">
-                        <h5 class="card-title"> RGB Distribution </h5>
+                        <h5 class="card-title"></h5>
                         <!-- First Pie Chart -->
                         <div id="pieChart1"
                              style="min-height: 450px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); position: relative;"
@@ -190,7 +233,11 @@
                                 // Initialize the first pie chart
                                 echarts.init(document.querySelector("#pieChart1")).setOption({
 
-
+                                    title: {
+                                        text: 'RGB Distribution',
+                                        subtext: '',
+                                        left: 'right'
+                                    },
                                     tooltip: {
                                         trigger: 'item'
                                     },
@@ -202,7 +249,7 @@
                                     series: [{
                                         name: '',
                                         type: 'pie',
-                                        radius: '100%',
+                                        radius: '60%',
                                         data: [
                                             {
                                                 value: r,
@@ -272,56 +319,8 @@
                         <!-- End Pie Chart -->
                     </div>
                 </div>
-
-
-                <div class="col-md-12">
-
-                    <div class="alternate-table">
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>Colour Name</th>
-                                <th>Pixel Value</th>
-                                <th>Hex Value</th>
-                                <th>
-                                    <div class="slider-header" data-color="red">
-                                        .
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="slider-header" data-color="green">
-                                        .
-                                    </div>
-                                </th>
-                                <th>
-                                    <div class="slider-header" data-color="blue">
-                                        .
-                                    </div>
-                                </th>
-                                <th>Percentage</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% if d %}
-                                {% for row in d %}
-                                    <tr>
-                                        <td>{{ row.labels }}</td>
-                                        <td>{{ row.values }}</td>
-                                        <td>{{ row.colors }}</td>
-                                        <td>{{ row.R }}</td>
-                                        <td>{{ row.G }}</td>
-                                        <td>{{ row.B }}</td>
-
-                                        <td>{{ row.percentages }}%</td>
-
-                                    </tr>
-                                {% endfor %}
-                            {% endif %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
+        </div>
     </section>
 
 
