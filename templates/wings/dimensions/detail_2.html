@@ -14,7 +14,6 @@
                             <li><a> / </a></li>
                             <li><a href="/bar">Editor</a></li>
                             <li><a> / </a></li>
-
                             <li><a href="">OPV</a></li>
                             <li><a> / </a></li>
                             <li><a href="javascript:history.back()">Results</a></li>
@@ -26,23 +25,30 @@
             </div>
         </div>
     </div>
-
     <section class="right-image">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 ">
                     <div class="left-content">
                         <h4>Original Image</h4>
-                        <p>All acquired images were preprocessed using a standard scaling function to ensure uniformity
-                            in the system and optimize the quality of the results. Image transformation techniques were
-                            employed to rescale the images to a common size, which is a common preprocessing step in
-                            computer vision applications. This preprocessing step is important because it standardizes
-                            the input data and reduces variations in image size and aspect ratio, which can impact the
-                            performance of subsequent algorithms.</p>
+                        <div class="col-md-10">
+                            <p align="justify">All acquired images were preprocessed using a standard scaling function
+                                to ensure uniformity
+                                in the system and optimize the quality of the results. Image transformation techniques
+                                were
+                                employed to rescale the images to a common size, which is a common preprocessing step in
+                                computer vision applications. This preprocessing step is important because it
+                                standardizes
+                                the input data and reduces variations in image size and aspect ratio, which can impact
+                                the
+                                performance of subsequent algorithms.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img src={{ img1 }} alt="">
+                    <div class="col-md-10">
+                        <img src={{ img1 }} alt="">
+                    </div>
                 </div>
             </div>
         </div>
@@ -54,17 +60,24 @@
                 <div class="col-md-6">
                     <div class="left-content">
                         <h4>Blur & Greyscale Image</h4>
-                        <p>The colored image was subjected to blurring to reduce noise and improve image quality.
-                            Subsequently, it was converted to a grayscale image, a common technique used in image
-                            processing and computer vision applications. To balance the intensity level of the grayscale
-                            image, contrast enhancement techniques were applied, such as histogram equalization, which
-                            redistributes the intensity values of the image to a more uniform distribution. This process
-                            improves the visual quality and the subsequent analysis of the image.</p>
-
+                        <div class="col-md-10">
+                            <p align="justify">The colored image was subjected to blurring to reduce noise and improve
+                                image quality.
+                                Subsequently, it was converted to a grayscale image, a common technique used in image
+                                processing and computer vision applications. To balance the intensity level of the
+                                grayscale
+                                image, contrast enhancement techniques were applied, such as histogram equalization,
+                                which
+                                redistributes the intensity values of the image to a more uniform distribution. This
+                                process
+                                improves the visual quality and the subsequent analysis of the image.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img src={{ img3 }} alt="">
+                    <div class="col-md-10">
+                        <img src={{ img3 }} alt="">
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,17 +88,25 @@
                 <div class="col-md-6">
                     <div class="left-content">
                         <h4>Binary Image</h4>
-                        <p>The system image was thresholded using a binary conversion technique to create a binary image
-                            where each pixel was assigned a binary value based on whether its intensity value was above
-                            or below a certain threshold value. This threshold value was chosen such that all the veins
-                            were properly connected, and the unwanted pixels were removed. This binary image was then
-                            used for segmentation, which is the process of dividing an image into meaningful regions or
-                            objects, allowing for more accurate analysis and interpretation. </p>
-
+                        <div class="col-md-10">
+                            <p align="justify">The system image was thresholded using a binary conversion technique to
+                                create a binary image
+                                where each pixel was assigned a binary value based on whether its intensity value was
+                                above
+                                or below a certain threshold value. This threshold value was chosen such that all the
+                                veins
+                                were properly connected, and the unwanted pixels were removed. This binary image was
+                                then
+                                used for segmentation, which is the process of dividing an image into meaningful regions
+                                or
+                                objects, allowing for more accurate analysis and interpretation.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img src={{ img2 }} alt="">
+                    <div class="col-md-10">
+                        <img src={{ img2 }} alt="">
+                    </div>
                 </div>
             </div>
         </div>
@@ -96,42 +117,59 @@
                 <div class="col-md-6">
                     <div class="left-content">
                         <h4>FloodFill & cleaned Image</h4>
-                        <p>To address the issue of disconnected veins and thick vein lines, a flood fill operation was
-                            applied to the image. Flood fill is a technique used to fill a closed region of an image
-                            with a specified color or intensity value. In this case, the flood fill operation was used
-                            to capture the structure of the wing by filling the gaps and thickening the vein lines. Once
-                            the flood fill operation was applied, a cleaning step was performed to remove any unwanted
-                            or irrelevant regions that may have been introduced during the operation. This cleaning step
-                            helps to improve the accuracy and reliability of subsequent analysis and interpretation of
-                            the wing structure.</p>
-
+                        <div class="col-md-10">
+                            <p align="justify">To address the issue of disconnected veins and thick vein lines, a flood
+                                fill operation was
+                                applied to the image. Flood fill is a technique used to fill a closed region of an image
+                                with a specified color or intensity value. In this case, the flood fill operation was
+                                used
+                                to capture the structure of the wing by filling the gaps and thickening the vein lines.
+                                Once
+                                the flood fill operation was applied, a cleaning step was performed to remove any
+                                unwanted
+                                or irrelevant regions that may have been introduced during the operation. This cleaning
+                                step
+                                helps to improve the accuracy and reliability of subsequent analysis and interpretation
+                                of
+                                the wing structure.</p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img src={{ img4 }} alt="">
+                    <div class="col-md-10">
+                        <img src={{ img4 }} alt="">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
-
     <section class="right-image">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
                     <div class="left-content">
                         <h4>Coloured regions with labels Image</h4>
-                        <p> To segment the wing structure, a watershed algorithm was applied to the dilated image. The
-                            watershed algorithm partitions an image into distinct segments by flooding the image from
-                            specified markers or seed points. In this case, the seed points were selected manually to
-                            define the boundaries of the wing segments. Each segment was assigned a unique label, and
-                            color was added to distinguish the segments visually. The total number of pixels in each
-                            segment was then extracted, which were later converted to area and perimeter using
-                            mathematical operations.</p>
-
+                        <div class="col-md-10">
+                            <p align="justify">
+                                To segment the wing structure, a watershed algorithm was applied to the dilated image.
+                                The
+                                watershed algorithm partitions an image into distinct segments by flooding the image
+                                from
+                                specified markers or seed points. In this case, the seed points were selected manually
+                                to
+                                define the boundaries of the wing segments. Each segment was assigned a unique label,
+                                and
+                                color was added to distinguish the segments visually. The total number of pixels in each
+                                segment was then extracted, which were later converted to area and perimeter using
+                                mathematical operations.
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img src={{ img6 }} alt="">
+                    <div class="col-md-10">
+                        <img src={{ img6 }} alt="">
+                    </div>
                 </div>
             </div>
         </div>
@@ -142,16 +180,24 @@
                 <div class="col-md-6">
                     <div class="left-content">
                         <h4>Coloured wing Image</h4>
-                        <p> To compute the area and perimeter of the entire object, the boundaries of the object were
-                            extracted using edge detection algorithms. The edge detection algorithm identifies the edges
-                            or boundaries of the object based on changes in the intensity values of neighboring pixels.
-                            Once the boundaries were identified, the area and perimeter of the entire object were
-                            calculated using mathematical operations. </p>
-
+                        <div class="col-md-10">
+                            <p align="justify">
+                                To compute the area and perimeter of the entire object, the boundaries of the object
+                                were
+                                extracted using edge detection algorithms. The edge detection algorithm identifies the
+                                edges
+                                or boundaries of the object based on changes in the intensity values of neighboring
+                                pixels.
+                                Once the boundaries were identified, the area and perimeter of the entire object were
+                                calculated using mathematical operations.
+                            </p>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img src={{ img7 }} alt="">
+                    <div class="col-md-10">
+                        <img src={{ img7 }} alt="">
+                    </div>
                 </div>
             </div>
         </div>

@@ -549,14 +549,14 @@ def w_bar(request):
         #                'user_name': request.user.username.upper()})
 
     flag = True
-    request.session['flag'] = flag
+
     orig_img = request.session['orig_img_fn']
 
     # FORM HANDLING FOR CENTERED/TOUCHING BORDERS IMAGE
     # BOTH RUN DIFFERENT FUNCTIONS
     if 'yes' in request.POST:
         flag = True
-
+        request.session['flag'] = flag
         result = algorithm_selection(WD_P.Skelatonize)
         data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
 
@@ -567,7 +567,7 @@ def w_bar(request):
 
     if 'no' in request.POST:
         flag = False
-
+        request.session['flag'] = flag
         result = algorithm_selection(WD_P.FloodFill)
         # result = algorithm_selection(other_option, save_dil)
         data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
@@ -599,6 +599,7 @@ def w_bar(request):
         f.module = 'Dimensions'
         f.save()
         return render(request, 'others/feedback_success.html')
+
 
     else:
         return render(request, 'wings/dimensions/bar.html',
@@ -773,7 +774,7 @@ def wingshape2(request):
         return redirect("/out")
 
     return render(request, 'wings/shape/w_shape2.html',
-                  {'head': 'Wing | Shape', 'title': 'Wing Shape', 'img_path': '../static/images/perfect.jpg',
+                  {'head': 'Makkhimeter ', 'title': 'Wing Shape', 'img_path': '../static/images/perfect.jpg',
                    'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
 
 
@@ -1385,7 +1386,7 @@ def hex_to_rgb(hex_value):
 
 def eyedimen(request):
     return render(request, 'eyes/Dimensions/e_dimen.html',
-                  {'head': 'Makkhimeter | Eyes', 'title': 'Eye Dimensions', 'user_name': request.user.username.upper()})
+                  {'head': 'Makkhimeter ', 'title': 'Eye Dimensions', 'user_name': request.user.username.upper()})
 
 
 def eyedimen2(request):
@@ -1400,7 +1401,7 @@ def eyedimen2(request):
         except (KeyError, ValidationError):
             # If the file was not uploaded or is not a valid image, render an error page
             return render(request, 'eyes/Dimension/e_dimen2.html',
-                          {'head': 'Eye | Dimensions', 'title': 'Eye Dimensions', 'img_path': 'static/images/404.gif',
+                          {'head': 'Makkhimeter ', 'title': 'Eye Dimensions', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
                            'out4': 'Accepted formats include PNG, JPG, & JPEG.',
@@ -1467,7 +1468,7 @@ def eyedimen2(request):
         return redirect('/e_d_o')
 
     return render(request, 'eyes/Dimensions/e_dimen2.html',
-                  {'head': 'Eye | Dimensions', 'title': 'Eye Dimensions', 'img_path': '../static/images/eye_front.jpg',
+                  {'head': 'Makkhimeter ', 'title': 'Eye Dimensions', 'img_path': '../static/images/eye_front.jpg',
                    'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
 
 
@@ -1494,7 +1495,7 @@ def e_dimen_out(request):
     area = request.session['area']
     peri = request.session['peri']
     return render(request, 'eyes/Dimensions/eyedimen_output.html',
-                  {'head': 'Eye | Dimensions', "orig": orig_img, 'title': 'Eye Dimensions', "dil": dil_img, "Ar": area,
+                  {'head': 'Makkhimeter ', "orig": orig_img, 'title': 'Eye Dimensions', "dil": dil_img, "Ar": area,
                    "Pr": peri,
                    'user_name': request.user.username.upper()})
 
@@ -1647,8 +1648,6 @@ def register_page(request):
 
 def myteam(request):
     return render(request, 'team/team.html',
-                  {'head': 'Team ', 'title': 'Makkhimeter Team', 'user_name': request.user.username.upper()})
+                  {'head': 'Makkhimeter ', 'title': 'Makkhimeter Team', 'user_name': request.user.username.upper()})
 
 
-def finalpage(request):
-    return render(request, 'base/refactor.html')

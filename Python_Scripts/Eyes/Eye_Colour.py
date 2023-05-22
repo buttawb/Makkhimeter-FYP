@@ -629,6 +629,13 @@ class color:
         return result
 
 
+import cv2
+import numpy as np
+from sklearn.cluster import KMeans
+from collections import Counter
+from multiprocessing import Pool, cpu_count
+
+
 class eye_col:
     def __init__(self):
         self.cc = color()
@@ -636,7 +643,6 @@ class eye_col:
 
     def get_image(self, image_path):
         image = cv2.imread(image_path)
-        # cv2 by default converts into the bgr form so we are converting into rgb
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         return image
 
@@ -646,7 +652,6 @@ class eye_col:
         return modified_image
 
     def KModel(self, image):
-        # we sett the max value of 255 in clusters
         clf = KMeans(n_clusters=4)
         labels = clf.fit_predict(image)
         return labels, clf
@@ -659,7 +664,6 @@ class eye_col:
         try:
             nm = self.cc.hex_to_name(h_color, spec=u'css3')
         except ValueError as v_error:
-            # print("{}".format(v_error))
             rms_lst = []
             for img_clr, img_hex in self.cc.CSS3_NAMES_TO_HEX.items():
                 cur_clr = self.cc.hex_to_rgb(img_hex)
@@ -671,51 +675,44 @@ class eye_col:
             nm = list(self.cc.CSS3_NAMES_TO_HEX.items())[closest_color][0]
         return nm
 
-    # here passing the model and the labels which are predicted from the model
-    # def color_distribution(self, counts, clf):
-    #     # counts = Counter(labels)
-    #     colors = {}
-    #     center_colors = clf.cluster_centers_
-    #     # We get ordered colors by iterating through the keys
-    #     ordered_colors = [center_colors[i] for i in counts.keys()]
-    #     # We got the different range of colors
-    #     hex_colors = [self.RGB2HEX(ordered_colors[i]) for i in counts.keys()]
-    #     rgb_colors = [ordered_colors[i] for i in counts.keys()]
-    #     lbl_color = [self.hex2name(ordered_colors[i]) for i in counts.keys()]
-    #
-    #     # plot the pie chart of those colors better for visualizing
-    #     plt.pie(counts.values(), labels=lbl_color, colors=hex_colors, autopct='%.0f%%',
-    #             textprops={'color': 'white', 'fontweight': 'bold'})
-
-    def final(self, img):
+    def process_image(self, img):
         image1 = self.get_image(img)
         image = self.interpolating_image(image1)
-        model = []
-        values = []
-        new = {}
+        labels, clf = self.KModel(image)
+        return labels, clf
 
-        for i in range(1):
-            labels, clf = self.KModel(image)
-            if i == 0:
-                model.append(clf)
+    def final(self, img):
+        pool = Pool(processes=4)  # Set the number of worker processes here
+        results = []
 
-            values.append(labels)
+        for _ in range(10):
+            results.append(pool.apply_async(self.process_image, (img,)))
+
+        pool.close()
+        pool.join()
+
+        model = [result.get()[1] for result in results]
+
+        values = [result.get()[0] for result in results]
 
         zero = 0
         one = 0
         two = 0
         three = 0
 
-        for i in range(1):
+        for i in range(10):
             zero += np.count_nonzero(values[i] == 0)
             one += np.count_nonzero(values[i] == 1)
             two += np.count_nonzero(values[i] == 2)
             three += np.count_nonzero(values[i] == 3)
 
-        new[0] = int(zero / 4)
-        new[1] = int(one / 4)
-        new[2] = int(two / 4)
-        new[3] = int(three / 4)
+        new = {
+            0: int(zero / 4),
+            1: int(one / 4),
+            2: int(two / 4),
+            3: int(three / 4)
+        }
+
         return new, model
 
     def run(self, img):
@@ -724,17 +721,10 @@ class eye_col:
         counts = out[0]
         clf = out[1][0]
         center_colors = clf.cluster_centers_
-        # We get ordered colors by iterating through the keys
         ordered_colors = [center_colors[i] for i in counts.keys()]
-        # We got the different range of colors
         hex_colors = [self.RGB2HEX(ordered_colors[i]) for i in counts.keys()]
         rgb_colors = [ordered_colors[i] for i in counts.keys()]
         lbl_color = [self.hex2name(ordered_colors[i]) for i in counts.keys()]
         lst = list(counts.values())
-
-        # plot the pie chart of those colors better for visualizing
-        # plt.pie(counts.values(), labels=lbl_color, colors=hex_colors, autopct='%.0f%%',
-        #         textprops={'color': 'white', 'fontweight': 'bold'})
-        # plt.savefig(chartname, dpi=1000, bbox_inches='tight')
 
         return lbl_color, lst, hex_colors

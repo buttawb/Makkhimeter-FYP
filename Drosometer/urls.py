@@ -81,7 +81,7 @@ urlpatterns = [
 
                   # path('check', views.fetch_data),
 
-                  path('destructon', views.finalpage),
+
 
                   # path('password_reset/', auth_views.PasswordResetView.as_view(
                   #     template_name='templates/user/password_reset.html'), name='password_reset'),

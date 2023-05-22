@@ -43,15 +43,15 @@
     <div class="row">
         <div class="column">
 
-
-            <img src={{ orig_img }} alt="Snow" style="width:100%" alt="Original Image">
-
+            <div class="col-md-10">
+                <img src={{ orig_img }} alt="Snow" style="width:100%" alt="Original Image">
+            </div>
         </div>
         <div class="column">
 
-
-            <img src={{ img2 }} alt="Forest" style="width:100%" alt="Segment Image">
-
+            <div class="col-md-10">
+                <img src={{ img2 }} alt="Forest" style="width:100%" alt="Segment Image">
+            </div>
         </div>
 
     </div>
@@ -72,8 +72,8 @@
                 {% for i in d %}
                     <tr>
                         <td>{{ i.label }}</td>
-                        <td>{{ i.Ar }}</td>
-                        <td>{{ i.Pr }}</td>
+                        <td>{{ i.Ar|floatformat:4 }}</td>
+                        <td>{{ i.Pr|floatformat:4 }}</td>
                     </tr>
                 {% endfor %}
             {% endif %}
@@ -97,10 +97,14 @@
 
     <div class="row">
         <div class="column">
-            <img src={{ orig_img }} alt="Snow" style="width:100%" alt="Uploaded Image">
+            <div class="col-md-10">
+                <img src={{ orig_img }} alt="Snow" style="width:100%" alt="Uploaded Image">
+            </div>
         </div>
         <div class="column">
-            <img src={{ img1 }} alt="Forest" style="width:100%" alt="Filled Image">
+            <div class="col-md-10">
+                <img src={{ img1 }} alt="Forest" style="width:100%" alt="Filled Image">
+            </div>
         </div>
     </div>
 
@@ -118,8 +122,8 @@
             {% if f %}
                 {% for j in f %}
                     <tr>
-                        <td>{{ j.Ar }}</td>
-                        <td>{{ j.Pr }}</td>
+                        <td>{{ j.Ar|floatformat:4 }}</td>
+                        <td>{{ j.Pr|floatformat:4 }}</td>
                     </tr>
                 {% endfor %}
             {% endif %}

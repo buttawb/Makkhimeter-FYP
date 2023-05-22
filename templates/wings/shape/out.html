@@ -45,13 +45,13 @@
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td>Oregan</td>
-                                            <td>{{ prob_oreg }}</td>
+                                            <td>Wild Type</td>
+                                            <td>{{ prob_oreg|floatformat:4 }}</td>
 
                                         </tr>
                                         <tr>
                                             <td>Mutated</td>
-                                            <td>{{ prob_mut }}</td>
+                                            <td>{{ prob_mut|floatformat:4 }}</td>
 
                                         </tbody>
                                     </table>
@@ -63,9 +63,9 @@
                                 <br>
                                 <h4><em style="color: rebeccapurple"> {{ sub_class }} <br> </em> {{ key }}</h4>
                                 <h4><a href="feedback">{{ out3 }}</a></h4>
-                                <br>
-                                <br>
-                                <button onclick="window.location.href='{% url 'generate_pdf' %}'">Generate Results PDF</button>
+
+                                {#                                <button onclick="window.location.href='{% url 'generate_pdf' %}'">Generate Results PDF#}
+                                {#                                </button>#}
                             </div>
                         </div>
                     </div>
