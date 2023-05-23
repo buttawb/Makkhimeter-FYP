@@ -1269,13 +1269,13 @@ section.buttons .container-fluid {
     text-align: right;
     display: inline-block;
     width: 100%;
-    height: 100px;
-    line-height: 100px;
+    height: 90px;
+    line-height: 90px;
 }
 
 @font-face {
     font-family: 'Psychoart';
-    src: url('/static/fonts/Aloevera-OVoWO.ttf') format('opentype');
+    src: url('/static/fonts/QuantumLemonNormalLemonNormal-1GL30.ttf') format('opentype');
 }
 
 #header .logo a {
@@ -1283,7 +1283,7 @@ section.buttons .container-fluid {
     text-transform: capitalize;
     letter-spacing: 1px;
     color: #fff;
-    font-weight: normal;
+    font-weight: 10;
     margin-right: 100px;
 
     font-family: 'Psychoart', sans-serif;

@@ -81,8 +81,6 @@ urlpatterns = [
 
                   # path('check', views.fetch_data),
 
-
-
                   # path('password_reset/', auth_views.PasswordResetView.as_view(
                   #     template_name='templates/user/password_reset.html'), name='password_reset'),
                   # path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(
@@ -93,6 +91,7 @@ urlpatterns = [
                   #     template_name='templates/user/password_reset_complete.html'), name='password_reset_complete'),
 
                   path('generate-pdf/', views.generate_pdf_view, name='generate_pdf'),
+                  path('data', views.dowdata),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
