@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Updated with new content.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/bar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/bar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/detail_1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/detail_1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/detail_2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/detail_2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/output.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -257,14 +260,8 @@
       <workItem from="1684585226051" duration="10476000" />
       <workItem from="1684727373087" duration="9834000" />
       <workItem from="1684770468630" duration="1303000" />
-      <workItem from="1684853889784" duration="13058000" />
-    </task>
-    <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
-      <created>1671046932084</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1671046932084</updated>
+      <workItem from="1684853889784" duration="13771000" />
+      <workItem from="1684952872450" duration="351000" />
     </task>
     <task id="LOCAL-00002" summary="Added 2nd algorithm of wing dimensions.">
       <created>1671097034075</created>
@@ -602,7 +599,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684867359691</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Updated with new content.">
+      <created>1684940381443</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1684940381443</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
