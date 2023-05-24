@@ -4,82 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="New Content.">
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/R.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/eye_front.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/eye_front_Ia4QBnJ.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image1685.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/fonts/Fashionvictim-4ZyD.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/fonts/QuantumLemonNormalLemonNormal-1GL30.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/data/eye/red/r1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/data/eye/red/r2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/data/eye/white/w1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/data/eye/white/w2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/data/wing/mutated/m1.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/data/wing/mutated/m2.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/data/wing/normal/n1.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/data/wing/normal/n2.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/9f846014-058b-4248-ac67-fa3f3d620047.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/029febfc-36e1-456a-af87-ae0a9f2253c5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/08adb36b-2a53-4f3b-8dbb-c752d8db3478.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/0fae5c39-25e3-43d6-afab-f5645fabcd2c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/1058524d-26dc-4e3f-ae4d-8aacae10e172.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/12d0c987-da31-4a46-8fb9-3a762804ba23.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/16e25fe0-27b5-487a-a0a0-e008fad35410.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/18591c38-d260-4d5b-a140-916f80590552.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/18ea40ed-034e-4551-ae6c-943b7c4e7eb3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/1af34917-9db8-46eb-96bf-03693a1b3ce9.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/1e90d17b-1c6d-408f-8c27-4bcca2df46f3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/22f44bcf-e5cc-4a9d-8628-ecbaa200ec39.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/293c54de-238a-4975-b124-b170ed0dba12.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/2abecadf-60d8-4be9-9551-fabe4a16c8e3.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/2c8df393-17f6-4350-837e-9fbb992d4655.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/2fa3f3f4-de9e-4cc5-b71f-004df670b6a7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/306ab46b-a4d0-4282-a1b8-a2d4d4f5035d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/33701bbc-df83-49f3-b402-b162f6bf122a.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/33a07772-de30-4136-8d9f-8d522ce2045d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/38cb8e6f-fd4a-4fb7-83ac-a46714842f94.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/3b7fd706-2a7b-40bc-a5fc-d323991d3b38.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/446b6937-98bc-47a1-93a6-090327ccee1b.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/44d4736f-33a0-4dac-b71e-f4364b94c694.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/63a2d814-248f-44dc-a508-d16f310d634a.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/63d0dc38-0898-4774-998b-4ef58c2efa4d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/648ed320-d545-4327-85da-9b6279d7e86f.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/6d282499-b0b9-4c84-b846-c93906302bcb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/6e4d434b-8efa-4808-a3bf-72cc7aed0052.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/707a3d54-c6a7-462e-b985-705e158948f8.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/72e301b7-b402-4c9c-95f5-371758f3f45c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/766a30cc-da40-40dc-b47a-3362ca4ee7eb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/78031315-fbea-47ff-97d8-b02d4e4a4320.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/7de37033-3f67-4994-9534-afc19c35f035.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/83c30630-feec-47ad-92ba-c3136c8d100e.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/999f826d-15a7-4872-9b07-98e56694c442.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/9ca94682-02e6-484f-99fd-4559fa5a50ea.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/9e4190aa-dbc6-4718-819d-db87cd463f20.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/a50e9edc-108f-4f1f-b8c8-d3479e2be643.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/a987b4cf-66f6-4973-bb10-e6d51cbc4e77.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/b05001e4-8957-4875-85de-dec42050fc1e.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/b13bcd12-c14a-447b-a33e-8cf38c9d38cb.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/c2133dc5-0b81-4946-adfa-f3b137e0b192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/d8c53567-9662-4d32-87fb-f698607edbff.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/e2a6df77-54b0-4eaf-8607-c29362d351e6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/e811a00c-0601-4cdc-9b2b-0feebc43f49c.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/ecc8c05f-2e9e-411e-9c8d-ef266f1177fe.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/f301a288-6c6a-497d-b93a-8058682e31e0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/f5664824-f10d-4584-b5f0-7c6c061b653b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/f65948ca-ed60-44a1-be1d-5fb5777bf163.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/fa42c7ed-b921-4b20-b22c-117493ad2821.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/others/data.html" afterDir="false" />
+    <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Updated with new content.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drosometer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Drosometer/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/templatemo-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/templatemo-style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/fonts/MiraclesAutumn-Rpx1A.otf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/eye_front.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/eye_front.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/team/team.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/team/team.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -330,7 +257,7 @@
       <workItem from="1684585226051" duration="10476000" />
       <workItem from="1684727373087" duration="9834000" />
       <workItem from="1684770468630" duration="1303000" />
-      <workItem from="1684853889784" duration="6434000" />
+      <workItem from="1684853889784" duration="13058000" />
     </task>
     <task id="LOCAL-00001" summary="Added check for whether the image is of wing or not.">
       <created>1671046932084</created>
@@ -668,7 +595,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684753137242</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Updated with new content.">
+      <created>1684867359691</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1684867359691</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -687,7 +621,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Overall Bristles stored in DB." />
     <MESSAGE value="UI changes." />
     <MESSAGE value="Admin site models registered." />
     <MESSAGE value="Used hash to avoid data redundancy." />
@@ -712,6 +645,7 @@
     <MESSAGE value="Modifications for M3." />
     <MESSAGE value="CONTENT BACKUP" />
     <MESSAGE value="New Content." />
-    <option name="LAST_COMMIT_MESSAGE" value="New Content." />
+    <MESSAGE value="Updated with new content." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated with new content." />
   </component>
 </project>

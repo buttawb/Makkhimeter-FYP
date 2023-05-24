@@ -237,7 +237,7 @@ def wingdimen2(request):
                           {'head': 'MakkhiMeter ', 'title': 'Wing Dimensions', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
-                           'out4': 'Accepted formats include TIFF.',
+                           'out4': 'Accepted formats include TIF, PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
 
         img1 = __reader(uploaded_img)
@@ -676,7 +676,7 @@ def wingshape2(request):
                           {'head': 'MakkhiMeter ', 'title': 'Wing Shape', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans1': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
-                           'out4': 'Accepted formats include TIFF.',
+                           'out4': 'Accepted formats include TIF, PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
 
         img1 = __reader(uploaded_img)
@@ -938,7 +938,7 @@ def wingbristles2(request):
                           {'head': 'MakkhiMeter ', 'title': 'Wing Bristles', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
-                           'out4': 'Accepted formats include TIFF',
+                           'out4': 'Accepted formats include TIF, PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
 
         img1 = __reader(uploaded_img)
@@ -1143,7 +1143,7 @@ def eye_omat2(request):
                           {'head': 'MakkhiMeter ', 'title': 'Eye Ommatidium', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
-                           'out4': 'Accepted formats include PNG, JPG, & JPEG.',
+                           'out4': 'Accepted formats include TIF, PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
 
         img1 = Image.open(uploaded_img)
@@ -1223,7 +1223,7 @@ def eye_col2(request):
                           {'head': 'MakkhiMeter ', 'title': 'Eye Colour', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
-                           'out4': 'Accepted formats include PNG, JPG, & JPEG.',
+                           'out4': 'Accepted formats include TIF, PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
 
         f = Image.open(uploaded_img)
@@ -1419,7 +1419,7 @@ def eyedimen2(request):
                           {'head': 'MakkhiMeter ', 'title': 'Eye Dimensions', 'img_path': 'static/images/404.gif',
                            'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
                            'out2': ' an image or not of required format.', 'out3': '',
-                           'out4': 'Accepted formats include PNG, JPG, & JPEG.',
+                           'out4': 'Accepted formats include TIF, PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
 
         eye_hash = Image.open(uploaded_img)
