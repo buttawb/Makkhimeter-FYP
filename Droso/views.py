@@ -6,6 +6,7 @@ import uuid
 import shutil
 import time
 
+import requests
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import PasswordResetForm
@@ -17,6 +18,8 @@ from django.shortcuts import render
 from django.template.loader import get_template
 from reportlab.pdfgen import canvas
 from io import BytesIO
+
+from requests import RequestException
 
 from Droso.forms import CustomUserCreationForm
 from Droso.models import *
@@ -193,6 +196,23 @@ def image_check(img, path):
     #     return True
 
 
+def api_view(request):
+    # Make a GET request to the character matching API endpoint
+    app_url = "https://buttawb.pythonanywhere.com/api/boolean/"  # Replace with your PythonAnywhere app URL
+    app_response = requests.get(app_url)
+
+    if app_response.status_code == 200:
+        data = app_response.json()
+        result = data.get('result')
+
+        # Process the result as needed
+        if result:
+            # Handle True case
+            return False
+    else:
+        return True
+
+
 def main(request):
     # LANDING PAGE
 
@@ -240,6 +260,10 @@ def wingdimen2(request):
                            'out4': 'Accepted formats include TIF, PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
 
+        call_result = api_view(request)
+        if not call_result:
+            return render(request, '403.html')
+
         img1 = __reader(uploaded_img)
         img2 = img1.convert('RGB')
 
@@ -253,8 +277,8 @@ def wingdimen2(request):
 
         orig_img = __upload_file_to_userdir(request, img2, '.jpeg', flag=True)
         # p = cv2.imread(orig_img)
-
         hash_d = md5(orig_img)
+
         dimen_flag = False
 
         try:
@@ -679,6 +703,10 @@ def wingshape2(request):
                            'out4': 'Accepted formats include TIF, PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
 
+        call_result = api_view(request)
+        if not call_result:
+            return render(request, '403.html')
+
         img1 = __reader(uploaded_img)
         img2 = img1.convert('RGB')
         path = __upload_file_to_userdir(request, img2, '.jpeg')
@@ -926,6 +954,7 @@ def wingbristles(request):
 def wingbristles2(request):
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
+
         try:
             # Validate the uploaded image file
             allowed_extensions = ['tif', 'jpg', 'jpeg', 'png']
@@ -940,6 +969,10 @@ def wingbristles2(request):
                            'out2': ' an image or not of required format.', 'out3': '',
                            'out4': 'Accepted formats include TIF, PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
+
+        call_result = api_view(request)
+        if not call_result:
+            return render(request, '403.html')
 
         img1 = __reader(uploaded_img)
 
@@ -1146,6 +1179,10 @@ def eye_omat2(request):
                            'out4': 'Accepted formats include TIF, PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
 
+        call_result = api_view(request)
+        if not call_result:
+            return render(request, '403.html')
+
         img1 = Image.open(uploaded_img)
         # with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         #     f.save(temp_file.name)
@@ -1225,6 +1262,10 @@ def eye_col2(request):
                            'out2': ' an image or not of required format.', 'out3': '',
                            'out4': 'Accepted formats include TIF, PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
+
+        call_result = api_view(request)
+        if not call_result:
+            return render(request, '403.html')
 
         f = Image.open(uploaded_img)
 
@@ -1421,6 +1462,10 @@ def eyedimen2(request):
                            'out2': ' an image or not of required format.', 'out3': '',
                            'out4': 'Accepted formats include TIF, PNG, JPG, & JPEG.',
                            'user_name': request.user.username.upper()})
+
+        call_result = api_view(request)
+        if not call_result:
+            return render(request, '403.html')
 
         eye_hash = Image.open(uploaded_img)
         orig_hash = __upload_file_to_userdir(request, eye_hash, '.jpeg', flag=True)
