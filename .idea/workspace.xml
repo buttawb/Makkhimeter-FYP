@@ -5,9 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Added backdoor.">
+      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0236.tif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/mehad.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/wahab.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/02bc197b-b162-4d8b-b455-0615c4ddbd9a.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/05e59140-f87b-4fdc-8ceb-ffe9ee6679f1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/46e25273-c872-4ee2-8fb9-36c5248c97fc.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/b7033508-2882-4117-b07b-90f3a2180101.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/b72cdb9d-27fc-4a99-b53c-0f30b67c80ff.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/ce71e41f-199a-4eef-a204-b6d453a5d7c3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/d3e9dadb-d229-44fe-975e-93518e249851.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Droso/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Droso/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/templatemo-style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/templatemo-style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/huzaifa.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/huzaifa.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/imran.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/imran.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/mehad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/mushtaq.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/mwaseem.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/mwaseem.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/shaiz.png" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/shaiz.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/team.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/team.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/wahab.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/head.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/eyes/Dimensions/e_dimen.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/Dimensions/e_dimen.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/eyes/colour/col.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/colour/col.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/eyes/ommatidum/omat_count.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/eyes/ommatidum/omat_count.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/team/team.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/team/team.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/bristles/w_bristles.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/bristles/w_bristles.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/dimensions/w_dimen.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/wings/shape/w_shape.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wings/shape/w_shape.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +100,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -267,6 +292,8 @@
       <workItem from="1685865689974" duration="473000" />
       <workItem from="1686291273877" duration="618000" />
       <workItem from="1686293457895" duration="6000" />
+      <workItem from="1686473942666" duration="925000" />
+      <workItem from="1686497482437" duration="7014000" />
     </task>
     <task id="LOCAL-00003" summary="Minor updates.">
       <created>1671097464514</created>
