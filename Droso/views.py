@@ -1124,6 +1124,12 @@ def f_b(request):
                   {'head': 'MakkhiMeter ', 'title': 'Feedback - MakkhiMeter',
                    'user_name': request.user.username.upper()})
 
+def team(request):
+    return render(request, 'others/team.html',
+                  {'head': 'MakkhiMeter ', 'title': 'Feedback - MakkhiMeter',
+                   'user_name': request.user.username.upper()})
+
+
 
 def wing_f(request):
     return render(request, 'f_w.html', {'head': 'MakkhiMeter ', 'user_name': request.user.username.upper()})
