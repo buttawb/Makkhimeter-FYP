@@ -5,34 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Added TEAM.">
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_130016.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/20221007_131347.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_eyeimages/w1118.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0224.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image0235.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/static/db_wingimages/image1118_-_Copy.tif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/images/imran.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/02af46b6-ad8d-4e0c-9526-7e8a9e2e35e9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/349e91a4-3e9c-470b-b935-82893c1965f1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/83a1b3f2-bd18-4e56-a071-80624f5ad6a8.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/85435a0e-3fa1-439a-8d9a-d3f5d3f2e019.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/86ba1db9-ec57-4361-b43c-e4e131047e99.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/8bb7d95a-d701-459a-af44-d4c93bdbb5ee.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/92a9a153-6e3a-4833-9091-5ba95b135f23.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/978ab36a-d1f6-4d32-880b-b71e22b3ee8c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/97e6ba1a-007b-4376-b5d4-534dbd5d168e.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/a453ccc0-ef26-4385-af9c-43fd548444eb.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/c8a1399c-622c-4c88-adb6-091d4da4bc1b.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/d346ebf4-5bf1-405e-b022-a2a35efd8dc6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/dd803051-def0-4971-921e-04d529da7b34.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/dd94c9a3-4313-4783-89a0-bfd55b3e98b0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/fcec8998-a631-439d-ac66-b1484774a2c8.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Drosometer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Drosometer/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/images/imran.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base/head.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/others/team.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/imran.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/static/images/imran.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/team/team.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/team/team.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -294,14 +268,8 @@
       <workItem from="1686291273877" duration="618000" />
       <workItem from="1686293457895" duration="6000" />
       <workItem from="1686473942666" duration="925000" />
-      <workItem from="1686497482437" duration="8402000" />
-    </task>
-    <task id="LOCAL-00004" summary="Wing dimensions UI modified.">
-      <created>1671220881003</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1671220881003</updated>
+      <workItem from="1686497482437" duration="8559000" />
+      <workItem from="1686545118114" duration="1153000" />
     </task>
     <task id="LOCAL-00005" summary="Modified models.py.">
       <created>1671284512090</created>
@@ -639,7 +607,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686504592645</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Added TEAM.">
+      <created>1686510638075</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1686510638075</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
