@@ -262,3 +262,23 @@ class Feedback_eye(models.Model):
 
     def __str__(self):
         return f"Feedback {self.priority} ({self.created_at})"
+
+
+# Feedback model for Ring Assay.
+
+# class Feedback_ra(models.Model):
+#     OPTIONS = (
+#         ('A', 'Very Satisfied'),
+#         ('B', 'Somewhat Satisfied'),
+#         ('C', 'Not Satisfied'),
+#     )
+#     priority = models.CharField(max_length=1, choices=OPTIONS)
+#     user = models.ForeignKey(User,
+#                              on_delete=models.CASCADE, null=True, blank=True,
+#                              verbose_name="User ID")
+#     image = models.ForeignKey(Eye_Image, on_delete=models.CASCADE, null=True, blank=True,
+#                               verbose_name="Image")
+#     created_at = models.DateTimeField(auto_now_add=True)
+#
+#     def __str__(self):
+#         return f"Feedback {self.priority} ({self.created_at})"

@@ -77,6 +77,11 @@ urlpatterns = [
                   path('w_dashboard', views.wing_dashboard),
                   path('e_dashboard', views.eye_dashboard),
 
+                  # RingAssay Paths
+                  path('ring_assay', views.ring_assay_1),
+                  path('ring_assay2', views.ring_assay_2),
+                  path('ring_out', views.ring_out),
+
                   # path('f_thorax', views.thorax_f),
 
                   # path('check', views.fetch_data),

@@ -24,6 +24,7 @@ from requests import RequestException
 from Droso.forms import CustomUserCreationForm
 from Droso.models import *
 # IMPORTING SCRIPTS
+
 # EYES
 from Python_Scripts.Eyes.Eye_Colour import *
 from Python_Scripts.Eyes.Eye_Dimensions import *
@@ -32,6 +33,8 @@ from Python_Scripts.Eyes.Eye_Ommatidium import *
 from Python_Scripts.Wings.Wing_Bristles.Wing_Bristles import *
 from Python_Scripts.Wings.Wing_Dimensions.Wing_Dimensions import *
 from Python_Scripts.Wings.Wing_Shape import dl
+# RING ASSAY
+from Python_Scripts.RingAssay.ring import *
 
 # CREATING SCRIPT CLASSES OBJECTS
 WD_PreP = WD_PreProcessing()
@@ -1705,6 +1708,80 @@ def register_page(request):
 #     w_area = w_dimen.objects.all()
 #     for i in w_area:
 #         return HttpResponse(i.wd_area)
+
+def ring_assay_1(request):
+    return render(request, 'RingAssay/ring_1.html',
+                  {'head': 'MakkhiMeter', 'title': 'RingAssay', 'user_name': request.user.username.upper()})
+
+
+def ring_assay_2(request):
+    if request.method == 'POST':
+        uploaded_img = request.FILES['img']
+
+        try:
+            # Validate the uploaded image file
+            allowed_extensions = ['tif', 'jpg', 'jpeg', 'png']
+            ext_validator = FileExtensionValidator(allowed_extensions=allowed_extensions)
+            ext_validator(uploaded_img)
+        except (KeyError, ValidationError):
+            # If the file was not uploaded or is not a valid image, render an error page
+            return render(request, 'RingAssay/ring_2.html',
+                          {'head': 'MakkhiMeter ', 'title': 'Ring Assay', 'img_path': 'static/images/404.gif',
+                           'img_name': 'Uploaded Image: ', 'out1': 'The file uploaded is either ', 'ans': 'NOT',
+                           'out2': ' an image or not of required format.', 'out3': '',
+                           'out4': 'Accepted formats include TIF, PNG, JPG, & JPEG.',
+                           'user_name': request.user.username.upper()})
+
+        call_result = api_view(request)
+        if not call_result:
+            return render(request, '403.html')
+
+        ring = Image.open(uploaded_img)
+        orig_ring = __upload_file_to_userdir(request, ring, '.jpeg', flag=True)
+        ring.save(orig_ring)
+        out_img_path = __upload_file_to_userdir(request, ring, '.png', flag=False)
+
+        df = ring_assay(orig_ring, out_img_path)
+        data = df_to_html(df)
+
+        request.session['orig_ring'] = orig_ring
+        request.session['out_ring'] = out_img_path
+        request.session['ring_data'] = data
+
+        return redirect('/ring_out')
+
+    return render(request, 'RingAssay/ring_2.html',
+                  {'head': 'MakkhiMeter ', 'title': 'RingAssay', 'img_path': '../static/images/ring_1.jpg',
+                   'img_name': 'Expected Input Image', 'user_name': request.user.username.upper()})
+
+
+def ring_out(request):
+    # SINCE RING DATA IMAGE IS NOT STORING PAUSE FEEDBACK.
+
+    if request.method == 'POST':
+        #     priority = request.POST.get('demo-priority')
+        #
+        #     f = Feedback_ra()
+        #
+        #     if request.user.is_authenticated:
+        #         f.user = request.user
+        #     else:
+        #         f.user = User.objects.get(pk=9999)
+        #     ra_pk = request.session.get('ra_pk')
+        #     f.image = Eye_Image.objects.get(pk=ra_pk)
+        #
+        #     f.priority = priority
+        #     f.save()
+        return render(request, 'others/feedback_success.html')
+
+    orig_ring = request.session['orig_ring']
+    out_img_path = request.session['out_ring']
+    data = request.session['ring_data']
+
+    return render(request, 'RingAssay/ring_output.html',
+                  {'head': 'MakkhiMeter ', 'title': 'RingAssay', 'orig_img': orig_ring, 'out_img': out_img_path,
+                   'user_name': request.user.username.upper(), 'd': data})
+
 
 def myteam(request):
     return render(request, 'team/team.html',
