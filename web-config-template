@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <system.webServer>
+    <handlers>
+      <add name="Python FastCGI"
+      path="*"
+      verb="*"
+      modules="FastCgiModule"
+      scriptProcessor="<to be filled in>"
+      resourceType="Unspecified"
+      requireAccess="Script" />
+    </handlers>
+  </system.webServer>
+
+  <appSettings>
+    <add key="PYTHONPATH" value="G:\Projects\D.M\Drosometer" />
+    <add key="WSGI_HANDLER" value="Drosometer.wsgi.application" />
+    <add key="DJANGO_SETTINGS_MODULE" value="Drosometer.settings" />
+  </appSettings>
+</configuration>
