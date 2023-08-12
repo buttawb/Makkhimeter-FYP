@@ -1776,6 +1776,7 @@ def ring_out(request):
 
     orig_ring = request.session['orig_ring']
     out_img_path = request.session['out_ring']
+    print(out_img_path)
     data = request.session['ring_data']
 
     return render(request, 'RingAssay/ring_output.html',

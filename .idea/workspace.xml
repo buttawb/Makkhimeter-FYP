@@ -5,11 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58951e13-2376-490c-a348-bc6faae127e9" name="Changes" comment="Added Ring Assay.">
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/4c7d8976-57ee-4847-9e63-187387afd8ee.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/users/dcob/bbdb87b4-e4eb-443e-b1c1-71d20cb40783.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-config-template" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/01cce845-c3ab-4105-afac-9eb2fa02e4eb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/07b19ebc-96f0-45ba-95a4-da43d1a9f259.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/085c1c4b-736a-460b-a92a-33bf518d5939.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/0e591956-cc03-4545-ac2d-e856d1ff53a3.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/1dbeb447-2402-4d18-b70a-b27790dd4eb3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/29c748a6-b5e6-466b-a5aa-dab58936da55.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/2ef5f95b-09bb-403a-8a4f-f52e5e90a91c.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/36102d82-90ba-40c2-a8c2-6012d4384cfb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/38bcb95f-300f-4a9c-a196-cfa607784c06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/45dad337-fd95-45f5-a866-1602345cb87a.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/4b928a6b-f35e-4a41-a21f-d4283147d773.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/58c6a032-4d58-46d5-bd75-d96f4088381d.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/60d40750-9170-4e8e-82b7-eafdf836b157.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/61b1985c-e512-4544-9f71-71d4f0aac66f.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/662dfb17-cb7e-4b90-9a85-692a219a498c.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/6a825b03-be1c-45c3-9dee-fd8b04f46e3e.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/779d320d-8670-46e8-a06c-2ca1a921d781.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/7ec349ca-03b7-467c-b53a-204bd9b168ca.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/7fcc8f7c-1451-40d5-9519-d6bd7b73eed9.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/9ab5a75f-598f-483a-88ef-028761dac9c5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/9dc7c76e-bc68-4255-9827-615d78a7fdbb.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/a105b737-e348-4928-9ccf-ee30607d26f2.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/af9f2904-6ec3-4694-b8d4-da0a25ba8bb9.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/b53f6eb5-ae59-4a65-be75-6e9719ccc396.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/b59bb4ca-1267-4444-aca3-6bc3a833ae91.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/ba41fa3f-81d3-43de-88af-bcf9a91dcc7f.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/be00bb5e-6664-41ca-92fa-0fa064243ada.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/c0672253-dc18-468d-a781-ed48c2d8a6c2.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/cb84d520-161a-4632-9a5f-b23c7fd92c9f.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/users/Anonymous/e030d881-4c1d-4ef9-bd49-fbfc7d391179.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Droso/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Droso/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/RingAssay/ring_output.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/RingAssay/ring_output.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,6 +311,8 @@
       <workItem from="1690973585739" duration="3496000" />
       <workItem from="1691034473153" duration="807000" />
       <workItem from="1691039967340" duration="1129000" />
+      <workItem from="1691748287352" duration="26000" />
+      <workItem from="1691765515477" duration="3236000" />
     </task>
     <task id="LOCAL-00006" summary="Database fixes.">
       <created>1671299618303</created>

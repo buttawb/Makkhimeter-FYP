@@ -1,4 +1,5 @@
 {% extends "base/head.html" %}
+{% load static %}
 {% block content %}
 
     <style>
@@ -14,43 +15,38 @@
             clear: both;
             display: table;
         }
-    </style>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="container">
-                <div class="horizontal">
-                    <div class="verticals ten offset-by-one">
 
-                        <ol class="breadcrumb breadcrumb-fill2">
-                            <li><a href="/"><i class="fa fa-home"></i></a></li>
-                            <li><a href="/ring_assay">Ring Assay</a></li>
-                            <li><a> / </a></li>
-                            <li><a href="/ring_assay2">Input</a></li>
-                            <li><a> / </a></li>
-                            <li class="active">Results</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br>
+        /* Style for marking dots */
+        .canvas-container {
+            position: relative;
+        }
+
+        .canvas-container canvas {
+            border: 1px solid #000;
+            cursor: crosshair; /* Cursor as a pen */
+        }
+
+        /* Style for distance display */
+        .distance-display {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+    </style>
+
+    <!-- ... (existing code) -->
+
     <h1>Circled Flies Image</h1>
 
     <div class="row">
         <div class="column">
-
-            <div class="col-md-10">
-                <img src={{ orig_img }} alt="" style="width:100%" alt="Original Image">
+            <div class="col-md-10 canvas-container">
+                <canvas id="canvas" style="max-width:100%;"></canvas>
+                <div class="distance-display" id="distanceDisplay"></div>
             </div>
         </div>
-        <div class="column">
-
-            <div class="col-md-10">
-                <img src={{ out_img }} alt="" style="width:100%" alt="Segment Image">
-            </div>
-        </div>
-
     </div>
 
     <!-- Tables -->
@@ -78,60 +74,71 @@
             {% endif %}
             </tbody>
         </table>
-
-
     </div>
-    <br>
-    <br>
 
-    <!-- Forms -->
-    <section class="forms">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="section-heading">
-                        <h2>Feedback</h2>
-                    </div>
-                    <form id="contact" action="" method="post">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-md-12">
-                                <p>We're always striving to improve our service. The results were: </p>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="circle-item">
-                                    <input name="demo-priority" type="radio" id="demo-small" value="A"
-                                           checked>
-                                    <label for="demo-small">Very Satisfied</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="circle-item">
-                                    <input name="demo-priority" type="radio" id="demo-medium" value="B">
-                                    <label for="demo-medium">Somewhat Satisfied</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                                <div class="circle-item">
-                                    <input name="demo-priority" type="radio" id="demo-old" value="C">
-                                    <label for="demo-old">Not Satisfied</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="border-icon-button">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var canvas = document.getElementById("canvas");
+            var ctx = canvas.getContext("2d");
+            var distanceDisplay = document.getElementById("distanceDisplay");
+            var detections = [];
 
-                                <button type="submit" name="feedback"><i class="fa fa-check"></i>Send feedback</button>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </section>
+            var img = new Image();
+            img.onload = function () {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
+            };
+            img.src = "{% static out_img %}"
 
 
+            canvas.addEventListener("mousedown", function (e) {
+                var x = e.offsetX;
+                var y = e.offsetY;
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+                detections = []; // Clear the previous detections
+
+                ctx.beginPath();
+                ctx.arc(x, y, 3, 0, Math.PI * 2);
+                ctx.fillStyle = "black";
+                ctx.fill();
+
+                var tubeHeight = canvas.height;
+                var pixelToMm = 200 / tubeHeight;
+                var distanceFromTop = y * pixelToMm;
+                var distanceFromBottom = (tubeHeight - y) * pixelToMm;
+
+                detections.push({
+                    x: x,
+                    y: y,
+                    dt: distanceFromTop,
+                    db: distanceFromBottom
+                });
+
+                updateDistanceDisplay(distanceFromTop, distanceFromBottom);
+            });
+
+            canvas.addEventListener("mousemove", function (e) {
+                var x = e.offsetX;
+                var y = e.offsetY;
+
+                distanceDisplay.style.left = (x + 10) + "px";
+                distanceDisplay.style.top = (y + 10) + "px";
+            });
+
+            function updateDistanceDisplay(dt, db) {
+                if (dt !== undefined && db !== undefined) {
+                    distanceDisplay.innerHTML = "Distance from top: " + dt.toFixed(4) + " mm<br>Distance from bottom: " + db.toFixed(4) + " mm";
+                    distanceDisplay.style.display = "block";
+                } else {
+                    distanceDisplay.style.display = "none";
+                }
+            }
+        });
+    </script>
+
+
+    <!-- ... (existing code) -->
 
 {% endblock %}
