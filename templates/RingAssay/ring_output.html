@@ -2,143 +2,141 @@
 {% load static %}
 {% block content %}
 
-    <style>
-        .column {
-            float: left;
-            width: 50%;
-            padding: 5px;
-        }
+<style>
+    .column {
+        float: left;
+        width: 50%;
+        padding: 5px;
+    }
 
-        /* Clear floats after image containers */
-        .row::after {
-            content: "";
-            clear: both;
-            display: table;
-        }
+    /* Clear floats after image containers */
+    .row::after {
+        content: "";
+        clear: both;
+        display: table;
+    }
 
-        /* Style for marking dots */
-        .canvas-container {
-            position: relative;
-        }
+    /* Style for marking dots */
+    .canvas-container {
+        position: relative;
+    }
 
-        .canvas-container canvas {
-            border: 1px solid #000;
-            cursor: crosshair; /* Cursor as a pen */
-        }
+    .canvas-container canvas {
+        border: 1px solid #000;
+        cursor: crosshair; /* Cursor as a pen */
+    }
 
-        /* Style for distance display */
-        .distance-display {
-            position: absolute;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 5px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-        }
-    </style>
+    /* Style for distance display */
+    .distance-display {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 5px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+</style>
 
-    <!-- ... (existing code) -->
+<!-- ... (existing code) -->
 
-    <h1>Circled Flies Image</h1>
+<h1>Circled Flies Image</h1>
 
-    <div class="row">
-        <div class="column">
-            <div class="col-md-10 canvas-container">
-                <canvas id="canvas" style="max-width:100%;"></canvas>
-                <div class="distance-display" id="distanceDisplay"></div>
-            </div>
+<div class="row">
+    <div class="column">
+        <div class="col-md-10 canvas-container">
+            <canvas id="canvas" style="max-width:100%;"></canvas>
+            <div class="distance-display" id="distanceDisplay"></div>
         </div>
     </div>
+</div>
 
-    <!-- Tables -->
+<!-- Tables -->
 
-    <div class="alternate-table">
-        <table>
-            <thead>
+<div class="alternate-table">
+    <table id="distanceTable">
+        <thead>
             <tr>
                 <th>Fly Label</th>
-                <th>Radius</th>
                 <th>Distance from top (mm)</th>
                 <th>Distance from bottom (mm)</th>
             </tr>
-            </thead>
-            <tbody>
+        </thead>
+        <tbody>
             {% if d %}
-                {% for item in d %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{ item.Radius|floatformat:4 }}</td>
-                        <td>{{ item.DT|floatformat:4 }}</td>
-                        <td>{{ item.DB|floatformat:4 }}</td>
-                    </tr>
-                {% endfor %}
+            {% for item in d %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ item.DT|floatformat:4 }}</td>
+                <td>{{ item.DB|floatformat:4 }}</td>
+            </tr>
+            {% endfor %}
             {% endif %}
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var canvas = document.getElementById("canvas");
-            var ctx = canvas.getContext("2d");
-            var distanceDisplay = document.getElementById("distanceDisplay");
-            var detections = [];
+<script>
+    var x_pos = 0;
+    var y_pos = 0;
 
-            var img = new Image();
-            img.onload = function () {
-                canvas.width = img.width;
-                canvas.height = img.height;
-                ctx.drawImage(img, 0, 0);
-            };
-            img.src = "{% static out_img %}"
+    document.addEventListener("DOMContentLoaded", function () {
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var distanceDisplay = document.getElementById("distanceDisplay");
+        var img = new Image();
 
+        img.onload = function () {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+        };
 
-            canvas.addEventListener("mousedown", function (e) {
-                var x = e.offsetX;
-                var y = e.offsetY;
+        // Set the image source
+        img.src = "{% static out_img %}";
 
-                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-                detections = []; // Clear the previous detections
+        canvas.addEventListener("mousemove", function (e) {
+            var x = e.offsetX;
+            var y = e.offsetY;
 
-                ctx.beginPath();
-                ctx.arc(x, y, 3, 0, Math.PI * 2);
-                ctx.fillStyle = "black";
-                ctx.fill();
+            var tubeHeight = canvas.height;
+            var pixelToMm = 200 / tubeHeight;
+            var distanceFromTop = y * pixelToMm;
+            var distanceFromBottom = (canvas.height - y) * pixelToMm;
+            x_pos = distanceFromTop;
+            y_pos = distanceFromBottom;
 
-                var tubeHeight = canvas.height;
-                var pixelToMm = 200 / tubeHeight;
-                var distanceFromTop = y * pixelToMm;
-                var distanceFromBottom = (tubeHeight - y) * pixelToMm;
+            updateDistanceDisplay(distanceFromTop, distanceFromBottom, x, y);
+        });
 
-                detections.push({
-                    x: x,
-                    y: y,
-                    dt: distanceFromTop,
-                    db: distanceFromBottom
-                });
+        canvas.addEventListener("click", function () {
+            // Grab x_pos and y_pos and fill the HTML table
+            var table = document.querySelector('#distanceTable tbody');
+            var newRow = table.insertRow();
+            var flyLabelCell = newRow.insertCell(0);
+            var distanceFromTopCell = newRow.insertCell(1);
+            var distanceFromBottomCell = newRow.insertCell(2);
 
-                updateDistanceDisplay(distanceFromTop, distanceFromBottom);
-            });
+            flyLabelCell.textContent = table.rows.length; // You can adjust this based on your fly label logic
+            distanceFromTopCell.textContent = x_pos.toFixed(4);
+            distanceFromBottomCell.textContent = y_pos.toFixed(4);
+        });
 
-            canvas.addEventListener("mousemove", function (e) {
-                var x = e.offsetX;
-                var y = e.offsetY;
-
+        function updateDistanceDisplay(dt, db, x, y) {
+            if (dt !== undefined && db !== undefined) {
+                if (y >= canvas.height) {
+                    distanceDisplay.innerHTML = "Distance from top: " + dt.toFixed(4) + " mm<br>Distance from bottom: 0 mm";
+                } else {
+                    distanceDisplay.innerHTML = "Distance from top: " + dt.toFixed(4) + " mm<br>Distance from bottom: " + db.toFixed(4) + " mm";
+                }
+                distanceDisplay.style.display = "block";
                 distanceDisplay.style.left = (x + 10) + "px";
                 distanceDisplay.style.top = (y + 10) + "px";
-            });
-
-            function updateDistanceDisplay(dt, db) {
-                if (dt !== undefined && db !== undefined) {
-                    distanceDisplay.innerHTML = "Distance from top: " + dt.toFixed(4) + " mm<br>Distance from bottom: " + db.toFixed(4) + " mm";
-                    distanceDisplay.style.display = "block";
-                } else {
-                    distanceDisplay.style.display = "none";
-                }
+            } else {
+                distanceDisplay.style.display = "none";
             }
-        });
-    </script>
+        }
+    });
+</script>
 
-
-    <!-- ... (existing code) -->
+<!-- ... (existing code) -->
 
 {% endblock %}

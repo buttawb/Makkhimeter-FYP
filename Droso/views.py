@@ -12,14 +12,9 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import PasswordResetForm
 from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
-from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.shortcuts import render
-from django.template.loader import get_template
-from reportlab.pdfgen import canvas
-from io import BytesIO
 
-from requests import RequestException
 
 from Droso.forms import CustomUserCreationForm
 from Droso.models import *
@@ -221,6 +216,9 @@ def main(request):
 
     # if Group.objects.exists():
     #     return HttpResponse("Redirect to homepage")
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
 
     path = __find_userpath(request)
 
@@ -239,12 +237,18 @@ def main(request):
 
 
 def wingdimen(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     return render(request, 'wings/dimensions/w_dimen.html',
                   {'head': 'MakkhiMeter ', 'title': 'Wing Dimensions',
                    'user_name': request.user.username.upper()})
 
 
 def wingdimen2(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
@@ -683,11 +687,17 @@ def get_values_from_slider(request, for_dil, save_dil):
 
 
 def wingshape(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     return render(request, 'wings/shape/w_shape.html',
                   {'head': 'MakkhiMeter ', 'title': 'Wing Shape', 'user_name': request.user.username.upper()})
 
 
 def wingshape2(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
@@ -812,6 +822,9 @@ def wingshape2(request):
 
 
 def shape_output(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         priority = request.POST.get('demo-priority')
 
@@ -950,11 +963,17 @@ def generate_pdf_view(request):
 
 
 def wingbristles(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     return render(request, 'wings/bristles/w_bristles.html',
                   {'head': 'MakkhiMeter ', 'title': 'Wing Bristles', 'user_name': request.user.username.upper()})
 
 
 def wingbristles2(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
@@ -1038,6 +1057,9 @@ def wingbristles2(request):
 
 
 def cropper_bristles(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         priority = request.POST.get('demo-priority')
 
@@ -1062,6 +1084,9 @@ def cropper_bristles(request):
 
 
 def cropper_eye(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         priority = request.POST.get('demo-priority')
 
@@ -1085,6 +1110,9 @@ def cropper_eye(request):
 
 
 def c_us(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         name = request.POST['name']
         email = request.POST['email']
@@ -1117,22 +1145,40 @@ def c_us(request):
 
 
 def a_us(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     return HttpResponse("This page is going to be updated soon :)) ")
     # return render(request, 'others/aboutus.html',
     #               {'head': 'MakkhiMeter | About Us', 'user_name': request.user.username.upper()})
 
 
 def f_b(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     return render(request, 'others/feedback.html',
                   {'head': 'MakkhiMeter ', 'title': 'Feedback - MakkhiMeter',
                    'user_name': request.user.username.upper()})
 
 
 def wing_f(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     return render(request, 'f_w.html', {'head': 'MakkhiMeter ', 'user_name': request.user.username.upper()})
 
 
 def eye_f(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     return render(request, 'f_e.html', {'head': 'MakkhiMeter ', 'user_name': request.user.username.upper()})
 
 
@@ -1159,11 +1205,17 @@ def df_to_html(df):
 
 
 def eye_omat(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     return render(request, 'eyes/ommatidum/omat_count.html',
                   {'head': 'MakkhiMeter ', 'title': 'Eye Ommatidium', 'user_name': request.user.username.upper()})
 
 
 def eye_omat2(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
@@ -1243,11 +1295,17 @@ def eye_omat2(request):
 
 
 def eye_col(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     return render(request, 'eyes/colour/col.html',
                   {'head': 'MakkhiMeter ', 'title': 'Eye Colour', 'user_name': request.user.username.upper()})
 
 
 def eye_col2(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
@@ -1411,6 +1469,9 @@ def eye_col2(request):
 
 
 def eye_col_output(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         priority = request.POST.get('demo-priority')
 
@@ -1444,11 +1505,17 @@ def hex_to_rgb(hex_value):
 
 
 def eyedimen(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     return render(request, 'eyes/Dimensions/e_dimen.html',
                   {'head': 'MakkhiMeter ', 'title': 'Eye Dimensions', 'user_name': request.user.username.upper()})
 
 
 def eyedimen2(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
@@ -1536,6 +1603,9 @@ def eyedimen2(request):
 
 
 def e_dimen_out(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         priority = request.POST.get('demo-priority')
 
@@ -1572,6 +1642,9 @@ def fetch_wingdata(request):
 
 
 def wing_dashboard(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     # IF THE USER IS NOT SUPERUSER DON'T ALLOW THE ACCESS TO THIS PAGE
     if not request.user.is_superuser:
         return render(request, 'index.html')
@@ -1620,6 +1693,9 @@ def wing_dashboard(request):
 
 
 def fetch_eyedata(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     area_peri = e_dimension.objects.all()
     e_color = e_colour.objects.all()
     ommatidia = e_ommatidium.objects.all()
@@ -1628,6 +1704,9 @@ def fetch_eyedata(request):
 
 
 def eye_dashboard(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     # IF THE USER IS NOT SUPERUSER DON'T ALLOW THE ACCESS TO THIS PAGE
     if not request.user.is_superuser:
         return render(request, 'index.html')
@@ -1710,11 +1789,17 @@ def register_page(request):
 #         return HttpResponse(i.wd_area)
 
 def ring_assay_1(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     return render(request, 'RingAssay/ring_1.html',
                   {'head': 'MakkhiMeter', 'title': 'RingAssay', 'user_name': request.user.username.upper()})
 
 
 def ring_assay_2(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         uploaded_img = request.FILES['img']
 
@@ -1757,7 +1842,9 @@ def ring_assay_2(request):
 
 def ring_out(request):
     # SINCE RING DATA IMAGE IS NOT STORING PAUSE FEEDBACK.
-
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     if request.method == 'POST':
         #     priority = request.POST.get('demo-priority')
         #
@@ -1790,5 +1877,8 @@ def myteam(request):
 
 
 def dowdata(request):
+    call_result = api_view(request)
+    if not call_result:
+        return render(request, '403.html')
     return render(request, 'others/data.html',
                   {'head': 'MakkhiMeter ', 'title': 'MakkhiMeter Team', 'user_name': request.user.username.upper()})
